@@ -1,0 +1,18 @@
+/**
+ * Created by agnither on 20.04.16.
+ */
+package com.agnither.spacetaxi
+{
+    public class Config
+    {
+        public static const FACEBOOK_APP_ID: String = "630268433718548";
+        
+        public static const debug: Boolean = BUILD::debug;
+        public static const platform: String = BUILD::ios ? "ios" : (BUILD::android ? "android" : "desktop");
+
+        public static var version: String = ""; // set from InitTask
+
+        public static var support: String = "support@dieselpuppet.com";
+        public static var subject: String = "Player ID %s, Russian Lotto, GP, version %s";
+    }
+}

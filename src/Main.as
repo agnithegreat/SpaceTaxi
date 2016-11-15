@@ -3,26 +3,19 @@
  */
 package
 {
-    import com.dieselpuppet.lotto.Application;
-    import com.dieselpuppet.lotto.Config;
-    import com.mesmotronic.ane.AndroidFullScreen;
+    import com.agnither.spacetaxi.Application;
+    import com.agnither.spacetaxi.Config;
 
     import flash.display.StageQuality;
     import flash.display3D.Context3DTextureFormat;
-    import flash.text.TextField;
 
     import starling.text.TextField;
 
-    [SWF (frameRate=60, width=640, height=960, backgroundColor="#000000")]
+    [SWF (frameRate=60, width=1024, height=768, backgroundColor="#000000")]
     public class Main extends StarlingMainBase
     {
         public function Main()
         {
-            BUILD::android
-            {
-                AndroidFullScreen.stage = stage;
-                AndroidFullScreen.immersiveMode() || AndroidFullScreen.leanMode();
-            }
             super(Application);
         }
 

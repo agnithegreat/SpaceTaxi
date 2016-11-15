@@ -1,0 +1,3 @@
+[submodule "MainBase"]
+	path = MainBase
+	url = https://github.com/agnithegreat/MainBase.git
