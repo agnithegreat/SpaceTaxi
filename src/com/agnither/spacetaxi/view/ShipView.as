@@ -27,7 +27,7 @@ package com.agnither.spacetaxi.view
             
             _canvas = new Canvas();
             _canvas.beginFill(0xFFFFFF);
-            _canvas.drawCircle(0, 0, _ship.radius * 5);
+            _canvas.drawCircle(0, 0, _ship.radius);
             addChild(_canvas);
         }
 

@@ -3,6 +3,7 @@
  */
 package com.agnither.spacetaxi.view
 {
+    import com.agnither.spacetaxi.Application;
     import com.agnither.spacetaxi.model.Planet;
     import com.agnither.spacetaxi.model.Space;
 
@@ -18,20 +19,29 @@ package com.agnither.spacetaxi.view
 
     public class SpaceView extends Sprite
     {
+        private static const DASH_LENGTH: int = 12;
+        private static const GAP_LENGTH: int = 8;
+
         private var _space: Space;
         
         private var _shipView: ShipView;
         private var _planets: Vector.<PlanetView>;
         
         private var _trajectory: Shape;
-        private var _speed: Shape;
+        private var _counter: int;
+
+        private var _draw: Boolean;
+        private var _lineLength: Number;
+        private var _maxLength: int;
 
         public function SpaceView(space: Space)
         {
             super();
             
             _space = space;
-            _space.addEventListener(Space.TRAJECTORY, handleTrajectory);
+            _space.addEventListener(Space.SHOW_TRAJECTORY, handleShowTrajectory);
+            _space.addEventListener(Space.UPDATE_TRAJECTORY, handleUpdateTrajectory);
+            _space.addEventListener(Space.HIDE_TRAJECTORY, handleHideTrajectory);
 
             _planets = new <PlanetView>[];
             for (var i:int = 0; i < _space.planets.length; i++)
@@ -45,11 +55,8 @@ package com.agnither.spacetaxi.view
             _shipView = new ShipView(_space.ship);
             addChild(_shipView);
 
-            _speed = new Shape();
-            Starling.current.nativeStage.addChild(_speed);
-
             _trajectory = new Shape();
-            Starling.current.nativeStage.addChild(_trajectory);
+            Application.flashViewport.addChild(_trajectory);
 
             Starling.current.stage.addEventListener(TouchEvent.TOUCH, handleTouch);
         }
@@ -59,14 +66,13 @@ package com.agnither.spacetaxi.view
             var touch: Touch = event.getTouch(stage);
             if (touch != null)
             {
-                var position: Point = touch.getLocation(this);
-                _space.setPullPoint(position.x, position.y);
                 switch (touch.phase)
                 {
                     case TouchPhase.BEGAN:
                     case TouchPhase.MOVED:
                     {
-                        _space.updateTrajectory();
+                        var position: Point = touch.getLocation(this);
+                        _space.setPullPoint(position.x, position.y);
                         break;
                     }
                     case TouchPhase.ENDED:
@@ -78,26 +84,50 @@ package com.agnither.spacetaxi.view
             }
         }
 
-        private function handleTrajectory(event: Event):void
+        private function handleShowTrajectory(event: Event):void
         {
-            _speed.graphics.clear();
-            if (_space.ship.landed)
-            {
-                _speed.graphics.lineStyle(3, 0xFF0000);
-                _speed.graphics.moveTo(_space.ship.position.x, _space.ship.position.y);
-                _speed.graphics.lineTo(_space.ship.position.x + _space.pullPoint.x, _space.ship.position.y + _space.pullPoint.y);
-            }
-
+            _trajectory.visible = true;
+            
             _trajectory.graphics.clear();
-            if (_space.trajectory.length > 0)
+            _trajectory.graphics.lineStyle(3, 0xFF0000, 0.5);
+            _counter = 0;
+
+            _lineLength = 0;
+            _draw = true;
+            _maxLength = _draw ? DASH_LENGTH : GAP_LENGTH;
+        }
+
+        private function handleUpdateTrajectory(event: Event):void
+        {
+            if (_counter == 0)
             {
-                _trajectory.graphics.lineStyle(2, 0xFFFFFF);
-                _trajectory.graphics.moveTo(_space.trajectory[0], _space.trajectory[1]);
-                for (var i:int = 2; i < _space.trajectory.length; i += 2)
+                _trajectory.graphics.moveTo(_space.trajectory[_counter].x, _space.trajectory[_counter].y);
+                _counter++;
+            }
+            if (_space.trajectory.length > _counter)
+            {
+                for (_counter; _counter < _space.trajectory.length; _counter++)
                 {
-                    _trajectory.graphics.lineTo(_space.trajectory[i], _space.trajectory[i+1]);
+                    _lineLength += Point.distance(_space.trajectory[_counter], _space.trajectory[_counter-1]);
+                    if (_lineLength > _maxLength)
+                    {
+                        _lineLength = 0;
+                        _draw = !_draw;
+                        _maxLength = _draw ? DASH_LENGTH : GAP_LENGTH;
+                    }
+                    if (_draw)
+                    {
+                        _trajectory.graphics.lineTo(_space.trajectory[_counter].x, _space.trajectory[_counter].y);
+                    } else {
+                        _trajectory.graphics.moveTo(_space.trajectory[_counter].x, _space.trajectory[_counter].y);
+                    }
                 }
             }
+        }
+
+        private function handleHideTrajectory(event: Event):void
+        {
+            _trajectory.visible = false;
         }
     }
 }
