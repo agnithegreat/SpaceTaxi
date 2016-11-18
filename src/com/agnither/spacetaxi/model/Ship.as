@@ -3,13 +3,19 @@
  */
 package com.agnither.spacetaxi.model
 {
+    import flash.geom.Point;
+
+    import starling.core.Starling;
+
+    import starling.events.Event;
+
     public class Ship extends DynamicSpaceBody
     {
         public static const COLLIDE: String = "Ship.COLLIDE";
         public static const LAND: String = "Ship.LAND";
         public static const CRASH: String = "Ship.CRASH";
-        
-        private var _rotation: Number;
+
+        protected var _rotation: Number;
         public function get rotation():Number
         {
             return _rotation;
@@ -26,26 +32,82 @@ package com.agnither.spacetaxi.model
         {
             return _crashed;
         }
+
+        protected var _fuel: Number;
+        public function get fuel():Number
+        {
+            return _fuel;
+        }
+
+        protected var _durability: Number;
+        public function get durability():Number
+        {
+            return _durability;
+        }
+        
+        protected var _planet: Planet;
         
         protected var _orders: Vector.<Order>;
+        
+        protected var _offset: Point;
+        public function get offset():Point
+        {
+            return _offset;
+        }
 
         public function Ship(radius: int, mass: Number)
         {
             super(radius, mass);
 
             _rotation = 0;
-            
+
+            // TODO: FUEL - setup
+            _fuel = 100;
+
+            // TODO: DURABILITY - setup
+            _durability = 100;
+
             _orders = new <Order>[];
+
+            _offset = new Point();
         }
 
-        public function launch():void
+        public function launch(fuel: Number = 0):void
         {
+            if (_fuel < fuel) {
+                throw new Error("no fuel");
+            }
+
+            if (_planet != null)
+            {
+                _planet.removeEventListener(SpaceBody.UPDATE, handlePlanetUpdate);
+                _planet = null;
+            }
             _landed = false;
+
+            if (fuel > 0)
+            {
+                _fuel -= fuel;
+                // TODO: LOW FUEL
+                // TODO: NO FUEL
+            }
+
+            Starling.juggler.tween(_offset, 0.3, {x: 0, y: 0});
         }
 
-        public function collide():void
+        public function collide(power: Number = 0):void
         {
             dispatchEventWith(COLLIDE);
+
+            if (power > 0)
+            {
+                _durability -= power;
+                // TODO: LOW DURABILITY
+                if (_durability <= 0)
+                {
+                    crash();
+                }
+            }
         }
 
         override public function accelerate(x: Number, y: Number):void
@@ -56,8 +118,11 @@ package com.agnither.spacetaxi.model
             dispatchEventWith(UPDATE);
         }
         
-        public function land():void
+        public function land(planet: Planet):void
         {
+            _planet = planet;
+            _planet.addEventListener(SpaceBody.UPDATE, handlePlanetUpdate);
+            
             stop();
             _landed = true;
             dispatchEventWith(LAND);
@@ -65,6 +130,7 @@ package com.agnither.spacetaxi.model
 
         public function crash():void
         {
+            // TODO: EXPLOSION
             stop();
             _crashed = true;
             dispatchEventWith(CRASH);
@@ -97,6 +163,27 @@ package com.agnither.spacetaxi.model
             body.place(_position.x, _position.y);
             body.accelerate(_speed.x, _speed.y);
             return body;
+        }
+
+        private function handlePlanetUpdate(event: Event):void
+        {
+            var angle: Number = Math.atan2(y - _planet.y, x - _planet.x);
+            var nx: Number = _planet.radius * Math.cos(angle) * Math.cos(_planet.time) * _planet.scale;
+            var ny: Number = _planet.radius * Math.sin(angle) * Math.sin(_planet.time) * _planet.scale;
+
+            var angleDelta: Number = (Math.PI + angle - _rotation) % (Math.PI * 2);
+            if (angleDelta < 0)
+            {
+                angleDelta += Math.PI * 2;
+            }
+            if (angleDelta > Math.PI)
+            {
+                angleDelta = -(Math.PI * 2 - angleDelta);
+            }
+            _rotation += angleDelta * 0.2;
+            _offset.x += (nx - _offset.x) * 0.2;
+            _offset.y += (ny - _offset.y) * 0.2;
+            update();
         }
     }
 }

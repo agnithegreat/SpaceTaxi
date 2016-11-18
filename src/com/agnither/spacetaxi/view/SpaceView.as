@@ -28,7 +28,9 @@ package com.agnither.spacetaxi.view
         private var _space: Space;
 
         private var _background: Image;
+        private var _stars: Image;
         private var _container: Sprite;
+        private var _milkyway: Image;
 
         private var _shipView: ShipView;
         private var _planets: Vector.<PlanetView>;
@@ -58,8 +60,19 @@ package com.agnither.spacetaxi.view
             _background.height = stage.stageHeight;
             addChild(_background);
 
+            _stars = new Image(Application.assetsManager.getTexture("stars_pattern"));
+            _stars.tileGrid = new flash.geom.Rectangle(0, 0, _stars.width, _stars.height);
+            _stars.width = stage.stageWidth;
+            _stars.height = stage.stageHeight;
+            addChild(_stars);
+
             _container = new Sprite();
             addChild(_container);
+
+            _milkyway = new Image(Application.assetsManager.getTexture("milkyway-min"));
+            _milkyway.width = stage.stageWidth;
+            _milkyway.height = stage.stageHeight;
+            addChild(_milkyway);
 
             _planets = new <PlanetView>[];
             for (var i:int = 0; i < _space.planets.length; i++)
@@ -124,7 +137,7 @@ package com.agnither.spacetaxi.view
             _trajectory.visible = true;
             
             _trajectory.graphics.clear();
-            _trajectory.graphics.lineStyle(3, 0xFF0000, 0.5);
+            _trajectory.graphics.lineStyle(3, 0xFFFFFF, 0.5);
             _counter = 0;
 
             _lineLength = 0;

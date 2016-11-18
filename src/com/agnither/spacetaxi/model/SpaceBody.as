@@ -5,9 +5,11 @@ package com.agnither.spacetaxi.model
 {
     import flash.geom.Point;
 
+    import starling.animation.IAnimatable;
+
     import starling.events.EventDispatcher;
 
-    public class SpaceBody extends EventDispatcher
+    public class SpaceBody extends EventDispatcher implements IAnimatable
     {
         public static const UPDATE: String = "SpaceBody.UPDATE";
 
@@ -28,13 +30,13 @@ package com.agnither.spacetaxi.model
         {
             return _position;
         }
-        public function get x():int
+        public function get x():Number
         {
-            return Math.round(_position.x);
+            return _position.x;
         }
-        public function get y():int
+        public function get y():Number
         {
-            return Math.round(_position.y);
+            return _position.y;
         }
         
         public function SpaceBody(radius: int, mass: Number)
@@ -49,6 +51,10 @@ package com.agnither.spacetaxi.model
         {
             _position.x = x;
             _position.y = y;
+        }
+
+        public function advanceTime(delta: Number):void
+        {
         }
         
         public function update():void

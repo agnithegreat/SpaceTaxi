@@ -29,8 +29,13 @@ package com.agnither.spacetaxi.model
         public static const MAX_SPEED: Number = 1000;
         public static const MAX_DISTANCE: Number = 10000;
         public static const TRAJECTORY_STEPS: Number = 50;
+        public static const TRAJECTORY_LENGTH: Number = 200;
         public static const PULL_MULTIPLIER: Number = 0.2;
         public static const PULL_SCALE: int = 2;
+        
+        public static const FUEL_MULTIPLIER: Number = 1;
+        public static const DAMAGE_MULTIPLIER: Number = 1;
+        public static const MIN_DAMAGE: Number = 5;
 
         private var _ship: Ship;
         public function get ship():Ship
@@ -48,6 +53,10 @@ package com.agnither.spacetaxi.model
         public function get pullPoint():Point
         {
             return _pullPoint;
+        }
+        public function get fuel():Number
+        {
+            return FUEL_MULTIPLIER * Math.pow(Point.distance(_pullPoint, new Point()), 0.5);
         }
         
         private var _trajectory: Vector.<Point>;
@@ -67,7 +76,7 @@ package com.agnither.spacetaxi.model
 
         public function init():void
         {
-            _ship = new Ship(15, 1);
+            _ship = new Ship(20, 1);
             _ship.place(30, 235);
 
             _planets = new <Planet>[];
@@ -83,12 +92,12 @@ package com.agnither.spacetaxi.model
 
             _orderController = new OrderController();
             _orderController.addEventListener(OrderController.UPDATE, handleUpdateOrders);
-//            _orderController.addOrder(new Order(_planets[1].getZone(), _planets[2].getZone()));
-//            _orderController.addOrder(new Order(_planets[0].getZone(), _planets[1].getZone()));
-//            _orderController.addOrder(new Order(_planets[2].getZone(), _planets[0].getZone()));
-//            _orderController.addOrder(new Order(_planets[2].getZone(), _planets[1].getZone()));
-//            _orderController.addOrder(new Order(_planets[0].getZone(), _planets[2].getZone()));
-//            _orderController.addOrder(new Order(_planets[1].getZone(), _planets[0].getZone()));
+            _orderController.addOrder(new Order(_planets[1].getZone(), _planets[2].getZone()));
+            _orderController.addOrder(new Order(_planets[0].getZone(), _planets[1].getZone()));
+            _orderController.addOrder(new Order(_planets[2].getZone(), _planets[0].getZone()));
+            _orderController.addOrder(new Order(_planets[2].getZone(), _planets[1].getZone()));
+            _orderController.addOrder(new Order(_planets[0].getZone(), _planets[2].getZone()));
+            _orderController.addOrder(new Order(_planets[1].getZone(), _planets[0].getZone()));
             _orderController.start(3);
         }
 
@@ -102,6 +111,13 @@ package com.agnither.spacetaxi.model
                 {
                     _pullPoint.x = px;
                     _pullPoint.y = py;
+
+                    var scale: Number = _ship.fuel / fuel;
+                    if (scale < 1)
+                    {
+                        _pullPoint.x *= scale;
+                        _pullPoint.y *= scale;
+                    }
                     updateTrajectory();
                 }
             }
@@ -115,7 +131,7 @@ package com.agnither.spacetaxi.model
                 _trajectory.length = 0;
                 dispatchEventWith(SHOW_TRAJECTORY);
                 var ship: Ship = _ship.clone() as Ship;
-                ship.launch();
+                ship.launch(0);
                 ship.accelerate(_pullPoint.x, _pullPoint.y);
                 computeTrajectory(ship);
             }
@@ -125,7 +141,7 @@ package com.agnither.spacetaxi.model
         {
             var i: int = 0;
             var d: int = 0;
-            while (!ship.landed && !ship.crashed && i < TRAJECTORY_STEPS && d < MAX_DISTANCE)
+            while (!ship.landed && !ship.crashed && _trajectory.length < TRAJECTORY_LENGTH && i < TRAJECTORY_STEPS && d < MAX_DISTANCE)
             {
                 i++;
                 _trajectory.push(ship.position.clone());
@@ -138,7 +154,7 @@ package com.agnither.spacetaxi.model
             if (d >= MAX_DISTANCE)
             {
                 ship.crash();
-            } else if (!ship.landed && !ship.crashed)
+            } else if (!ship.landed && !ship.crashed && _trajectory.length < TRAJECTORY_LENGTH)
             {
                 Starling.juggler.delayCall(computeTrajectory, 0.01, ship);
             }
@@ -148,7 +164,7 @@ package com.agnither.spacetaxi.model
         {
             if (_ship.landed)
             {
-                _ship.launch();
+                _ship.launch(fuel);
                 _ship.accelerate(_pullPoint.x, _pullPoint.y);
 
                 _time = 0;
@@ -163,6 +179,7 @@ package com.agnither.spacetaxi.model
             var planet: Planet = new Planet(radius, mass, type);
             planet.place(x, y);
             _planets.push(planet);
+            Starling.juggler.add(planet);
         }
 
         private function step(ship: Ship, delta: Number):void
@@ -213,25 +230,28 @@ package com.agnither.spacetaxi.model
                 var planetCollided: Planet = checkCollisions(ship, currentDelta);
                 if (planetCollided != null)
                 {
-                    ship.collide();
-                    if (planetCollided.type.safe)
+                    var damage: Number = planetCollided.type.safe ? DAMAGE_MULTIPLIER * Math.pow(Point.distance(ship.speed, new Point()), 0.5) : ship.durability;
+                    ship.collide(damage >= MIN_DAMAGE ? damage : 0);
+                    
+                    if (!ship.crashed)
                     {
                         var order: Boolean = _orderController.hasOrder(planetCollided, ship);
                         if (order)
                         {
-                            ship.land();
+                            ship.land(planetCollided);
                             if (_ship == ship)
                             {
                                 _orderController.checkOrder(planetCollided, ship);
                             }
                         } else {
-                            checkLand(ship);
+                            checkLand(ship, planetCollided);
                         }
-                    } else {
-                        ship.crash();
                     }
                 }
-                ship.move(currentDelta);
+                if (!ship.crashed)
+                {
+                    ship.move(currentDelta);
+                }
 
                 delta -= currentDelta;
                 currentDelta = Math.min(delta, maxDelta);
@@ -260,12 +280,12 @@ package com.agnither.spacetaxi.model
             return null;
         }
 
-        private function checkLand(ship: Ship):void
+        private function checkLand(ship: Ship, planet: Planet):void
         {
             var d: Number = Point.distance(ship.speed, new Point());
             if (d <= MIN_SPEED)
             {
-                ship.land();
+                ship.land(planet);
             }
         }
 

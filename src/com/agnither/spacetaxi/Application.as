@@ -27,7 +27,9 @@ package com.agnither.spacetaxi
         
         public function start():void
         {
-            assetsManager = new AssetManager();
+            Starling.current.antiAliasing = 16;
+
+            assetsManager = new AssetManager(1, true);
             assetsManager.verbose = Config.debug;
             
             appController = new AppController();

@@ -25,6 +25,19 @@ package com.agnither.spacetaxi.model
             return _zones[id];
         }
 
+        private var _time: Number;
+        private var _timeMultiplier: Number;
+        public function get time():Number
+        {
+            return _time * _timeMultiplier;
+        }
+        
+        private var _scale: Number = 0.03;
+        public function get scale():Number
+        {
+            return _scale;
+        }
+
         public function Planet(radius: int, mass: Number, type: PlanetType)
         {
             super(radius, mass);
@@ -43,6 +56,17 @@ package com.agnither.spacetaxi.model
                 zone.addEventListener(Zone.UPDATE, handleOrder);
                 _zones.push(zone);
             }
+
+            _time = Math.random();
+            _timeMultiplier = 1 + (Math.random()-0.5) * 0.1;
+        }
+
+        override public function advanceTime(delta: Number):void
+        {
+            super.advanceTime(delta);
+            
+            _time += delta;
+            dispatchEventWith(UPDATE);
         }
 
         public function getZoneByShip(ship: Ship):Zone

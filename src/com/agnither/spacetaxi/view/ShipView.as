@@ -28,7 +28,7 @@ package com.agnither.spacetaxi.view
             _ship.addEventListener(Ship.CRASH, handleCrash);
 
 //            _image = new Image(Application.assetsManager.getTexture("Special/taxi"));
-            _image = new Image(Application.assetsManager.getTexture("taxi"));
+            _image = new Image(Application.assetsManager.getTexture("ship_body_close"));
             _image.pivotX = _image.width / 2;
             _image.pivotY = _image.height / 2;
             _image.scaleX = _ship.radius / 400 * 2;
@@ -40,8 +40,8 @@ package com.agnither.spacetaxi.view
 
         private function handleUpdate(event: Event):void
         {
-            x = Math.round(_ship.x);
-            y = Math.round(_ship.y);
+            x = _ship.x + _ship.offset.x;
+            y = _ship.y + _ship.offset.y;
 
             _image.rotation = _ship.rotation - Math.PI/2;
         }

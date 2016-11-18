@@ -197,19 +197,16 @@
         </struct>
         <key>individualSpriteSettings</key>
         <map type="IndividualSpriteSettingsMap">
-            <key type="filename">../../../../Dropbox/Source/Planets/1.png</key>
-            <key type="filename">../../../../Dropbox/Source/Planets/10.png</key>
-            <key type="filename">../../../../Dropbox/Source/Planets/11.png</key>
-            <key type="filename">../../../../Dropbox/Source/Planets/12.png</key>
-            <key type="filename">../../../../Dropbox/Source/Planets/13.png</key>
-            <key type="filename">../../../../Dropbox/Source/Planets/2.png</key>
-            <key type="filename">../../../../Dropbox/Source/Planets/3.png</key>
-            <key type="filename">../../../../Dropbox/Source/Planets/4.png</key>
-            <key type="filename">../../../../Dropbox/Source/Planets/5.png</key>
-            <key type="filename">../../../../Dropbox/Source/Planets/6.png</key>
-            <key type="filename">../../../../Dropbox/Source/Planets/7.png</key>
-            <key type="filename">../../../../Dropbox/Source/Planets/8.png</key>
-            <key type="filename">../../../../Dropbox/Source/Planets/9.png</key>
+            <key type="filename">assets/planets/1.png</key>
+            <key type="filename">assets/planets/10.png</key>
+            <key type="filename">assets/planets/12.png</key>
+            <key type="filename">assets/planets/2.png</key>
+            <key type="filename">assets/planets/3.png</key>
+            <key type="filename">assets/planets/5.png</key>
+            <key type="filename">assets/planets/6.png</key>
+            <key type="filename">assets/planets/7.png</key>
+            <key type="filename">assets/planets/8.png</key>
+            <key type="filename">assets/planets/9.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
@@ -222,167 +219,90 @@
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">../../../../Dropbox/Source/Special/Boom.png</key>
+            <key type="filename">assets/ship/ship_body_close.png</key>
+            <key type="filename">assets/ship/ship_body_open.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
                 <key>scale9Enabled</key>
                 <false/>
                 <key>scale9Borders</key>
-                <rect>149,142,297,284</rect>
+                <rect>100,115,200,231</rect>
                 <key>scale9Paddings</key>
-                <rect>149,142,297,284</rect>
+                <rect>100,115,200,231</rect>
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">../../../../Dropbox/Source/Special/Comet.png</key>
+            <key type="filename">assets/ship/ship_door.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
                 <key>scale9Enabled</key>
                 <false/>
                 <key>scale9Borders</key>
-                <rect>193,174,386,349</rect>
+                <rect>35,22,70,44</rect>
                 <key>scale9Paddings</key>
-                <rect>193,174,386,349</rect>
+                <rect>35,22,70,44</rect>
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">../../../../Dropbox/Source/Special/DeadHole.png</key>
+            <key type="filename">assets/ship/ship_door_2.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
                 <key>scale9Enabled</key>
                 <false/>
                 <key>scale9Borders</key>
-                <rect>482,443,964,886</rect>
+                <rect>36,40,72,79</rect>
                 <key>scale9Paddings</key>
-                <rect>482,443,964,886</rect>
+                <rect>36,40,72,79</rect>
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">../../../../Dropbox/Source/Special/EnergyCharge.png</key>
+            <key type="filename">assets/ship/ship_fire.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
                 <key>scale9Enabled</key>
                 <false/>
                 <key>scale9Borders</key>
-                <rect>193,235,386,470</rect>
+                <rect>124,53,248,106</rect>
                 <key>scale9Paddings</key>
-                <rect>193,235,386,470</rect>
+                <rect>124,53,248,106</rect>
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">../../../../Dropbox/Source/Special/Jump.png</key>
+            <key type="filename">assets/ship/ship_ladder.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
                 <key>scale9Enabled</key>
                 <false/>
                 <key>scale9Borders</key>
-                <rect>48,212,96,424</rect>
+                <rect>59,33,119,66</rect>
                 <key>scale9Paddings</key>
-                <rect>48,212,96,424</rect>
+                <rect>59,33,119,66</rect>
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">../../../../Dropbox/Source/Special/Neutral.png</key>
+            <key type="filename">assets/ship/ship_mount.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
                 <key>scale9Enabled</key>
                 <false/>
                 <key>scale9Borders</key>
-                <rect>257,257,514,514</rect>
+                <rect>83,14,166,28</rect>
                 <key>scale9Paddings</key>
-                <rect>257,257,514,514</rect>
-                <key>scale9FromFile</key>
-                <false/>
-            </struct>
-            <key type="filename">../../../../Dropbox/Source/Special/Push.png</key>
-            <struct type="IndividualSpriteSettings">
-                <key>pivotPoint</key>
-                <point_f>0.5,0.5</point_f>
-                <key>scale9Enabled</key>
-                <false/>
-                <key>scale9Borders</key>
-                <rect>284,277,568,553</rect>
-                <key>scale9Paddings</key>
-                <rect>284,277,568,553</rect>
-                <key>scale9FromFile</key>
-                <false/>
-            </struct>
-            <key type="filename">../../../../Dropbox/Source/Special/Star.png</key>
-            <struct type="IndividualSpriteSettings">
-                <key>pivotPoint</key>
-                <point_f>0.5,0.5</point_f>
-                <key>scale9Enabled</key>
-                <false/>
-                <key>scale9Borders</key>
-                <rect>82,82,164,164</rect>
-                <key>scale9Paddings</key>
-                <rect>82,82,164,164</rect>
-                <key>scale9FromFile</key>
-                <false/>
-            </struct>
-            <key type="filename">../../../../Dropbox/Source/Special/Station.png</key>
-            <struct type="IndividualSpriteSettings">
-                <key>pivotPoint</key>
-                <point_f>0.5,0.5</point_f>
-                <key>scale9Enabled</key>
-                <false/>
-                <key>scale9Borders</key>
-                <rect>144,152,288,304</rect>
-                <key>scale9Paddings</key>
-                <rect>144,152,288,304</rect>
-                <key>scale9FromFile</key>
-                <false/>
-            </struct>
-            <key type="filename">../../../../Dropbox/Source/Special/Sun.png</key>
-            <struct type="IndividualSpriteSettings">
-                <key>pivotPoint</key>
-                <point_f>0.5,0.5</point_f>
-                <key>scale9Enabled</key>
-                <false/>
-                <key>scale9Borders</key>
-                <rect>326,326,652,651</rect>
-                <key>scale9Paddings</key>
-                <rect>326,326,652,651</rect>
-                <key>scale9FromFile</key>
-                <false/>
-            </struct>
-            <key type="filename">../../../../Dropbox/Source/Special/taxi.png</key>
-            <struct type="IndividualSpriteSettings">
-                <key>pivotPoint</key>
-                <point_f>0.5,0.5</point_f>
-                <key>scale9Enabled</key>
-                <false/>
-                <key>scale9Borders</key>
-                <rect>124,156,248,311</rect>
-                <key>scale9Paddings</key>
-                <rect>124,156,248,311</rect>
-                <key>scale9FromFile</key>
-                <false/>
-            </struct>
-            <key type="filename">../../../../Dropbox/Source/Special/taxiFinish.png</key>
-            <struct type="IndividualSpriteSettings">
-                <key>pivotPoint</key>
-                <point_f>0.5,0.5</point_f>
-                <key>scale9Enabled</key>
-                <false/>
-                <key>scale9Borders</key>
-                <rect>100,130,200,259</rect>
-                <key>scale9Paddings</key>
-                <rect>100,130,200,259</rect>
+                <rect>83,14,166,28</rect>
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
         </map>
         <key>fileList</key>
         <array>
-            <filename>../../../../Dropbox/Source/Planets</filename>
-            <filename>../../../../Dropbox/Source/Special</filename>
+            <filename>assets/planets</filename>
+            <filename>assets/ship</filename>
         </array>
         <key>ignoreFileList</key>
         <array/>
