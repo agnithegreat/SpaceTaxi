@@ -1,3 +1,6 @@
 [submodule "MainBase"]
 	path = MainBase
 	url = https://github.com/agnithegreat/MainBase.git
+[submodule "TaskManagement"]
+	path = TaskManagement
+	url = https://github.com/agnithegreat/TaskManagement.git

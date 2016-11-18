@@ -5,6 +5,7 @@ package
 {
     import com.agnither.spacetaxi.Application;
     import com.agnither.spacetaxi.Config;
+    import com.mesmotronic.ane.AndroidFullScreen;
 
     import flash.display.StageQuality;
     import flash.display3D.Context3DTextureFormat;
@@ -16,6 +17,11 @@ package
     {
         public function Main()
         {
+            BUILD::android
+            {
+                AndroidFullScreen.stage = stage;
+                AndroidFullScreen.immersiveMode() || AndroidFullScreen.leanMode();
+            }
             super(Application);
         }
 

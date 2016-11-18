@@ -3,6 +3,7 @@
  */
 package com.agnither.spacetaxi.model
 {
+    import com.agnither.spacetaxi.enums.PlanetType;
     import com.agnither.spacetaxi.model.orders.Zone;
 
     import starling.events.Event;
@@ -11,6 +12,12 @@ package com.agnither.spacetaxi.model
     {
         public static const ORDER: String = "Planet.ORDER";
         
+        private var _type: PlanetType;
+        public function get type():PlanetType
+        {
+            return _type;
+        }
+        
         private var _zones: Vector.<Zone>;
         public function getZone(id: int = -1):Zone
         {
@@ -18,9 +25,11 @@ package com.agnither.spacetaxi.model
             return _zones[id];
         }
 
-        public function Planet(radius: int, mass: Number)
+        public function Planet(radius: int, mass: Number, type: PlanetType)
         {
             super(radius, mass);
+            
+            _type = type;
 
             _zones = new <Zone>[];
 
@@ -46,7 +55,7 @@ package com.agnither.spacetaxi.model
 
         override public function clone():SpaceBody
         {
-            var body: Planet = new Planet(_radius, _mass);
+            var body: Planet = new Planet(_radius, _mass, _type);
             body.place(_position.x, _position.y);
             return body;
         }

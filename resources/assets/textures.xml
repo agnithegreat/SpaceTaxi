@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with TexturePacker http://www.codeandweb.com/texturepacker-->
+<!-- $TexturePacker:SmartUpdate:51861ce13e15b016c78d23005836186a:e6153ec574f4437b205be59da6693104:2a288f7160b778d75d6fb3a0e2108afb$ -->
+<TextureAtlas imagePath="textures.png" width="4096" height="4096">
+    <SubTexture name="1" x="4" y="2424" width="500" height="500"/>
+    <SubTexture name="2" x="510" y="2424" width="500" height="500"/>
+    <SubTexture name="3" x="1016" y="2424" width="500" height="500"/>
+    <SubTexture name="4" x="2020" y="2424" rotated="true" width="479" height="493" frameX="-3" frameY="-21" frameWidth="500" frameHeight="500"/>
+    <SubTexture name="5" x="577" y="1782" width="500" height="500"/>
+    <SubTexture name="6" x="1083" y="1782" width="500" height="500"/>
+    <SubTexture name="7" x="2505" y="2424" width="494" height="489" frameX="-4" frameY="-5" frameWidth="500" frameHeight="500"/>
+    <SubTexture name="8" x="3706" y="1851" rotated="true" width="380" height="500" frameX="0" frameY="-60" frameWidth="500" frameHeight="500"/>
+    <SubTexture name="9" x="1037" y="3215" width="500" height="500"/>
+    <SubTexture name="10" x="2006" y="3215" rotated="true" width="493" height="498" frameX="-2" frameY="-2" frameWidth="500" frameHeight="500"/>
+    <SubTexture name="11" x="1543" y="3215" rotated="true" width="457" height="500" frameX="0" frameY="-24" frameWidth="500" frameHeight="500"/>
+    <SubTexture name="12" x="1522" y="2424" rotated="true" width="492" height="500" frameX="0" frameY="-8" frameWidth="500" frameHeight="500"/>
+    <SubTexture name="13" x="2505" y="2919" width="487" height="476" frameX="-3" frameY="-14" frameWidth="500" frameHeight="500"/>
+    <SubTexture name="Boom" x="4" y="1782" rotated="true" width="567" height="594"/>
+    <SubTexture name="Comet" x="3247" y="4" width="772" height="697"/>
+    <SubTexture name="DeadHole" x="4" y="4" width="1927" height="1772"/>
+    <SubTexture name="EnergyCharge" x="3247" y="707" width="771" height="940"/>
+    <SubTexture name="Jump" x="3078" y="1653" rotated="true" width="848" height="192"/>
+    <SubTexture name="Neutral" x="4" y="2935" width="1027" height="1027"/>
+    <SubTexture name="Push" x="1937" y="1312" width="1135" height="1106"/>
+    <SubTexture name="Star" x="3691" y="2881" width="328" height="328"/>
+    <SubTexture name="Station" x="3078" y="2353" rotated="true" width="607" height="576"/>
+    <SubTexture name="Sun" x="1937" y="4" width="1304" height="1302"/>
+    <SubTexture name="taxi" x="3078" y="1851" rotated="true" width="622" height="496"/>
+    <SubTexture name="taxiFinish" x="3691" y="2357" width="400" height="518"/>
+</TextureAtlas>

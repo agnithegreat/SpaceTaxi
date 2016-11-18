@@ -5,6 +5,16 @@ package com.agnither.spacetaxi.model
 {
     public class Ship extends DynamicSpaceBody
     {
+        public static const COLLIDE: String = "Ship.COLLIDE";
+        public static const LAND: String = "Ship.LAND";
+        public static const CRASH: String = "Ship.CRASH";
+        
+        private var _rotation: Number;
+        public function get rotation():Number
+        {
+            return _rotation;
+        }
+        
         protected var _landed: Boolean;
         public function get landed():Boolean
         {
@@ -23,6 +33,8 @@ package com.agnither.spacetaxi.model
         {
             super(radius, mass);
 
+            _rotation = 0;
+            
             _orders = new <Order>[];
         }
 
@@ -30,11 +42,38 @@ package com.agnither.spacetaxi.model
         {
             _landed = false;
         }
+
+        public function collide():void
+        {
+            dispatchEventWith(COLLIDE);
+        }
+
+        override public function accelerate(x: Number, y: Number):void
+        {
+            super.accelerate(x, y);
+
+            _rotation = Math.atan2(y, x);
+            dispatchEventWith(UPDATE);
+        }
         
         public function land():void
         {
             stop();
             _landed = true;
+            dispatchEventWith(LAND);
+        }
+
+        public function crash():void
+        {
+            stop();
+            _crashed = true;
+            dispatchEventWith(CRASH);
+        }
+
+        public function stop():void
+        {
+            _speed.x = 0;
+            _speed.y = 0;
         }
         
         public function addOrder(order: Order):void
@@ -50,18 +89,6 @@ package com.agnither.spacetaxi.model
         public function removeOrder(order: Order):void
         {
             _orders.splice(_orders.indexOf(order), 1);
-        }
-
-        public function crash():void
-        {
-            stop();
-            _crashed = true;
-        }
-
-        public function stop():void
-        {
-            _speed.x = 0;
-            _speed.y = 0;
         }
 
         override public function clone():SpaceBody

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <module type="Flex" version="4">
-  <component name="FlexBuildConfigurationManager" active="SpaceTaxi Desktop">
+  <component name="FlexBuildConfigurationManager" active="SpaceTaxi Android">
     <configurations>
-      <configuration name="SpaceTaxi Desktop" target-platform="Desktop" pure-as="true" main-class="Main" output-file="SpaceTaxi_Desktop.swf" output-folder="$MODULE_DIR$/out/production/SpaceTaxi">
+      <configuration name="SpaceTaxi Desktop" target-platform="Desktop" pure-as="true" main-class="Main" output-file="SpaceTaxi_Desktop.swf" output-folder="$MODULE_DIR$/build">
         <dependencies target-player="24.0">
           <entries>
             <entry module-name="MainBase" build-configuration-name="MainBase">
@@ -11,23 +11,40 @@
             <entry library-name="swc" library-level="project">
               <dependency linkage="Merged" />
             </entry>
+            <entry module-name="TaskManagement" build-configuration-name="TaskManagement">
+              <dependency linkage="Merged" />
+            </entry>
           </entries>
           <sdk name="AIRSDK_24" />
         </dependencies>
         <compiler-options>
           <option name="additionalOptions" value="-define+=BUILD::debug,true -define+=BUILD::mobile,false -define+=BUILD::ios,false -define+=BUILD::android,false -advanced-telemetry=true" />
         </compiler-options>
-        <packaging-air-desktop use-generated-descriptor="false" custom-descriptor-path="$MODULE_DIR$/SpaceTaxi-desktop.xml" package-file-name="SpaceTaxi_Desktop" />
+        <packaging-air-desktop use-generated-descriptor="false" custom-descriptor-path="$MODULE_DIR$/SpaceTaxi-desktop.xml" package-file-name="SpaceTaxi_Desktop">
+          <files-to-package>
+            <FilePathAndPathInPackage file-path="$MODULE_DIR$/resources/assets" path-in-package="assets" />
+            <FilePathAndPathInPackage file-path="$MODULE_DIR$/resources/config" path-in-package="config" />
+          </files-to-package>
+        </packaging-air-desktop>
         <packaging-android />
         <packaging-ios />
       </configuration>
-      <configuration name="SpaceTaxi Android" target-platform="Mobile" pure-as="true" main-class="Main" output-file="SpaceTaxi_Android.swf" output-folder="$MODULE_DIR$/out/production/SpaceTaxi">
+      <configuration name="SpaceTaxi Android" target-platform="Mobile" pure-as="true" main-class="Main" output-file="SpaceTaxi_Android.swf" output-folder="$MODULE_DIR$/build">
         <dependencies>
           <entries>
             <entry module-name="MainBase" build-configuration-name="MainBase">
               <dependency linkage="Merged" />
             </entry>
             <entry library-name="swc" library-level="project">
+              <dependency linkage="Merged" />
+            </entry>
+            <entry module-name="TaskManagement" build-configuration-name="TaskManagement">
+              <dependency linkage="Merged" />
+            </entry>
+            <entry library-name="android" library-level="project">
+              <dependency linkage="Merged" />
+            </entry>
+            <entry library-name="common" library-level="project">
               <dependency linkage="Merged" />
             </entry>
           </entries>
@@ -37,7 +54,12 @@
           <option name="additionalOptions" value="-define+=BUILD::debug,true -define+=BUILD::mobile,true -define+=BUILD::ios,false -define+=BUILD::android,true -advanced-telemetry=true" />
         </compiler-options>
         <packaging-air-desktop />
-        <packaging-android enabled="true" use-generated-descriptor="false" custom-descriptor-path="$MODULE_DIR$/SpaceTaxi-desktop.xml" package-file-name="SpaceTaxi_Android" />
+        <packaging-android enabled="true" use-generated-descriptor="false" custom-descriptor-path="$MODULE_DIR$/SpaceTaxi-android.xml" package-file-name="SpaceTaxi_Android">
+          <files-to-package>
+            <FilePathAndPathInPackage file-path="$MODULE_DIR$/resources/config" path-in-package="config" />
+            <FilePathAndPathInPackage file-path="$MODULE_DIR$/resources/assets" path-in-package="assets" />
+          </files-to-package>
+        </packaging-android>
         <packaging-ios package-file-name="SpaceTaxi_Android" />
       </configuration>
     </configurations>
@@ -52,5 +74,8 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module" module-name="MainBase" exported="" />
     <orderEntry type="library" exported="" name="swc" level="project" />
+    <orderEntry type="module" module-name="TaskManagement" exported="" />
+    <orderEntry type="library" exported="" name="android" level="project" />
+    <orderEntry type="library" exported="" name="common" level="project" />
   </component>
 </module>

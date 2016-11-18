@@ -6,27 +6,32 @@ package com.agnither.spacetaxi.view
     import com.agnither.spacetaxi.Application;
     import com.agnither.spacetaxi.model.Planet;
     import com.agnither.spacetaxi.model.Space;
+    import com.agnither.utils.gui.components.AbstractComponent;
 
     import flash.display.Shape;
     import flash.geom.Point;
 
     import starling.core.Starling;
+    import starling.display.Image;
     import starling.display.Sprite;
     import starling.events.Event;
     import starling.events.Touch;
     import starling.events.TouchEvent;
     import starling.events.TouchPhase;
 
-    public class SpaceView extends Sprite
+    public class SpaceView extends AbstractComponent
     {
         private static const DASH_LENGTH: int = 12;
         private static const GAP_LENGTH: int = 8;
 
         private var _space: Space;
-        
+
+        private var _background: Image;
+        private var _container: Sprite;
+
         private var _shipView: ShipView;
         private var _planets: Vector.<PlanetView>;
-        
+
         private var _trajectory: Shape;
         private var _counter: int;
 
@@ -42,20 +47,46 @@ package com.agnither.spacetaxi.view
             _space.addEventListener(Space.SHOW_TRAJECTORY, handleShowTrajectory);
             _space.addEventListener(Space.UPDATE_TRAJECTORY, handleUpdateTrajectory);
             _space.addEventListener(Space.HIDE_TRAJECTORY, handleHideTrajectory);
+        }
+
+        override protected function initialize():void
+        {
+            _background = new Image(Application.assetsManager.getTexture("space_pattern"));
+            _background.pivotX = _background.width * 0.5;
+            _background.pivotY = _background.height * 0.5;
+            _background.x = stage.stageWidth * 0.5;
+            _background.y = stage.stageHeight * 0.5;
+            _background.scaleX = stage.stageWidth / _background.width;
+            _background.scaleY = stage.stageHeight / _background.height;
+            addChild(_background);
+
+            _container = new Sprite();
+            addChild(_container);
 
             _planets = new <PlanetView>[];
             for (var i:int = 0; i < _space.planets.length; i++)
             {
                 var planet: Planet = _space.planets[i];
                 var planetView: PlanetView = new PlanetView(planet);
-                addChild(planetView);
+                _container.addChild(planetView);
                 _planets.push(planetView);
             }
 
             _shipView = new ShipView(_space.ship);
-            addChild(_shipView);
+            _container.addChild(_shipView);
+
+            var rect: flash.geom.Rectangle = _container.getBounds(stage);
+            var scale: Number = Math.max(stage.stageWidth / rect.width, stage.stageHeight / rect.height) * 0.8;
+            _container.x = (stage.stageWidth - rect.width * scale) * 0.5 - rect.x;
+            _container.y = (stage.stageHeight - rect.height * scale) * 0.5 - rect.y;
+            _container.scaleX = scale;
+            _container.scaleY = scale;
 
             _trajectory = new Shape();
+            _trajectory.x = _container.x;
+            _trajectory.y = _container.y;
+            _trajectory.scaleX = scale;
+            _trajectory.scaleY = scale;
             Application.flashViewport.addChild(_trajectory);
 
             Starling.current.stage.addEventListener(TouchEvent.TOUCH, handleTouch);
@@ -68,10 +99,16 @@ package com.agnither.spacetaxi.view
             {
                 switch (touch.phase)
                 {
+                    case TouchPhase.HOVER:
+                    {
+//                        var position: Point = touch.getLocation(this);
+//                        trace(position.x, position.y);
+                        break;
+                    }
                     case TouchPhase.BEGAN:
                     case TouchPhase.MOVED:
                     {
-                        var position: Point = touch.getLocation(this);
+                        var position: Point = touch.getLocation(_shipView);
                         _space.setPullPoint(position.x, position.y);
                         break;
                     }

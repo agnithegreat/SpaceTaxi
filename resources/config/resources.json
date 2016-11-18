@@ -1,0 +1,17 @@
+{
+  "common": {
+    "cache": false,
+    "folder": "assets",
+    "assets": [
+      "space_pattern.png",
+      "textures.png",
+      "textures.xml"
+    ]
+  },
+  "sounds": {
+    "cache": false,
+    "folder": "sounds",
+    "assets": [
+    ]
+  }
+}

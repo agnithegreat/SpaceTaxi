@@ -4,37 +4,41 @@
 package com.agnither.spacetaxi
 {
     import com.agnither.spacetaxi.controller.AppController;
-    import com.agnither.spacetaxi.view.SpaceView;
+    import com.agnither.spacetaxi.tasks.init.InitTask;
+    import com.agnither.tasks.global.TaskSystem;
 
     import flash.display.Sprite;
 
     import starling.core.Starling;
     import starling.display.Sprite;
+    import starling.utils.AssetManager;
 
     public class Application extends starling.display.Sprite implements IStartable
     {
+        public static var graphicPack: int = 2048;
+
         public static var appController: AppController;
+
+        public static var assetsManager: AssetManager;
+
         public static var viewport: starling.display.Sprite;
         
         public static var flashViewport: flash.display.Sprite;
         
         public function start():void
         {
-            appController = new AppController();
-            appController.init();
+            assetsManager = new AssetManager();
+            assetsManager.verbose = Config.debug;
             
-            var scale: Number = Math.max(Starling.current.stage.stageWidth / 800, Starling.current.stage.stageHeight / 600);
+            appController = new AppController();
 
             flashViewport = new flash.display.Sprite();
-            flashViewport.scaleX = scale;
-            flashViewport.scaleY = scale;
             Starling.current.nativeOverlay.addChild(flashViewport);
 
             viewport = new starling.display.Sprite();
-            viewport.addChild(new SpaceView(appController.space));
-            viewport.scaleX = scale;
-            viewport.scaleY = scale;
             addChild(viewport);
+            
+            TaskSystem.getInstance().addTask(new InitTask());
         }
     }
 }
