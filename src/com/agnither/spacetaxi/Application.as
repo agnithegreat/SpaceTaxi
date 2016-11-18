@@ -7,13 +7,11 @@ package com.agnither.spacetaxi
     import com.agnither.spacetaxi.tasks.init.InitTask;
     import com.agnither.tasks.global.TaskSystem;
 
-    import flash.display.Sprite;
-
     import starling.core.Starling;
     import starling.display.Sprite;
     import starling.utils.AssetManager;
 
-    public class Application extends starling.display.Sprite implements IStartable
+    public class Application extends Sprite implements IStartable
     {
         public static var graphicPack: int = 2048;
 
@@ -21,9 +19,7 @@ package com.agnither.spacetaxi
 
         public static var assetsManager: AssetManager;
 
-        public static var viewport: starling.display.Sprite;
-        
-        public static var flashViewport: flash.display.Sprite;
+        public static var viewport: Sprite;
         
         public function start():void
         {
@@ -34,10 +30,7 @@ package com.agnither.spacetaxi
             
             appController = new AppController();
 
-            flashViewport = new flash.display.Sprite();
-            Starling.current.nativeOverlay.addChild(flashViewport);
-
-            viewport = new starling.display.Sprite();
+            viewport = new Sprite();
             addChild(viewport);
             
             TaskSystem.getInstance().addTask(new InitTask());

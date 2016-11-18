@@ -8,22 +8,23 @@ package com.agnither.spacetaxi.view
     import com.agnither.spacetaxi.model.Space;
     import com.agnither.utils.gui.components.AbstractComponent;
 
-    import flash.display.Shape;
     import flash.geom.Point;
     import flash.geom.Rectangle;
 
     import starling.core.Starling;
+    import starling.display.Canvas;
     import starling.display.Image;
     import starling.display.Sprite;
     import starling.events.Event;
     import starling.events.Touch;
     import starling.events.TouchEvent;
     import starling.events.TouchPhase;
+    import starling.geom.Polygon;
 
     public class SpaceView extends AbstractComponent
     {
-        private static const DASH_LENGTH: int = 12;
-        private static const GAP_LENGTH: int = 8;
+        private static const DASH_LENGTH: int = 10;
+        private static const GAP_LENGTH: int = 4;
 
         private var _space: Space;
 
@@ -35,12 +36,19 @@ package com.agnither.spacetaxi.view
         private var _shipView: ShipView;
         private var _planets: Vector.<PlanetView>;
 
-        private var _trajectory: Shape;
+        private var _trajectory: Canvas;
         private var _counter: int;
 
+        private var _dashStart: Point;
         private var _draw: Boolean;
         private var _lineLength: Number;
         private var _maxLength: int;
+
+        private var _baseWidth: Number;
+        private var _baseHeight: Number;
+        private var _basePivotX: Number;
+        private var _basePivotY: Number;
+        private var _baseScale: Number;
 
         public function SpaceView(space: Space)
         {
@@ -50,6 +58,7 @@ package com.agnither.spacetaxi.view
             _space.addEventListener(Space.SHOW_TRAJECTORY, handleShowTrajectory);
             _space.addEventListener(Space.UPDATE_TRAJECTORY, handleUpdateTrajectory);
             _space.addEventListener(Space.HIDE_TRAJECTORY, handleHideTrajectory);
+            _space.addEventListener(Space.STEP, handleStep);
         }
 
         override protected function initialize():void
@@ -66,13 +75,16 @@ package com.agnither.spacetaxi.view
             _stars.height = stage.stageHeight;
             addChild(_stars);
 
-            _container = new Sprite();
-            addChild(_container);
-
             _milkyway = new Image(Application.assetsManager.getTexture("milkyway-min"));
             _milkyway.width = stage.stageWidth;
             _milkyway.height = stage.stageHeight;
             addChild(_milkyway);
+
+            _container = new Sprite();
+            addChild(_container);
+
+            _trajectory = new Canvas();
+            _container.addChild(_trajectory);
 
             _planets = new <PlanetView>[];
             for (var i:int = 0; i < _space.planets.length; i++)
@@ -87,18 +99,20 @@ package com.agnither.spacetaxi.view
             _container.addChild(_shipView);
 
             var rect: flash.geom.Rectangle = _container.getBounds(stage);
-            var scale: Number = Math.max(stage.stageWidth / rect.width, stage.stageHeight / rect.height) * 0.8;
-            _container.x = (stage.stageWidth - rect.width * scale) * 0.5 - rect.x;
-            _container.y = (stage.stageHeight - rect.height * scale) * 0.5 - rect.y;
-            _container.scaleX = scale;
-            _container.scaleY = scale;
+            _baseWidth = rect.width;
+            _baseHeight = rect.height;
+            _baseScale = Math.max(stage.stageWidth / _baseWidth, stage.stageHeight / _baseHeight) * 0.8;
+            _basePivotX = rect.x + _baseWidth / 2;
+            _basePivotY = rect.y + _baseHeight / 2;
 
-            _trajectory = new Shape();
-            _trajectory.x = _container.x;
-            _trajectory.y = _container.y;
-            _trajectory.scaleX = scale;
-            _trajectory.scaleY = scale;
-            Application.flashViewport.addChild(_trajectory);
+            _container.x = stage.stageWidth / 2;
+            _container.y = stage.stageHeight / 2;
+            _container.pivotX = _basePivotX;
+            _container.pivotY = _basePivotY;
+            _container.scaleX = _baseScale;
+            _container.scaleY = _baseScale;
+
+            _dashStart = new Point();
 
             Starling.current.stage.addEventListener(TouchEvent.TOUCH, handleTouch);
         }
@@ -135,9 +149,9 @@ package com.agnither.spacetaxi.view
         private function handleShowTrajectory(event: Event):void
         {
             _trajectory.visible = true;
-            
-            _trajectory.graphics.clear();
-            _trajectory.graphics.lineStyle(3, 0xFFFFFF, 0.5);
+
+            _trajectory.clear();
+            _trajectory.beginFill(0xFFFFFF, 1);
             _counter = 0;
 
             _lineLength = 0;
@@ -149,7 +163,7 @@ package com.agnither.spacetaxi.view
         {
             if (_counter == 0)
             {
-                _trajectory.graphics.moveTo(_space.trajectory[_counter].x, _space.trajectory[_counter].y);
+                _dashStart = _space.trajectory[_counter];
                 _counter++;
             }
             if (_space.trajectory.length > _counter)
@@ -165,9 +179,10 @@ package com.agnither.spacetaxi.view
                     }
                     if (_draw)
                     {
-                        _trajectory.graphics.lineTo(_space.trajectory[_counter].x, _space.trajectory[_counter].y);
+                        var points: Array = getLine(_dashStart, _space.trajectory[_counter], 2);
+                        _trajectory.drawPolygon(new Polygon(points));
                     } else {
-                        _trajectory.graphics.moveTo(_space.trajectory[_counter].x, _space.trajectory[_counter].y);
+                        _dashStart = _space.trajectory[_counter];
                     }
                 }
             }
@@ -176,6 +191,37 @@ package com.agnither.spacetaxi.view
         private function handleHideTrajectory(event: Event):void
         {
             _trajectory.visible = false;
+        }
+
+        private function handleStep(event: Event):void
+        {
+            var dx: Number = _shipView.x + _basePivotX - _baseWidth * 0.5;
+            dx = Math.max(-_baseWidth, Math.min(dx, _baseWidth));
+            var dy: Number = _shipView.y + _basePivotY - _baseHeight * 0.5;
+            dy = Math.max(-_baseHeight, Math.min(dy, _baseHeight));
+            var d: Number = Math.pow(dx * dx + dy * dy, 0.5);
+            var scale: Number = 1 - d * 0.25 / _baseWidth;
+
+            _container.pivotX = _basePivotX + dx * 0.25;
+            _container.pivotY = _basePivotY + dy * 0.25;
+            _container.scaleX = _baseScale * scale;
+            _container.scaleY = _baseScale * scale;
+
+            _milkyway.pivotX = dx * 0.05;
+            _milkyway.pivotY = dy * 0.05;
+        }
+
+        private function getLine(p1: Point, p2: Point, thickness: int):Array
+        {
+            var angle: Number = Math.atan2(p2.y - p1.y, p2.x - p1.x);
+            var points: Array = [];
+            var dx: Number = Math.cos(angle - Math.PI * 0.5) * thickness;
+            var dy: Number = Math.sin(angle - Math.PI * 0.5) * thickness;
+            points.push(p1.x - dx, p1.y - dy);
+            points.push(p1.x + dx, p1.y + dy);
+            points.push(p2.x + dx, p2.y + dy);
+            points.push(p2.x - dx, p2.y - dy);
+            return points;
         }
     }
 }

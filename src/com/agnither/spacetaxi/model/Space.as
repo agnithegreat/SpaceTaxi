@@ -19,6 +19,7 @@ package com.agnither.spacetaxi.model
         public static const SHOW_TRAJECTORY: String = "Space.SHOW_TRAJECTORY";
         public static const UPDATE_TRAJECTORY: String = "Space.UPDATE_TRAJECTORY";
         public static const HIDE_TRAJECTORY: String = "Space.HIDE_TRAJECTORY";
+        public static const STEP: String = "Space.STEP";
 
         public static const G: Number = 6.67;
         public static const DISTANCE_POWER: Number = 2;
@@ -29,7 +30,8 @@ package com.agnither.spacetaxi.model
         public static const MAX_SPEED: Number = 1000;
         public static const MAX_DISTANCE: Number = 10000;
         public static const TRAJECTORY_STEPS: Number = 50;
-        public static const TRAJECTORY_LENGTH: Number = 200;
+//        public static const TRAJECTORY_LENGTH: Number = 200;
+        public static const TRAJECTORY_LENGTH: Number = 10000;
         public static const PULL_MULTIPLIER: Number = 0.2;
         public static const PULL_SCALE: int = 2;
         
@@ -300,6 +302,8 @@ package com.agnither.spacetaxi.model
             {
                 step(_ship, DELTA);
             }
+            
+            dispatchEventWith(STEP);
         }
 
         private function handleUpdateOrders(event: Event):void
