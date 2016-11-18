@@ -10,6 +10,7 @@ package com.agnither.spacetaxi.view
 
     import flash.display.Shape;
     import flash.geom.Point;
+    import flash.geom.Rectangle;
 
     import starling.core.Starling;
     import starling.display.Image;
@@ -52,12 +53,9 @@ package com.agnither.spacetaxi.view
         override protected function initialize():void
         {
             _background = new Image(Application.assetsManager.getTexture("space_pattern"));
-            _background.pivotX = _background.width * 0.5;
-            _background.pivotY = _background.height * 0.5;
-            _background.x = stage.stageWidth * 0.5;
-            _background.y = stage.stageHeight * 0.5;
-            _background.scaleX = stage.stageWidth / _background.width;
-            _background.scaleY = stage.stageHeight / _background.height;
+            _background.tileGrid = new flash.geom.Rectangle(0, 0, _background.width, _background.height);
+            _background.width = stage.stageWidth;
+            _background.height = stage.stageHeight;
             addChild(_background);
 
             _container = new Sprite();
