@@ -4,7 +4,7 @@
         <key>fileFormatVersion</key>
         <int>4</int>
         <key>texturePackerVersion</key>
-        <string>4.3.0</string>
+        <string>4.3.1</string>
         <key>fileName</key>
         <string>/Users/agnither/projects/Idea/SpaceTaxi/assets/textures.tps</string>
         <key>autoSDSettings</key>
@@ -197,6 +197,19 @@
         </struct>
         <key>individualSpriteSettings</key>
         <map type="IndividualSpriteSettingsMap">
+            <key type="filename">assets/fonts/futura_30_bold_italic_white_numeric.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>32,32,64,64</rect>
+                <key>scale9Paddings</key>
+                <rect>32,32,64,64</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
             <key type="filename">assets/planets/1.png</key>
             <key type="filename">assets/planets/10.png</key>
             <key type="filename">assets/planets/12.png</key>
@@ -303,6 +316,7 @@
         <array>
             <filename>assets/planets</filename>
             <filename>assets/ship</filename>
+            <filename>assets/fonts</filename>
         </array>
         <key>ignoreFileList</key>
         <array/>

@@ -6,8 +6,11 @@
       "milkyway-min.png",
       "space_pattern.png",
       "stars_pattern.png",
+
       "textures.png",
-      "textures.xml"
+      "textures.xml",
+
+      "fonts/futura_30_bold_italic_white_numeric.xml"
     ]
   },
   "sounds": {

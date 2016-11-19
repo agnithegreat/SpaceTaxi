@@ -20,6 +20,9 @@ package com.agnither.spacetaxi.view
     import starling.events.TouchEvent;
     import starling.events.TouchPhase;
     import starling.geom.Polygon;
+    import starling.text.TextField;
+    import starling.text.TextFieldAutoSize;
+    import starling.text.TextFormat;
 
     public class SpaceView extends AbstractComponent
     {
@@ -35,6 +38,8 @@ package com.agnither.spacetaxi.view
 
         private var _shipView: ShipView;
         private var _planets: Vector.<PlanetView>;
+
+        private var _distanceTF: TextField;
 
         private var _trajectory: Canvas;
         private var _counter: int;
@@ -85,6 +90,10 @@ package com.agnither.spacetaxi.view
 
             _trajectory = new Canvas();
             _container.addChild(_trajectory);
+
+            _distanceTF = new TextField(50, 50, "", new TextFormat("futura_30_bold_italic_white_numeric", -1, 0xFFFFFF));
+            _distanceTF.autoSize = TextFieldAutoSize.BOTH_DIRECTIONS;
+            addChild(_distanceTF);
 
             _planets = new <PlanetView>[];
             for (var i:int = 0; i < _space.planets.length; i++)
@@ -168,7 +177,7 @@ package com.agnither.spacetaxi.view
             }
             if (_space.trajectory.length > _counter)
             {
-                for (_counter; _counter < _space.trajectory.length; _counter++)
+                for (_counter; _counter < Math.min(_space.trajectory.length, Space.TRAJECTORY_LENGTH); _counter++)
                 {
                     _lineLength += Point.distance(_space.trajectory[_counter], _space.trajectory[_counter-1]);
                     if (_lineLength > _maxLength)
@@ -195,9 +204,13 @@ package com.agnither.spacetaxi.view
 
         private function handleStep(event: Event):void
         {
-            var dx: Number = _shipView.x + _basePivotX - _baseWidth * 0.5;
+            var dx: Number = _shipView.x - _baseWidth * 0.5;
+            var dy: Number = _shipView.y - _baseHeight * 0.5;
+
+            var realDistance: Number = Math.pow(dx * dx + dy * dy, 0.5);
+            var angle: Number = Math.atan2(dy, dx);
+
             dx = Math.max(-_baseWidth, Math.min(dx, _baseWidth));
-            var dy: Number = _shipView.y + _basePivotY - _baseHeight * 0.5;
             dy = Math.max(-_baseHeight, Math.min(dy, _baseHeight));
             var d: Number = Math.pow(dx * dx + dy * dy, 0.5);
             var scale: Number = 1 - d * 0.25 / _baseWidth;
@@ -208,6 +221,13 @@ package com.agnither.spacetaxi.view
                 scaleX: _baseScale * scale,
                 scaleY: _baseScale * scale
             });
+
+            _distanceTF.text = String(Math.round(realDistance - d));
+            _distanceTF.pivotX = _distanceTF.width * 0.5;
+            _distanceTF.pivotY = _distanceTF.height * 0.5;
+            _distanceTF.x = stage.stageWidth * 0.5 + Math.cos(angle) * stage.stageHeight * 0.45;
+            _distanceTF.y = stage.stageHeight * 0.5 + Math.sin(angle) * stage.stageHeight * 0.45;
+            _distanceTF.visible = !_shipView.getBounds(stage).intersects(new flash.geom.Rectangle(0, 0, stage.stageWidth, stage.stageHeight));
         }
 
         private function getLine(p1: Point, p2: Point, thickness: int):Array

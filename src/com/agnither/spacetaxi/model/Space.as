@@ -28,8 +28,9 @@ package com.agnither.spacetaxi.model
         public static const MIN_SPEED: Number = 1;
         public static const CONTROL_SPEED: Number = 100;
         public static const MAX_SPEED: Number = 1000;
-        public static const MAX_DISTANCE: Number = 10000;
+        public static const MAX_DISTANCE: Number = 4000;
         public static const TRAJECTORY_STEPS: Number = 50;
+        public static const TRAJECTORY_LENGTH: Number = 150;
         public static const PULL_MULTIPLIER: Number = 0.2;
         public static const PULL_SCALE: int = 2;
         

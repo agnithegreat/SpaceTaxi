@@ -32,7 +32,7 @@ package com.agnither.spacetaxi
 
             viewport = new Sprite();
             addChild(viewport);
-            
+
             TaskSystem.getInstance().addTask(new InitTask());
         }
     }
