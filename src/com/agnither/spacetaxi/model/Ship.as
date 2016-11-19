@@ -59,17 +59,32 @@ package com.agnither.spacetaxi.model
         {
             super(radius, mass);
 
+            _orders = new <Order>[];
+
+            _offset = new Point();
+            
+            reset();
+        }
+        
+        override public function reset():void
+        {
+            super.reset();
+            
             _rotation = 0;
+            
+            _landed = false;
+            _crashed = false;
 
             // TODO: FUEL - setup
             _fuel = 100;
 
             // TODO: DURABILITY - setup
             _durability = 100;
-
-            _orders = new <Order>[];
-
-            _offset = new Point();
+            
+            _orders.length = 0;
+            
+            _offset.x = 0;
+            _offset.y = 0;
         }
 
         public function launch(fuel: Number = 0):void

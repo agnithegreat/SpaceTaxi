@@ -30,8 +30,6 @@ package com.agnither.spacetaxi.model
         public static const MAX_SPEED: Number = 1000;
         public static const MAX_DISTANCE: Number = 10000;
         public static const TRAJECTORY_STEPS: Number = 50;
-//        public static const TRAJECTORY_LENGTH: Number = 200;
-        public static const TRAJECTORY_LENGTH: Number = 10000;
         public static const PULL_MULTIPLIER: Number = 0.2;
         public static const PULL_SCALE: int = 2;
         
@@ -49,6 +47,12 @@ package com.agnither.spacetaxi.model
         public function get planets():Vector.<Planet>
         {
             return _planets;
+        }
+
+        private var _center: Point;
+        public function get center():Point
+        {
+            return _center;
         }
         
         private var _pullPoint: Point;
@@ -79,15 +83,20 @@ package com.agnither.spacetaxi.model
         public function init():void
         {
             _ship = new Ship(20, 1);
-            _ship.place(30, 235);
+            resetShip();
+
+            _center = new Point();
 
             _planets = new <Planet>[];
             addPlanet(95, 205, 50, 201, PlanetType.NORMAL);
             addPlanet(300, 95, 50, 197, PlanetType.NORMAL);
             addPlanet(565, 370, 100, 348, PlanetType.NORMAL);
-            
+
 //            addPlanet(230, 430, 100, 500, PlanetType.LAVA);
 //            addPlanet(230, 430, 50, 3000, PlanetType.BLACK_HOLE);
+
+            _center.x /= _planets.length;
+            _center.y /= _planets.length;
 
             _pullPoint = new Point();
             _trajectory = new <Point>[];
@@ -101,6 +110,12 @@ package com.agnither.spacetaxi.model
             _orderController.addOrder(new Order(_planets[0].getZone(), _planets[2].getZone()));
             _orderController.addOrder(new Order(_planets[1].getZone(), _planets[0].getZone()));
             _orderController.start(3);
+        }
+
+        private function resetShip():void
+        {
+            _ship.reset();
+            _ship.place(30, 235);
         }
 
         public function setPullPoint(x: int, y: int):void
@@ -142,21 +157,16 @@ package com.agnither.spacetaxi.model
         private function computeTrajectory(ship: Ship):void
         {
             var i: int = 0;
-            var d: int = 0;
-            while (!ship.landed && !ship.crashed && _trajectory.length < TRAJECTORY_LENGTH && i < TRAJECTORY_STEPS && d < MAX_DISTANCE)
+            while (!ship.landed && !ship.crashed && i < TRAJECTORY_STEPS)
             {
                 i++;
                 _trajectory.push(ship.position.clone());
                 step(ship, DELTA);
-                d = Point.distance(ship.position, _ship.position);
             }
             _trajectory.push(ship.position.clone());
             dispatchEventWith(UPDATE_TRAJECTORY);
 
-            if (d >= MAX_DISTANCE)
-            {
-                ship.crash();
-            } else if (!ship.landed && !ship.crashed && _trajectory.length < TRAJECTORY_LENGTH)
+            if (!ship.landed && !ship.crashed)
             {
                 Starling.juggler.delayCall(computeTrajectory, 0.01, ship);
             }
@@ -182,6 +192,9 @@ package com.agnither.spacetaxi.model
             planet.place(x, y);
             _planets.push(planet);
             Starling.juggler.add(planet);
+
+            _center.x += x;
+            _center.y += y;
         }
 
         private function step(ship: Ship, delta: Number):void
@@ -191,6 +204,7 @@ package com.agnither.spacetaxi.model
                 checkGravity(ship);
                 checkSpeed(ship);
                 checkMove(ship, delta);
+                checkDistance(ship);
                 ship.update();
             }
         }
@@ -291,9 +305,25 @@ package com.agnither.spacetaxi.model
             }
         }
 
+        private function checkDistance(ship: Ship):void
+        {
+            var d: Number = Point.distance(ship.position, _center);
+            if (d >= MAX_DISTANCE)
+            {
+                ship.crash();
+            }
+        }
+
         public function advanceTime(delta: Number):void
         {
-            if (_ship.landed || _ship.crashed) return;
+            if (_ship.landed) return;
+
+            if (_ship.crashed)
+            {
+                trace("reset");
+                resetShip();
+                return;
+            }
 
             _time += delta;
             var amount: int = _time * 1000 * DELTA;
@@ -302,7 +332,7 @@ package com.agnither.spacetaxi.model
             {
                 step(_ship, DELTA);
             }
-            
+
             dispatchEventWith(STEP);
         }
 

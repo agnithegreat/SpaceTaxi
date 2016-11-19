@@ -52,5 +52,13 @@ package com.agnither.spacetaxi.model
             body.accelerate(_speed.x, _speed.y);
             return body;
         }
+
+        override public function reset():void
+        {
+            super.reset();
+            
+            _speed.x = 0;
+            _speed.y = 0;
+        }
     }
 }

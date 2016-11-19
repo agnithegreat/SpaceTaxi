@@ -202,13 +202,12 @@ package com.agnither.spacetaxi.view
             var d: Number = Math.pow(dx * dx + dy * dy, 0.5);
             var scale: Number = 1 - d * 0.25 / _baseWidth;
 
-            _container.pivotX = _basePivotX + dx * 0.25;
-            _container.pivotY = _basePivotY + dy * 0.25;
-            _container.scaleX = _baseScale * scale;
-            _container.scaleY = _baseScale * scale;
-
-            _milkyway.pivotX = dx * 0.05;
-            _milkyway.pivotY = dy * 0.05;
+            Starling.juggler.tween(_container, 0.5, {
+                pivotX: _basePivotX + dx * 0.25,
+                pivotY: _basePivotY + dy * 0.25,
+                scaleX: _baseScale * scale,
+                scaleY: _baseScale * scale
+            });
         }
 
         private function getLine(p1: Point, p2: Point, thickness: int):Array

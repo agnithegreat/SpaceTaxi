@@ -68,5 +68,10 @@ package com.agnither.spacetaxi.model
             body.place(_position.x, _position.y); 
             return body;
         }
+
+        public function reset():void
+        {
+            
+        }
     }
 }

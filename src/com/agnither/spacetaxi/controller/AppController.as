@@ -24,8 +24,6 @@ package com.agnither.spacetaxi.controller
             _space = new Space();
             _space.init();
 
-            _space.launch();
-            
             Starling.juggler.add(_space);
         }
     }

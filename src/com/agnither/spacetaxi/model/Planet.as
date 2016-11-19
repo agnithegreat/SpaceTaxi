@@ -32,7 +32,7 @@ package com.agnither.spacetaxi.model
             return _time * _timeMultiplier;
         }
         
-        private var _scale: Number = 0.03;
+        private var _scale: Number = 0.05;
         public function get scale():Number
         {
             return _scale;

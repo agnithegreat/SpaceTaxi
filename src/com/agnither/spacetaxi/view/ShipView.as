@@ -58,7 +58,7 @@ package com.agnither.spacetaxi.view
 
         private function handleCrash(event: Event):void
         {
-            destroy();
+//            destroy();
         }
 
         private function destroy():void
