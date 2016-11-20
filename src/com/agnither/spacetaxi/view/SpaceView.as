@@ -55,6 +55,8 @@ package com.agnither.spacetaxi.view
         private var _basePivotY: Number;
         private var _baseScale: Number;
 
+        private var _aiming: Boolean;
+
         public function SpaceView(space: Space)
         {
             super();
@@ -135,20 +137,29 @@ package com.agnither.spacetaxi.view
                 {
                     case TouchPhase.HOVER:
                     {
-//                        var position: Point = touch.getLocation(this);
-//                        trace(position.x, position.y);
                         break;
                     }
                     case TouchPhase.BEGAN:
                     case TouchPhase.MOVED:
                     {
                         var position: Point = touch.getLocation(_shipView);
-                        _space.setPullPoint(position.x, position.y);
+                        if (Point.distance(position, new Point()) <= 50)
+                        {
+                            _aiming = true;
+                        }
+                        if (_aiming)
+                        {
+                            _space.setPullPoint(position.x, position.y);
+                        }
                         break;
                     }
                     case TouchPhase.ENDED:
                     {
-                        _space.launch();
+                        if (_aiming)
+                        {
+                            _space.launch();
+                            _aiming = false;
+                        }
                         break;
                     }
                 }
