@@ -46,9 +46,8 @@ package com.agnither.spacetaxi.model
 
             _zones = new <Zone>[];
 
-//            var length: Number = 2 * Math.PI * radius;
-//            var amount: int = length / Space.PLANET_ZONE_SIZE;
-            const amount: int = 16;
+            var length: Number = 2 * Math.PI * radius;
+            var amount: int = Math.round(length / Space.PLANET_ZONE_SIZE);
             const size: Number = 2 * Math.PI / amount;
             for (var i:int = 0; i < amount; i++)
             {

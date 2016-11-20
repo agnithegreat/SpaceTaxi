@@ -31,8 +31,10 @@ package com.agnither.spacetaxi.model
         public static const MAX_DISTANCE: Number = 4000;
         public static const TRAJECTORY_STEPS: Number = 50;
         public static const TRAJECTORY_LENGTH: Number = 150;
-        public static const PULL_MULTIPLIER: Number = 0.2;
-        public static const PULL_SCALE: int = 2;
+        public static const PULL_MULTIPLIER: Number = 0.1;
+        public static const PULL_SCALE: int = 1;
+        
+        public static const PLANET_ZONE_SIZE: int = 40;
         
         public static const FUEL_MULTIPLIER: Number = 1;
         public static const DAMAGE_MULTIPLIER: Number = 1;

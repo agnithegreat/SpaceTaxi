@@ -80,7 +80,7 @@ package com.agnither.spacetaxi.view
             _ship.removeEventListener(SpaceBody.UPDATE, handleUpdate);
             _ship.removeEventListener(Ship.ORDER, handleOrder);
             _ship.removeEventListener(Ship.LAUNCH, handleLaunch);
-            _ship.removeEventListener(Ship.COLLIDE, handleCollide)
+            _ship.removeEventListener(Ship.COLLIDE, handleCollide);
             _ship.removeEventListener(Ship.LAND, handleLand);
             _ship.removeEventListener(Ship.CRASH, handleCrash);
             _ship = null;
