@@ -1,23 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with TexturePacker http://www.codeandweb.com/texturepacker-->
-<!-- $TexturePacker:SmartUpdate:cfd0ae44a3688e00e379bbf0f561ec26:6075f024c8ea03fbd96008a49bb891e1:2a288f7160b778d75d6fb3a0e2108afb$ -->
+<!-- $TexturePacker:SmartUpdate:e25ef229c0873abbd94c918b88642b50:faf5ac2f2f3e9774a0bbbf1c2eb7aafb:2a288f7160b778d75d6fb3a0e2108afb$ -->
 <TextureAtlas imagePath="textures.png" width="2048" height="2048">
     <SubTexture name="1" x="4" y="4" width="500" height="500"/>
     <SubTexture name="2" x="4" y="510" width="500" height="500"/>
     <SubTexture name="3" x="4" y="1016" width="500" height="500"/>
     <SubTexture name="5" x="4" y="1522" width="500" height="500"/>
     <SubTexture name="6" x="510" y="4" width="500" height="500"/>
-    <SubTexture name="7" x="1520" y="510" width="494" height="489" frameX="-4" frameY="-5" frameWidth="500" frameHeight="500"/>
+    <SubTexture name="7" x="510" y="1008" width="494" height="489" frameX="-4" frameY="-5" frameWidth="500" frameHeight="500"/>
     <SubTexture name="8" x="1016" y="4" width="500" height="500"/>
     <SubTexture name="9" x="1522" y="4" width="500" height="500"/>
     <SubTexture name="10" x="1016" y="510" width="498" height="493" frameX="-2" frameY="-2" frameWidth="500" frameHeight="500"/>
     <SubTexture name="12" x="510" y="510" width="500" height="492" frameX="0" frameY="-8" frameWidth="500" frameHeight="500"/>
-    <SubTexture name="futura_30_bold_italic_white_numeric" x="917" y="1371" rotated="true" width="76" height="118" frameX="-2" frameY="-2" frameWidth="128" frameHeight="128"/>
-    <SubTexture name="ship_body_close" x="1520" y="1005" rotated="true" width="461" height="400"/>
-    <SubTexture name="ship_body_open" x="1012" y="1009" rotated="true" width="461" height="400"/>
-    <SubTexture name="ship_door" x="917" y="1225" rotated="true" width="88" height="140"/>
-    <SubTexture name="ship_door_2" x="753" y="1225" rotated="true" width="158" height="143"/>
-    <SubTexture name="ship_fire" x="510" y="1008" width="496" height="211"/>
-    <SubTexture name="ship_ladder" x="510" y="1225" width="237" height="132"/>
-    <SubTexture name="ship_mount" x="1987" y="1005" rotated="true" width="56" height="331"/>
+    <SubTexture name="futura_30_bold_italic_white_numeric" x="1520" y="510" width="118" height="76" frameX="-2" frameY="-2" frameWidth="128" frameHeight="128"/>
 </TextureAtlas>

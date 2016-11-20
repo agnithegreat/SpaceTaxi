@@ -88,9 +88,6 @@ package com.agnither.spacetaxi.view
             _container = new Sprite();
             addChild(_container);
 
-            _trajectory = new Canvas();
-            _container.addChild(_trajectory);
-
             _distanceTF = new TextField(50, 50, "", new TextFormat("futura_30_bold_italic_white_numeric", -1, 0xFFFFFF));
             _distanceTF.autoSize = TextFieldAutoSize.BOTH_DIRECTIONS;
             addChild(_distanceTF);
@@ -106,6 +103,9 @@ package com.agnither.spacetaxi.view
 
             _shipView = new ShipView(_space.ship);
             _container.addChild(_shipView);
+
+            _trajectory = new Canvas();
+            _container.addChild(_trajectory);
 
             var rect: flash.geom.Rectangle = _container.getBounds(stage);
             _baseWidth = rect.width;

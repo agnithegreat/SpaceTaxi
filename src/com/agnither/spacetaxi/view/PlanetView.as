@@ -37,7 +37,7 @@ package com.agnither.spacetaxi.view
             _glow = new Canvas();
             addChild(_glow);
 
-            _baseScale = (_planet.radius) / 428 * 2;
+            _baseScale = (_planet.radius + 5) / 428 * 2;
 
             var rand: int = Math.random() * PLANETS.length;
             _image = new Image(Application.assetsManager.getTexture(PLANETS[rand]));

@@ -11,6 +11,8 @@ package com.agnither.spacetaxi.model
 
     public class Ship extends DynamicSpaceBody
     {
+        public static const ORDER: String = "Ship.ORDER";
+        public static const LAUNCH: String = "Ship.LAUNCH";
         public static const COLLIDE: String = "Ship.COLLIDE";
         public static const LAND: String = "Ship.LAND";
         public static const CRASH: String = "Ship.CRASH";
@@ -108,6 +110,8 @@ package com.agnither.spacetaxi.model
             }
 
             Starling.juggler.tween(_offset, 0.3, {x: 0, y: 0});
+            
+            dispatchEventWith(LAUNCH);
         }
 
         public function collide(power: Number = 0):void
@@ -160,6 +164,7 @@ package com.agnither.spacetaxi.model
         public function addOrder(order: Order):void
         {
             _orders.push(order);
+            dispatchEventWith(ORDER);
         }
         
         public function hasOrder(order: Order):Boolean
@@ -170,6 +175,7 @@ package com.agnither.spacetaxi.model
         public function removeOrder(order: Order):void
         {
             _orders.splice(_orders.indexOf(order), 1);
+            dispatchEventWith(ORDER);
         }
 
         override public function clone():SpaceBody

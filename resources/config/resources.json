@@ -10,7 +10,11 @@
       "textures.png",
       "textures.xml",
 
-      "fonts/futura_30_bold_italic_white_numeric.xml"
+      "fonts/futura_30_bold_italic_white_numeric.xml",
+
+      "ship/ship_skeleton.json",
+      "ship/ship_texture.json",
+      "ship/ship_texture.png"
     ]
   },
   "sounds": {
