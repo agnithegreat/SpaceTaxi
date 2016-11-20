@@ -46,6 +46,12 @@ package com.agnither.spacetaxi.controller.game
             dispatchEventWith(UPDATE);
         }
 
+        public function nextOrder():void
+        {
+            removeOrder(_orders[0]);
+            activateOrder();
+        }
+
         public function checkOrder(planet: Planet, ship: Ship):void
         {
             var zone: Zone = planet.getZoneByShip(ship);
@@ -56,15 +62,13 @@ package com.agnither.spacetaxi.controller.game
                 {
                     order.start();
                     ship.order();
-                    zone.setOrder(null);
                 } else if (order.started && order.arrival == zone)
                 {
                     _money += order.money;
-                    trace(order.money, _money);
                     order.complete();
                     ship.order();
-                    zone.setOrder(null);
-                    removeOrder(order);
+
+                    nextOrder();
                 }
             }
         }

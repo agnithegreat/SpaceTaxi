@@ -69,13 +69,15 @@ package com.agnither.spacetaxi.model
             _time = 0;
 
             _departure.setOrder(this);
-            _arrival.setOrder(this);
         }
 
         public function start():void
         {
             _started = true;
             _startTime = _time;
+            
+            _departure.setOrder(null);
+            _arrival.setOrder(this);
         }
 
         public function complete():void
@@ -84,6 +86,8 @@ package com.agnither.spacetaxi.model
             _started = false;
             _completed = true;
             _endTime = _time;
+            
+            _arrival.setOrder(null);
         }
 
         public function damage(value: Number):void

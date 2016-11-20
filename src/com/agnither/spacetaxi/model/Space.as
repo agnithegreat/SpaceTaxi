@@ -105,7 +105,6 @@ package com.agnither.spacetaxi.model
             _trajectory = new <Point>[];
 
             _orderController = new OrderController();
-            _orderController.addEventListener(OrderController.UPDATE, handleUpdateOrders);
             _orderController.addOrder(new Order(100, 100, _planets[1].getZone(), _planets[2].getZone()));
             _orderController.addOrder(new Order(100, 100, _planets[0].getZone(), _planets[1].getZone()));
             _orderController.addOrder(new Order(100, 100, _planets[2].getZone(), _planets[0].getZone()));
@@ -133,10 +132,10 @@ package com.agnither.spacetaxi.model
                     _pullPoint.y = py;
 
                     var scale: Number = _ship.fuel / fuel;
-                    if (scale < 1)
+                    if (scale < 1);
                     {
-                        _pullPoint.x *= scale;
-                        _pullPoint.y *= scale;
+                        _pullPoint.x *= scale * 0.9999;
+                        _pullPoint.y *= scale * 0.9999;
                     }
                     updateTrajectory();
                 }
@@ -341,11 +340,6 @@ package com.agnither.spacetaxi.model
             }
 
             dispatchEventWith(STEP);
-        }
-
-        private function handleUpdateOrders(event: Event):void
-        {
-            _orderController.start(3);
         }
     }
 }
