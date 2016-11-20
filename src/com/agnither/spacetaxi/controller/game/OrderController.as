@@ -9,22 +9,24 @@ package com.agnither.spacetaxi.controller.game
     import com.agnither.spacetaxi.model.orders.Zone;
 
     import starling.core.Starling;
-
     import starling.events.EventDispatcher;
 
     public class OrderController extends EventDispatcher
     {
         public static const UPDATE: String = "OrderController.UPDATE";
-        
+
         private var _orders: Vector.<Order>;
         public function get orders():Vector.<Order>
         {
             return _orders;
         }
         
+        private var _money: int;
+        
         public function OrderController()
         {
             _orders = new <Order>[];
+            _money = 0;
         }
         
         public function start(delay: Number = 0):void
@@ -50,13 +52,16 @@ package com.agnither.spacetaxi.controller.game
             var order: Order = zone.order;
             if (order != null)
             {
-                if (!ship.hasOrder(order) && order.departure == zone)
+                if (!order.started && order.departure == zone)
                 {
-                    ship.addOrder(order);
+                    order.start();
+                    ship.order();
                     zone.setOrder(null);
-                } else if (ship.hasOrder(order) && order.arrival == zone)
+                } else if (order.started && order.arrival == zone)
                 {
-                    ship.removeOrder(order);
+                    _money += order.money;
+                    order.complete();
+                    ship.order();
                     zone.setOrder(null);
                     removeOrder(order);
                 }
@@ -68,7 +73,7 @@ package com.agnither.spacetaxi.controller.game
             var zone: Zone = planet.getZoneByShip(ship);
             return zone.order != null && (zone.order.departure == zone || zone.order.arrival == zone);
         }
-        
+
         private function activateOrder():void
         {
             if (_orders.length > 0)

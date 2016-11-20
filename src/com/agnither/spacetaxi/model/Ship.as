@@ -6,7 +6,6 @@ package com.agnither.spacetaxi.model
     import flash.geom.Point;
 
     import starling.core.Starling;
-
     import starling.events.Event;
 
     public class Ship extends DynamicSpaceBody
@@ -16,7 +15,7 @@ package com.agnither.spacetaxi.model
         public static const COLLIDE: String = "Ship.COLLIDE";
         public static const LAND: String = "Ship.LAND";
         public static const CRASH: String = "Ship.CRASH";
-
+        
         protected var _rotation: Number;
         public function get rotation():Number
         {
@@ -49,8 +48,6 @@ package com.agnither.spacetaxi.model
         
         protected var _planet: Planet;
         
-        protected var _orders: Vector.<Order>;
-        
         protected var _offset: Point;
         public function get offset():Point
         {
@@ -60,8 +57,6 @@ package com.agnither.spacetaxi.model
         public function Ship(radius: int, mass: Number)
         {
             super(radius, mass);
-
-            _orders = new <Order>[];
 
             _offset = new Point();
             
@@ -82,8 +77,6 @@ package com.agnither.spacetaxi.model
 
             // TODO: DURABILITY - setup
             _durability = 100;
-            
-            _orders.length = 0;
             
             _offset.x = 0;
             _offset.y = 0;
@@ -161,23 +154,11 @@ package com.agnither.spacetaxi.model
             _speed.y = 0;
         }
         
-        public function addOrder(order: Order):void
+        public function order():void
         {
-            _orders.push(order);
             dispatchEventWith(ORDER);
         }
         
-        public function hasOrder(order: Order):Boolean
-        {
-            return _orders.indexOf(order) >= 0;
-        }
-
-        public function removeOrder(order: Order):void
-        {
-            _orders.splice(_orders.indexOf(order), 1);
-            dispatchEventWith(ORDER);
-        }
-
         override public function clone():SpaceBody
         {
             var body: Ship = new Ship(_radius, _mass);

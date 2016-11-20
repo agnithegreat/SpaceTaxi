@@ -9,6 +9,12 @@ package com.agnither.spacetaxi.model
 
     public class Order extends EventDispatcher
     {
+        private var _money: int;
+        public function get money():int
+        {
+            return _money;
+        }
+        
         private var _departure: Zone;
         public function get departure():Zone
         {
@@ -20,9 +26,22 @@ package com.agnither.spacetaxi.model
         {
             return _arrival;
         }
-
-        public function Order(departure: Zone, arrival: Zone)
+        
+        private var _started: Boolean;
+        public function get started():Boolean
         {
+            return _started;
+        }
+        
+        private var _completed: Boolean;
+        public function get completed():Boolean
+        {
+            return _completed;
+        }
+
+        public function Order(money: int, departure: Zone, arrival: Zone)
+        {
+            _money = money;
             _departure = departure;
             _arrival = arrival;
         }
@@ -31,6 +50,17 @@ package com.agnither.spacetaxi.model
         {
             _departure.setOrder(this);
             _arrival.setOrder(this);
+        }
+        
+        public function start():void
+        {
+            _started = true;
+        }
+
+        public function complete():void
+        {
+            _completed = true;
+            _started = false;
         }
     }
 }
