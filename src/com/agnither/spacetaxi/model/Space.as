@@ -246,11 +246,6 @@ package com.agnither.spacetaxi.model
                 var planetCollided: Planet = checkCollisions(ship, currentDelta);
                 if (planetCollided != null)
                 {
-                    var damage: Number = planetCollided.type.safe ? DAMAGE_MULTIPLIER * Point.distance(ship.speed, new Point()) : ship.durability;
-                    damage = damage >= MIN_DAMAGE ? damage : 0;
-                    ship.collide(damage);
-                    _orderController.checkDamage(damage);
-                    
                     if (!ship.crashed)
                     {
                         var order: Boolean = _orderController.hasOrder(planetCollided, ship);
@@ -278,6 +273,7 @@ package com.agnither.spacetaxi.model
 
         private function checkCollisions(ship: Ship, delta: Number):Planet
         {
+            var resultPlanet: Planet;
             var nextPosition: Point = new Point(ship.position.x + ship.speed.x * delta, ship.position.y + ship.speed.y * delta);
             for (var i: int = 0; i < _planets.length; i++)
             {
@@ -290,12 +286,32 @@ package com.agnither.spacetaxi.model
                     {
                         ship.rotate(GeomUtils.getAngleDelta(ship.speed, shipPlanet) * 2 - Math.PI);
                         ship.multiply(planet.bounce);
+                        resultPlanet = planet;
                         return planet;
-                    } else if (d <= ship.radius*2) return planet;
-                    else return null;
+                    } else if (d <= ship.radius*2)
+                    {
+                        resultPlanet = planet;
+                    }
+
+                    if (resultPlanet != null)
+                    {
+                        if (resultPlanet.type.safe)
+                        {
+                            if (resultPlanet.bounce == 0)
+                            {
+                                var damage: Number = DAMAGE_MULTIPLIER * Point.distance(ship.speed, new Point());
+                                damage = damage >= MIN_DAMAGE ? damage : 0;
+                                ship.collide(damage);
+                                _orderController.checkDamage(damage);
+                            }
+                        } else {
+                            ship.collide(ship.durability);
+                            _orderController.checkDamage(ship.durability);
+                        }
+                    }
                 }
             }
-            return null;
+            return resultPlanet;
         }
 
         private function checkLand(ship: Ship, planet: Planet):void
@@ -324,7 +340,6 @@ package com.agnither.spacetaxi.model
 
             if (_ship.crashed)
             {
-                trace("reset");
                 resetShip();
                 return;
             }
