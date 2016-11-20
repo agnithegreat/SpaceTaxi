@@ -132,7 +132,7 @@ package com.agnither.spacetaxi.model
                     _pullPoint.y = py;
 
                     var scale: Number = _ship.fuel / fuel;
-                    if (scale < 1);
+                    if (scale < 1)
                     {
                         _pullPoint.x *= scale * 0.9999;
                         _pullPoint.y *= scale * 0.9999;
