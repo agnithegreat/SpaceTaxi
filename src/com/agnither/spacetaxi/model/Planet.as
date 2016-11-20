@@ -11,6 +11,12 @@ package com.agnither.spacetaxi.model
     public class Planet extends SpaceBody
     {
         public static const ORDER: String = "Planet.ORDER";
+
+        private var _bounce: Number;
+        public function get bounce():Number
+        {
+            return _bounce;
+        }
         
         private var _type: PlanetType;
         public function get type():PlanetType
@@ -38,10 +44,11 @@ package com.agnither.spacetaxi.model
             return _scale;
         }
 
-        public function Planet(radius: int, mass: Number, type: PlanetType)
+        public function Planet(radius: int, mass: Number, bounce: Number, type: PlanetType)
         {
             super(radius, mass);
-            
+
+            _bounce = bounce;
             _type = type;
 
             _zones = new <Zone>[];
@@ -78,7 +85,7 @@ package com.agnither.spacetaxi.model
 
         override public function clone():SpaceBody
         {
-            var body: Planet = new Planet(_radius, _mass, _type);
+            var body: Planet = new Planet(_radius, _mass, _bounce, _type);
             body.place(_position.x, _position.y);
             return body;
         }

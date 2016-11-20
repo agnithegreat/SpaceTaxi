@@ -11,7 +11,6 @@ package com.agnither.spacetaxi.model
 
     import starling.animation.IAnimatable;
     import starling.core.Starling;
-    import starling.events.Event;
     import starling.events.EventDispatcher;
 
     public class Space extends EventDispatcher implements IAnimatable
@@ -24,7 +23,6 @@ package com.agnither.spacetaxi.model
         public static const G: Number = 6.67;
         public static const DISTANCE_POWER: Number = 2;
         public static const DELTA: Number = 0.2;
-        public static const BOUNCE: Number = 0.5;
         public static const MIN_SPEED: Number = 1;
         public static const CONTROL_SPEED: Number = 100;
         public static const MAX_SPEED: Number = 1000;
@@ -91,11 +89,11 @@ package com.agnither.spacetaxi.model
             _center = new Point();
 
             _planets = new <Planet>[];
-            addPlanet(95, 205, 50, 201, PlanetType.NORMAL);
-            addPlanet(300, 95, 50, 197, PlanetType.NORMAL);
-            addPlanet(565, 370, 100, 348, PlanetType.NORMAL);
+            addPlanet(95, 205, 50, 201, 0, PlanetType.NORMAL);
+            addPlanet(300, 95, 50, 197, 0, PlanetType.NORMAL);
+            addPlanet(565, 370, 100, 348, 0, PlanetType.NORMAL);
 
-//            addPlanet(230, 430, 100, 500, PlanetType.LAVA);
+            addPlanet(230, 430, 50, 200, 2, PlanetType.NORMAL);
 //            addPlanet(230, 430, 50, 3000, PlanetType.BLACK_HOLE);
 
             _center.x /= _planets.length;
@@ -188,9 +186,9 @@ package com.agnither.spacetaxi.model
             }
         }
 
-        private function addPlanet(x: int, y: int, radius: int, mass: Number, type: PlanetType):void
+        private function addPlanet(x: int, y: int, radius: int, mass: Number, bounce: Number, type: PlanetType):void
         {
-            var planet: Planet = new Planet(radius, mass, type);
+            var planet: Planet = new Planet(radius, mass, bounce, type);
             planet.place(x, y);
             _planets.push(planet);
             Starling.juggler.add(planet);
@@ -291,7 +289,7 @@ package com.agnither.spacetaxi.model
                     if (planet.type.solid)
                     {
                         ship.rotate(GeomUtils.getAngleDelta(ship.speed, shipPlanet) * 2 - Math.PI);
-                        ship.multiply(BOUNCE);
+                        ship.multiply(planet.bounce);
                         return planet;
                     } else if (d <= ship.radius*2) return planet;
                     else return null;
