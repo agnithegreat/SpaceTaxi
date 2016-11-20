@@ -60,6 +60,7 @@ package com.agnither.spacetaxi.controller.game
                 } else if (order.started && order.arrival == zone)
                 {
                     _money += order.money;
+                    trace(order.money, _money);
                     order.complete();
                     ship.order();
                     zone.setOrder(null);
@@ -72,6 +73,22 @@ package com.agnither.spacetaxi.controller.game
         {
             var zone: Zone = planet.getZoneByShip(ship);
             return zone.order != null && (zone.order.departure == zone || zone.order.arrival == zone);
+        }
+        
+        public function step(delta: Number):void
+        {
+            for (var i:int = 0; i < _orders.length; i++)
+            {
+                _orders[i].step(delta);
+            }
+        }
+
+        public function checkDamage(value: Number):void
+        {
+            for (var i:int = 0; i < _orders.length; i++)
+            {
+                _orders[i].damage(value);
+            }
         }
 
         private function activateOrder():void

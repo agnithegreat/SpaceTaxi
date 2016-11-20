@@ -36,7 +36,7 @@ package com.agnither.spacetaxi.model
         
         public static const PLANET_ZONE_SIZE: int = 40;
         
-        public static const FUEL_MULTIPLIER: Number = 1;
+        public static const FUEL_MULTIPLIER: Number = 0.3;
         public static const DAMAGE_MULTIPLIER: Number = 1;
         public static const MIN_DAMAGE: Number = 10;
 
@@ -106,12 +106,12 @@ package com.agnither.spacetaxi.model
 
             _orderController = new OrderController();
             _orderController.addEventListener(OrderController.UPDATE, handleUpdateOrders);
-            _orderController.addOrder(new Order(100, _planets[1].getZone(), _planets[2].getZone()));
-            _orderController.addOrder(new Order(100, _planets[0].getZone(), _planets[1].getZone()));
-            _orderController.addOrder(new Order(100, _planets[2].getZone(), _planets[0].getZone()));
-            _orderController.addOrder(new Order(100, _planets[2].getZone(), _planets[1].getZone()));
-            _orderController.addOrder(new Order(100, _planets[0].getZone(), _planets[2].getZone()));
-            _orderController.addOrder(new Order(100, _planets[1].getZone(), _planets[0].getZone()));
+            _orderController.addOrder(new Order(100, 100, _planets[1].getZone(), _planets[2].getZone()));
+            _orderController.addOrder(new Order(100, 100, _planets[0].getZone(), _planets[1].getZone()));
+            _orderController.addOrder(new Order(100, 100, _planets[2].getZone(), _planets[0].getZone()));
+            _orderController.addOrder(new Order(100, 100, _planets[2].getZone(), _planets[1].getZone()));
+            _orderController.addOrder(new Order(100, 100, _planets[0].getZone(), _planets[2].getZone()));
+            _orderController.addOrder(new Order(100, 100, _planets[1].getZone(), _planets[0].getZone()));
             _orderController.start(3);
         }
 
@@ -250,7 +250,9 @@ package com.agnither.spacetaxi.model
                 if (planetCollided != null)
                 {
                     var damage: Number = planetCollided.type.safe ? DAMAGE_MULTIPLIER * Point.distance(ship.speed, new Point()) : ship.durability;
-                    ship.collide(damage >= MIN_DAMAGE ? damage : 0);
+                    damage = damage >= MIN_DAMAGE ? damage : 0;
+                    ship.collide(damage);
+                    _orderController.checkDamage(damage);
                     
                     if (!ship.crashed)
                     {
@@ -319,6 +321,8 @@ package com.agnither.spacetaxi.model
 
         public function advanceTime(delta: Number):void
         {
+            _orderController.step(delta);
+            
             if (_ship.landed) return;
 
             if (_ship.crashed)
