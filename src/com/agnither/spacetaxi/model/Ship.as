@@ -3,9 +3,8 @@
  */
 package com.agnither.spacetaxi.model
 {
-    import flash.geom.Point;
+    import com.agnither.spacetaxi.utils.GeomUtils;
 
-    import starling.core.Starling;
     import starling.events.Event;
 
     public class Ship extends DynamicSpaceBody
@@ -47,19 +46,15 @@ package com.agnither.spacetaxi.model
         }
         
         protected var _planet: Planet;
-        
-        protected var _offset: Point;
-        public function get offset():Point
+        public function get planet():Planet
         {
-            return _offset;
+            return _planet;
         }
 
         public function Ship(radius: int, mass: Number)
         {
             super(radius, mass);
 
-            _offset = new Point();
-            
             reset();
         }
         
@@ -77,9 +72,6 @@ package com.agnither.spacetaxi.model
 
             // TODO: DURABILITY - setup
             _durability = 100;
-            
-            _offset.x = 0;
-            _offset.y = 0;
         }
 
         public function launch(fuel: Number = 0):void
@@ -102,8 +94,6 @@ package com.agnither.spacetaxi.model
                 // TODO: NO FUEL
             }
 
-            Starling.juggler.tween(_offset, 0.3, {x: 0, y: 0});
-            
             dispatchEventWith(LAUNCH);
         }
 
@@ -169,22 +159,9 @@ package com.agnither.spacetaxi.model
 
         private function handlePlanetUpdate(event: Event):void
         {
-            var angle: Number = Math.atan2(y - _planet.y, x - _planet.x);
-            var nx: Number = _planet.radius * Math.cos(angle) * Math.cos(_planet.time) * _planet.scale;
-            var ny: Number = _planet.radius * Math.sin(angle) * Math.sin(_planet.time) * _planet.scale;
-
-            var angleDelta: Number = (Math.PI + angle - _rotation) % (Math.PI * 2);
-            if (angleDelta < 0)
-            {
-                angleDelta += Math.PI * 2;
-            }
-            if (angleDelta > Math.PI)
-            {
-                angleDelta = -(Math.PI * 2 - angleDelta);
-            }
+            var angle: Number = Math.PI + Math.atan2(y - _planet.y, x - _planet.x);
+            var angleDelta: Number = GeomUtils.getAngleDelta(_rotation, angle);
             _rotation += angleDelta * 0.2;
-            _offset.x += (nx - _offset.x) * 0.2;
-            _offset.y += (ny - _offset.y) * 0.2;
             update();
         }
     }

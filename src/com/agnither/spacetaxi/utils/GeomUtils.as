@@ -28,11 +28,25 @@ package com.agnither.spacetaxi.utils
             return projection;
         }
 
-        public static function getAngleDelta(vector1: Point, vector2: Point):Number
+        public static function getVectorDelta(vector1: Point, vector2: Point):Number
         {
             var angle1: Number = Math.atan2(vector1.y, vector1.x);
             var angle2: Number = Math.atan2(vector2.y, vector2.x);
             return angle2 - angle1;
+        }
+
+        public static function getAngleDelta(angle1: Number, angle2: Number):Number
+        {
+            var angleDelta: Number = (angle2 - angle1) % (Math.PI * 2);
+            if (angleDelta < 0)
+            {
+                angleDelta += Math.PI * 2;
+            }
+            if (angleDelta > Math.PI)
+            {
+                angleDelta = -(Math.PI * 2 - angleDelta);
+            }
+            return angleDelta
         }
     }
 }

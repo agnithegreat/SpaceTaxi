@@ -284,7 +284,7 @@ package com.agnither.spacetaxi.model
                 {
                     if (planet.type.solid)
                     {
-                        ship.rotate(GeomUtils.getAngleDelta(ship.speed, shipPlanet) * 2 - Math.PI);
+                        ship.rotate(GeomUtils.getVectorDelta(ship.speed, shipPlanet) * 2 - Math.PI);
                         ship.multiply(planet.bounce);
                         resultPlanet = planet;
                         return planet;

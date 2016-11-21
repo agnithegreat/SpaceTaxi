@@ -3,11 +3,14 @@
  */
 package com.agnither.spacetaxi.view
 {
+    import com.agnither.spacetaxi.model.Planet;
     import com.agnither.spacetaxi.model.Ship;
     import com.agnither.spacetaxi.model.SpaceBody;
 
     import dragonBones.starling.StarlingArmatureDisplay;
     import dragonBones.starling.StarlingFactory;
+
+    import flash.geom.Point;
 
     import starling.display.Sprite;
     import starling.events.Event;
@@ -17,6 +20,8 @@ package com.agnither.spacetaxi.view
         private var _ship: Ship;
 
         private var _animation: StarlingArmatureDisplay;
+
+        private var _offset: Point;
         
         public function ShipView(ship: Ship)
         {
@@ -39,13 +44,26 @@ package com.agnither.spacetaxi.view
             _animation.scaleY = _ship.radius / 400 * 2;
             addChild(_animation);
 
+            _offset = new Point();
+
             handleUpdate(null);
         }
 
         private function handleUpdate(event: Event):void
         {
-            x = _ship.x + _ship.offset.x;
-            y = _ship.y + _ship.offset.y;
+            var planet: Planet = _ship.planet;
+            if (planet != null)
+            {
+                var angle: Number = Math.atan2(_ship.y - planet.y, _ship.x - planet.x);
+                var nx: Number = planet.radius * Math.cos(angle) * Math.cos(planet.time) * planet.scale;
+                var ny: Number = planet.radius * Math.sin(angle) * Math.sin(planet.time) * planet.scale;
+
+                _offset.x += (nx - _offset.x) * 0.2;
+                _offset.y += (ny - _offset.y) * 0.2;
+            }
+
+            x = _ship.x + _offset.x;
+            y = _ship.y + _offset.y;
 
             _animation.rotation = _ship.rotation - Math.PI/2;
         }
