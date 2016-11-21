@@ -6,6 +6,7 @@ package com.agnither.spacetaxi.view
     import com.agnither.spacetaxi.Application;
     import com.agnither.spacetaxi.model.Planet;
     import com.agnither.spacetaxi.model.Space;
+    import com.agnither.spacetaxi.view.effects.ExplosionEffect;
     import com.agnither.utils.gui.components.AbstractComponent;
 
     import flash.geom.Point;
@@ -33,7 +34,11 @@ package com.agnither.spacetaxi.view
 
         private var _background: Image;
         private var _stars: Image;
+
         private var _container: Sprite;
+        private var _planetsContainer: Sprite;
+        private var _objectsContainer: Sprite;
+        private var _effectsContainer: Sprite;
 
         private var _shipView: ShipView;
         private var _planets: Vector.<PlanetView>;
@@ -84,6 +89,9 @@ package com.agnither.spacetaxi.view
             _container = new Sprite();
             addChild(_container);
 
+            _planetsContainer = new Sprite();
+            _container.addChild(_planetsContainer);
+
             _distanceTF = new TextField(50, 50, "", new TextFormat("futura_30_bold_italic_white_numeric", -1, 0xFFFFFF));
             _distanceTF.autoSize = TextFieldAutoSize.BOTH_DIRECTIONS;
             addChild(_distanceTF);
@@ -93,12 +101,17 @@ package com.agnither.spacetaxi.view
             {
                 var planet: Planet = _space.planets[i];
                 var planetView: PlanetView = new PlanetView(planet);
-                _container.addChild(planetView);
+                _planetsContainer.addChild(planetView);
                 _planets.push(planetView);
             }
 
-            _shipView = new ShipView(_space.ship);
-            _container.addChild(_shipView);
+            _objectsContainer = new Sprite();
+            _container.addChild(_objectsContainer);
+
+            _effectsContainer = new Sprite();
+            _container.addChild(_effectsContainer);
+
+            addShip();
 
             _trajectory = new Canvas();
             _container.addChild(_trajectory);
@@ -122,6 +135,23 @@ package com.agnither.spacetaxi.view
             Starling.current.stage.addEventListener(TouchEvent.TOUCH, handleTouch);
 
             handleStep(null);
+        }
+
+        private function addShip():void
+        {
+            _shipView = new ShipView(_space.ship);
+            _shipView.addEventListener(ShipView.EXPLODE, handleExplode);
+            _objectsContainer.addChild(_shipView);
+        }
+
+        private function handleExplode(event: Event):void
+        {
+            _shipView.removeEventListener(ShipView.EXPLODE, handleExplode);
+
+            var explosion: ExplosionEffect = new ExplosionEffect();
+            explosion.x = _shipView.x;
+            explosion.y = _shipView.y;
+            _effectsContainer.addChild(explosion);
         }
 
         private function handleTouch(event: TouchEvent):void

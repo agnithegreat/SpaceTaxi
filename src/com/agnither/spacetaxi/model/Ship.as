@@ -12,6 +12,7 @@ package com.agnither.spacetaxi.model
         public static const ORDER: String = "Ship.ORDER";
         public static const LAUNCH: String = "Ship.LAUNCH";
         public static const COLLIDE: String = "Ship.COLLIDE";
+        public static const LAND_PREPARE: String = "Ship.LAND_PREPARE";
         public static const LAND: String = "Ship.LAND";
         public static const CRASH: String = "Ship.CRASH";
         
@@ -38,11 +39,21 @@ package com.agnither.spacetaxi.model
         {
             return _fuel;
         }
+        protected var _fuelMax: Number;
+        public function get fuelMax():Number
+        {
+            return _fuelMax;
+        }
 
         protected var _durability: Number;
         public function get durability():Number
         {
             return _durability;
+        }
+        protected var _durabilityMax: Number;
+        public function get durabilityMax():Number
+        {
+            return _durabilityMax;
         }
         
         protected var _planet: Planet;
@@ -68,10 +79,12 @@ package com.agnither.spacetaxi.model
             _crashed = false;
 
             // TODO: FUEL - setup
-            _fuel = 100;
+            _fuelMax = 100;
+            _fuel = _fuelMax;
 
             // TODO: DURABILITY - setup
-            _durability = 100;
+            _durabilityMax = 100;
+            _durability = _durabilityMax;
         }
 
         public function launch(fuel: Number = 0):void
@@ -117,7 +130,11 @@ package com.agnither.spacetaxi.model
             super.accelerate(x, y);
 
             _rotation = Math.atan2(y, x);
-            dispatchEventWith(UPDATE);
+        }
+        
+        public function landPrepare():void
+        {
+            dispatchEventWith(LAND_PREPARE);
         }
         
         public function land(planet: Planet):void
@@ -132,7 +149,7 @@ package com.agnither.spacetaxi.model
 
         public function crash():void
         {
-            // TODO: EXPLOSION
+            _durability = 0;
             stop();
             _crashed = true;
             dispatchEventWith(CRASH);
@@ -147,6 +164,16 @@ package com.agnither.spacetaxi.model
         public function order():void
         {
             dispatchEventWith(ORDER);
+        }
+
+        public function fuelUp(amount: Number):void
+        {
+            _fuel = Math.min(_fuel + amount, _fuelMax);
+        }
+
+        public function repair():void
+        {
+
         }
         
         override public function clone():SpaceBody

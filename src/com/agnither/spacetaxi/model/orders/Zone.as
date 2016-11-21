@@ -5,6 +5,7 @@ package com.agnither.spacetaxi.model.orders
 {
     import com.agnither.spacetaxi.model.Order;
     import com.agnither.spacetaxi.model.Planet;
+    import com.agnither.spacetaxi.model.Station;
 
     import starling.events.EventDispatcher;
 
@@ -35,6 +36,12 @@ package com.agnither.spacetaxi.model.orders
         {
             return _order;
         }
+
+        private var _station: Station;
+        public function get station():Station
+        {
+            return _station;
+        }
         
         public function Zone(planet: Planet, angle: Number, size: Number)
         {
@@ -47,6 +54,11 @@ package com.agnither.spacetaxi.model.orders
         {
             _order = order;
             dispatchEventWith(UPDATE);
+        }
+        
+        public function setStation(station: Station):void
+        {
+            _station = station;
         }
     }
 }

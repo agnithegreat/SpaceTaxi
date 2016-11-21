@@ -7,19 +7,27 @@ package com.agnither.spacetaxi.view
     import com.agnither.spacetaxi.model.Ship;
     import com.agnither.spacetaxi.model.SpaceBody;
 
+    import dragonBones.Bone;
     import dragonBones.starling.StarlingArmatureDisplay;
     import dragonBones.starling.StarlingFactory;
 
     import flash.geom.Point;
 
+    import starling.core.Starling;
     import starling.display.Sprite;
     import starling.events.Event;
 
     public class ShipView extends Sprite
     {
+        public static const EXPLODE: String = "ShipView.EXPLODE";
+        
         private var _ship: Ship;
 
         private var _animation: StarlingArmatureDisplay;
+        private var _thrust: Boolean;
+
+        private var _mount: StarlingArmatureDisplay;
+        private var _mounted: Boolean;
 
         private var _offset: Point;
         
@@ -32,17 +40,17 @@ package com.agnither.spacetaxi.view
             _ship.addEventListener(Ship.ORDER, handleOrder);
             _ship.addEventListener(Ship.LAUNCH, handleLaunch);
             _ship.addEventListener(Ship.COLLIDE, handleCollide);
+            _ship.addEventListener(Ship.LAND_PREPARE, handleLand);
             _ship.addEventListener(Ship.LAND, handleLand);
             _ship.addEventListener(Ship.CRASH, handleCrash);
 
             _animation = StarlingFactory.factory.buildArmatureDisplay("Ship", "ship");
-//            _animation.addEventListener(EventObject.START, _animationHandler);
-//            _animation.addEventListener(EventObject.LOOP_COMPLETE, _animationHandler);
-//            _animation.addEventListener(EventObject.COMPLETE, _animationHandler);
-//            _animation.addEventListener(EventObject.FRAME_EVENT, _frameEventHandler);
-            _animation.scaleX = _ship.radius / 400 * 2;
-            _animation.scaleY = _ship.radius / 400 * 2;
+            _animation.scaleX = 0.25;
+            _animation.scaleY = 0.25;
             addChild(_animation);
+            _animation.animation.gotoAndStopByFrame("launch");
+
+            _mount = _animation.getChildAt(2) as StarlingArmatureDisplay;
 
             _offset = new Point();
 
@@ -68,14 +76,29 @@ package com.agnither.spacetaxi.view
             _animation.rotation = _ship.rotation - Math.PI/2;
         }
 
+        private function stopFire():void
+        {
+            Starling.juggler.removeDelayedCalls(stopFire);
+            if (_thrust)
+            {
+//                _animation.animation.gotoAndPlayByFrame("land");
+                _thrust = false;
+            }
+        }
+
         private function handleOrder(event: Event):void
         {
-            _animation.armature.animation.gotoAndPlayByFrame("order");
+            _animation.animation.gotoAndPlayByFrame("order");
         }
 
         private function handleLaunch(event: Event):void
         {
-            _animation.armature.animation.gotoAndPlayByFrame("launch");
+//            _animation.animation.gotoAndPlayByFrame("launch");
+            _mount.animation.gotoAndPlayByFrame("close");
+            _thrust = true;
+            _mounted = false;
+
+            Starling.juggler.delayCall(stopFire, 0.5);
         }
 
         private function handleCollide(event: Event):void
@@ -85,23 +108,40 @@ package com.agnither.spacetaxi.view
 
         private function handleLand(event: Event):void
         {
-            _animation.armature.animation.gotoAndPlayByFrame("land");
+            if (!_mounted)
+            {
+                stopFire();
+                _mount.animation.gotoAndPlayByFrame("open");
+                _mounted = true;
+            }
         }
 
         private function handleCrash(event: Event):void
         {
-//            destroy();
+            clear();
+            Starling.juggler.tween(_animation, 0.1, {alpha: 0, onComplete: destroy});
+            
+            dispatchEventWith(EXPLODE);
+        }
+
+        private function clear():void
+        {
+            if (_ship != null)
+            {
+                _ship.removeEventListener(SpaceBody.UPDATE, handleUpdate);
+                _ship.removeEventListener(Ship.ORDER, handleOrder);
+                _ship.removeEventListener(Ship.LAUNCH, handleLaunch);
+                _ship.removeEventListener(Ship.COLLIDE, handleCollide);
+                _ship.removeEventListener(Ship.LAND_PREPARE, handleLand);
+                _ship.removeEventListener(Ship.LAND, handleLand);
+                _ship.removeEventListener(Ship.CRASH, handleCrash);
+                _ship = null;
+            }
         }
 
         private function destroy():void
         {
-            _ship.removeEventListener(SpaceBody.UPDATE, handleUpdate);
-            _ship.removeEventListener(Ship.ORDER, handleOrder);
-            _ship.removeEventListener(Ship.LAUNCH, handleLaunch);
-            _ship.removeEventListener(Ship.COLLIDE, handleCollide);
-            _ship.removeEventListener(Ship.LAND, handleLand);
-            _ship.removeEventListener(Ship.CRASH, handleCrash);
-            _ship = null;
+            clear();
 
             removeChild(_animation, true);
             _animation = null;
