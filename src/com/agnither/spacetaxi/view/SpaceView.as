@@ -34,7 +34,6 @@ package com.agnither.spacetaxi.view
         private var _background: Image;
         private var _stars: Image;
         private var _container: Sprite;
-        private var _milkyway: Image;
 
         private var _shipView: ShipView;
         private var _planets: Vector.<PlanetView>;
@@ -82,11 +81,6 @@ package com.agnither.spacetaxi.view
             _stars.height = stage.stageHeight;
             addChild(_stars);
 
-            _milkyway = new Image(Application.assetsManager.getTexture("milkyway-min"));
-            _milkyway.width = stage.stageWidth;
-            _milkyway.height = stage.stageHeight;
-            addChild(_milkyway);
-
             _container = new Sprite();
             addChild(_container);
 
@@ -126,6 +120,8 @@ package com.agnither.spacetaxi.view
             _dashStart = new Point();
 
             Starling.current.stage.addEventListener(TouchEvent.TOUCH, handleTouch);
+
+            handleStep(null);
         }
 
         private function handleTouch(event: TouchEvent):void
@@ -226,7 +222,7 @@ package com.agnither.spacetaxi.view
             var d: Number = Math.pow(dx * dx + dy * dy, 0.5);
             var scale: Number = 1 - d * 0.25 / _baseWidth;
 
-            Starling.juggler.tween(_container, 0.5, {
+            Starling.juggler.tween(_container, event != null ? 0.3 : 0, {
                 pivotX: _basePivotX + dx * 0.25,
                 pivotY: _basePivotY + dy * 0.25,
                 scaleX: _baseScale * scale,
