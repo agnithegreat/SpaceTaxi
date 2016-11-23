@@ -16,6 +16,8 @@ package com.agnither.spacetaxi.tasks.load
         override public function execute(token: Object):void
         {
             addTask(new LoadMultipleResourcesTask(["sounds"]));
+            
+            addTask(new LoadSwfTask("sounds/sound"));
 
             super.execute(token);
         }

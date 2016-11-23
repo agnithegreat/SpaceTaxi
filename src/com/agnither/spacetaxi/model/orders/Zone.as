@@ -55,10 +55,11 @@ package com.agnither.spacetaxi.model.orders
             _order = order;
             dispatchEventWith(UPDATE);
         }
-        
+
         public function setStation(station: Station):void
         {
             _station = station;
+            dispatchEventWith(UPDATE);
         }
     }
 }

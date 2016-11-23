@@ -8,6 +8,7 @@ package com.agnither.spacetaxi.model
     import com.agnither.spacetaxi.utils.GeomUtils;
 
     import flash.geom.Point;
+    import flash.geom.Rectangle;
 
     import starling.animation.IAnimatable;
     import starling.core.Starling;
@@ -22,7 +23,7 @@ package com.agnither.spacetaxi.model
 
         public static const G: Number = 6.67;
         public static const DISTANCE_POWER: Number = 2;
-        public static const DELTA: Number = 0.2;
+        public static const DELTA: Number = 0.15;
         public static const MIN_SPEED: Number = 1;
         public static const CONTROL_SPEED: Number = 100;
         public static const MAX_SPEED: Number = 1000;
@@ -35,7 +36,7 @@ package com.agnither.spacetaxi.model
         public static const PLANET_ZONE_SIZE: int = 40;
         
         public static const FUEL_MULTIPLIER: Number = 0.3;
-        public static const DAMAGE_MULTIPLIER: Number = 1;
+        public static const DAMAGE_MULTIPLIER: Number = 0.5;
         public static const MIN_DAMAGE: Number = 10;
 
         private var _ship: Ship;
@@ -48,6 +49,12 @@ package com.agnither.spacetaxi.model
         public function get planets():Vector.<Planet>
         {
             return _planets;
+        }
+        
+        private var _viewport: Rectangle;
+        public function get viewport():Rectangle
+        {
+            return _viewport;
         }
 
         private var _center: Point;
@@ -88,18 +95,19 @@ package com.agnither.spacetaxi.model
             _ship.reset();
             _ship.place(30, 235);
 
-            _center = new Point();
-
             _planets = new <Planet>[];
             addPlanet(95, 205, 50, 201, 0, PlanetType.NORMAL);
             addPlanet(300, 95, 50, 197, 0, PlanetType.NORMAL);
             addPlanet(565, 370, 100, 348, 0, PlanetType.NORMAL);
 
-            addPlanet(230, 430, 50, 200, 1, PlanetType.NORMAL);
-//            addPlanet(230, 430, 50, 3000, PlanetType.BLACK_HOLE);
-
-            _center.x /= _planets.length;
-            _center.y /= _planets.length;
+//            addPlanet(230, 630, 50, 50, 2, PlanetType.NORMAL);
+//            addPlanet(230, 430, 50, 3000, 0, PlanetType.BLACK_HOLE);
+            
+//            _viewport = new Rectangle(0, 0, 710, 725);
+            _viewport = new Rectangle(0, 0, 710, 515);
+            _center = new Point();
+            _center.x = _viewport.x + _viewport.width / 2;
+            _center.y = _viewport.y + _viewport.height / 2;
 
             _pullPoint = new Point();
             _trajectory = new <Point>[];
@@ -192,9 +200,6 @@ package com.agnither.spacetaxi.model
             planet.place(x, y);
             _planets.push(planet);
             Starling.juggler.add(planet);
-
-            _center.x += x;
-            _center.y += y;
         }
 
         private function step(ship: Ship, delta: Number):void

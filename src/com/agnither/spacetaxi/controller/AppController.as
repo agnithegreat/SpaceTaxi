@@ -3,6 +3,7 @@
  */
 package com.agnither.spacetaxi.controller
 {
+    import com.agnither.spacetaxi.managers.sound.SoundManager;
     import com.agnither.spacetaxi.model.Space;
 
     import starling.core.Starling;
@@ -25,6 +26,8 @@ package com.agnither.spacetaxi.controller
             _space.init();
 
             Starling.juggler.add(_space);
+
+            SoundManager.playMusic(SoundManager.MENU);
         }
     }
 }

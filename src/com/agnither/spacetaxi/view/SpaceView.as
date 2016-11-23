@@ -20,7 +20,6 @@ package com.agnither.spacetaxi.view
     import starling.events.Touch;
     import starling.events.TouchEvent;
     import starling.events.TouchPhase;
-    import starling.geom.Polygon;
     import starling.text.TextField;
     import starling.text.TextFieldAutoSize;
     import starling.text.TextFormat;
@@ -28,7 +27,10 @@ package com.agnither.spacetaxi.view
     public class SpaceView extends AbstractComponent
     {
         private static const DASH_LENGTH: int = 10;
+        private static const DOT_LENGTH: int = 4;
         private static const GAP_LENGTH: int = 4;
+
+        private static const MAX_DOTS: int = 300;
 
         private var _space: Space;
 
@@ -51,10 +53,10 @@ package com.agnither.spacetaxi.view
         private var _dashStart: Point;
         private var _draw: Boolean;
         private var _lineLength: Number;
+        private var _dotCounter: int;
         private var _maxLength: int;
 
-        private var _baseWidth: Number;
-        private var _baseHeight: Number;
+        private var _viewport: Rectangle;
         private var _basePivotX: Number;
         private var _basePivotY: Number;
         private var _baseScale: Number;
@@ -75,13 +77,13 @@ package com.agnither.spacetaxi.view
         override protected function initialize():void
         {
             _background = new Image(Application.assetsManager.getTexture("space_pattern"));
-            _background.tileGrid = new flash.geom.Rectangle(0, 0, _background.width, _background.height);
+            _background.tileGrid = new Rectangle(0, 0, _background.width, _background.height);
             _background.width = stage.stageWidth;
             _background.height = stage.stageHeight;
             addChild(_background);
 
             _stars = new Image(Application.assetsManager.getTexture("stars_pattern"));
-            _stars.tileGrid = new flash.geom.Rectangle(0, 0, _stars.width, _stars.height);
+            _stars.tileGrid = new Rectangle(0, 0, _stars.width, _stars.height);
             _stars.width = stage.stageWidth;
             _stars.height = stage.stageHeight;
             addChild(_stars);
@@ -116,12 +118,10 @@ package com.agnither.spacetaxi.view
             _trajectory = new Canvas();
             _container.addChild(_trajectory);
 
-            var rect: flash.geom.Rectangle = _container.getBounds(stage);
-            _baseWidth = rect.width;
-            _baseHeight = rect.height;
-            _baseScale = Math.max(stage.stageWidth / _baseWidth, stage.stageHeight / _baseHeight) * 0.8;
-            _basePivotX = rect.x + _baseWidth / 2;
-            _basePivotY = rect.y + _baseHeight / 2;
+            _viewport = _space.viewport;
+            _baseScale = Math.min(stage.stageWidth / _viewport.width, stage.stageHeight / _viewport.height) * 0.8;
+            _basePivotX = _viewport.x + _viewport.width / 2;
+            _basePivotY = _viewport.y + _viewport.height / 2;
 
             _container.x = stage.stageWidth / 2;
             _container.y = stage.stageHeight / 2;
@@ -201,6 +201,7 @@ package com.agnither.spacetaxi.view
             _counter = 0;
 
             _lineLength = 0;
+            _dotCounter = 0;
             _draw = true;
             _maxLength = _draw ? DASH_LENGTH : GAP_LENGTH;
         }
@@ -215,20 +216,26 @@ package com.agnither.spacetaxi.view
             if (_space.trajectory.length > _counter)
             {
                 for (_counter; _counter < Math.min(_space.trajectory.length, Space.TRAJECTORY_LENGTH); _counter++)
+//                for (_counter; _counter < _space.trajectory.length; _counter++)
                 {
                     _lineLength += Point.distance(_space.trajectory[_counter], _space.trajectory[_counter-1]);
                     if (_lineLength > _maxLength)
                     {
+                        if (_draw)
+                        {
+//                            var points: Array = getLine(_dashStart, _space.trajectory[_counter], 2);
+//                            _trajectory.drawPolygon(new Polygon(points));
+                            var point: Point = _space.trajectory[_counter];
+                            _trajectory.drawCircle(point.x, point.y, DOT_LENGTH * (Math.max(0.3, 1 - _dotCounter / MAX_DOTS)));
+                            _dotCounter++;
+                        } else {
+                            _dashStart = _space.trajectory[_counter];
+                        }
+
                         _lineLength = 0;
                         _draw = !_draw;
                         _maxLength = _draw ? DASH_LENGTH : GAP_LENGTH;
-                    }
-                    if (_draw)
-                    {
-                        var points: Array = getLine(_dashStart, _space.trajectory[_counter], 2);
-                        _trajectory.drawPolygon(new Polygon(points));
-                    } else {
-                        _dashStart = _space.trajectory[_counter];
+
                     }
                 }
             }
@@ -241,30 +248,29 @@ package com.agnither.spacetaxi.view
 
         private function handleStep(event: Event):void
         {
-            var dx: Number = _shipView.x - _baseWidth * 0.5;
-            var dy: Number = _shipView.y - _baseHeight * 0.5;
+            var dx: Number = _shipView.x - _basePivotX;
+            var dy: Number = _shipView.y - _basePivotY;
 
             var realDistance: Number = Math.pow(dx * dx + dy * dy, 0.5);
             var angle: Number = Math.atan2(dy, dx);
 
-            dx = Math.max(-_baseWidth, Math.min(dx, _baseWidth));
-            dy = Math.max(-_baseHeight, Math.min(dy, _baseHeight));
-            var d: Number = Math.pow(dx * dx + dy * dy, 0.5);
-            var scale: Number = 1 - d * 0.25 / _baseWidth;
+            var sx: Number = Math.max(_basePivotX - _viewport.width, Math.min(_shipView.x, _basePivotX + _viewport.width));
+            var sy: Number = Math.max(_basePivotY - _viewport.height, Math.min(_shipView.y, _basePivotY + _viewport.height));
+            var scale: Number = 1 - Math.max((Math.abs((sx-_basePivotX) / _viewport.width), Math.abs((sy-_basePivotY) / _viewport.height))) * 0.25;
 
             Starling.juggler.tween(_container, event != null ? 0.3 : 0, {
-                pivotX: _basePivotX + dx * 0.25,
-                pivotY: _basePivotY + dy * 0.25,
+                pivotX: (_basePivotX + sx) / 2,
+                pivotY: (_basePivotY + sy) / 2,
                 scaleX: _baseScale * scale,
                 scaleY: _baseScale * scale
             });
 
-            _distanceTF.text = String(Math.round(realDistance - d));
+            _distanceTF.text = String(Math.round(realDistance / 10));
             _distanceTF.pivotX = _distanceTF.width * 0.5;
             _distanceTF.pivotY = _distanceTF.height * 0.5;
             _distanceTF.x = stage.stageWidth * 0.5 + Math.cos(angle) * stage.stageHeight * 0.45;
             _distanceTF.y = stage.stageHeight * 0.5 + Math.sin(angle) * stage.stageHeight * 0.45;
-            _distanceTF.visible = !_shipView.getBounds(stage).intersects(new flash.geom.Rectangle(0, 0, stage.stageWidth, stage.stageHeight));
+            _distanceTF.visible = !_shipView.getBounds(stage).intersects(new Rectangle(0, 0, stage.stageWidth, stage.stageHeight));
         }
 
         private function getLine(p1: Point, p2: Point, thickness: int):Array
