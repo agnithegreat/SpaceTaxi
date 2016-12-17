@@ -126,13 +126,13 @@
             "cls":"feathers.layout.AnchorLayoutData",
             "customParams":{},
             "params":{
-              "left":474,
+              "left":420,
               "top":40
             }
           },
           "name":"layoutGroup",
           "width":1351,
-          "x":474,
+          "x":420,
           "y":40
         }
       },
