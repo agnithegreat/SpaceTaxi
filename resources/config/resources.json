@@ -1,19 +1,30 @@
 {
   "common": {
     "cache": false,
-    "folder": "assets",
+    "folder": "",
     "assets": [
-      "space_pattern.png",
-      "stars_pattern.png",
+      "levels/test.json",
+      "levels/level1.json",
 
-      "textures.png",
-      "textures.xml",
+      "layouts/main_screen",
+      "layouts/fuel_indicator",
+      "layouts/capacity_indicator",
+      "layouts/durability_indicator",
+      "layouts/distance_meter",
 
-      "fonts/futura_30_bold_italic_white_numeric.xml",
+      "textures/space_pattern.png",
+      "textures/stars_pattern.png",
 
-      "ship/ship_skeleton.json",
-      "ship/ship_texture.json",
-      "ship/ship_texture.png"
+      "textures/gui.png",
+      "textures/gui.xml",
+      "textures/textures.png",
+      "textures/textures.xml",
+
+      "textures/fonts/futura_30_bold_italic_white_numeric.xml",
+
+      "textures/ship/ship_skeleton.json",
+      "textures/ship/ship_texture.json",
+      "textures/ship/ship_texture.png"
     ]
   },
   "sounds": {

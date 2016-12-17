@@ -19,8 +19,8 @@ package com.agnither.spacetaxi.model
             return _radius;
         }
 
-        protected var _mass: Number;
-        public function get mass():Number
+        protected var _mass: int;
+        public function get mass():int
         {
             return _mass;
         }
@@ -39,7 +39,7 @@ package com.agnither.spacetaxi.model
             return _position.y;
         }
         
-        public function SpaceBody(radius: int, mass: Number)
+        public function SpaceBody(radius: int, mass: int)
         {
             _radius = radius;
             _mass = mass;

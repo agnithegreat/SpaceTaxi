@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with TexturePacker http://www.codeandweb.com/texturepacker-->
+<!-- $TexturePacker:SmartUpdate:64a38a02ae2a5303083c119c75378ced:ebff5ef02a63a47c4d192a758aed4f0a:336e91466504ac11351905e0c428ebfd$ -->
+<TextureAtlas imagePath="gui.png" width="512" height="512">
+    <SubTexture name="arrow" x="352" y="150" width="134" height="217"/>
+    <SubTexture name="capacity" x="282" y="373" rotated="true" width="132" height="133"/>
+    <SubTexture name="capacity_index_empty" x="128" y="193" width="197" height="57"/>
+    <SubTexture name="capacity_index_full" x="128" y="256" width="197" height="57"/>
+    <SubTexture name="coin" x="352" y="4" width="144" height="140"/>
+    <SubTexture name="fuel" x="4" y="373" width="133" height="133"/>
+    <SubTexture name="fuel_index_full" x="4" y="4" width="342" height="57"/>
+    <SubTexture name="fuel_life_index_empty" x="4" y="67" width="342" height="57"/>
+    <SubTexture name="life" x="143" y="373" width="133" height="133"/>
+    <SubTexture name="life_index_full" x="4" y="130" width="342" height="57"/>
+    <SubTexture name="settings" x="4" y="193" width="118" height="118"/>
+</TextureAtlas>

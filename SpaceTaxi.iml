@@ -22,8 +22,11 @@
         </compiler-options>
         <packaging-air-desktop use-generated-descriptor="false" custom-descriptor-path="$MODULE_DIR$/SpaceTaxi-desktop.xml" package-file-name="SpaceTaxi_Desktop">
           <files-to-package>
-            <FilePathAndPathInPackage file-path="$MODULE_DIR$/resources/assets" path-in-package="assets" />
             <FilePathAndPathInPackage file-path="$MODULE_DIR$/resources/config" path-in-package="config" />
+            <FilePathAndPathInPackage file-path="$MODULE_DIR$/resources/sounds" path-in-package="sounds" />
+            <FilePathAndPathInPackage file-path="$MODULE_DIR$/resources/workspace/textures" path-in-package="textures" />
+            <FilePathAndPathInPackage file-path="$MODULE_DIR$/resources/workspace/layouts" path-in-package="layouts" />
+            <FilePathAndPathInPackage file-path="$MODULE_DIR$/resources/levels" path-in-package="levels" />
           </files-to-package>
         </packaging-air-desktop>
         <packaging-android />
@@ -57,10 +60,64 @@
         <packaging-android enabled="true" use-generated-descriptor="false" custom-descriptor-path="$MODULE_DIR$/SpaceTaxi-android.xml" package-file-name="SpaceTaxi_Android">
           <files-to-package>
             <FilePathAndPathInPackage file-path="$MODULE_DIR$/resources/config" path-in-package="config" />
-            <FilePathAndPathInPackage file-path="$MODULE_DIR$/resources/assets" path-in-package="assets" />
+            <FilePathAndPathInPackage file-path="$MODULE_DIR$/resources/workspace/textures" path-in-package="textures" />
+            <FilePathAndPathInPackage file-path="$MODULE_DIR$/resources/sounds" path-in-package="sounds" />
+            <FilePathAndPathInPackage file-path="$MODULE_DIR$/resources/workspace/layouts" path-in-package="layouts" />
+            <FilePathAndPathInPackage file-path="$MODULE_DIR$/resources/levels" path-in-package="levels" />
           </files-to-package>
         </packaging-android>
         <packaging-ios package-file-name="SpaceTaxi_Android" />
+      </configuration>
+      <configuration name="SpaceTaxi IOS" target-platform="Mobile" pure-as="true" main-class="Main" output-file="SpaceTaxi_IOS.swf" output-folder="$MODULE_DIR$/build">
+        <dependencies>
+          <entries>
+            <entry module-name="MainBase" build-configuration-name="MainBase">
+              <dependency linkage="Merged" />
+            </entry>
+            <entry library-name="swc" library-level="project">
+              <dependency linkage="Merged" />
+            </entry>
+            <entry module-name="TaskManagement" build-configuration-name="TaskManagement">
+              <dependency linkage="Merged" />
+            </entry>
+            <entry library-name="common" library-level="project">
+              <dependency linkage="Merged" />
+            </entry>
+            <entry library-name="ios" library-level="project">
+              <dependency linkage="Merged" />
+            </entry>
+          </entries>
+          <sdk name="AIRSDK_24" />
+        </dependencies>
+        <compiler-options>
+          <option name="additionalOptions" value="-define+=BUILD::debug,true -define+=BUILD::mobile,true -define+=BUILD::ios,true -define+=BUILD::android,false -advanced-telemetry=true" />
+        </compiler-options>
+        <packaging-air-desktop />
+        <packaging-android use-generated-descriptor="false" custom-descriptor-path="$MODULE_DIR$/SpaceTaxi-android.xml" package-file-name="SpaceTaxi_IOS">
+          <files-to-package>
+            <FilePathAndPathInPackage file-path="$MODULE_DIR$/resources/config" path-in-package="config" />
+            <FilePathAndPathInPackage file-path="$MODULE_DIR$/resources/assets" path-in-package="assets" />
+          </files-to-package>
+        </packaging-android>
+        <packaging-ios enabled="true" use-generated-descriptor="false" custom-descriptor-path="$MODULE_DIR$/SpaceTaxi-ios.xml" package-file-name="SpaceTaxi_IOS">
+          <files-to-package>
+            <FilePathAndPathInPackage file-path="$MODULE_DIR$/resources/config" path-in-package="config" />
+            <FilePathAndPathInPackage file-path="$MODULE_DIR$/resources/workspace/textures" path-in-package="textures" />
+            <FilePathAndPathInPackage file-path="$MODULE_DIR$/resources/sounds" path-in-package="sounds" />
+            <FilePathAndPathInPackage file-path="$MODULE_DIR$/resources/launch/Default-568h@2x.png" path-in-package="Default-568h@2x.png" />
+            <FilePathAndPathInPackage file-path="$MODULE_DIR$/resources/launch/Default-667h@2x.png" path-in-package="Default-667h@2x.png" />
+            <FilePathAndPathInPackage file-path="$MODULE_DIR$/resources/launch/Default-Landscape-736h@3x.png" path-in-package="Default-Landscape-736h@3x.png" />
+            <FilePathAndPathInPackage file-path="$MODULE_DIR$/resources/launch/Default-Landscape.png" path-in-package="Default-Landscape.png" />
+            <FilePathAndPathInPackage file-path="$MODULE_DIR$/resources/launch/Default-Landscape@2x.png" path-in-package="Default-Landscape@2x.png" />
+            <FilePathAndPathInPackage file-path="$MODULE_DIR$/resources/launch/Default-Portrait-736h@3x.png" path-in-package="Default-Portrait-736h@3x.png" />
+            <FilePathAndPathInPackage file-path="$MODULE_DIR$/resources/launch/Default-Portrait.png" path-in-package="Default-Portrait.png" />
+            <FilePathAndPathInPackage file-path="$MODULE_DIR$/resources/launch/Default-Portrait@2x.png" path-in-package="Default-Portrait@2x.png" />
+            <FilePathAndPathInPackage file-path="$MODULE_DIR$/resources/launch/Default@2x.png" path-in-package="Default@2x.png" />
+            <FilePathAndPathInPackage file-path="$MODULE_DIR$/resources/workspace/layouts" path-in-package="layouts" />
+            <FilePathAndPathInPackage file-path="$MODULE_DIR$/resources/levels" path-in-package="levels" />
+          </files-to-package>
+          <AirSigningOptions keystore-path="$USER_HOME$/Dropbox/Kitchen/KEYS/ios_development.p12" provisioning-profile-path="$USER_HOME$/Dropbox/Kitchen/KEYS/TopsyKitchen_Development.mobileprovision" />
+        </packaging-ios>
       </configuration>
     </configurations>
     <compiler-options />
@@ -77,5 +134,6 @@
     <orderEntry type="module" module-name="TaskManagement" exported="" />
     <orderEntry type="library" exported="" name="android" level="project" />
     <orderEntry type="library" exported="" name="common" level="project" />
+    <orderEntry type="library" exported="" name="ios" level="project" />
   </component>
 </module>

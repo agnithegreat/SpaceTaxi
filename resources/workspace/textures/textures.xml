@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with TexturePacker http://www.codeandweb.com/texturepacker-->
+<!-- $TexturePacker:SmartUpdate:c7c9932f76cb2299422ce660fa82e5f7:dc73214dc4fcd4430bebab4d5712df6f:2a288f7160b778d75d6fb3a0e2108afb$ -->
+<TextureAtlas imagePath="textures.png" width="2048" height="2048">
+    <SubTexture name="misc/comet" x="1627" y="4" width="328" height="328"/>
+    <SubTexture name="misc/dot" x="2014" y="673" width="30" height="30"/>
+    <SubTexture name="planets/1" x="615" y="4" width="500" height="500"/>
+    <SubTexture name="planets/2" x="1121" y="4" width="500" height="500"/>
+    <SubTexture name="planets/3" x="615" y="510" width="500" height="500"/>
+    <SubTexture name="planets/5" x="1121" y="510" width="500" height="500"/>
+    <SubTexture name="planets/6" x="4" y="569" width="500" height="500"/>
+    <SubTexture name="planets/7" x="1016" y="1016" rotated="true" width="489" height="494" frameX="-4" frameY="-5" frameWidth="500" frameHeight="500"/>
+    <SubTexture name="planets/8" x="4" y="1075" width="500" height="500"/>
+    <SubTexture name="planets/9" x="510" y="1016" width="500" height="500"/>
+    <SubTexture name="planets/10" x="1008" y="1522" rotated="true" width="493" height="498" frameX="-2" frameY="-2" frameWidth="500" frameHeight="500"/>
+    <SubTexture name="planets/12" x="510" y="1522" rotated="true" width="492" height="500" frameX="0" frameY="-8" frameWidth="500" frameHeight="500"/>
+    <SubTexture name="planets/blackhole/circle_1" x="1627" y="338" width="300" height="276" frameX="-158" frameY="-148" frameWidth="613" frameHeight="573"/>
+    <SubTexture name="planets/blackhole/circle_2" x="4" y="4" width="605" height="559" frameX="-8" frameY="0" frameWidth="613" frameHeight="573"/>
+    <SubTexture name="planets/blackhole/skull" x="1961" y="73" width="68" height="92" frameX="-277" frameY="-240" frameWidth="613" frameHeight="573"/>
+    <SubTexture name="stars/01" x="1977" y="562" width="37" height="37"/>
+    <SubTexture name="stars/02" x="1933" y="420" width="52" height="52"/>
+    <SubTexture name="stars/03" x="2017" y="637" rotated="true" width="25" height="30"/>
+    <SubTexture name="stars/04" x="1981" y="517" rotated="true" width="40" height="39" frameX="0" frameY="0" frameWidth="43" frameHeight="40"/>
+    <SubTexture name="stars/05" x="1991" y="422" width="50" height="41" frameX="-1" frameY="-3" frameWidth="58" frameHeight="47"/>
+    <SubTexture name="stars/06" x="1933" y="361" rotated="true" width="56" height="53" frameX="0" frameY="0" frameWidth="57" frameHeight="60"/>
+    <SubTexture name="stars/07" x="1933" y="524" width="39" height="31" frameX="-8" frameY="-5" frameWidth="47" frameHeight="41"/>
+    <SubTexture name="stars/08" x="1961" y="293" rotated="true" width="63" height="62" frameX="-2" frameY="-4" frameWidth="64" frameHeight="67"/>
+    <SubTexture name="stars/09" x="1961" y="231" rotated="true" width="64" height="56" frameX="0" frameY="0" frameWidth="60" frameHeight="64"/>
+    <SubTexture name="stars/10" x="1995" y="361" width="48" height="55" frameX="0" frameY="-1" frameWidth="56" frameHeight="56"/>
+    <SubTexture name="stars/11" x="1961" y="4" width="72" height="63" frameX="-2" frameY="0" frameWidth="75" frameHeight="67"/>
+    <SubTexture name="stars/white_01" x="1933" y="604" width="37" height="37"/>
+    <SubTexture name="stars/white_02" x="1933" y="478" rotated="true" width="42" height="40" frameX="0" frameY="0" frameWidth="42" frameHeight="42"/>
+    <SubTexture name="stars/white_03" x="1976" y="643" rotated="true" width="32" height="29" frameX="-2" frameY="0" frameWidth="34" frameHeight="32"/>
+    <SubTexture name="stars/white_04" x="1961" y="171" rotated="true" width="67" height="54" frameX="-3" frameY="0" frameWidth="68" frameHeight="70"/>
+    <SubTexture name="stars/white_05" x="2017" y="605" width="27" height="26"/>
+    <SubTexture name="stars/white_06" x="1933" y="561" width="38" height="37" frameX="0" frameY="-2" frameWidth="39" frameHeight="39"/>
+    <SubTexture name="stars/white_07" x="1976" y="605" rotated="true" width="35" height="32"/>
+    <SubTexture name="stars/white_08" x="2020" y="562" width="24" height="25" frameX="-1" frameY="-1" frameWidth="25" frameHeight="26"/>
+    <SubTexture name="stars/white_09" x="1991" y="469" width="42" height="42"/>
+</TextureAtlas>

@@ -4,11 +4,8 @@
 package com.agnither.spacetaxi.controller.game
 {
     import com.agnither.spacetaxi.model.Order;
-    import com.agnither.spacetaxi.model.Planet;
     import com.agnither.spacetaxi.model.Ship;
-    import com.agnither.spacetaxi.model.orders.Zone;
 
-    import starling.core.Starling;
     import starling.events.EventDispatcher;
 
     public class OrderController extends EventDispatcher
@@ -22,6 +19,10 @@ package com.agnither.spacetaxi.controller.game
         }
         
         private var _money: int;
+        public function get money():int
+        {
+            return _money;
+        }
         
         public function OrderController()
         {
@@ -29,9 +30,13 @@ package com.agnither.spacetaxi.controller.game
             _money = 0;
         }
         
-        public function start(delay: Number = 0):void
+        public function start():void
         {
-            Starling.juggler.delayCall(activateOrder, delay);
+            for (var i:int = 0; i < _orders.length; i++)
+            {
+                var order: Order = _orders[i];
+                order.activate();
+            }
         }
         
         public function addOrder(order: Order):void
@@ -46,37 +51,24 @@ package com.agnither.spacetaxi.controller.game
             dispatchEventWith(UPDATE);
         }
 
-        public function nextOrder():void
+        public function checkOrders(ship: Ship):void
         {
-            removeOrder(_orders[0]);
-            activateOrder();
-        }
-
-        public function checkOrder(planet: Planet, ship: Ship):void
-        {
-            var zone: Zone = planet.getZoneByShip(ship);
-            var order: Order = zone.order;
-            if (order != null)
+            for (var i:int = 0; i < _orders.length; i++)
             {
-                if (!order.started && order.departure == zone)
+                var order: Order = _orders[i];
+                if (!order.started && order.departure.check(ship))
                 {
                     order.start();
-                    ship.order();
-                } else if (order.started && order.arrival == zone)
+                    ship.order(true);
+                } else if (order.started && order.arrival.check(ship))
                 {
                     _money += order.money;
                     order.complete();
-                    ship.order();
+                    ship.order(false);
 
-                    nextOrder();
+                    removeOrder(order);
                 }
             }
-        }
-
-        public function hasOrder(planet: Planet, ship: Ship):Boolean
-        {
-            var zone: Zone = planet.getZoneByShip(ship);
-            return zone.order != null && (zone.order.departure == zone || zone.order.arrival == zone);
         }
         
         public function step(delta: Number):void
@@ -92,14 +84,6 @@ package com.agnither.spacetaxi.controller.game
             for (var i:int = 0; i < _orders.length; i++)
             {
                 _orders[i].damage(value);
-            }
-        }
-
-        private function activateOrder():void
-        {
-            if (_orders.length > 0)
-            {
-                _orders[0].activate();
             }
         }
     }

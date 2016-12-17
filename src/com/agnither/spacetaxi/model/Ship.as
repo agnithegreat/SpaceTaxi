@@ -3,8 +3,6 @@
  */
 package com.agnither.spacetaxi.model
 {
-    import com.agnither.spacetaxi.utils.GeomUtils;
-
     import starling.events.Event;
 
     public class Ship extends DynamicSpaceBody
@@ -34,26 +32,37 @@ package com.agnither.spacetaxi.model
             return _crashed;
         }
 
-        protected var _fuel: Number;
-        public function get fuel():Number
+        protected var _fuel: int;
+        public function get fuel():int
         {
             return _fuel;
         }
-        protected var _fuelMax: Number;
-        public function get fuelMax():Number
+        protected var _fuelMax: int;
+        public function get fuelMax():int
         {
             return _fuelMax;
         }
 
-        protected var _durability: Number;
-        public function get durability():Number
+        protected var _durability: int;
+        public function get durability():int
         {
             return _durability;
         }
-        protected var _durabilityMax: Number;
-        public function get durabilityMax():Number
+        protected var _durabilityMax: int;
+        public function get durabilityMax():int
         {
             return _durabilityMax;
+        }
+
+        protected var _capacity: int;
+        public function get capacity():int
+        {
+            return _capacity;
+        }
+        protected var _capacityMax: int;
+        public function get capacityMax():int
+        {
+            return _capacityMax;
         }
         
         protected var _planet: Planet;
@@ -62,9 +71,13 @@ package com.agnither.spacetaxi.model
             return _planet;
         }
 
-        public function Ship(radius: int, mass: Number)
+        private var _landing: Boolean;
+
+        public function Ship(radius: int, mass: Number, rotation: Number)
         {
             super(radius, mass);
+            
+            _rotation = rotation;
 
             reset();
         }
@@ -73,21 +86,23 @@ package com.agnither.spacetaxi.model
         {
             super.reset();
             
-            _rotation = 0;
-            
             _landed = false;
             _crashed = false;
 
             // TODO: FUEL - setup
-            _fuelMax = 100;
+            _fuelMax = 9;
             _fuel = _fuelMax;
 
             // TODO: DURABILITY - setup
-            _durabilityMax = 100;
+            _durabilityMax = 9;
             _durability = _durabilityMax;
+            
+            // TODO: CAPACITY - setup
+            _capacityMax = 5;
+            _capacity = _capacityMax;
         }
 
-        public function launch(fuel: Number = 0):void
+        public function launch(fuel: int = 0):void
         {
             if (_fuel < fuel) {
                 throw new Error("no fuel");
@@ -99,6 +114,7 @@ package com.agnither.spacetaxi.model
                 _planet = null;
             }
             _landed = false;
+            _landing = false;
 
             if (fuel > 0)
             {
@@ -110,7 +126,21 @@ package com.agnither.spacetaxi.model
             dispatchEventWith(LAUNCH);
         }
 
-        public function collide(power: Number = 0):void
+        override public function accelerate(x: Number, y: Number):void
+        {
+            super.accelerate(x, y);
+
+            if (x == 0 && y == 0) return;
+            
+            if (_landing && _planet != null)
+            {
+                rotateToPlanet(_planet);
+            } else {
+                _rotation = Math.atan2(_speed.y, _speed.x);
+            }
+        }
+
+        public function collide(power: int = 0):void
         {
             dispatchEventWith(COLLIDE);
 
@@ -125,18 +155,13 @@ package com.agnither.spacetaxi.model
             }
         }
 
-        override public function accelerate(x: Number, y: Number):void
+        public function landPrepare(planet: Planet):void
         {
-            super.accelerate(x, y);
-
-            _rotation = Math.atan2(y, x);
-        }
-        
-        public function landPrepare():void
-        {
+            _planet = planet;
+            _landing = true;
             dispatchEventWith(LAND_PREPARE);
         }
-        
+
         public function land(planet: Planet):void
         {
             _planet = planet;
@@ -161,8 +186,9 @@ package com.agnither.spacetaxi.model
             _speed.y = 0;
         }
         
-        public function order():void
+        public function order(add: Boolean):void
         {
+            _capacity += add ? -1 : 1;
             dispatchEventWith(ORDER);
         }
 
@@ -178,7 +204,7 @@ package com.agnither.spacetaxi.model
         
         override public function clone():SpaceBody
         {
-            var body: Ship = new Ship(_radius, _mass);
+            var body: Ship = new Ship(_radius, _mass, _rotation);
             body.place(_position.x, _position.y);
             body.accelerate(_speed.x, _speed.y);
             return body;
@@ -186,9 +212,12 @@ package com.agnither.spacetaxi.model
 
         private function handlePlanetUpdate(event: Event):void
         {
-            var angle: Number = Math.PI + Math.atan2(y - _planet.y, x - _planet.x);
-            var angleDelta: Number = GeomUtils.getAngleDelta(_rotation, angle);
-            _rotation += angleDelta * 0.2;
+            rotateToPlanet(_planet);
+        }
+
+        private function rotateToPlanet(planet: Planet):void
+        {
+            _rotation = Math.atan2(y - planet.y, x - planet.x);
             update();
         }
     }

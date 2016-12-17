@@ -5,13 +5,27 @@ package com.agnither.spacetaxi.enums
 {
     public class PlanetType
     {
-        public static const NORMAL: PlanetType = new PlanetType(1);
-        public static const ANTI_GRAVITY: PlanetType = new PlanetType(2);
-        public static const LAVA: PlanetType = new PlanetType(3, true, false);
-        public static const BLACK_HOLE: PlanetType = new PlanetType(4, false, false);
+        public static const NORMAL: PlanetType = new PlanetType("normal");
+        public static const ANTI_GRAVITY: PlanetType = new PlanetType("anti_gravity");
+        public static const LAVA: PlanetType = new PlanetType("lava", true, false);
+        public static const BLACK_HOLE: PlanetType = new PlanetType("black_hole", false, false);
+        
+        private static var types: Vector.<PlanetType> = new <PlanetType>[NORMAL, ANTI_GRAVITY, LAVA, BLACK_HOLE];
+        
+        public static function getType(type: String):PlanetType
+        {
+            for (var i:int = 0; i < types.length; i++)
+            {
+                if (types[i].type == type)
+                {
+                    return types[i];
+                }
+            }
+            return null;
+        }
 
-        private var _type: int;
-        public function get type():int
+        private var _type: String;
+        public function get type():String
         {
             return _type;
         }
@@ -28,7 +42,7 @@ package com.agnither.spacetaxi.enums
             return _safe;
         }
 
-        public function PlanetType(type: int, solid: Boolean = true, safe: Boolean = true)
+        public function PlanetType(type: String, solid: Boolean = true, safe: Boolean = true)
         {
             _type = type;
             _solid = solid;

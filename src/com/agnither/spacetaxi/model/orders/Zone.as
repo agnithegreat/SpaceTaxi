@@ -4,8 +4,11 @@
 package com.agnither.spacetaxi.model.orders
 {
     import com.agnither.spacetaxi.model.Order;
-    import com.agnither.spacetaxi.model.Planet;
+    import com.agnither.spacetaxi.model.Ship;
     import com.agnither.spacetaxi.model.Station;
+    import com.agnither.spacetaxi.vo.ZoneVO;
+
+    import flash.geom.Point;
 
     import starling.events.EventDispatcher;
 
@@ -13,22 +16,10 @@ package com.agnither.spacetaxi.model.orders
     {
         public static const UPDATE: String = "Zone.UPDATE";
         
-        private var _planet: Planet;
-        public function get planet():Planet
+        private var _zone: ZoneVO;
+        public function get zone():ZoneVO
         {
-            return _planet;
-        }
-        
-        private var _angle: Number;
-        public function get angle():Number
-        {
-            return _angle;
-        }
-
-        private var _size: Number;
-        public function get size():Number
-        {
-            return _size;
+            return _zone;
         }
         
         private var _order: Order;
@@ -43,11 +34,14 @@ package com.agnither.spacetaxi.model.orders
             return _station;
         }
         
-        public function Zone(planet: Planet, angle: Number, size: Number)
+        public function Zone(zone: ZoneVO)
         {
-            _planet = planet;
-            _angle = angle;
-            _size = size;
+            _zone = zone;
+        }
+        
+        public function check(ship: Ship):Boolean
+        {
+            return Point.distance(ship.position, new Point(_zone.x, _zone.y)) <= _zone.size;
         }
         
         public function setOrder(order: Order):void

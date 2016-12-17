@@ -4,8 +4,10 @@
 package com.agnither.spacetaxi.tasks.init
 {
     import com.agnither.spacetaxi.Application;
+    import com.agnither.spacetaxi.managers.windows.WindowManager;
     import com.agnither.spacetaxi.tasks.load.LoadAdditionalTask;
-    import com.agnither.spacetaxi.view.SpaceView;
+    import com.agnither.spacetaxi.view.scenes.game.SpaceView;
+    import com.agnither.spacetaxi.view.gui.screens.MainScreen;
     import com.agnither.tasks.abstract.MultiTask;
 
     import dragonBones.starling.StarlingFactory;
@@ -35,7 +37,8 @@ package com.agnither.spacetaxi.tasks.init
             );
 
             Application.appController.init();
-            Application.viewport.addChild(new SpaceView(Application.appController.space));
+            WindowManager.showScene(new SpaceView(Application.appController.space));
+            WindowManager.showScreen(new MainScreen());
 
             super.processComplete();
         }
