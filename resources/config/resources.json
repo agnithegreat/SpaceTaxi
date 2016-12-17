@@ -20,8 +20,6 @@
       "textures/textures.png",
       "textures/textures.xml",
 
-      "textures/fonts/futura_30_bold_italic_white_numeric.xml",
-
       "textures/ship/ship_skeleton.json",
       "textures/ship/ship_texture.json",
       "textures/ship/ship_texture.png"

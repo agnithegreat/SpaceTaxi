@@ -31,7 +31,7 @@
             ],
             "customParams":{},
             "params":{
-              "autoSize":"bothDirections",
+              "autoSize":"horizontal",
               "batchable":true,
               "format":{
                 "cls":"starling.text.TextFormat",
@@ -40,15 +40,16 @@
                   "bold":true,
                   "color":16777215,
                   "font":"Adventure",
+                  "horizontalAlign":"left",
                   "size":80
                 }
               },
               "height":105,
               "name":"_moneyTF",
-              "text":"0000",
-              "width":177,
+              "text":"0 ",
+              "width":72,
               "x":154,
-              "y":20
+              "y":18
             }
           }
         ],

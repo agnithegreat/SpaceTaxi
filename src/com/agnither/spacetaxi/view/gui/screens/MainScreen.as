@@ -33,7 +33,7 @@ package com.agnither.spacetaxi.view.gui.screens
 
         public var _moneyTF: TextField;
 
-        private var _money: int;
+        private var _money: int = -1;
 
         public function MainScreen()
         {
@@ -86,11 +86,7 @@ package com.agnither.spacetaxi.view.gui.screens
 
         public function set money(value: int):void
         {
-            _moneyTF.text = String(value);
-            while (_moneyTF.text.length < 5)
-            {
-                _moneyTF.text = "0" + _moneyTF.text;
-            }
+            _moneyTF.text = String(value) + " ";
         }
 
         public function get money():int
