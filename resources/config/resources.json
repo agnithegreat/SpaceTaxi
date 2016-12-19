@@ -13,7 +13,6 @@
       "layouts/distance_meter",
 
       "textures/space_pattern.png",
-      "textures/stars_pattern.png",
 
       "textures/gui.png",
       "textures/gui.xml",

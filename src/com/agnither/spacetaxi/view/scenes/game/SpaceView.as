@@ -38,7 +38,9 @@ package com.agnither.spacetaxi.view.scenes.game
 
         private var _background: Image;
         private var _overlay: Image;
-        private var _stars: Image;
+        private var _starsParallax1: ParallaxLayer;
+        private var _starsParallax2: ParallaxLayer;
+        private var _starsParallax3: ParallaxLayer;
 
         private var _container: Sprite;
         private var _planetsContainer: Sprite;
@@ -88,15 +90,17 @@ package com.agnither.spacetaxi.view.scenes.game
             _background.y = stage.stageHeight * 0.5;
             addChild(_background);
 
-            _stars = new Image(Application.assetsManager.getTexture("stars_pattern"));
-            _stars.pivotX = _stars.width * 0.5;
-            _stars.pivotY = _stars.height * 0.5;
-            _stars.tileGrid = new Rectangle(0, 0, _stars.width, _stars.height);
-            _stars.width = stage.stageWidth * 2;
-            _stars.height = stage.stageHeight * 2;
-            _stars.x = stage.stageWidth * 0.5;
-            _stars.y = stage.stageHeight * 0.5;
-            addChild(_stars);
+            _starsParallax1 = new ParallaxLayer(0.1, 30, 0.4);
+            addChild(_starsParallax1);
+            _starsParallax1.init();
+
+            _starsParallax2 = new ParallaxLayer(0.15, 20, 0.6);
+            addChild(_starsParallax2);
+            _starsParallax2.init();
+
+            _starsParallax3 = new ParallaxLayer(0.2, 10, 0.8);
+            addChild(_starsParallax3);
+            _starsParallax3.init();
 
             _overlay = new Image(Texture.fromColor(100, 100, 0xFFFFFF, 0.2));
             _overlay.width = stage.stageWidth;
@@ -110,7 +114,7 @@ package com.agnither.spacetaxi.view.scenes.game
             _container.addChild(_planetsContainer);
 
             _planets = new <PlanetView>[];
-            for (var i:int = 0; i < _space.planets.length; i++)
+            for (var i: int = 0; i < _space.planets.length; i++)
             {
                 var planet: Planet = _space.planets[i];
                 if (planet.type == PlanetType.BLACK_HOLE)
@@ -306,9 +310,17 @@ package com.agnither.spacetaxi.view.scenes.game
                 y: stage.stageHeight * 0.5 - dy * 0.05
             });
 
-            Starling.juggler.tween(_stars, event != null ? 0.3 : 0, {
-                x: stage.stageWidth * 0.5 - dx * 0.1,
-                y: stage.stageHeight * 0.5 - dy * 0.1
+            Starling.juggler.tween(_starsParallax1, event != null ? 0.3 : 0, {
+                x: -dx,
+                y: -dy
+            });
+            Starling.juggler.tween(_starsParallax2, event != null ? 0.3 : 0, {
+                x: -dx,
+                y: -dy
+            });
+            Starling.juggler.tween(_starsParallax3, event != null ? 0.3 : 0, {
+                x: -dx,
+                y: -dy
             });
 
             if (!_aimMode)
