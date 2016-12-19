@@ -98,7 +98,6 @@ package com.agnither.spacetaxi.model
             return _orderController;
         }
 
-        private var _slow: Boolean;
         private var _landPlanet: Planet;
 
         public function Space()
@@ -187,8 +186,6 @@ package com.agnither.spacetaxi.model
 
         public function launch():void
         {
-            _slow = false;
-
             if (_ship.landed && _ship.fuel > 0)
             {
                 launchShip(_ship);
@@ -337,7 +334,10 @@ package com.agnither.spacetaxi.model
 
             if (_ship.landed || _ship.crashed) return;
 
-            _time += _slow ? delta * 0.5 : delta;
+            var scaleSize: int = 50 * DELTA;
+            var timeScale: Number = Math.sqrt(Math.max(0.01, Math.min(1, _flightTime / scaleSize, (_trajectoryTime-_flightTime) / scaleSize)));
+
+            _time += delta * timeScale;
             var amount: int = _time * 1000 * DELTA;
             _time -= amount / (1000 * DELTA);
             for (var i:int = 0; i < amount; i++)
@@ -348,7 +348,6 @@ package com.agnither.spacetaxi.model
 
             if (_landPlanet != null && _trajectoryTime - _flightTime < 10)
             {
-                _slow = true;
                 _ship.landPrepare(_landPlanet);
             }
 
