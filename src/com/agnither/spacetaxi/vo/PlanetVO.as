@@ -3,10 +3,11 @@
  */
 package com.agnither.spacetaxi.vo
 {
+    import flash.geom.Point;
+
     public class PlanetVO
     {
-        public var x: int;
-        public var y: int;
+        public var position: Point;
         public var radius: int;
         public var mass: int;
         public var bounce: int;

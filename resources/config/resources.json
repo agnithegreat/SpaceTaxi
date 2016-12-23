@@ -7,6 +7,7 @@
       "levels/level1.json",
 
       "layouts/main_screen",
+      "layouts/game_screen",
       "layouts/fuel_indicator",
       "layouts/capacity_indicator",
       "layouts/durability_indicator",

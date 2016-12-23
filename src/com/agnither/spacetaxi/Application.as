@@ -6,6 +6,7 @@ package com.agnither.spacetaxi
     import com.agnither.spacetaxi.controller.AppController;
     import com.agnither.spacetaxi.managers.windows.WindowManager;
     import com.agnither.spacetaxi.tasks.init.InitTask;
+    import com.agnither.spacetaxi.view.Fonts;
     import com.agnither.tasks.global.TaskSystem;
 
     import feathers.layout.AnchorLayout;
@@ -35,6 +36,8 @@ package com.agnither.spacetaxi
 
         public function start():void
         {
+            Fonts;
+
             Starling.current.antiAliasing = 16;
 
             viewport.width = stage.stageWidth;

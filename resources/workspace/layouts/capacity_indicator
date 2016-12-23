@@ -6,7 +6,7 @@
         "constructorParams":[
           {
             "cls":"starling.textures.Texture",
-            "textureName":"capacity_index_empty"
+            "textureName":"game_screen/capacity_index_empty"
           }
         ],
         "customParams":{},
@@ -43,7 +43,7 @@
         "constructorParams":[
           {
             "cls":"starling.textures.Texture",
-            "textureName":"capacity_index_full"
+            "textureName":"game_screen/capacity_index_full"
           }
         ],
         "customParams":{},
@@ -66,12 +66,12 @@
             "params":{
               "name":null,
               "scaleX":4.32,
-              "scaleY":1.14,
+              "scaleY":1.18,
               "x":-19
             }
           },
           "name":"_bar",
-          "x":130,
+          "x":131,
           "y":9
         }
       },
@@ -80,7 +80,7 @@
         "constructorParams":[
           {
             "cls":"starling.textures.Texture",
-            "textureName":"capacity"
+            "textureName":"game_screen/capacity"
           }
         ],
         "customParams":{},

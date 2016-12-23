@@ -44,7 +44,7 @@ package com.agnither.spacetaxi.view.scenes.game
             y = _planet.y;
             
             scaleX = (1 + Math.cos(_planet.time) * _planet.scale);
-            scaleY = (1 + Math.sin(_planet.time) * _planet.scale);
+            scaleY = (1 + Math.cos(_planet.time + Math.PI) * _planet.scale);
         }
     }
 }

@@ -3,6 +3,7 @@
  */
 package com.agnither.spacetaxi.controller.game
 {
+    import com.agnither.spacetaxi.managers.sound.SoundManager;
     import com.agnither.spacetaxi.model.Order;
     import com.agnither.spacetaxi.model.Ship;
 
@@ -58,11 +59,16 @@ package com.agnither.spacetaxi.controller.game
                 var order: Order = _orders[i];
                 if (!order.started && order.departure.check(ship))
                 {
-                    order.start();
-                    ship.order(true);
+                    if (ship.capacity > 0)
+                    {
+                        order.start();
+                        ship.order(true);
+                    }
                 } else if (order.started && order.arrival.check(ship))
                 {
                     _money += order.money;
+                    SoundManager.playSound(SoundManager.COINS_LOOP);
+                    
                     order.complete();
                     ship.order(false);
 

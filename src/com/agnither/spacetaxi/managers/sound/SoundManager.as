@@ -5,8 +5,6 @@ package com.agnither.spacetaxi.managers.sound
 {
     import by.blooddy.crypto.MD5;
 
-    import com.agnither.spacetaxi.Application;
-
     import flash.desktop.NativeApplication;
     import flash.media.AudioPlaybackMode;
     import flash.media.Sound;
@@ -20,7 +18,18 @@ package com.agnither.spacetaxi.managers.sound
     public class SoundManager
     {
         public static const MENU: String = "sound.Menu";
-        
+
+        public static const CHECK_GREEN: String = "sound.CheckGreen";
+        public static const COINS_LOOP: String = "sound.CoinsLoop";
+        public static const EARTHING_OTHER: String = "sound.EarthingOther";
+        public static const EARTHING: String = "sound.Earthing";
+        public static const EXPLOSION: String = "sound.Explosion";
+        public static const FLY: String = "sound.Fly";
+        public static const JUMP_PLANET: String = "sound.JumpPlanet";
+        public static const LEGS: String = "sound.Legs";
+        public static const OPEN_CLOSE: String = "sound.OpenClose";
+        public static const START: String = "sound.Start";
+
         private static var playing: Dictionary = new Dictionary(true);
 
         public static function getSound(name: String):Sound

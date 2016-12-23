@@ -37,7 +37,7 @@ package
         {
             super.initializeStarling();
 
-            showStats = Config.debug;
+//            showStats = Config.debug;
         }
     }
 }

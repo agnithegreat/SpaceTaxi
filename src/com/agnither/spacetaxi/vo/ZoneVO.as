@@ -3,10 +3,12 @@
  */
 package com.agnither.spacetaxi.vo
 {
+    import flash.geom.Point;
+
     public class ZoneVO
     {
-        public var x: int;
-        public var y: int;
+        public var position: Point;
         public var size: Number;
+        public var planet: PlanetVO;
     }
 }

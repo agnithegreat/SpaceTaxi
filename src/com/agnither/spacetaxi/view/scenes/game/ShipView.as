@@ -3,6 +3,7 @@
  */
 package com.agnither.spacetaxi.view.scenes.game
 {
+    import com.agnither.spacetaxi.managers.sound.SoundManager;
     import com.agnither.spacetaxi.model.Planet;
     import com.agnither.spacetaxi.model.Ship;
     import com.agnither.spacetaxi.model.SpaceBody;
@@ -42,6 +43,7 @@ package com.agnither.spacetaxi.view.scenes.game
             _ship.addEventListener(Ship.ORDER, handleOrder);
             _ship.addEventListener(Ship.LAUNCH, handleLaunch);
             _ship.addEventListener(Ship.COLLIDE, handleCollide);
+            _ship.addEventListener(Ship.BOUNCE, handleBounce);
             _ship.addEventListener(Ship.LAND_PREPARE, handleLandPrepare);
             _ship.addEventListener(Ship.LAND, handleLand);
             _ship.addEventListener(Ship.CRASH, handleCrash);
@@ -67,7 +69,7 @@ package com.agnither.spacetaxi.view.scenes.game
             {
                 var angle: Number = Math.atan2(_ship.y - planet.y, _ship.x - planet.x);
                 var nx: Number = planet.radius * Math.cos(angle) * Math.cos(planet.time) * planet.scale;
-                var ny: Number = planet.radius * Math.sin(angle) * Math.sin(planet.time) * planet.scale;
+                var ny: Number = planet.radius * Math.sin(angle) * Math.cos(planet.time + Math.PI) * planet.scale;
 
                 _offset.x += (nx - _offset.x) * 0.2;
                 _offset.y += (ny - _offset.y) * 0.2;
@@ -100,6 +102,8 @@ package com.agnither.spacetaxi.view.scenes.game
 
         private function handleOrder(event: Event):void
         {
+            SoundManager.playSound(SoundManager.OPEN_CLOSE);
+            
             _animation.animation.gotoAndPlayByFrame("order");
         }
 
@@ -110,11 +114,25 @@ package com.agnither.spacetaxi.view.scenes.game
             _thrust = true;
             _mounted = false;
             _delayed = false;
+
+            SoundManager.playSound(SoundManager.START);
+            SoundManager.playSound(SoundManager.FLY);
         }
 
         private function handleCollide(event: Event):void
         {
+            if (event.data > 0)
+            {
+                SoundManager.playSound(SoundManager.EARTHING_OTHER);
+            } else {
+                SoundManager.playSound(SoundManager.EARTHING);
+            }
+//            SoundManager.playSound(SoundManager.JUMP_PLANET);
+        }
 
+        private function handleBounce(event: Event):void
+        {
+            SoundManager.playSound(SoundManager.JUMP_PLANET);
         }
 
         private function handleLandPrepare(event: Event):void
@@ -129,6 +147,8 @@ package com.agnither.spacetaxi.view.scenes.game
 
         private function handleLand(event: Event):void
         {
+            SoundManager.playSound(SoundManager.LEGS);
+
             stopFire();
             mount();
         }
@@ -139,16 +159,22 @@ package com.agnither.spacetaxi.view.scenes.game
             Starling.juggler.tween(_animation, 0.1, {alpha: 0, onComplete: destroy});
             
             dispatchEventWith(EXPLODE);
+
+            SoundManager.playSound(SoundManager.EXPLOSION);
         }
 
         private function clear():void
         {
+            Starling.juggler.removeDelayedCalls(stopFire);
+            Starling.juggler.removeDelayedCalls(mount);
+
             if (_ship != null)
             {
                 _ship.removeEventListener(SpaceBody.UPDATE, handleUpdate);
                 _ship.removeEventListener(Ship.ORDER, handleOrder);
                 _ship.removeEventListener(Ship.LAUNCH, handleLaunch);
                 _ship.removeEventListener(Ship.COLLIDE, handleCollide);
+                _ship.removeEventListener(Ship.BOUNCE, handleBounce);
                 _ship.removeEventListener(Ship.LAND_PREPARE, handleLandPrepare);
                 _ship.removeEventListener(Ship.LAND, handleLand);
                 _ship.removeEventListener(Ship.CRASH, handleCrash);

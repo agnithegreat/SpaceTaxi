@@ -26,8 +26,6 @@ package com.agnither.spacetaxi.controller
             _space.init();
 
             Starling.juggler.add(_space);
-
-            SoundManager.playMusic(SoundManager.MENU);
         }
     }
 }

@@ -1,16 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with TexturePacker http://www.codeandweb.com/texturepacker-->
-<!-- $TexturePacker:SmartUpdate:64a38a02ae2a5303083c119c75378ced:ebff5ef02a63a47c4d192a758aed4f0a:336e91466504ac11351905e0c428ebfd$ -->
-<TextureAtlas imagePath="gui.png" width="512" height="512">
-    <SubTexture name="arrow" x="352" y="150" width="134" height="217"/>
-    <SubTexture name="capacity" x="282" y="373" rotated="true" width="132" height="133"/>
-    <SubTexture name="capacity_index_empty" x="128" y="193" width="197" height="57"/>
-    <SubTexture name="capacity_index_full" x="128" y="256" width="197" height="57"/>
-    <SubTexture name="coin" x="352" y="4" width="144" height="140"/>
-    <SubTexture name="fuel" x="4" y="373" width="133" height="133"/>
-    <SubTexture name="fuel_index_full" x="4" y="4" width="342" height="57"/>
-    <SubTexture name="fuel_life_index_empty" x="4" y="67" width="342" height="57"/>
-    <SubTexture name="life" x="143" y="373" width="133" height="133"/>
-    <SubTexture name="life_index_full" x="4" y="130" width="342" height="57"/>
-    <SubTexture name="settings" x="4" y="193" width="118" height="118"/>
+<!-- $TexturePacker:SmartUpdate:6e2bad3c1b12914d667a0a4fef4350c5:7ac29738dd6340e78cde58336d10b775:336e91466504ac11351905e0c428ebfd$ -->
+<TextureAtlas imagePath="gui.png" width="2048" height="2048">
+    <SubTexture name="game_screen/capacity" x="1627" y="1068" width="133" height="132"/>
+    <SubTexture name="game_screen/capacity_index_empty" x="1821" y="4" width="197" height="57"/>
+    <SubTexture name="game_screen/capacity_index_full" x="1821" y="67" width="196" height="59"/>
+    <SubTexture name="game_screen/coin" x="1798" y="536" width="144" height="140"/>
+    <SubTexture name="game_screen/fuel" x="1627" y="790" width="133" height="133"/>
+    <SubTexture name="game_screen/fuel_index_full" x="1983" y="132" rotated="true" width="59" height="342"/>
+    <SubTexture name="game_screen/fuel_life_index_empty" x="1735" y="414" rotated="true" width="57" height="342"/>
+    <SubTexture name="game_screen/life" x="1627" y="929" width="133" height="133"/>
+    <SubTexture name="game_screen/life_index_full" x="1983" y="480" rotated="true" width="58" height="342"/>
+    <SubTexture name="game_screen/settings" x="4" y="1306" width="118" height="118"/>
+    <SubTexture name="main_screen/achievements" x="1821" y="132" rotated="true" width="156" height="398"/>
+    <SubTexture name="main_screen/achievements_teaser" x="1069" y="1306" width="512" height="505"/>
+    <SubTexture name="main_screen/choose_level" x="1766" y="989" rotated="true" width="275" height="350"/>
+    <SubTexture name="main_screen/choose_level_teaser" x="550" y="1475" rotated="true" width="513" height="518"/>
+    <SubTexture name="main_screen/free_coins" x="1798" y="682" rotated="true" width="140" height="301"/>
+    <SubTexture name="main_screen/free_coins_teaser" x="4" y="862" rotated="true" width="426" height="432"/>
+    <SubTexture name="main_screen/garage" x="1763" y="1345" width="280" height="103"/>
+    <SubTexture name="main_screen/garage_teaser" x="4" y="1475" rotated="true" width="540" height="549"/>
+    <SubTexture name="main_screen/logo_express" x="933" y="4" width="882" height="297"/>
+    <SubTexture name="main_screen/logo_glow" x="4" y="4" width="923" height="852" frameX="-11" frameY="-82" frameWidth="948" frameHeight="948"/>
+    <SubTexture name="main_screen/logo_kosmos" x="933" y="307" width="796" height="477"/>
+    <SubTexture name="main_screen/play_button" x="933" y="790" width="688" height="510" frameX="0" frameY="0" frameWidth="688" frameHeight="521"/>
+    <SubTexture name="main_screen/play_button_txt" x="1627" y="1206" rotated="true" width="130" height="263"/>
+    <SubTexture name="main_screen/ship_shadow" x="1735" y="307" rotated="true" width="67" height="101"/>
 </TextureAtlas>

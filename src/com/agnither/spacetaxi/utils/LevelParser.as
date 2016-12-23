@@ -9,6 +9,7 @@ package com.agnither.spacetaxi.utils
     import com.agnither.spacetaxi.vo.ShipVO;
     import com.agnither.spacetaxi.vo.ZoneVO;
 
+    import flash.geom.Point;
     import flash.geom.Rectangle;
 
     public class LevelParser
@@ -30,8 +31,7 @@ package com.agnither.spacetaxi.utils
             {
                 var pl: Object = level.planets[i];
                 var planet: PlanetVO = new PlanetVO();
-                planet.x = pl.x;
-                planet.y = pl.y;
+                planet.position = new Point(pl.x, pl.y);
                 planet.radius = pl.radius;
                 planet.mass = pl.mass;
                 planet.bounce = pl.bounce;
@@ -50,20 +50,38 @@ package com.agnither.spacetaxi.utils
                 order.cost = or.cost;
                 
                 order.departure = new ZoneVO();
-                order.departure.x = or.departure.x;
-                order.departure.y = or.departure.y;
+                order.departure.position = new Point(or.departure.x, or.departure.y);
                 order.departure.size = or.departure.size;
+                order.departure.planet = getNearestPlanet(order.departure.position, planets);
 
                 order.arrival = new ZoneVO();
-                order.arrival.x = or.arrival.x;
-                order.arrival.y = or.arrival.y;
+                order.arrival.position = new Point(or.arrival.x, or.arrival.y);
                 order.arrival.size = or.arrival.size;
+                order.arrival.planet = getNearestPlanet(order.arrival.position, planets);
                 
                 orders.push(order);
             }
             data.orders = orders;
 
             return data;
+        }
+        
+        private static function getNearestPlanet(position: Point, planets: Vector.<PlanetVO>):PlanetVO
+        {
+            var nearestPlanet: PlanetVO = null;
+            var nearestDistance: Number = 0;
+            for (var i:int = 0; i < planets.length; i++)
+            {
+                var planet: PlanetVO = planets[i];
+                var distance: Number = Point.distance(position, planet.position);
+                if (nearestPlanet == null || nearestDistance > distance)
+                {
+                    nearestPlanet = planet;
+                    nearestDistance = distance;
+                }
+            }
+            trace(position, nearestPlanet.position);
+            return nearestPlanet;
         }
     }
 }

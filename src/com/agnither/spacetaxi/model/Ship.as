@@ -10,6 +10,7 @@ package com.agnither.spacetaxi.model
         public static const ORDER: String = "Ship.ORDER";
         public static const LAUNCH: String = "Ship.LAUNCH";
         public static const COLLIDE: String = "Ship.COLLIDE";
+        public static const BOUNCE: String = "Ship.BOUNCE";
         public static const LAND_PREPARE: String = "Ship.LAND_PREPARE";
         public static const LAND: String = "Ship.LAND";
         public static const CRASH: String = "Ship.CRASH";
@@ -142,7 +143,7 @@ package com.agnither.spacetaxi.model
 
         public function collide(power: int = 0):void
         {
-            dispatchEventWith(COLLIDE);
+            dispatchEventWith(COLLIDE, false, power);
 
             if (power > 0)
             {
@@ -170,6 +171,16 @@ package com.agnither.spacetaxi.model
             stop();
             _landed = true;
             dispatchEventWith(LAND);
+        }
+
+        override public function multiply(multiplier: Number):void
+        {
+            super.multiply(multiplier);
+            
+            if (multiplier > 0)
+            {
+                dispatchEventWith(BOUNCE);
+            }
         }
 
         public function crash():void

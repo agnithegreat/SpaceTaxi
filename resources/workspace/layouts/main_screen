@@ -2,138 +2,259 @@
   "layout":{
     "children":[
       {
+        "cls":"starling.display.Image",
+        "constructorParams":[
+          {
+            "cls":"starling.textures.Texture",
+            "textureName":"space_pattern"
+          }
+        ],
+        "customParams":{},
+        "params":{
+          "name":"_back",
+          "scaleX":2,
+          "scaleY":1.5,
+          "tileGrid":{
+            "cls":"flash.geom.Rectangle",
+            "customParams":{},
+            "params":{
+              "height":1024,
+              "width":1024
+            }
+          }
+        }
+      },
+      {
         "children":[
           {
             "cls":"starling.display.Image",
             "constructorParams":[
               {
                 "cls":"starling.textures.Texture",
-                "textureName":"coin"
+                "textureName":"main_screen/logo_glow"
               }
             ],
             "customParams":{},
             "params":{
-              "name":"coin"
+              "name":"_glow",
+              "pivotX":474,
+              "pivotY":474,
+              "scaleX":1.25,
+              "scaleY":1.25,
+              "x":592.5,
+              "y":305
             }
           },
           {
-            "cls":"starling.text.TextField",
+            "cls":"starling.display.Image",
             "constructorParams":[
               {
-                "value":200
-              },
-              {
-                "value":100
-              },
-              {
-                "value":""
+                "cls":"starling.textures.Texture",
+                "textureName":"main_screen/logo_kosmos"
               }
             ],
             "customParams":{},
             "params":{
-              "autoSize":"horizontal",
-              "batchable":true,
-              "format":{
-                "cls":"starling.text.TextFormat",
+              "name":"kosmos",
+              "x":194.5
+            }
+          },
+          {
+            "cls":"starling.display.Image",
+            "constructorParams":[
+              {
+                "cls":"starling.textures.Texture",
+                "textureName":"planets/1"
+              }
+            ],
+            "customParams":{},
+            "params":{
+              "name":"_planet1",
+              "pivotX":250,
+              "pivotY":250,
+              "scaleX":0.4,
+              "scaleY":0.4,
+              "x":394.5,
+              "y":254
+            }
+          },
+          {
+            "cls":"starling.display.Image",
+            "constructorParams":[
+              {
+                "cls":"starling.textures.Texture",
+                "textureName":"planets/1"
+              }
+            ],
+            "customParams":{},
+            "params":{
+              "name":"_planet1Mask",
+              "pivotX":250,
+              "pivotY":250,
+              "scaleX":0.4,
+              "scaleY":0.4,
+              "x":394.5,
+              "y":254
+            }
+          },
+          {
+            "cls":"starling.display.Image",
+            "constructorParams":[
+              {
+                "cls":"starling.textures.Texture",
+                "textureName":"planets/1"
+              }
+            ],
+            "customParams":{},
+            "params":{
+              "name":"_planet2",
+              "pivotX":250,
+              "pivotY":250,
+              "scaleX":0.4,
+              "scaleY":0.4,
+              "x":812.5,
+              "y":221
+            }
+          },
+          {
+            "cls":"starling.display.Image",
+            "constructorParams":[
+              {
+                "cls":"starling.textures.Texture",
+                "textureName":"planets/1"
+              }
+            ],
+            "customParams":{},
+            "params":{
+              "name":"_planet2Mask",
+              "pivotX":250,
+              "pivotY":250,
+              "scaleX":0.4,
+              "scaleY":0.4,
+              "x":812.5,
+              "y":221
+            }
+          },
+          {
+            "children":[
+              {
+                "cls":"starling.display.Image",
+                "constructorParams":[
+                  {
+                    "cls":"starling.textures.Texture",
+                    "textureName":"main_screen/ship_shadow"
+                  }
+                ],
                 "customParams":{},
                 "params":{
-                  "bold":true,
-                  "color":16777215,
-                  "font":"Adventure",
-                  "horizontalAlign":"left",
-                  "size":80
+                  "name":"shadow",
+                  "pivotX":36,
+                  "pivotY":30,
+                  "x":604,
+                  "y":5
                 }
-              },
-              "height":105,
-              "name":"_moneyTF",
-              "text":"0 ",
-              "width":72,
-              "x":154,
-              "y":18
+              }
+            ],
+            "cls":"starling.display.Sprite",
+            "customParams":{},
+            "params":{
+              "name":"_shipShadow1",
+              "pivotX":604,
+              "pivotY":236,
+              "x":604,
+              "y":236
+            }
+          },
+          {
+            "children":[
+              {
+                "cls":"starling.display.Image",
+                "constructorParams":[
+                  {
+                    "cls":"starling.textures.Texture",
+                    "textureName":"main_screen/ship_shadow"
+                  }
+                ],
+                "customParams":{},
+                "params":{
+                  "name":"shadow",
+                  "pivotX":36,
+                  "pivotY":30,
+                  "x":604,
+                  "y":5
+                }
+              }
+            ],
+            "cls":"starling.display.Sprite",
+            "customParams":{},
+            "params":{
+              "name":"_shipShadow2",
+              "pivotX":604,
+              "pivotY":236,
+              "x":604,
+              "y":236
+            }
+          },
+          {
+            "children":[
+              {
+                "children":[],
+                "cls":"starling.display.Sprite",
+                "customParams":{},
+                "params":{
+                  "name":"_shipContainer",
+                  "x":604,
+                  "y":5
+                }
+              }
+            ],
+            "cls":"starling.display.Sprite",
+            "customParams":{},
+            "params":{
+              "name":"_ship",
+              "pivotX":604,
+              "pivotY":236,
+              "x":604,
+              "y":236
+            }
+          },
+          {
+            "cls":"starling.display.Image",
+            "constructorParams":[
+              {
+                "cls":"starling.textures.Texture",
+                "textureName":"main_screen/logo_express"
+              }
+            ],
+            "customParams":{},
+            "params":{
+              "name":"space_express",
+              "x":150.5,
+              "y":264
             }
           }
         ],
         "cls":"feathers.controls.LayoutGroup",
         "customParams":{},
         "params":{
+          "height":1185,
           "layout":{
-            "cls":"feathers.layout.HorizontalLayout",
+            "cls":"feathers.layout.AnchorLayout",
             "customParams":{},
-            "params":{
-              "gap":10,
-              "verticalAlign":"middle"
-            }
+            "params":{}
           },
           "layoutData":{
             "cls":"feathers.layout.AnchorLayoutData",
             "customParams":{},
             "params":{
-              "left":40,
-              "top":40
+              "horizontalCenter":0,
+              "top":300
             }
           },
-          "name":"layoutGroup",
-          "x":40,
-          "y":40
-        }
-      },
-      {
-        "children":[
-          {
-            "cls":"starling.display.Sprite",
-            "customParams":{
-              "customComponentClass":"com.agnither.spacetaxi.view.gui.game.IndicatorView",
-              "source":"fuel_indicator"
-            },
-            "params":{
-              "name":"_fuelIndicator"
-            }
-          },
-          {
-            "cls":"starling.display.Sprite",
-            "customParams":{
-              "customComponentClass":"com.agnither.spacetaxi.view.gui.game.IndicatorView",
-              "source":"durability_indicator"
-            },
-            "params":{
-              "name":"_durabilityIndicator",
-              "x":512
-            }
-          },
-          {
-            "cls":"starling.display.Sprite",
-            "customParams":{
-              "customComponentClass":"com.agnither.spacetaxi.view.gui.game.IndicatorView",
-              "source":"capacity_indicator"
-            },
-            "params":{
-              "name":"_capacityIndicator",
-              "x":1024
-            }
-          }
-        ],
-        "cls":"feathers.controls.LayoutGroup",
-        "customParams":{},
-        "params":{
-          "layout":{
-            "cls":"feathers.layout.HorizontalLayout",
-            "customParams":{},
-            "params":{
-              "gap":40
-            }
-          },
-          "layoutData":{
-            "cls":"feathers.layout.AnchorLayoutData",
-            "customParams":{},
-            "params":{
-              "left":420,
-              "top":40
-            }
-          },
-          "name":"layoutGroup",
-          "width":1351,
-          "x":420,
-          "y":40
+          "name":"center",
+          "width":1185,
+          "x":431,
+          "y":300
         }
       },
       {
@@ -143,39 +264,307 @@
             "constructorParams":[
               {
                 "cls":"starling.textures.Texture",
-                "textureName":"settings"
+                "textureName":"main_screen/play_button"
               }
             ],
             "customParams":{},
             "params":{
-              "height":118,
-              "name":"_settingsButton",
+              "height":521,
+              "name":"_playButton",
               "textFormat":{
                 "cls":"starling.text.TextFormat",
                 "constructorParams":[],
                 "customParams":{},
                 "params":{}
               },
-              "width":118
+              "width":688
+            }
+          },
+          {
+            "cls":"starling.display.Image",
+            "constructorParams":[
+              {
+                "cls":"starling.textures.Texture",
+                "textureName":"main_screen/play_button_txt"
+              }
+            ],
+            "customParams":{},
+            "params":{
+              "name":"_playLabel",
+              "x":213,
+              "y":166
             }
           }
         ],
         "cls":"feathers.controls.LayoutGroup",
         "customParams":{},
         "params":{
-          "height":118,
+          "height":521,
+          "layout":{
+            "cls":"feathers.layout.AnchorLayout",
+            "customParams":{},
+            "params":{}
+          },
           "layoutData":{
             "cls":"feathers.layout.AnchorLayoutData",
             "customParams":{},
             "params":{
-              "right":40,
-              "top":40
+              "bottom":150,
+              "horizontalCenter":0
             }
           },
-          "name":"layoutGroup",
-          "width":118,
-          "x":1890,
-          "y":40
+          "name":"center",
+          "width":688,
+          "x":680,
+          "y":865
+        }
+      },
+      {
+        "children":[
+          {
+            "cls":"starling.display.Button",
+            "constructorParams":[
+              {
+                "cls":"starling.textures.Texture",
+                "textureName":"main_screen/achievements_teaser"
+              }
+            ],
+            "customParams":{},
+            "params":{
+              "height":505,
+              "name":"_achievementsButton",
+              "textFormat":{
+                "cls":"starling.text.TextFormat",
+                "constructorParams":[],
+                "customParams":{},
+                "params":{}
+              },
+              "width":512,
+              "x":2,
+              "y":-3
+            }
+          },
+          {
+            "cls":"starling.display.Image",
+            "constructorParams":[
+              {
+                "cls":"starling.textures.Texture",
+                "textureName":"main_screen/achievements"
+              }
+            ],
+            "customParams":{},
+            "params":{
+              "name":"_achievementsLabel",
+              "x":53,
+              "y":333
+            }
+          }
+        ],
+        "cls":"feathers.controls.LayoutGroup",
+        "customParams":{},
+        "params":{
+          "layout":{
+            "cls":"feathers.layout.AnchorLayout",
+            "customParams":{},
+            "params":{}
+          },
+          "layoutData":{
+            "cls":"feathers.layout.AnchorLayoutData",
+            "customParams":{},
+            "params":{
+              "left":100,
+              "top":100
+            }
+          },
+          "name":"top_left",
+          "x":100,
+          "y":100
+        }
+      },
+      {
+        "children":[
+          {
+            "cls":"starling.display.Button",
+            "constructorParams":[
+              {
+                "cls":"starling.textures.Texture",
+                "textureName":"main_screen/choose_level_teaser"
+              }
+            ],
+            "customParams":{},
+            "params":{
+              "height":513,
+              "name":"_chooseLevelButton",
+              "textFormat":{
+                "cls":"starling.text.TextFormat",
+                "constructorParams":[],
+                "customParams":{},
+                "params":{}
+              },
+              "width":518,
+              "x":-7,
+              "y":-545
+            }
+          },
+          {
+            "cls":"starling.display.Image",
+            "constructorParams":[
+              {
+                "cls":"starling.textures.Texture",
+                "textureName":"main_screen/choose_level"
+              }
+            ],
+            "customParams":{},
+            "params":{
+              "name":"_chooseLevelLabel",
+              "x":144,
+              "y":-327
+            }
+          }
+        ],
+        "cls":"feathers.controls.LayoutGroup",
+        "customParams":{},
+        "params":{
+          "layout":{
+            "cls":"feathers.layout.AnchorLayout",
+            "customParams":{},
+            "params":{}
+          },
+          "layoutData":{
+            "cls":"feathers.layout.AnchorLayoutData",
+            "customParams":{},
+            "params":{
+              "bottom":100,
+              "left":100
+            }
+          },
+          "name":"bottom_left",
+          "x":100,
+          "y":1436
+        }
+      },
+      {
+        "children":[
+          {
+            "cls":"starling.display.Button",
+            "constructorParams":[
+              {
+                "cls":"starling.textures.Texture",
+                "textureName":"main_screen/free_coins_teaser"
+              }
+            ],
+            "customParams":{},
+            "params":{
+              "height":426,
+              "name":"_freeCoinsButton",
+              "textFormat":{
+                "cls":"starling.text.TextFormat",
+                "constructorParams":[],
+                "customParams":{},
+                "params":{}
+              },
+              "width":432,
+              "x":-443,
+              "y":41
+            }
+          },
+          {
+            "cls":"starling.display.Image",
+            "constructorParams":[
+              {
+                "cls":"starling.textures.Texture",
+                "textureName":"main_screen/free_coins"
+              }
+            ],
+            "customParams":{},
+            "params":{
+              "name":"_freeCoinsLabel",
+              "x":-334,
+              "y":316
+            }
+          }
+        ],
+        "cls":"feathers.controls.LayoutGroup",
+        "customParams":{},
+        "params":{
+          "layout":{
+            "cls":"feathers.layout.AnchorLayout",
+            "customParams":{},
+            "params":{}
+          },
+          "layoutData":{
+            "cls":"feathers.layout.AnchorLayoutData",
+            "customParams":{},
+            "params":{
+              "right":100,
+              "top":100
+            }
+          },
+          "name":"top_right",
+          "x":1948,
+          "y":100
+        }
+      },
+      {
+        "children":[
+          {
+            "cls":"starling.display.Button",
+            "constructorParams":[
+              {
+                "cls":"starling.textures.Texture",
+                "textureName":"main_screen/garage_teaser"
+              }
+            ],
+            "customParams":{},
+            "params":{
+              "height":540,
+              "name":"_garageButton",
+              "textFormat":{
+                "cls":"starling.text.TextFormat",
+                "constructorParams":[],
+                "customParams":{},
+                "params":{}
+              },
+              "width":549,
+              "x":-534,
+              "y":-596
+            }
+          },
+          {
+            "cls":"starling.display.Image",
+            "constructorParams":[
+              {
+                "cls":"starling.textures.Texture",
+                "textureName":"main_screen/garage"
+              }
+            ],
+            "customParams":{},
+            "params":{
+              "name":"_garageLabel",
+              "x":-361,
+              "y":-179
+            }
+          }
+        ],
+        "cls":"feathers.controls.LayoutGroup",
+        "customParams":{},
+        "params":{
+          "layout":{
+            "cls":"feathers.layout.AnchorLayout",
+            "customParams":{},
+            "params":{}
+          },
+          "layoutData":{
+            "cls":"feathers.layout.AnchorLayoutData",
+            "customParams":{},
+            "params":{
+              "bottom":100,
+              "right":100
+            }
+          },
+          "name":"bottom_right",
+          "x":1933,
+          "y":1436
         }
       }
     ],
@@ -191,13 +580,25 @@
       "layoutData":{
         "cls":"feathers.layout.AnchorLayoutData",
         "customParams":{},
-        "params":{}
+        "params":{
+          "horizontalCenter":0,
+          "percentHeight":100,
+          "percentWidth":100,
+          "verticalCenter":0
+        }
       },
       "name":"_root",
       "width":2048
     }
   },
   "setting":{
+    "background":{
+      "height":1535,
+      "name":"main_screen_temp",
+      "width":2048,
+      "x":0,
+      "y":0
+    },
     "canvasColor":0,
     "canvasSize":{
       "x":2048,

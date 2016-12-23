@@ -4,6 +4,7 @@
 package com.agnither.spacetaxi.model.orders
 {
     import com.agnither.spacetaxi.model.Order;
+    import com.agnither.spacetaxi.model.Planet;
     import com.agnither.spacetaxi.model.Ship;
     import com.agnither.spacetaxi.model.Station;
     import com.agnither.spacetaxi.vo.ZoneVO;
@@ -16,10 +17,22 @@ package com.agnither.spacetaxi.model.orders
     {
         public static const UPDATE: String = "Zone.UPDATE";
         
+        private var _id: int;
+        public function get id():int
+        {
+            return _id;
+        }
+        
         private var _zone: ZoneVO;
         public function get zone():ZoneVO
         {
             return _zone;
+        }
+        
+        private var _planet: Planet;
+        public function get planet():Planet
+        {
+            return _planet;
         }
         
         private var _order: Order;
@@ -34,14 +47,16 @@ package com.agnither.spacetaxi.model.orders
             return _station;
         }
         
-        public function Zone(zone: ZoneVO)
+        public function Zone(id: int, zone: ZoneVO, planet: Planet)
         {
+            _id = id;
             _zone = zone;
+            _planet = planet;
         }
         
         public function check(ship: Ship):Boolean
         {
-            return Point.distance(ship.position, new Point(_zone.x, _zone.y)) <= _zone.size;
+            return Point.distance(ship.position, new Point(_zone.position.x, _zone.position.y)) <= _zone.size;
         }
         
         public function setOrder(order: Order):void

@@ -6,6 +6,7 @@ package com.agnither.spacetaxi.model
     import com.agnither.spacetaxi.Application;
     import com.agnither.spacetaxi.controller.game.OrderController;
     import com.agnither.spacetaxi.enums.PlanetType;
+    import com.agnither.spacetaxi.managers.sound.SoundManager;
     import com.agnither.spacetaxi.model.orders.Zone;
     import com.agnither.spacetaxi.utils.GeomUtils;
     import com.agnither.spacetaxi.utils.LevelParser;
@@ -131,7 +132,7 @@ package com.agnither.spacetaxi.model
             for (i = 0; i < level.orders.length; i++)
             {
                 var order: OrderVO = level.orders[i];
-                _orderController.addOrder(new Order(order.cost, 100, new Zone(order.departure), new Zone(order.arrival)));
+                _orderController.addOrder(new Order(order.cost, 100, new Zone(i, order.departure, _planetsDict[order.departure.planet]), new Zone(i, order.arrival, _planetsDict[order.arrival.planet])));
             }
             _orderController.start();
         }
@@ -140,8 +141,8 @@ package com.agnither.spacetaxi.model
         {
             if (_ship.landed && _ship.fuel > 0)
             {
-                var px: int = Math.round(x * PULL_MULTIPLIER / PULL_SCALE) * PULL_SCALE;
-                var py: int = Math.round(y * PULL_MULTIPLIER / PULL_SCALE) * PULL_SCALE;
+                var px: int = -Math.round(x * PULL_MULTIPLIER / PULL_SCALE) * PULL_SCALE;
+                var py: int = -Math.round(y * PULL_MULTIPLIER / PULL_SCALE) * PULL_SCALE;
                 if (px != _pullPoint.x || py != _pullPoint.y)
                 {
                     _pullPoint.x = px;
@@ -200,7 +201,7 @@ package com.agnither.spacetaxi.model
         private function addPlanet(planetData: PlanetVO):void
         {
             var planet: Planet = new Planet(planetData.radius, planetData.mass, planetData.bounce, PlanetType.getType(planetData.type), planetData.skin);
-            planet.place(planetData.x, planetData.y);
+            planet.place(planetData.position.x, planetData.position.y);
             _planets.push(planet);
             _planetsDict[planetData] = planet;
             Starling.juggler.add(planet);
@@ -334,7 +335,7 @@ package com.agnither.spacetaxi.model
 
             if (_ship.landed || _ship.crashed) return;
 
-            var scaleSize: int = 50 * DELTA;
+            var scaleSize: Number = 50 * DELTA;
             var timeScale: Number = Math.sqrt(Math.max(0.01, Math.min(1, _flightTime / scaleSize, (_trajectoryTime-_flightTime) / scaleSize)));
 
             _time += delta * timeScale;
