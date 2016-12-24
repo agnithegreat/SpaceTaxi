@@ -10,6 +10,10 @@ package com.agnither.spacetaxi.model
         public static const COLLECT: String = "SpaceBody.COLLECT";
         
         private var _collectible: CollectibleVO;
+        public function get type():String
+        {
+            return _collectible.type;
+        }
         
         public function Collectible(collectible: CollectibleVO)
         {

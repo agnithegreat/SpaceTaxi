@@ -27,7 +27,7 @@ package com.agnither.spacetaxi.view.scenes.game
             _collectible = collectible;
             _collectible.addEventListener(Collectible.COLLECT, handleCollect);
 
-            _image = new Image(Application.assetsManager.getTexture("misc/loot_box"));
+            _image = new Image(Application.assetsManager.getTexture("misc/" + _collectible.type));
             _image.pivotX = _image.width * 0.5;
             _image.pivotY = _image.height * 0.5;
             addChild(_image);
