@@ -64,5 +64,12 @@ package com.agnither.spacetaxi.model
             body.place(_position.x, _position.y);
             return body;
         }
+        
+        override public function destroy():void
+        {
+            super.destroy();
+            
+            _type = null;
+        }
     }
 }

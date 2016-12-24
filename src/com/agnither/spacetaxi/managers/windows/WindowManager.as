@@ -94,40 +94,21 @@ package com.agnither.spacetaxi.managers.windows
         
         public static function showScene(scene: AbstractComponent):void
         {
-            replaceLayerContent(_sceneLayer, scene);
+            _sceneLayer.removeChildren(0, -1);
+            if (scene != null)
+            {
+                _sceneLayer.addChild(scene);
+            }
         }
 
-        public static function showScreen(screen: Screen, tween: Boolean = false, back: Boolean = false):void
+        public static function showScreen(screen: Screen):void
         {
-            if (tween && _currentScreen != null)
-            {
-                if (!screen.initialized)
-                {
-                    _screenHelperLayer.addChild(screen);
-                    Starling.juggler.delayCall(showScreen, 0.1, screen, tween, back);
-                    return;
-                }
-
-                var callback: Function = function ():void
-                {
-                    _screenTweenLayer.removeChildren(0, -1, true);
-                    showScreen(screen);
-                };
-
-                if (back)
-                {
-                    TweenManager.tweenBack(screen, _currentScreen, _screenTweenLayer, callback);
-                } else {
-                    TweenManager.tween(_currentScreen, screen, _screenTweenLayer, callback);
-                }
-            } else {
-                _currentScreen = screen;
-                _currentScreen.visible = true;
-                _screenLayer.removeChildren();
-                _screenLayer.addChild(_currentScreen);
-                _currentScreen.setup();
-                updateScreenFreeze();
-            }
+            _currentScreen = screen;
+            _currentScreen.visible = true;
+            _screenLayer.removeChildren();
+            _screenLayer.addChild(_currentScreen);
+            _currentScreen.setup();
+            updateScreenFreeze();
         }
         
         public static function showPopup(popup: Popup, tween: Boolean = false):void

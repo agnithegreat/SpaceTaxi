@@ -7,7 +7,9 @@ package com.agnither.spacetaxi.view.gui.screens
     import com.agnither.spacetaxi.controller.game.OrderController;
     import com.agnither.spacetaxi.model.Ship;
     import com.agnither.spacetaxi.model.SpaceBody;
+    import com.agnither.spacetaxi.tasks.logic.EndGameTask;
     import com.agnither.spacetaxi.view.gui.game.IndicatorView;
+    import com.agnither.tasks.global.TaskSystem;
     import com.agnither.utils.gui.components.Screen;
 
     import feathers.controls.LayoutGroup;
@@ -61,12 +63,22 @@ package com.agnither.spacetaxi.view.gui.screens
             Application.appController.space.ship.addEventListener(SpaceBody.UPDATE, handleUpdate);
             Application.appController.space.orders.addEventListener(OrderController.UPDATE, handleUpdate);
             handleUpdate(null);
+
+            _settingsButton.addEventListener(Event.TRIGGERED, handleSettings);
         }
 
         override protected function deactivate():void
         {
             Application.appController.space.ship.removeEventListener(SpaceBody.UPDATE, handleUpdate);
             Application.appController.space.orders.removeEventListener(OrderController.UPDATE, handleUpdate);
+            
+            _settingsButton.removeEventListener(Event.TRIGGERED, handleSettings);
+        }
+        
+        override public function tryClose():Boolean
+        {
+            // TODO: notify user
+            return true;
         }
 
         private function handleUpdate(event: Event):void
@@ -82,6 +94,11 @@ package com.agnither.spacetaxi.view.gui.screens
                 _money = moneyVal;
                 Starling.juggler.tween(this, event != null ? 0.5 : 0, {"money": _money});
             }
+        }
+
+        private function handleSettings(event: Event):void
+        {
+            TaskSystem.getInstance().addTask(new EndGameTask());
         }
 
         public function set money(value: int):void

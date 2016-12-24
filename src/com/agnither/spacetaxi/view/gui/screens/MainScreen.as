@@ -4,7 +4,7 @@
 package com.agnither.spacetaxi.view.gui.screens
 {
     import com.agnither.spacetaxi.Application;
-    import com.agnither.spacetaxi.tasks.init.InitGameTask;
+    import com.agnither.spacetaxi.tasks.logic.StartGameTask;
     import com.agnither.spacetaxi.view.gui.items.FakeShipView;
     import com.agnither.spacetaxi.view.utils.Animator;
     import com.agnither.tasks.global.TaskSystem;
@@ -151,7 +151,7 @@ package com.agnither.spacetaxi.view.gui.screens
 
         private function handlePlay(event: Event):void
         {
-            TaskSystem.getInstance().addTask(new InitGameTask());
+            TaskSystem.getInstance().addTask(new StartGameTask());
         }
     }
 }

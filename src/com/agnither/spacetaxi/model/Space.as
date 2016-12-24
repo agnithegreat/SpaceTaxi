@@ -5,6 +5,7 @@ package com.agnither.spacetaxi.model
 {
     import com.agnither.spacetaxi.Application;
     import com.agnither.spacetaxi.controller.game.OrderController;
+    import com.agnither.spacetaxi.controller.game.ZoneController;
     import com.agnither.spacetaxi.enums.PlanetType;
     import com.agnither.spacetaxi.managers.sound.SoundManager;
     import com.agnither.spacetaxi.model.orders.Zone;
@@ -40,8 +41,7 @@ package com.agnither.spacetaxi.model
         public static const PULL_MULTIPLIER: Number = 0.1;
         public static const PULL_SCALE: int = 1;
         
-        public static const DAMAGE_MULTIPLIER: Number = 0.5;
-        public static const MIN_DAMAGE: Number = 10;
+        public static const DAMAGE_SPEED: Number = 20;
 
         private var _ship: Ship;
         public function get ship():Ship
@@ -93,6 +93,12 @@ package com.agnither.spacetaxi.model
             return _trajectoryTime;
         }
 
+        private var _zoneController: ZoneController;
+        public function get zones():ZoneController
+        {
+            return _zoneController;
+        }
+
         private var _orderController: OrderController;
         public function get orders():OrderController
         {
@@ -128,13 +134,47 @@ package com.agnither.spacetaxi.model
             _pullPoint = new Point();
             _trajectory = new <Point>[];
 
+            _zoneController = new ZoneController();
             _orderController = new OrderController();
             for (i = 0; i < level.orders.length; i++)
             {
                 var order: OrderVO = level.orders[i];
-                _orderController.addOrder(new Order(order.cost, 100, new Zone(i, order.departure, _planetsDict[order.departure.planet]), new Zone(i, order.arrival, _planetsDict[order.arrival.planet])));
+                var departure: Zone = new Zone(i, order.departure, _planetsDict[order.departure.planet]);
+                var arrival: Zone = new Zone(i, order.arrival, _planetsDict[order.arrival.planet]);
+                _zoneController.addZone(departure);
+                _zoneController.addZone(arrival);
+                _orderController.addOrder(new Order(order.cost, 100, departure, arrival));
             }
             _orderController.start();
+        }
+        
+        public function destroy():void
+        {
+            Starling.juggler.removeDelayedCalls(computeTrajectory);
+            
+            _ship.destroy();
+            _ship = null;
+            
+            while (_planets.length > 0)
+            {
+                var planet: Planet = _planets.shift();
+                planet.destroy();
+            }
+            _planetsDict = null;
+            _planets = null;
+
+            _landPlanet = null;
+
+            _viewport = null;
+            _center = null;
+            _pullPoint = null;
+            _trajectory = null;
+            
+            _zoneController.destroy();
+            _zoneController = null;
+            
+            _orderController.destroy();
+            _orderController = null;
         }
 
         public function setPullPoint(x: int, y: int):void
@@ -177,6 +217,7 @@ package com.agnither.spacetaxi.model
                 step(ship, DELTA);
                 _trajectoryTime += DELTA;
             }
+            if (_trajectory.length <= 5) return;
             dispatchEventWith(UPDATE_TRAJECTORY);
 
             if (!ship.landed && !ship.crashed)
@@ -187,7 +228,7 @@ package com.agnither.spacetaxi.model
 
         public function launch():void
         {
-            if (_ship.landed && _ship.fuel > 0)
+            if (_ship.landed && _ship.fuel > 0 && _trajectory.length > 5)
             {
                 launchShip(_ship);
 
@@ -291,8 +332,7 @@ package com.agnither.spacetaxi.model
                     {
                         if (planet.type.safe)
                         {
-                            var damage: Number = DAMAGE_MULTIPLIER * Point.distance(ship.speed, new Point());
-                            if (damage >= MIN_DAMAGE)
+                            if (ship.speedMod >= DAMAGE_SPEED)
                             {
                                 ship.collide(1);
                                 _orderController.checkDamage(1);
@@ -324,7 +364,7 @@ package com.agnither.spacetaxi.model
 
                 if (_ship == ship)
                 {
-                    _orderController.checkOrders(_ship);
+                    _zoneController.checkZones(_ship);
                 }
             }
         }
@@ -336,7 +376,9 @@ package com.agnither.spacetaxi.model
             if (_ship.landed || _ship.crashed) return;
 
             var scaleSize: Number = 50 * DELTA;
-            var timeScale: Number = Math.sqrt(Math.max(0.01, Math.min(1, _flightTime / scaleSize, (_trajectoryTime-_flightTime) / scaleSize)));
+            var fromStart: Number = _flightTime / scaleSize;
+            var toEnd: Number = ship.speedMod >= DAMAGE_SPEED ? 1 : (_trajectoryTime - _flightTime) / scaleSize;
+            var timeScale: Number = Math.sqrt(Math.max(0.01, Math.min(1, fromStart, toEnd)));
 
             _time += delta * timeScale;
             var amount: int = _time * 1000 * DELTA;

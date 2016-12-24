@@ -4,12 +4,7 @@
 package com.agnither.spacetaxi.tasks.init
 {
     import com.agnither.spacetaxi.Application;
-    import com.agnither.spacetaxi.managers.sound.SoundManager;
-    import com.agnither.spacetaxi.managers.windows.WindowManager;
     import com.agnither.spacetaxi.tasks.load.LoadAdditionalTask;
-    import com.agnither.spacetaxi.view.gui.screens.MainScreen;
-    import com.agnither.spacetaxi.view.scenes.game.SpaceView;
-    import com.agnither.spacetaxi.view.gui.screens.GameScreen;
     import com.agnither.tasks.abstract.MultiTask;
 
     import dragonBones.starling.StarlingFactory;
@@ -37,12 +32,9 @@ package com.agnither.spacetaxi.tasks.init
                 Application.assetsManager.getObject("ship_texture"),
                 Application.assetsManager.getTexture("ship_texture")
             );
-
-            SoundManager.playMusic(SoundManager.MENU);
-            WindowManager.showScreen(new MainScreen());
-
-//            WindowManager.showScene(new SpaceView(Application.appController.space));
-//            WindowManager.showScreen(new GameScreen());
+            
+            Application.appController.init();
+            Application.appController.states.mainState();
 
             super.processComplete();
         }

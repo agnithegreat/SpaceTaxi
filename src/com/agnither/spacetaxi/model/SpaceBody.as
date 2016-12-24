@@ -73,5 +73,12 @@ package com.agnither.spacetaxi.model
         {
             
         }
+        
+        public function destroy():void
+        {
+            removeEventListeners(UPDATE);
+            
+            _position = null;
+        }
     }
 }

@@ -80,7 +80,6 @@ package com.agnither.spacetaxi.utils
                     nearestDistance = distance;
                 }
             }
-            trace(position, nearestPlanet.position);
             return nearestPlanet;
         }
     }

@@ -4,7 +4,6 @@
 package com.agnither.spacetaxi.view.scenes.game
 {
     import com.agnither.spacetaxi.Application;
-    import com.agnither.spacetaxi.enums.PlanetType;
     import com.agnither.spacetaxi.model.Order;
     import com.agnither.spacetaxi.model.Planet;
     import com.agnither.spacetaxi.model.Space;
@@ -44,12 +43,13 @@ package com.agnither.spacetaxi.view.scenes.game
 
         private var _container: Sprite;
         private var _planetsContainer: Sprite;
+        private var _ordersContainer: Sprite;
         private var _objectsContainer: Sprite;
         private var _effectsContainer: Sprite;
 
-        private var _shipView: ShipView;
         private var _planets: Vector.<PlanetView>;
         private var _orders: Vector.<OrderView>;
+        private var _shipView: ShipView;
 
         private var _trajectory: Sprite;
         private var _trajectoryLength: Number;
@@ -67,15 +67,9 @@ package com.agnither.spacetaxi.view.scenes.game
 
         private var _time: Number;
 
-        public function SpaceView(space: Space)
+        public function SpaceView()
         {
             super();
-            
-            _space = space;
-            _space.addEventListener(Space.SHOW_TRAJECTORY, handleShowTrajectory);
-            _space.addEventListener(Space.UPDATE_TRAJECTORY, handleUpdateTrajectory);
-            _space.addEventListener(Space.HIDE_TRAJECTORY, handleHideTrajectory);
-            _space.addEventListener(Space.STEP, handleStep);
         }
 
         override protected function initialize():void
@@ -114,33 +108,11 @@ package com.agnither.spacetaxi.view.scenes.game
             _container.addChild(_planetsContainer);
 
             _planets = new <PlanetView>[];
-            for (var i: int = 0; i < _space.planets.length; i++)
-            {
-                var planet: Planet = _space.planets[i];
-                if (planet.type == PlanetType.BLACK_HOLE)
-                {
-                    var blackHoleView: BlackHoleView = new BlackHoleView(planet);
-                    _planetsContainer.addChild(blackHoleView);
-                } else {
-                    var planetView: PlanetView = new PlanetView(planet);
-                    _planetsContainer.addChild(planetView);
-                    _planets.push(planetView);
-                }
-            }
+
+            _ordersContainer = new Sprite();
+            _container.addChild(_ordersContainer);
 
             _orders = new <OrderView>[];
-            for (i = 0; i < _space.orders.orders.length; i++)
-            {
-                var order: Order = _space.orders.orders[i];
-
-                var departure: OrderView = new OrderView(order.departure, false);
-                _container.addChild(departure);
-                _orders.push(departure);
-
-                var arrival: OrderView = new OrderView(order.arrival, true);
-                _container.addChild(arrival);
-                _orders.push(arrival);
-            }
 
             _trajectory = new Sprite();
             _container.addChild(_trajectory);
@@ -150,8 +122,40 @@ package com.agnither.spacetaxi.view.scenes.game
 
             _effectsContainer = new Sprite();
             _container.addChild(_effectsContainer);
+        }
 
-            addShip();
+        override protected function activate():void
+        {
+            _space = Application.appController.space;
+            _space.addEventListener(Space.SHOW_TRAJECTORY, handleShowTrajectory);
+            _space.addEventListener(Space.UPDATE_TRAJECTORY, handleUpdateTrajectory);
+            _space.addEventListener(Space.HIDE_TRAJECTORY, handleHideTrajectory);
+            _space.addEventListener(Space.STEP, handleStep);
+
+            for (var i: int = 0; i < _space.planets.length; i++)
+            {
+                var planet: Planet = _space.planets[i];
+                var planetView: PlanetView = new PlanetView(planet);
+                _planetsContainer.addChild(planetView);
+                _planets.push(planetView);
+            }
+
+            for (i = 0; i < _space.orders.orders.length; i++)
+            {
+                var order: Order = _space.orders.orders[i];
+
+                var departure: OrderView = new OrderView(order.departure, false);
+                _ordersContainer.addChild(departure);
+                _orders.push(departure);
+
+                var arrival: OrderView = new OrderView(order.arrival, true);
+                _ordersContainer.addChild(arrival);
+                _orders.push(arrival);
+            }
+
+            _shipView = new ShipView(_space.ship);
+            _shipView.addEventListener(ShipView.EXPLODE, handleExplode);
+            _objectsContainer.addChild(_shipView);
 
             _viewport = _space.viewport;
             _baseScale = Math.min(stage.stageWidth / _viewport.width, stage.stageHeight / _viewport.height) * 0.85;
@@ -175,11 +179,37 @@ package com.agnither.spacetaxi.view.scenes.game
             Starling.juggler.add(this);
         }
 
-        private function addShip():void
+        override protected function deactivate():void
         {
-            _shipView = new ShipView(_space.ship);
-            _shipView.addEventListener(ShipView.EXPLODE, handleExplode);
-            _objectsContainer.addChild(_shipView);
+            _space.removeEventListener(Space.SHOW_TRAJECTORY, handleShowTrajectory);
+            _space.removeEventListener(Space.UPDATE_TRAJECTORY, handleUpdateTrajectory);
+            _space.removeEventListener(Space.HIDE_TRAJECTORY, handleHideTrajectory);
+            _space.removeEventListener(Space.STEP, handleStep);
+            _space = null;
+
+            while (_planets.length > 0)
+            {
+                var planetView: PlanetView = _planets.shift();
+                planetView.destroy();
+            }
+
+            while (_orders.length > 0)
+            {
+                var orderView: OrderView = _orders.shift();
+                orderView.destroy();
+            }
+
+            resetTrajectory();
+
+            _viewport = null;
+            _previousDot = null;
+
+            _shipView.destroy();
+            _shipView = null;
+
+            Starling.current.stage.removeEventListener(TouchEvent.TOUCH, handleTouch);
+
+            Starling.juggler.remove(this);
         }
 
         private function handleExplode(event: Event):void

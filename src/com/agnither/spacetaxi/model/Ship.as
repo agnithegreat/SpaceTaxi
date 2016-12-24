@@ -228,8 +228,18 @@ package com.agnither.spacetaxi.model
 
         private function rotateToPlanet(planet: Planet):void
         {
-            _rotation = Math.atan2(y - planet.y, x - planet.x);
-            update();
+            if (planet != null)
+            {
+                _rotation = Math.atan2(y - planet.y, x - planet.x);
+                update();
+            }
+        }
+
+        override public function destroy():void
+        {
+            super.destroy();
+
+            _planet = null;
         }
     }
 }

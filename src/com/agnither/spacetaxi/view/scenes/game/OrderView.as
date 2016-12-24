@@ -26,6 +26,8 @@ package com.agnither.spacetaxi.view.scenes.game
 
 //        private var _sign: Image;
 
+        private var _count: int;
+
         public function OrderView(zone: Zone, arrival: Boolean)
         {
             super();
@@ -47,6 +49,7 @@ package com.agnither.spacetaxi.view.scenes.game
                 textures = textures.reverse();
             }
             _animation = new MovieClip(textures);
+            _animation.addEventListener(Event.COMPLETE, handleAnimationComplete);
             _animation.pivotX = _animation.width * 0.5;
             _animation.pivotY = _animation.height * 0.4;
             _animation.scaleX = scale;
@@ -70,9 +73,20 @@ package com.agnither.spacetaxi.view.scenes.game
             rotation = Math.atan2(_zone.zone.position.y - _zone.planet.y, _zone.zone.position.x - _zone.planet.x) + Math.PI * 0.5;
         }
 
+        private function handleAnimationComplete(event: Event):void
+        {
+            _count++;
+            if (_count >= 2)
+            {
+                _animation.stop();
+                Starling.juggler.delayCall(_animation.play, 1 + Math.random() * 2);
+                _count = 0;
+            }
+        }
+
         private function handleUpdate(event: Event):void
         {
-            visible = _zone.order != null && _zone.order.active;
+            visible = _zone.active;
 
             if (event != null)
             {
@@ -91,6 +105,21 @@ package com.agnither.spacetaxi.view.scenes.game
 
 //            var jump: Number = 0.1 + 0.125 * (Math.cos(_zone.planet.time * 3) + 1);
 //            _sign.y = 50 * jump;
+        }
+        
+        public function destroy():void
+        {
+            _zone.planet.removeEventListener(SpaceBody.UPDATE, handlePlanetUpdate);
+            _zone.removeEventListener(Zone.UPDATE, handleUpdate);
+            _zone = null;
+
+            _back.removeFromParent(true);
+            _back = null;
+            
+            _animation.removeFromParent(true);
+            _animation = null;
+
+            removeFromParent(true);
         }
     }
 }

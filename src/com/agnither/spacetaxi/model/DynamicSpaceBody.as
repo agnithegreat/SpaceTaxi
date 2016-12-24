@@ -12,6 +12,10 @@ package com.agnither.spacetaxi.model
         {
             return _speed;
         }
+        public function get speedMod():Number
+        {
+            return Math.sqrt(_speed.x * _speed.x + _speed.y * _speed.y);
+        }
 
         public function DynamicSpaceBody(radius: int, mass: Number)
         {
@@ -59,6 +63,13 @@ package com.agnither.spacetaxi.model
             
             _speed.x = 0;
             _speed.y = 0;
+        }
+
+        override public function destroy():void
+        {
+            super.destroy();
+
+            _speed = null;
         }
     }
 }

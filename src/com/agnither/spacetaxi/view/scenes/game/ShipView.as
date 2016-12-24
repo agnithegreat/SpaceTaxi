@@ -182,12 +182,16 @@ package com.agnither.spacetaxi.view.scenes.game
             }
         }
 
-        private function destroy():void
+        public function destroy():void
         {
             clear();
 
             removeChild(_animation, true);
             _animation = null;
+
+            _mount = null;
+            
+            _offset = null;
 
             removeFromParent(true);
         }

@@ -3,6 +3,8 @@
  */
 package com.agnither.spacetaxi.model
 {
+    import com.agnither.spacetaxi.model.orders.Zone;
+
     public class Station
     {
         private var _price: Number;
@@ -11,9 +13,18 @@ package com.agnither.spacetaxi.model
             return _price;
         }
         
-        public function Station(price: Number)
+        private var _zone: Zone;
+        public function get zone():Zone
+        {
+            return _zone;
+        }
+        
+        public function Station(price: Number, zone: Zone)
         {
             _price = price;
+            
+            _zone = zone;
+            _zone.active = true;
         }
     }
 }

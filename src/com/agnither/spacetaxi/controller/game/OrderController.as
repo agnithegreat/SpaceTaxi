@@ -6,6 +6,7 @@ package com.agnither.spacetaxi.controller.game
     import com.agnither.spacetaxi.managers.sound.SoundManager;
     import com.agnither.spacetaxi.model.Order;
     import com.agnither.spacetaxi.model.Ship;
+    import com.agnither.spacetaxi.model.orders.Zone;
 
     import starling.events.EventDispatcher;
 
@@ -52,19 +53,19 @@ package com.agnither.spacetaxi.controller.game
             dispatchEventWith(UPDATE);
         }
 
-        public function checkOrders(ship: Ship):void
+        public function checkOrders(ship: Ship, zone: Zone):void
         {
             for (var i:int = 0; i < _orders.length; i++)
             {
                 var order: Order = _orders[i];
-                if (!order.started && order.departure.check(ship))
+                if (!order.started && order.departure == zone)
                 {
                     if (ship.capacity > 0)
                     {
                         order.start();
                         ship.order(true);
                     }
-                } else if (order.started && order.arrival.check(ship))
+                } else if (order.started && order.arrival == zone)
                 {
                     _money += order.money;
                     SoundManager.playSound(SoundManager.COINS_LOOP);
@@ -90,6 +91,15 @@ package com.agnither.spacetaxi.controller.game
             for (var i:int = 0; i < _orders.length; i++)
             {
                 _orders[i].damage(value);
+            }
+        }
+        
+        public function destroy():void
+        {
+            while (_orders.length > 0)
+            {
+                var order: Order = _orders.shift();
+                order.destroy();
             }
         }
     }

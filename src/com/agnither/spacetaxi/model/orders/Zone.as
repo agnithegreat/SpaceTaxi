@@ -3,10 +3,8 @@
  */
 package com.agnither.spacetaxi.model.orders
 {
-    import com.agnither.spacetaxi.model.Order;
     import com.agnither.spacetaxi.model.Planet;
     import com.agnither.spacetaxi.model.Ship;
-    import com.agnither.spacetaxi.model.Station;
     import com.agnither.spacetaxi.vo.ZoneVO;
 
     import flash.geom.Point;
@@ -35,16 +33,10 @@ package com.agnither.spacetaxi.model.orders
             return _planet;
         }
         
-        private var _order: Order;
-        public function get order():Order
+        private var _active: Boolean;
+        public function get active():Boolean
         {
-            return _order;
-        }
-
-        private var _station: Station;
-        public function get station():Station
-        {
-            return _station;
+            return _active;
         }
         
         public function Zone(id: int, zone: ZoneVO, planet: Planet)
@@ -56,19 +48,19 @@ package com.agnither.spacetaxi.model.orders
         
         public function check(ship: Ship):Boolean
         {
-            return Point.distance(ship.position, new Point(_zone.position.x, _zone.position.y)) <= _zone.size;
+            return Point.distance(ship.position, new Point(_zone.position.x, _zone.position.y)) <= _zone.size + ship.radius;
         }
         
-        public function setOrder(order: Order):void
+        public function set active(value: Boolean):void
         {
-            _order = order;
+            _active = value;
             dispatchEventWith(UPDATE);
         }
-
-        public function setStation(station: Station):void
+        
+        public function destroy():void
         {
-            _station = station;
-            dispatchEventWith(UPDATE);
+            _zone = null;
+            _planet = null;
         }
     }
 }

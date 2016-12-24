@@ -46,5 +46,16 @@ package com.agnither.spacetaxi.view.scenes.game
             scaleX = (1 + Math.cos(_planet.time) * _planet.scale);
             scaleY = (1 + Math.cos(_planet.time + Math.PI) * _planet.scale);
         }
+        
+        public function destroy():void
+        {
+            _planet.removeEventListener(SpaceBody.UPDATE, handleUpdate);
+            _planet = null;
+            
+            _image.removeFromParent(true);
+            _image = null;
+            
+            removeFromParent(true);
+        }
     }
 }
