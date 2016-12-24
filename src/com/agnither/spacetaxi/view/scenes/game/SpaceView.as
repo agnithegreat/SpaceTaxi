@@ -4,9 +4,9 @@
 package com.agnither.spacetaxi.view.scenes.game
 {
     import com.agnither.spacetaxi.Application;
-    import com.agnither.spacetaxi.model.Order;
     import com.agnither.spacetaxi.model.Planet;
     import com.agnither.spacetaxi.model.Space;
+    import com.agnither.spacetaxi.model.orders.Zone;
     import com.agnither.spacetaxi.view.scenes.game.effects.ExplosionEffect;
     import com.agnither.utils.gui.components.AbstractComponent;
 
@@ -43,12 +43,12 @@ package com.agnither.spacetaxi.view.scenes.game
 
         private var _container: Sprite;
         private var _planetsContainer: Sprite;
-        private var _ordersContainer: Sprite;
+        private var _zonesContainer: Sprite;
         private var _objectsContainer: Sprite;
         private var _effectsContainer: Sprite;
 
         private var _planets: Vector.<PlanetView>;
-        private var _orders: Vector.<OrderView>;
+        private var _zones: Vector.<ZoneView>;
         private var _shipView: ShipView;
 
         private var _trajectory: Sprite;
@@ -109,10 +109,10 @@ package com.agnither.spacetaxi.view.scenes.game
 
             _planets = new <PlanetView>[];
 
-            _ordersContainer = new Sprite();
-            _container.addChild(_ordersContainer);
+            _zonesContainer = new Sprite();
+            _container.addChild(_zonesContainer);
 
-            _orders = new <OrderView>[];
+            _zones = new <ZoneView>[];
 
             _trajectory = new Sprite();
             _container.addChild(_trajectory);
@@ -140,17 +140,12 @@ package com.agnither.spacetaxi.view.scenes.game
                 _planets.push(planetView);
             }
 
-            for (i = 0; i < _space.orders.orders.length; i++)
+            for (i = 0; i < _space.zones.zones.length; i++)
             {
-                var order: Order = _space.orders.orders[i];
-
-                var departure: OrderView = new OrderView(order.departure, false);
-                _ordersContainer.addChild(departure);
-                _orders.push(departure);
-
-                var arrival: OrderView = new OrderView(order.arrival, true);
-                _ordersContainer.addChild(arrival);
-                _orders.push(arrival);
+                var zone: Zone = _space.zones.zones[i];
+                var zoneView: ZoneView = new ZoneView(zone);
+                _zonesContainer.addChild(zoneView);
+                _zones.push(zoneView);
             }
 
             _shipView = new ShipView(_space.ship);
@@ -193,9 +188,9 @@ package com.agnither.spacetaxi.view.scenes.game
                 planetView.destroy();
             }
 
-            while (_orders.length > 0)
+            while (_zones.length > 0)
             {
-                var orderView: OrderView = _orders.shift();
+                var orderView: ZoneView = _zones.shift();
                 orderView.destroy();
             }
 

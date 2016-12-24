@@ -14,7 +14,7 @@ package com.agnither.spacetaxi.model.orders
     public class Zone extends EventDispatcher
     {
         public static const UPDATE: String = "Zone.UPDATE";
-        
+
         private var _id: int;
         public function get id():int
         {
@@ -44,6 +44,7 @@ package com.agnither.spacetaxi.model.orders
             _id = id;
             _zone = zone;
             _planet = planet;
+            _active = true;
         }
         
         public function check(ship: Ship):Boolean

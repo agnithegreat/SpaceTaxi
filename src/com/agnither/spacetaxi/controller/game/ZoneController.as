@@ -4,6 +4,7 @@
 package com.agnither.spacetaxi.controller.game
 {
     import com.agnither.spacetaxi.Application;
+    import com.agnither.spacetaxi.enums.ZoneType;
     import com.agnither.spacetaxi.model.Ship;
     import com.agnither.spacetaxi.model.orders.Zone;
 
@@ -34,7 +35,25 @@ package com.agnither.spacetaxi.controller.game
                 var zone: Zone = _zones[i];
                 if (zone.active && zone.check(ship))
                 {
+                    useZone(zone, ship);
+                }
+            }
+        }
+
+        private function useZone(zone: Zone, ship: Ship):void
+        {
+            switch (zone.zone.type)
+            {
+                case ZoneType.DEPARTURE:
+                case ZoneType.ARRIVAL:
+                {
                     Application.appController.space.orders.checkOrders(ship, zone);
+                    break;
+                }
+                case ZoneType.FUEL:
+                {
+                    ship.fuelUp(ship.fuelMax);
+                    break;
                 }
             }
         }

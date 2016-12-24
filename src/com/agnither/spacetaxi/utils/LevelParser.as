@@ -3,6 +3,7 @@
  */
 package com.agnither.spacetaxi.utils
 {
+    import com.agnither.spacetaxi.vo.CollectibleVO;
     import com.agnither.spacetaxi.vo.LevelVO;
     import com.agnither.spacetaxi.vo.OrderVO;
     import com.agnither.spacetaxi.vo.PlanetVO;
@@ -50,11 +51,13 @@ package com.agnither.spacetaxi.utils
                 order.cost = or.cost;
                 
                 order.departure = new ZoneVO();
+                order.departure.type = or.departure.type;
                 order.departure.position = new Point(or.departure.x, or.departure.y);
                 order.departure.size = or.departure.size;
                 order.departure.planet = getNearestPlanet(order.departure.position, planets);
 
                 order.arrival = new ZoneVO();
+                order.arrival.type = or.arrival.type;
                 order.arrival.position = new Point(or.arrival.x, or.arrival.y);
                 order.arrival.size = or.arrival.size;
                 order.arrival.planet = getNearestPlanet(order.arrival.position, planets);
@@ -62,6 +65,30 @@ package com.agnither.spacetaxi.utils
                 orders.push(order);
             }
             data.orders = orders;
+
+            var zones: Vector.<ZoneVO> = new <ZoneVO>[];
+            for (i = 0; i < level.zones.length; i++)
+            {
+                var z: Object = level.zones[i];
+                var zone: ZoneVO = new ZoneVO();
+                zone.type = z.type;
+                zone.position = new Point(z.x, z.y);
+                zone.size = z.size;
+                zone.planet = getNearestPlanet(zone.position, planets);
+                zones.push(zone);
+            }
+            data.zones = zones;
+
+            var collectibles: Vector.<CollectibleVO> = new <CollectibleVO>[];
+            for (i = 0; i < level.collectibles.length; i++)
+            {
+                var coll: Object = level.collectibles[i];
+                var collectible: CollectibleVO = new CollectibleVO();
+                collectible.position = new Point(coll.x, coll.y);
+                collectible.type = coll.type;
+                collectibles.push(collectible);
+            }
+            data.collectibles = collectibles;
 
             return data;
         }

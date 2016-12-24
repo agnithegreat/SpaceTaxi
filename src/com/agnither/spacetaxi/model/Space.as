@@ -14,6 +14,7 @@ package com.agnither.spacetaxi.model
     import com.agnither.spacetaxi.vo.LevelVO;
     import com.agnither.spacetaxi.vo.OrderVO;
     import com.agnither.spacetaxi.vo.PlanetVO;
+    import com.agnither.spacetaxi.vo.ZoneVO;
 
     import flash.geom.Point;
     import flash.geom.Rectangle;
@@ -135,6 +136,12 @@ package com.agnither.spacetaxi.model
             _trajectory = new <Point>[];
 
             _zoneController = new ZoneController();
+            for (i = 0; i < level.zones.length; i++)
+            {
+                var zone: ZoneVO = level.zones[i];
+                _zoneController.addZone(new Zone(3, zone, _planetsDict[zone.planet]));
+            }
+            
             _orderController = new OrderController();
             for (i = 0; i < level.orders.length; i++)
             {

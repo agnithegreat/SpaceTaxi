@@ -43,6 +43,8 @@ package com.agnither.spacetaxi.controller.game
         
         public function addOrder(order: Order):void
         {
+            order.departure.active = false;
+            order.arrival.active = false;
             _orders.push(order);
             dispatchEventWith(UPDATE);
         }

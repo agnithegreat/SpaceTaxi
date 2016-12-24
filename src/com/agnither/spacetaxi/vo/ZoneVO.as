@@ -7,6 +7,7 @@ package com.agnither.spacetaxi.vo
 
     public class ZoneVO
     {
+        public var type: String;
         public var position: Point;
         public var size: Number;
         public var planet: PlanetVO;

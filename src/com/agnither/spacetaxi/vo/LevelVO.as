@@ -10,6 +10,8 @@ package com.agnither.spacetaxi.vo
         public var ship: ShipVO;
         public var planets: Vector.<PlanetVO>;
         public var orders: Vector.<OrderVO>;
+        public var zones: Vector.<ZoneVO>;
+        public var collectibles: Vector.<CollectibleVO>;
         public var viewport: Rectangle;
     }
 }
