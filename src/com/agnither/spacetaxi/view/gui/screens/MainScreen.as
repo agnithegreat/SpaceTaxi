@@ -22,7 +22,7 @@ package com.agnither.spacetaxi.view.gui.screens
 
     public class MainScreen extends Screen
     {
-        public static var SKINS: Array = ["1", "2", "3", "5", "6", "7", "8", "9", "10", "12"];
+        public static var SKINS: Array = ["1", "2", "3", "5", "6", "7", "8", "9", "10", "12", "np_01", "np_03", "np_04", "np_05", "np_06", "np_07", "np_08", "np_09", "np_10", "np_11", "np_12"];
 
         public var _root: LayoutGroup;
 

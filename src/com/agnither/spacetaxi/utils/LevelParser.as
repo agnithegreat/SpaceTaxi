@@ -86,6 +86,7 @@ package com.agnither.spacetaxi.utils
                 var collectible: CollectibleVO = new CollectibleVO();
                 collectible.position = new Point(coll.x, coll.y);
                 collectible.type = coll.type;
+                collectible.size = coll.size;
                 collectibles.push(collectible);
             }
             data.collectibles = collectibles;

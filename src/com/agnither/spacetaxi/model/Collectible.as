@@ -15,8 +15,7 @@ package com.agnither.spacetaxi.model
         {
             _collectible = collectible;
             
-//            super(_collectible.size * 0.5, 1);
-            super(40, 1);
+            super(_collectible.size, 1);
         }
         
         public function collect():void
