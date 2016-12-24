@@ -11,6 +11,7 @@ package com.agnither.spacetaxi.model
     import com.agnither.spacetaxi.model.orders.Zone;
     import com.agnither.spacetaxi.utils.GeomUtils;
     import com.agnither.spacetaxi.utils.LevelParser;
+    import com.agnither.spacetaxi.vo.CollectibleVO;
     import com.agnither.spacetaxi.vo.LevelVO;
     import com.agnither.spacetaxi.vo.OrderVO;
     import com.agnither.spacetaxi.vo.PlanetVO;
@@ -55,6 +56,12 @@ package com.agnither.spacetaxi.model
         public function get planets():Vector.<Planet>
         {
             return _planets;
+        }
+        
+        private var _collectibles: Vector.<Collectible>;
+        public function get collectibles():Vector.<Collectible>
+        {
+            return _collectibles;
         }
         
         private var _viewport: Rectangle;
@@ -107,6 +114,12 @@ package com.agnither.spacetaxi.model
         }
 
         private var _landPlanet: Planet;
+        
+        private var _danger: Boolean;
+        public function get danger():Boolean
+        {
+            return _danger;
+        }
 
         public function Space()
         {
@@ -125,6 +138,15 @@ package com.agnither.spacetaxi.model
             for (var i:int = 0; i < level.planets.length; i++)
             {
                 addPlanet(level.planets[i]);
+            }
+
+            _collectibles = new <Collectible>[];
+            for (i = 0; i < level.collectibles.length; i++)
+            {
+                var coll: CollectibleVO = level.collectibles[i];
+                var collectible: Collectible = new Collectible(coll);
+                collectible.place(coll.position.x, coll.position.y);
+                _collectibles.push(collectible);
             }
 
             _viewport = level.viewport;
@@ -161,6 +183,12 @@ package com.agnither.spacetaxi.model
             
             _ship.destroy();
             _ship = null;
+            
+            while (_collectibles.length > 0)
+            {
+                var collectible: Collectible = _collectibles.shift();
+                collectible.destroy();
+            }
             
             while (_planets.length > 0)
             {
@@ -206,6 +234,7 @@ package com.agnither.spacetaxi.model
                 Starling.juggler.removeDelayedCalls(computeTrajectory);
                 _trajectory.length = 0;
                 _trajectoryTime = 0;
+                _danger = false;
                 dispatchEventWith(SHOW_TRAJECTORY);
 
                 var ship: Ship = _ship.clone() as Ship;
@@ -217,12 +246,17 @@ package com.agnither.spacetaxi.model
         private function computeTrajectory(ship: Ship):void
         {
             var i: int = 0;
+            var durability: int = ship.durability;
             while (!ship.landed && !ship.crashed && i < TRAJECTORY_STEPS)
             {
                 i++;
                 _trajectory.push(ship.position.clone());
                 step(ship, DELTA);
                 _trajectoryTime += DELTA;
+            }
+            if (ship.durability < durability)
+            {
+                _danger = true;
             }
             if (_trajectory.length <= 5) return;
             dispatchEventWith(UPDATE_TRAJECTORY);
@@ -288,6 +322,18 @@ package com.agnither.spacetaxi.model
                         checkLand(ship, planetCollided);
                     }
                 }
+                
+                var collectible: Collectible = checkCollectible(ship, currentDelta);
+                if (collectible != null)
+                {
+                    if (ship == _ship)
+                    {
+                        // TODO: add reward, do some stuff
+                        collectible.collect();
+                        _collectibles.splice(_collectibles.indexOf(collectible), 0);
+                    }
+                }
+                
                 if (!ship.crashed)
                 {
                     ship.move(currentDelta);
@@ -356,6 +402,21 @@ package com.agnither.spacetaxi.model
                     {
                         return planet;
                     }
+                }
+            }
+            return null;
+        }
+
+        private function checkCollectible(ship: Ship, delta: Number):Collectible
+        {
+            var nextPosition: Point = new Point(ship.position.x + ship.speed.x * delta, ship.position.y + ship.speed.y * delta);
+            for (var i: int = 0; i < _collectibles.length; i++)
+            {
+                var collectible: Collectible = _collectibles[i];
+                var d: Number = Point.distance(collectible.position, nextPosition);
+                if (d <= ship.radius + collectible.radius)
+                {
+                    return collectible;
                 }
             }
             return null;

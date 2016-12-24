@@ -4,6 +4,7 @@
 package com.agnither.spacetaxi.view.scenes.game
 {
     import com.agnither.spacetaxi.Application;
+    import com.agnither.spacetaxi.model.Collectible;
     import com.agnither.spacetaxi.model.Planet;
     import com.agnither.spacetaxi.model.Space;
     import com.agnither.spacetaxi.model.orders.Zone;
@@ -48,6 +49,7 @@ package com.agnither.spacetaxi.view.scenes.game
         private var _effectsContainer: Sprite;
 
         private var _planets: Vector.<PlanetView>;
+        private var _collectibles: Vector.<CollectibleView>;
         private var _zones: Vector.<ZoneView>;
         private var _shipView: ShipView;
 
@@ -108,6 +110,7 @@ package com.agnither.spacetaxi.view.scenes.game
             _container.addChild(_planetsContainer);
 
             _planets = new <PlanetView>[];
+            _collectibles = new <CollectibleView>[];
 
             _zonesContainer = new Sprite();
             _container.addChild(_zonesContainer);
@@ -138,6 +141,14 @@ package com.agnither.spacetaxi.view.scenes.game
                 var planetView: PlanetView = new PlanetView(planet);
                 _planetsContainer.addChild(planetView);
                 _planets.push(planetView);
+            }
+
+            for (i = 0; i < _space.collectibles.length; i++)
+            {
+                var collectible: Collectible = _space.collectibles[i];
+                var collectibleView: CollectibleView = new CollectibleView(collectible);
+                _objectsContainer.addChild(collectibleView);
+                _collectibles.push(collectibleView);
             }
 
             for (i = 0; i < _space.zones.zones.length; i++)
@@ -186,6 +197,12 @@ package com.agnither.spacetaxi.view.scenes.game
             {
                 var planetView: PlanetView = _planets.shift();
                 planetView.destroy();
+            }
+
+            while (_collectibles.length > 0)
+            {
+                var collectibleView: CollectibleView = _collectibles.shift();
+                collectibleView.destroy();
             }
 
             while (_zones.length > 0)
@@ -304,6 +321,11 @@ package com.agnither.spacetaxi.view.scenes.game
                 }
             }
             _trajectoryLength = end;
+
+            for (i = 0; i < _trajectory.numChildren; i++)
+            {
+                (_trajectory.getChildAt(i) as Image).color = _space.danger ? 0xFF0000 : 0xFFFFFF;
+            }
         }
 
         private function resetTrajectory():void

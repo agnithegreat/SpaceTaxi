@@ -9,5 +9,6 @@ package com.agnither.spacetaxi.vo
     {
         public var position: Point;
         public var type: String;
+        public var size: int;
     }
 }
