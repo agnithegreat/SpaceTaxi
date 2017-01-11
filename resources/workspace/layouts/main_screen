@@ -253,46 +253,47 @@
           },
           "name":"center",
           "width":1185,
-          "x":431,
+          "x":1455,
           "y":300
         }
       },
       {
         "children":[
           {
-            "cls":"starling.display.Button",
-            "constructorParams":[
+            "children":[
               {
-                "cls":"starling.textures.Texture",
-                "textureName":"main_screen/play_button"
-              }
-            ],
-            "customParams":{},
-            "params":{
-              "height":521,
-              "name":"_playButton",
-              "textFormat":{
-                "cls":"starling.text.TextFormat",
-                "constructorParams":[],
+                "cls":"starling.display.Image",
+                "constructorParams":[
+                  {
+                    "cls":"starling.textures.Texture",
+                    "textureName":"main_screen/play_button"
+                  }
+                ],
                 "customParams":{},
-                "params":{}
+                "params":{
+                  "name":"image"
+                }
               },
-              "width":688
-            }
-          },
-          {
-            "cls":"starling.display.Image",
-            "constructorParams":[
               {
-                "cls":"starling.textures.Texture",
-                "textureName":"main_screen/play_button_txt"
+                "cls":"starling.display.Image",
+                "constructorParams":[
+                  {
+                    "cls":"starling.textures.Texture",
+                    "textureName":"main_screen/play_button_txt"
+                  }
+                ],
+                "customParams":{},
+                "params":{
+                  "name":"label",
+                  "x":213,
+                  "y":166
+                }
               }
             ],
+            "cls":"starlingbuilder.extensions.uicomponents.ContainerButton",
             "customParams":{},
             "params":{
-              "name":"_playLabel",
-              "x":213,
-              "y":166
+              "name":"_playButton"
             }
           }
         ],
@@ -315,48 +316,49 @@
           },
           "name":"center",
           "width":688,
-          "x":680,
-          "y":865
+          "x":1704,
+          "y":2401
         }
       },
       {
         "children":[
           {
-            "cls":"starling.display.Button",
-            "constructorParams":[
+            "children":[
               {
-                "cls":"starling.textures.Texture",
-                "textureName":"main_screen/achievements_teaser"
+                "cls":"starling.display.Image",
+                "constructorParams":[
+                  {
+                    "cls":"starling.textures.Texture",
+                    "textureName":"main_screen/achievements_teaser"
+                  }
+                ],
+                "customParams":{},
+                "params":{
+                  "name":"image"
+                }
+              },
+              {
+                "cls":"starling.display.Image",
+                "constructorParams":[
+                  {
+                    "cls":"starling.textures.Texture",
+                    "textureName":"main_screen/achievements"
+                  }
+                ],
+                "customParams":{},
+                "params":{
+                  "name":"label",
+                  "x":51,
+                  "y":336
+                }
               }
             ],
+            "cls":"starlingbuilder.extensions.uicomponents.ContainerButton",
             "customParams":{},
             "params":{
-              "height":505,
               "name":"_achievementsButton",
-              "textFormat":{
-                "cls":"starling.text.TextFormat",
-                "constructorParams":[],
-                "customParams":{},
-                "params":{}
-              },
-              "width":512,
               "x":2,
               "y":-3
-            }
-          },
-          {
-            "cls":"starling.display.Image",
-            "constructorParams":[
-              {
-                "cls":"starling.textures.Texture",
-                "textureName":"main_screen/achievements"
-              }
-            ],
-            "customParams":{},
-            "params":{
-              "name":"_achievementsLabel",
-              "x":53,
-              "y":333
             }
           }
         ],
@@ -384,41 +386,42 @@
       {
         "children":[
           {
-            "cls":"starling.display.Button",
-            "constructorParams":[
+            "children":[
               {
-                "cls":"starling.textures.Texture",
-                "textureName":"main_screen/choose_level_teaser"
+                "cls":"starling.display.Image",
+                "constructorParams":[
+                  {
+                    "cls":"starling.textures.Texture",
+                    "textureName":"main_screen/choose_level_teaser"
+                  }
+                ],
+                "customParams":{},
+                "params":{
+                  "name":"image"
+                }
+              },
+              {
+                "cls":"starling.display.Image",
+                "constructorParams":[
+                  {
+                    "cls":"starling.textures.Texture",
+                    "textureName":"main_screen/choose_level"
+                  }
+                ],
+                "customParams":{},
+                "params":{
+                  "name":"label",
+                  "x":151,
+                  "y":218
+                }
               }
             ],
+            "cls":"starlingbuilder.extensions.uicomponents.ContainerButton",
             "customParams":{},
             "params":{
-              "height":513,
               "name":"_chooseLevelButton",
-              "textFormat":{
-                "cls":"starling.text.TextFormat",
-                "constructorParams":[],
-                "customParams":{},
-                "params":{}
-              },
-              "width":518,
               "x":-7,
               "y":-545
-            }
-          },
-          {
-            "cls":"starling.display.Image",
-            "constructorParams":[
-              {
-                "cls":"starling.textures.Texture",
-                "textureName":"main_screen/choose_level"
-              }
-            ],
-            "customParams":{},
-            "params":{
-              "name":"_chooseLevelLabel",
-              "x":144,
-              "y":-327
             }
           }
         ],
@@ -440,47 +443,48 @@
           },
           "name":"bottom_left",
           "x":100,
-          "y":1436
+          "y":2972
         }
       },
       {
         "children":[
           {
-            "cls":"starling.display.Button",
-            "constructorParams":[
+            "children":[
               {
-                "cls":"starling.textures.Texture",
-                "textureName":"main_screen/free_coins_teaser"
+                "cls":"starling.display.Image",
+                "constructorParams":[
+                  {
+                    "cls":"starling.textures.Texture",
+                    "textureName":"main_screen/free_coins_teaser"
+                  }
+                ],
+                "customParams":{},
+                "params":{
+                  "name":"image"
+                }
+              },
+              {
+                "cls":"starling.display.Image",
+                "constructorParams":[
+                  {
+                    "cls":"starling.textures.Texture",
+                    "textureName":"main_screen/free_coins"
+                  }
+                ],
+                "customParams":{},
+                "params":{
+                  "name":"label",
+                  "x":109,
+                  "y":275
+                }
               }
             ],
+            "cls":"starlingbuilder.extensions.uicomponents.ContainerButton",
             "customParams":{},
             "params":{
-              "height":426,
               "name":"_freeCoinsButton",
-              "textFormat":{
-                "cls":"starling.text.TextFormat",
-                "constructorParams":[],
-                "customParams":{},
-                "params":{}
-              },
-              "width":432,
               "x":-443,
               "y":41
-            }
-          },
-          {
-            "cls":"starling.display.Image",
-            "constructorParams":[
-              {
-                "cls":"starling.textures.Texture",
-                "textureName":"main_screen/free_coins"
-              }
-            ],
-            "customParams":{},
-            "params":{
-              "name":"_freeCoinsLabel",
-              "x":-334,
-              "y":316
             }
           }
         ],
@@ -501,48 +505,49 @@
             }
           },
           "name":"top_right",
-          "x":1948,
+          "x":3996,
           "y":100
         }
       },
       {
         "children":[
           {
-            "cls":"starling.display.Button",
-            "constructorParams":[
+            "children":[
               {
-                "cls":"starling.textures.Texture",
-                "textureName":"main_screen/garage_teaser"
+                "cls":"starling.display.Image",
+                "constructorParams":[
+                  {
+                    "cls":"starling.textures.Texture",
+                    "textureName":"main_screen/garage_teaser"
+                  }
+                ],
+                "customParams":{},
+                "params":{
+                  "name":"image"
+                }
+              },
+              {
+                "cls":"starling.display.Image",
+                "constructorParams":[
+                  {
+                    "cls":"starling.textures.Texture",
+                    "textureName":"main_screen/garage"
+                  }
+                ],
+                "customParams":{},
+                "params":{
+                  "name":"label",
+                  "x":173,
+                  "y":417
+                }
               }
             ],
+            "cls":"starlingbuilder.extensions.uicomponents.ContainerButton",
             "customParams":{},
             "params":{
-              "height":540,
               "name":"_garageButton",
-              "textFormat":{
-                "cls":"starling.text.TextFormat",
-                "constructorParams":[],
-                "customParams":{},
-                "params":{}
-              },
-              "width":549,
               "x":-534,
               "y":-596
-            }
-          },
-          {
-            "cls":"starling.display.Image",
-            "constructorParams":[
-              {
-                "cls":"starling.textures.Texture",
-                "textureName":"main_screen/garage"
-              }
-            ],
-            "customParams":{},
-            "params":{
-              "name":"_garageLabel",
-              "x":-361,
-              "y":-179
             }
           }
         ],
@@ -563,15 +568,15 @@
             }
           },
           "name":"bottom_right",
-          "x":1933,
-          "y":1436
+          "x":3981,
+          "y":2972
         }
       }
     ],
     "cls":"feathers.controls.LayoutGroup",
     "customParams":{},
     "params":{
-      "height":1536,
+      "height":3072,
       "layout":{
         "cls":"feathers.layout.AnchorLayout",
         "customParams":{},
@@ -588,17 +593,10 @@
         }
       },
       "name":"_root",
-      "width":2048
+      "width":4096
     }
   },
   "setting":{
-    "background":{
-      "height":1535,
-      "name":"main_screen_temp",
-      "width":2048,
-      "x":0,
-      "y":0
-    },
     "canvasColor":0,
     "canvasSize":{
       "x":2048,

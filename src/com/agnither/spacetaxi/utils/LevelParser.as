@@ -15,10 +15,17 @@ package com.agnither.spacetaxi.utils
 
     public class LevelParser
     {
-        public static function parse(level: Object):LevelVO
+        public static function parse(id: int, episode: int, level: Object):LevelVO
         {
             var data: LevelVO = new LevelVO();
 
+            data.id = id;
+            data.episode = episode;
+            
+            // TODO: remove hardcode
+            data.current = id == 0;
+            data.stars = 0;
+            
             data.viewport = new Rectangle(level.viewport.x, level.viewport.y, level.viewport.width, level.viewport.height);
 
             var ship: ShipVO = new ShipVO();

@@ -123,7 +123,7 @@ package com.agnither.spacetaxi.view.scenes.game
         {
             if (event.data > 0)
             {
-                SoundManager.playSound(SoundManager.EARTHING_OTHER);
+                SoundManager.playSound(SoundManager.CRASH);
             } else {
                 SoundManager.playSound(SoundManager.EARTHING);
             }

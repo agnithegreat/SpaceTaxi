@@ -322,10 +322,11 @@ package com.agnither.spacetaxi.view.scenes.game
             }
             _trajectoryLength = end;
 
-            for (i = 0; i < _trajectory.numChildren; i++)
-            {
-                (_trajectory.getChildAt(i) as Image).color = _space.danger ? 0xFF0000 : 0xFFFFFF;
-            }
+            // TODO: figure out: use _space.danger or not
+//            for (i = 0; i < _trajectory.numChildren; i++)
+//            {
+//                (_trajectory.getChildAt(i) as Image).color = _space.danger ? 0xFF0000 : 0xFFFFFF;
+//            }
         }
 
         private function resetTrajectory():void

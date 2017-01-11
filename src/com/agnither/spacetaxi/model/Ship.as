@@ -3,6 +3,8 @@
  */
 package com.agnither.spacetaxi.model
 {
+    import com.agnither.spacetaxi.managers.sound.SoundManager;
+
     import starling.events.Event;
 
     public class Ship extends DynamicSpaceBody
@@ -120,7 +122,13 @@ package com.agnither.spacetaxi.model
             if (fuel > 0)
             {
                 _fuel -= fuel;
+                
                 // TODO: LOW FUEL
+                if (_fuel == 1)
+                {
+                    SoundManager.playSound(SoundManager.LOW_FUEL);
+                }
+                
                 // TODO: NO FUEL
             }
 
@@ -148,7 +156,13 @@ package com.agnither.spacetaxi.model
             if (power > 0)
             {
                 _durability -= power;
+                
                 // TODO: LOW DURABILITY
+                if (_durability == 1)
+                {
+                    SoundManager.playSound(SoundManager.LOW_FUEL);
+                }
+                
                 if (_durability <= 0)
                 {
                     crash();
@@ -205,6 +219,7 @@ package com.agnither.spacetaxi.model
 
         public function fuelUp(amount: Number):void
         {
+            SoundManager.playSound(SoundManager.FUEL_LOAD);
             _fuel = Math.min(_fuel + amount, _fuelMax);
         }
 

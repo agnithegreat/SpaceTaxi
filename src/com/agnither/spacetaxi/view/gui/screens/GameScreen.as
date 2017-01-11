@@ -5,6 +5,7 @@ package com.agnither.spacetaxi.view.gui.screens
 {
     import com.agnither.spacetaxi.Application;
     import com.agnither.spacetaxi.controller.game.OrderController;
+    import com.agnither.spacetaxi.managers.sound.SoundManager;
     import com.agnither.spacetaxi.model.Ship;
     import com.agnither.spacetaxi.model.SpaceBody;
     import com.agnither.spacetaxi.tasks.logic.EndGameTask;
@@ -98,6 +99,7 @@ package com.agnither.spacetaxi.view.gui.screens
 
         private function handleSettings(event: Event):void
         {
+            SoundManager.playSound(SoundManager.CLICK);
             TaskSystem.getInstance().addTask(new EndGameTask());
         }
 

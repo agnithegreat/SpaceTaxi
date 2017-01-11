@@ -2,7 +2,9 @@ package com.agnither.spacetaxi.controller
 {
     import com.agnither.spacetaxi.managers.sound.SoundManager;
     import com.agnither.spacetaxi.managers.windows.WindowManager;
+    import com.agnither.spacetaxi.view.gui.screens.EpisodeScreen;
     import com.agnither.spacetaxi.view.gui.screens.GameScreen;
+    import com.agnither.spacetaxi.view.gui.screens.LevelScreen;
     import com.agnither.spacetaxi.view.gui.screens.MainScreen;
     import com.agnither.spacetaxi.view.scenes.game.SpaceView;
     import com.agnither.utils.gui.components.Screen;
@@ -12,6 +14,8 @@ package com.agnither.spacetaxi.controller
     public class StateController
     {
         public static const MAIN: String = "StateController.MAIN";
+        public static const EPISODE: String = "StateController.EPISODE";
+        public static const LEVEL: String = "StateController.LEVEL";
         public static const GAME: String = "StateController.GAME";
         
         private var _statesStack: Array;
@@ -41,6 +45,8 @@ package com.agnither.spacetaxi.controller
         {
             _screens = new Dictionary();
             _screens[MAIN] = new MainScreen();
+            _screens[EPISODE] = new EpisodeScreen();
+            _screens[LEVEL] = new LevelScreen();
             _screens[GAME] = new GameScreen();
 
             _scenes = new Dictionary();
@@ -52,6 +58,16 @@ package com.agnither.spacetaxi.controller
         public function mainState():void
         {
             setState(MAIN);
+        }
+        
+        public function episodeState():void
+        {
+            setState(EPISODE);
+        }
+
+        public function levelState():void
+        {
+            setState(LEVEL);
         }
 
         public function gameState():void
@@ -96,6 +112,8 @@ package com.agnither.spacetaxi.controller
                 }
                 case GAME:
                 {
+                    SoundManager.stopMusic(SoundManager.GAMEPLAY);
+                    SoundManager.playMusic(SoundManager.MENU);
                     break;
                 }
             }
@@ -107,25 +125,27 @@ package com.agnither.spacetaxi.controller
 
             _statesStack.push(state);
             updateState();
+        }
 
-            switch (state)
+        private function updateState():void
+        {
+            switch (currentState)
             {
                 case MAIN:
                 {
 //                    Application.appController.services.checkAds();
+                    SoundManager.stopMusic(SoundManager.GAMEPLAY);
                     SoundManager.playMusic(SoundManager.MENU);
                     break;
                 }
                 case GAME:
                 {
-                    SoundManager.playMusic(SoundManager.MENU);
+                    SoundManager.stopMusic(SoundManager.MENU);
+                    SoundManager.playMusic(SoundManager.GAMEPLAY);
                     break;
                 }
             }
-        }
 
-        private function updateState():void
-        {
             WindowManager.showScene(_scenes[currentState]);
             WindowManager.showScreen(_screens[currentState]);
         }

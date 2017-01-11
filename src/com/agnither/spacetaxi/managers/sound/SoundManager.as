@@ -18,6 +18,7 @@ package com.agnither.spacetaxi.managers.sound
     public class SoundManager
     {
         public static const MENU: String = "sound.Menu";
+        public static const GAMEPLAY: String = "sound.Gameplay";
 
         public static const CHECK_GREEN: String = "sound.CheckGreen";
         public static const COINS_LOOP: String = "sound.CoinsLoop";
@@ -29,6 +30,12 @@ package com.agnither.spacetaxi.managers.sound
         public static const LEGS: String = "sound.Legs";
         public static const OPEN_CLOSE: String = "sound.OpenClose";
         public static const START: String = "sound.Start";
+
+        public static const FUEL_LOAD: String = "sound.FuelLoad";
+        public static const LOW_FUEL: String = "sound.LowFuel";
+        public static const CRASH: String = "sound.Crash";
+        public static const CLICK: String = "sound.Click";
+        public static const BOX_TAKE: String = "sound.BoxTake";
 
         private static var playing: Dictionary = new Dictionary(true);
 

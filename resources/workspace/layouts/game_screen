@@ -38,15 +38,23 @@
                 "customParams":{},
                 "params":{
                   "color":16777215,
-                  "font":"Adventure Normal",
+                  "font":"dragu_medium",
                   "horizontalAlign":"left",
                   "size":80
                 }
               },
               "height":105,
               "name":"_moneyTF",
-              "text":"0 ",
-              "width":81,
+              "style":{
+                "cls":"starling.styles.DistanceFieldStyle",
+                "customParams":{},
+                "params":{
+                  "mode":"basic",
+                  "softness":0.13
+                }
+              },
+              "text":"300",
+              "width":136.25,
               "x":154,
               "y":18
             }

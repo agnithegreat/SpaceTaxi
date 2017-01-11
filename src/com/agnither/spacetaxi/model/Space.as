@@ -3,14 +3,12 @@
  */
 package com.agnither.spacetaxi.model
 {
-    import com.agnither.spacetaxi.Application;
     import com.agnither.spacetaxi.controller.game.OrderController;
     import com.agnither.spacetaxi.controller.game.ZoneController;
     import com.agnither.spacetaxi.enums.PlanetType;
     import com.agnither.spacetaxi.managers.sound.SoundManager;
     import com.agnither.spacetaxi.model.orders.Zone;
     import com.agnither.spacetaxi.utils.GeomUtils;
-    import com.agnither.spacetaxi.utils.LevelParser;
     import com.agnither.spacetaxi.vo.CollectibleVO;
     import com.agnither.spacetaxi.vo.LevelVO;
     import com.agnither.spacetaxi.vo.OrderVO;
@@ -39,8 +37,8 @@ package com.agnither.spacetaxi.model
         public static const DAMAGE_SPEED: Number = 20;
         public static const CONTROL_SPEED: Number = 100;
         public static const MAX_SPEED: Number = 1000;
-        public static const TRAJECTORY_STEPS: Number = 50;
-        public static const TRAJECTORY_LENGTH: Number = 100;
+        public static const TRAJECTORY_STEPS: Number = 250; // default 50
+        public static const TRAJECTORY_LENGTH: Number = 10000; // default 100
         public static const PULL_MULTIPLIER: Number = 0.1;
         public static const PULL_SCALE: int = 1;
 
@@ -124,10 +122,8 @@ package com.agnither.spacetaxi.model
         {
         }
 
-        public function init():void
+        public function init(level: LevelVO):void
         {
-            var level: LevelVO = LevelParser.parse(Application.assetsManager.getObject("test"));
-
             _ship = new Ship(10, 1, level.ship.rotation);
             _ship.place(level.ship.x, level.ship.y);
             _ship.landPrepare(null);
@@ -328,8 +324,9 @@ package com.agnither.spacetaxi.model
                     if (ship == _ship)
                     {
                         // TODO: add reward, do some stuff
+                        SoundManager.playSound(SoundManager.BOX_TAKE);
                         collectible.collect();
-                        _collectibles.splice(_collectibles.indexOf(collectible), 0);
+                        _collectibles.splice(_collectibles.indexOf(collectible), 1);
                     }
                 }
                 

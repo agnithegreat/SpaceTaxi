@@ -15,6 +15,12 @@ package com.agnither.spacetaxi.controller
             return _stateController;
         }
         
+        private var _levelsController: LevelsController;
+        public function get levelsController():LevelsController
+        {
+            return _levelsController;
+        }
+        
         private var _space: Space;
         public function get space():Space
         {
@@ -24,6 +30,7 @@ package com.agnither.spacetaxi.controller
         public function AppController()
         {
             _stateController = new StateController();
+            _levelsController = new LevelsController();
             
             _space = new Space();
         }
@@ -31,12 +38,29 @@ package com.agnither.spacetaxi.controller
         public function init():void
         {
             _stateController.init();
+            _levelsController.init();
+        }
+
+        public function selectEpisode(episode: int):void
+        {
+            _levelsController.selectEpisode(episode);
+        }
+        
+        public function selectLevel(level: int):void
+        {
+            _levelsController.selectLevel(level);
         }
         
         public function startGame():void
         {
-            _space.init();
+            _space.init(_levelsController.currentLevel);
             Starling.juggler.add(_space);
+        }
+
+        public function restartGame():void
+        {
+            endGame();
+            startGame();
         }
 
         public function endGame():void

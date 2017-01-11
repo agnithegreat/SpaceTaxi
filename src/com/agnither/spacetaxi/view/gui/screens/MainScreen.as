@@ -4,6 +4,7 @@
 package com.agnither.spacetaxi.view.gui.screens
 {
     import com.agnither.spacetaxi.Application;
+    import com.agnither.spacetaxi.managers.sound.SoundManager;
     import com.agnither.spacetaxi.tasks.logic.StartGameTask;
     import com.agnither.spacetaxi.view.gui.items.FakeShipView;
     import com.agnither.spacetaxi.view.utils.Animator;
@@ -12,13 +13,13 @@ package com.agnither.spacetaxi.view.gui.screens
 
     import feathers.controls.LayoutGroup;
 
-    import starling.display.Button;
     import starling.display.Image;
     import starling.display.Sprite;
     import starling.events.Event;
     import starling.extensions.TextureMaskStyle;
 
     import starlingbuilder.engine.util.StageUtil;
+    import starlingbuilder.extensions.uicomponents.ContainerButton;
 
     public class MainScreen extends Screen
     {
@@ -37,20 +38,11 @@ package com.agnither.spacetaxi.view.gui.screens
         public var _ship: Sprite;
         public var _shipContainer: Sprite;
 
-        public var _achievementsButton: Button;
-        public var _achievementsLabel: Image;
-
-        public var _chooseLevelButton: Button;
-        public var _chooseLevelLabel: Image;
-
-        public var _freeCoinsButton: Button;
-        public var _freeCoinsLabel: Image;
-
-        public var _garageButton: Button;
-        public var _garageLabel: Image;
-
-        public var _playButton: Button;
-        public var _playLabel: Image;
+        public var _achievementsButton: ContainerButton;
+        public var _chooseLevelButton: ContainerButton;
+        public var _freeCoinsButton: ContainerButton;
+        public var _garageButton: ContainerButton;
+        public var _playButton: ContainerButton;
 
         public function MainScreen()
         {
@@ -62,37 +54,26 @@ package com.agnither.spacetaxi.view.gui.screens
 
         override protected function initialize():void
         {
-            _achievementsLabel.touchable = false;
-            _chooseLevelLabel.touchable = false;
-            _freeCoinsLabel.touchable = false;
-            _garageLabel.touchable = false;
-            _playLabel.touchable = false;
-
             const delta: Number = 0.03;
             Animator.create(1, Math.random() * Math.PI * 2, function (time: Number):void
             {
                 _achievementsButton.pivotY = Math.sin(time) * _achievementsButton.height * delta;
-                _achievementsLabel.pivotY = Math.sin(time) * _achievementsButton.height * delta;
             });
             Animator.create(1, Math.random() * Math.PI * 2, function (time: Number):void
             {
                 _chooseLevelButton.pivotY = Math.sin(time) * _chooseLevelButton.height * delta;
-                _chooseLevelLabel.pivotY = Math.sin(time) * _chooseLevelButton.height * delta;
             });
             Animator.create(1, Math.random() * Math.PI * 2, function (time: Number):void
             {
                 _freeCoinsButton.pivotY = Math.sin(time) * _freeCoinsButton.height * delta;
-                _freeCoinsLabel.pivotY = Math.sin(time) * _freeCoinsButton.height * delta;
             });
             Animator.create(1, Math.random() * Math.PI * 2, function (time: Number):void
             {
                 _garageButton.pivotY = Math.sin(time) * _garageButton.height * delta;
-                _garageLabel.pivotY = Math.sin(time) * _garageButton.height * delta;
             });
             Animator.create(1, Math.random() * Math.PI * 2, function (time: Number):void
             {
                 _playButton.pivotY = Math.sin(time) * _playButton.height * delta;
-                _playLabel.pivotY = Math.sin(time) * _playButton.height * delta;
             });
 
             var scale: Number = 0.44;
@@ -141,6 +122,10 @@ package com.agnither.spacetaxi.view.gui.screens
 
             _shipContainer.addChild(new FakeShipView());
 
+            _achievementsButton.addEventListener(Event.TRIGGERED, handleAchievements);
+            _chooseLevelButton.addEventListener(Event.TRIGGERED, handleChooseLevel);
+            _freeCoinsButton.addEventListener(Event.TRIGGERED, handleFreeCoins);
+            _garageButton.addEventListener(Event.TRIGGERED, handleGarage);
             _playButton.addEventListener(Event.TRIGGERED, handlePlay);
 
             StageUtil.fitAll(_root, Application.guiSize.width, Application.guiSize.height, Application.viewport.width, Application.viewport.height);
@@ -149,8 +134,30 @@ package com.agnither.spacetaxi.view.gui.screens
             _back.height = stage.stageHeight;
         }
 
+        private function handleAchievements(event: Event):void
+        {
+            SoundManager.playSound(SoundManager.CLICK);
+        }
+
+        private function handleChooseLevel(event: Event):void
+        {
+            SoundManager.playSound(SoundManager.CLICK);
+            Application.appController.states.episodeState();
+        }
+
+        private function handleFreeCoins(event: Event):void
+        {
+            SoundManager.playSound(SoundManager.CLICK);
+        }
+
+        private function handleGarage(event: Event):void
+        {
+            SoundManager.playSound(SoundManager.CLICK);
+        }
+
         private function handlePlay(event: Event):void
         {
+            SoundManager.playSound(SoundManager.CLICK);
             TaskSystem.getInstance().addTask(new StartGameTask());
         }
     }

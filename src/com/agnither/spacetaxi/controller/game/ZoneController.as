@@ -5,6 +5,7 @@ package com.agnither.spacetaxi.controller.game
 {
     import com.agnither.spacetaxi.Application;
     import com.agnither.spacetaxi.enums.ZoneType;
+    import com.agnither.spacetaxi.managers.sound.SoundManager;
     import com.agnither.spacetaxi.model.Ship;
     import com.agnither.spacetaxi.model.orders.Zone;
 
@@ -52,6 +53,7 @@ package com.agnither.spacetaxi.controller.game
                 }
                 case ZoneType.FUEL:
                 {
+                    SoundManager.playSound(SoundManager.FUEL_LOAD);
                     ship.fuelUp(ship.fuelMax);
                     break;
                 }

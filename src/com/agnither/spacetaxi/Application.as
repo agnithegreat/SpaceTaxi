@@ -19,6 +19,7 @@ package com.agnither.spacetaxi
     import starling.core.Starling;
     import starling.display.Sprite;
     import starling.extensions.AssetMediator;
+    import starling.styles.DistanceFieldStyle;
 
     import starlingbuilder.engine.UIBuilder;
 
@@ -36,8 +37,6 @@ package com.agnither.spacetaxi
 
         public function start():void
         {
-            Fonts;
-
             Starling.current.antiAliasing = 16;
 
             viewport.width = stage.stageWidth;
@@ -48,7 +47,7 @@ package com.agnither.spacetaxi
             assetsManager = new AssetMediator(1, true);
             assetsManager.verbose = Config.debug;
 
-            const linkers:Array = [AnchorLayout, HorizontalLayout, VerticalLayout, TiledRowsLayout];
+            const linkers:Array = [AnchorLayout, HorizontalLayout, VerticalLayout, TiledRowsLayout, DistanceFieldStyle];
             uiBuilder = new UIBuilder(assetsManager);
             
             appController = new AppController();
