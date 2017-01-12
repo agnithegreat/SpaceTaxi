@@ -5,6 +5,7 @@ package com.agnither.spacetaxi.utils
 {
     import com.agnither.spacetaxi.vo.CollectibleVO;
     import com.agnither.spacetaxi.vo.LevelVO;
+    import com.agnither.spacetaxi.vo.ObjectVO;
     import com.agnither.spacetaxi.vo.OrderVO;
     import com.agnither.spacetaxi.vo.PlanetVO;
     import com.agnither.spacetaxi.vo.ShipVO;
@@ -27,12 +28,6 @@ package com.agnither.spacetaxi.utils
             data.stars = 0;
             
             data.viewport = new Rectangle(level.viewport.x, level.viewport.y, level.viewport.width, level.viewport.height);
-
-            var ship: ShipVO = new ShipVO();
-            ship.x = level.ship.x;
-            ship.y = level.ship.y;
-            ship.rotation = level.ship.rotation;
-            data.ship = ship;
             
             var planets: Vector.<PlanetVO> = new <PlanetVO>[];
             for (var i:int = 0; i < level.planets.length; i++)
@@ -48,6 +43,12 @@ package com.agnither.spacetaxi.utils
                 planets.push(planet);
             }
             data.planets = planets;
+
+            var ship: ShipVO = new ShipVO();
+            ship.position = new Point(level.ship.x, level.ship.y);
+            ship.rotation = level.ship.rotation;
+            magnetToPlanet(ship, getNearestPlanet(ship.position, planets), 10);
+            data.ship = ship;
             
             var orders: Vector.<OrderVO> = new <OrderVO>[];
             for (i = 0; i < level.orders.length; i++)
@@ -56,19 +57,22 @@ package com.agnither.spacetaxi.utils
                 var order: OrderVO = new OrderVO();
                 order.id = or.id;
                 order.cost = or.cost;
+                order.wave = or.wave;
                 
                 order.departure = new ZoneVO();
                 order.departure.type = or.departure.type;
                 order.departure.position = new Point(or.departure.x, or.departure.y);
                 order.departure.size = or.departure.size;
                 order.departure.planet = getNearestPlanet(order.departure.position, planets);
+                magnetToPlanet(order.departure, order.departure.planet, 0);
 
                 order.arrival = new ZoneVO();
                 order.arrival.type = or.arrival.type;
                 order.arrival.position = new Point(or.arrival.x, or.arrival.y);
                 order.arrival.size = or.arrival.size;
                 order.arrival.planet = getNearestPlanet(order.arrival.position, planets);
-                
+                magnetToPlanet(order.arrival, order.arrival.planet, 0);
+
                 orders.push(order);
             }
             data.orders = orders;
@@ -82,6 +86,7 @@ package com.agnither.spacetaxi.utils
                 zone.position = new Point(z.x, z.y);
                 zone.size = z.size;
                 zone.planet = getNearestPlanet(zone.position, planets);
+                magnetToPlanet(zone, zone.planet, 0);
                 zones.push(zone);
             }
             data.zones = zones;
@@ -116,6 +121,13 @@ package com.agnither.spacetaxi.utils
                 }
             }
             return nearestPlanet;
+        }
+        
+        private static function magnetToPlanet(object: ObjectVO, planet: PlanetVO, radius: Number):void
+        {
+            var angle: Number = Math.atan2(object.position.y - planet.position.y, object.position.x - planet.position.x);
+            object.position.x = planet.position.x + (planet.radius + radius) * Math.cos(angle);
+            object.position.y = planet.position.y + (planet.radius + radius) * Math.sin(angle);
         }
     }
 }

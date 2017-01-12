@@ -28,6 +28,7 @@ package com.agnither.spacetaxi
         public static var guiSize: Rectangle = new Rectangle(0, 0, 2048, 1536);
         public static var viewport: Rectangle = new Rectangle(0, 0, 2048, 1536);
         public static var graphicPack: int = 2048;
+        public static var scaleFactor: Number = 1;
 
         public static var appController: AppController;
 
@@ -42,6 +43,7 @@ package com.agnither.spacetaxi
             viewport.width = stage.stageWidth;
             viewport.height = stage.stageHeight;
 
+            scaleFactor = 2 * viewport.height / guiSize.height;
 //            Application.scaleFactor = graphicPack / guiSize.height;
 
             assetsManager = new AssetMediator(1, true);

@@ -59,8 +59,7 @@ package com.agnither.spacetaxi.controller
 
         public function restartGame():void
         {
-            endGame();
-            startGame();
+            _space.restart(_levelsController.currentLevel);
         }
 
         public function endGame():void

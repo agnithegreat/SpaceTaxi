@@ -13,6 +13,7 @@ package com.agnither.spacetaxi.controller.game
     public class OrderController extends EventDispatcher
     {
         public static const UPDATE: String = "OrderController.UPDATE";
+        public static const DONE: String = "OrderController.DONE";
 
         private var _orders: Vector.<Order>;
         public function get orders():Vector.<Order>
@@ -26,18 +27,42 @@ package com.agnither.spacetaxi.controller.game
             return _money;
         }
         
+        private var _wave: int;
+        public function get wave():int
+        {
+            return _wave;
+        }
+        
         public function OrderController()
         {
             _orders = new <Order>[];
             _money = 0;
+            _wave = 0;
         }
         
         public function start():void
         {
+            nextWave();
+        }
+        
+        public function nextWave():void
+        {
+            _wave++;
+            
+            var newOrders: int = 0;
             for (var i:int = 0; i < _orders.length; i++)
             {
                 var order: Order = _orders[i];
-                order.activate();
+                if (!order.active && !order.completed && order.wave <= _wave)
+                {
+                    order.activate();
+                    newOrders++;
+                }
+            }
+            
+            if (newOrders == 0)
+            {
+                dispatchEventWith(DONE);
             }
         }
         
@@ -57,38 +82,43 @@ package com.agnither.spacetaxi.controller.game
 
         public function checkOrders(ship: Ship, zone: Zone):void
         {
+            var notCompleted: int = 0;
+            
             for (var i:int = 0; i < _orders.length; i++)
             {
                 var order: Order = _orders[i];
                 if (!order.started && order.departure == zone)
                 {
-                    if (ship.capacity > 0)
-                    {
-                        order.start();
-                        ship.order(true);
-                    }
+                    order.start();
+                    ship.order();
                 } else if (order.started && order.arrival == zone)
                 {
                     _money += order.money;
                     SoundManager.playSound(SoundManager.COINS_LOOP);
                     
                     order.complete();
-                    ship.order(false);
-
-                    removeOrder(order);
+                    ship.order();
                 }
+                if (order.active && !order.completed)
+                {
+                    notCompleted++;
+                }
+            }
+            if (notCompleted == 0)
+            {
+                nextWave();
             }
         }
         
-        public function step(delta: Number):void
+        public function increment(value: int):void
         {
             for (var i:int = 0; i < _orders.length; i++)
             {
-                _orders[i].step(delta);
+                _orders[i].wait(value);
             }
         }
 
-        public function checkDamage(value: Number):void
+        public function checkDamage(value: int):void
         {
             for (var i:int = 0; i < _orders.length; i++)
             {

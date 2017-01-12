@@ -43,16 +43,14 @@ package com.agnither.spacetaxi.controller
             _episodes.push(EpisodeVO.maelstrom);
             _episodes.push(EpisodeVO.soon);
 
-            for (var i: int = 0; i < 100; i++)
+            var data: Object = Application.assetsManager.getObject("levels");
+            for (var i: int = 0; i < data.length; i++)
             {
-                var data: Object = Application.assetsManager.getObject("level" + (i+1));
-                if (data != null)
-                {
-                    var ep: int = int(i / 12);
-                    var episode: EpisodeVO = _episodes[ep];
-                    var level: LevelVO = LevelParser.parse(i % 12, ep, data);
-                    episode.levels.push(level);
-                }
+                var id: int = i % 12;
+                var ep: int = int(i / 12);
+                var episode: EpisodeVO = _episodes[ep];
+                var level: LevelVO = LevelParser.parse(id, ep, data[i]);
+                episode.levels.push(level);
             }
         }
 

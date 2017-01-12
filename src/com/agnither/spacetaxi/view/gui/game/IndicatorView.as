@@ -5,6 +5,8 @@ package com.agnither.spacetaxi.view.gui.game
 {
     import com.agnither.utils.gui.components.AbstractComponent;
 
+    import feathers.controls.LayoutGroup;
+
     import starling.core.Starling;
     import starling.display.Image;
 
@@ -12,32 +14,31 @@ package com.agnither.spacetaxi.view.gui.game
     {
         public static const FUEL: String = "fuel";
         public static const DURABILITY: String = "durability";
-        public static const CAPACITY: String = "capacity";
-        
+
+        public var _root: LayoutGroup;
+
         public var _back: Image;
         public var _bar: Image;
         public var _icon: Image;
 
         private var _baseScale: Number = 0;
-        
+
         private var _type: String;
         private var _value: int;
         private var _max: int;
         private var _amount: int;
-        private var _reverse: Boolean;
 
         public function IndicatorView()
         {
             super();
         }
 
-        public function init(type: String, max: int, amount: int = 0, reverse: Boolean = false):void
+        public function init(type: String, max: int, amount: int = 0):void
         {
             _type = type;
 
             _max = max;
             _amount = amount || max;
-            _reverse = reverse;
 
             if (_baseScale == 0)
             {
@@ -45,22 +46,17 @@ package com.agnither.spacetaxi.view.gui.game
             }
 
             _back.mask.scaleX = _baseScale * (_max + 1) / (_amount + 1);
+            _root.width = _back.x + _back.mask.width;
         }
 
-        public function update(value: int):void
+        public function update(value: int, animate: Boolean = true):void
         {
             if (_value != value)
             {
                 _value = value;
 
-                var part: Number = _value / _max;
-                if (_reverse)
-                {
-                    part = 1 - part;
-                }
-
-                var scale: Number = _baseScale * (part * _max + 1) / (_amount + 1);
-                Starling.juggler.tween(_bar.mask, 0.3, {scaleX: scale});
+                var scale: Number = _baseScale * (_value + 1) / (_amount + 1);
+                Starling.juggler.tween(_bar.mask, animate ? 0.3 : 0, {scaleX: scale});
             }
         }
     }

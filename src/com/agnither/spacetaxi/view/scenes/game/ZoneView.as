@@ -138,7 +138,10 @@ package com.agnither.spacetaxi.view.scenes.game
         
         public function destroy():void
         {
-            _zone.planet.removeEventListener(SpaceBody.UPDATE, handlePlanetUpdate);
+            if (_zone.planet != null)
+            {
+                _zone.planet.removeEventListener(SpaceBody.UPDATE, handlePlanetUpdate);
+            }
             _zone.removeEventListener(Zone.UPDATE, handleUpdate);
             _zone = null;
 

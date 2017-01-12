@@ -85,10 +85,10 @@ package com.agnither.spacetaxi.managers.sound
             }
         }
 
-        public static function playSound(name: String):String
+        public static function playSound(name: String, loop: Boolean = false):String
         {
             var sound: Sound = getSound(name);
-            var container: SoundContainer = new SoundContainer(sound, false);
+            var container: SoundContainer = new SoundContainer(sound, loop);
             container.play();
 //            container.volume = container.music ? volume.music : volume.sound;
             
@@ -143,27 +143,22 @@ class SoundContainer
 {
     private var _sound: Sound;
     private var _soundChannel: SoundChannel;
-    
-    private var _music: Boolean;
-    public function get music():Boolean
-    {
-        return _music;
-    }
+    private var _loop: Boolean;
     
     public function get alive():Boolean
     {
         return _sound != null;
     }
 
-    public function SoundContainer(sound: Sound, music: Boolean)
+    public function SoundContainer(sound: Sound, loop: Boolean)
     {
         _sound = sound;
-        _music = music;
+        _loop = loop;
     }
 
     public function play():void
     {
-        _soundChannel = _sound.play(0, _music ? int.MAX_VALUE : 0);
+        _soundChannel = _sound.play(0, _loop ? int.MAX_VALUE : 0);
         if (_soundChannel != null)
         {
             _soundChannel.addEventListener(Event.SOUND_COMPLETE, handleSoundComplete);
@@ -192,7 +187,7 @@ class SoundContainer
     {
         stop();
         
-        if (_music)
+        if (_loop)
         {
             play()
         } else {

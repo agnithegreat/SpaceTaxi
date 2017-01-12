@@ -5,9 +5,8 @@ package com.agnither.spacetaxi.vo
 {
     import flash.geom.Point;
 
-    public class CollectibleVO
+    public class CollectibleVO extends ObjectVO
     {
-        public var position: Point;
         public var type: String;
         public var size: int;
     }

@@ -56,17 +56,6 @@ package com.agnither.spacetaxi.model
         {
             return _durabilityMax;
         }
-
-        protected var _capacity: int;
-        public function get capacity():int
-        {
-            return _capacity;
-        }
-        protected var _capacityMax: int;
-        public function get capacityMax():int
-        {
-            return _capacityMax;
-        }
         
         protected var _planet: Planet;
         public function get planet():Planet
@@ -75,6 +64,8 @@ package com.agnither.spacetaxi.model
         }
 
         private var _landing: Boolean;
+
+        private var _signal: String;
 
         public function Ship(radius: int, mass: Number, rotation: Number)
         {
@@ -93,16 +84,12 @@ package com.agnither.spacetaxi.model
             _crashed = false;
 
             // TODO: FUEL - setup
-            _fuelMax = 9;
+            _fuelMax = 3;
             _fuel = _fuelMax;
 
             // TODO: DURABILITY - setup
-            _durabilityMax = 9;
+            _durabilityMax = 1;
             _durability = _durabilityMax;
-            
-            // TODO: CAPACITY - setup
-            _capacityMax = 5;
-            _capacity = _capacityMax;
         }
 
         public function launch(fuel: int = 0):void
@@ -124,9 +111,9 @@ package com.agnither.spacetaxi.model
                 _fuel -= fuel;
                 
                 // TODO: LOW FUEL
-                if (_fuel == 1)
+                if (_fuel < 2 && _signal == null)
                 {
-                    SoundManager.playSound(SoundManager.LOW_FUEL);
+                    _signal = SoundManager.playSound(SoundManager.LOW_FUEL, true);
                 }
                 
                 // TODO: NO FUEL
@@ -158,9 +145,9 @@ package com.agnither.spacetaxi.model
                 _durability -= power;
                 
                 // TODO: LOW DURABILITY
-                if (_durability == 1)
+                if (_durability < 2 && _signal == null)
                 {
-                    SoundManager.playSound(SoundManager.LOW_FUEL);
+                    _signal = SoundManager.playSound(SoundManager.LOW_FUEL, true);
                 }
                 
                 if (_durability <= 0)
@@ -211,9 +198,8 @@ package com.agnither.spacetaxi.model
             _speed.y = 0;
         }
         
-        public function order(add: Boolean):void
+        public function order():void
         {
-            _capacity += add ? -1 : 1;
             dispatchEventWith(ORDER);
         }
 
@@ -221,11 +207,21 @@ package com.agnither.spacetaxi.model
         {
             SoundManager.playSound(SoundManager.FUEL_LOAD);
             _fuel = Math.min(_fuel + amount, _fuelMax);
+
+            if (_signal != null)
+            {
+                SoundManager.stopSound(_signal);
+                _signal = null;
+            }
         }
 
         public function repair():void
         {
-
+            if (_signal != null)
+            {
+                SoundManager.stopSound(_signal);
+                _signal = null;
+            }
         }
         
         override public function clone():SpaceBody
@@ -253,6 +249,12 @@ package com.agnither.spacetaxi.model
         override public function destroy():void
         {
             super.destroy();
+
+            if (_signal != null)
+            {
+                SoundManager.stopSound(_signal);
+                _signal = null;
+            }
 
             _planet = null;
         }

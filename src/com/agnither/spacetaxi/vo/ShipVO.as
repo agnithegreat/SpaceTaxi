@@ -3,10 +3,8 @@
  */
 package com.agnither.spacetaxi.vo
 {
-    public class ShipVO
+    public class ShipVO extends ObjectVO
     {
-        public var x: int;
-        public var y: int;
         public var rotation: Number;
     }
 }

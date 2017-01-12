@@ -5,9 +5,8 @@ package com.agnither.spacetaxi.vo
 {
     import flash.geom.Point;
 
-    public class PlanetVO
+    public class PlanetVO extends ObjectVO
     {
-        public var position: Point;
         public var radius: int;
         public var mass: int;
         public var bounce: int;

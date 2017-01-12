@@ -12,19 +12,17 @@ package com.agnither.spacetaxi.model
         private var _money: int;
         public function get money():int
         {
-            return Math.max(0, _money * moodMultiplier);
+            return Math.max(0, _money);
         }
-
-        private var _mood: Number;
-        public function get moodMultiplier():Number
-        {
-            return (_mood - _time) * 0.01;
-        }
-
-        private var _time: Number;
-        private var _startTime: Number;
-        private var _endTime: Number;
         
+        private var _wave: int;
+        public function get wave():int
+        {
+            return _wave;
+        }
+
+        private var _time: int;
+
         private var _departure: Zone;
         public function get departure():Zone
         {
@@ -55,10 +53,10 @@ package com.agnither.spacetaxi.model
             return _completed;
         }
 
-        public function Order(money: int, mood: Number, departure: Zone, arrival: Zone)
+        public function Order(money: int, wave: int, mood: Number, departure: Zone, arrival: Zone)
         {
             _money = money;
-            _mood = Math.min(mood, 100);
+            _wave = wave;
             _departure = departure;
             _arrival = arrival;
         }
@@ -74,8 +72,7 @@ package com.agnither.spacetaxi.model
         public function start():void
         {
             _started = true;
-            _startTime = _time;
-            
+
             _departure.active = false;
             _arrival.active = true;
         }
@@ -85,24 +82,23 @@ package com.agnither.spacetaxi.model
             _active = false;
             _started = false;
             _completed = true;
-            _endTime = _time;
 
             _arrival.active = false;
         }
 
-        public function damage(value: Number):void
+        public function damage(value: int):void
         {
             if (_started)
             {
-                _mood -= value;
+                _time += value;
             }
         }
 
-        public function step(delta: Number):void
+        public function wait(value: int):void
         {
             if (_active)
             {
-                _time += delta;
+                _time += value;
             }
         }
         

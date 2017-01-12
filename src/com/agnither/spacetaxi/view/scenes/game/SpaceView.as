@@ -8,7 +8,9 @@ package com.agnither.spacetaxi.view.scenes.game
     import com.agnither.spacetaxi.model.Planet;
     import com.agnither.spacetaxi.model.Space;
     import com.agnither.spacetaxi.model.orders.Zone;
+    import com.agnither.spacetaxi.tasks.logic.RestartGameTask;
     import com.agnither.spacetaxi.view.scenes.game.effects.ExplosionEffect;
+    import com.agnither.tasks.global.TaskSystem;
     import com.agnither.utils.gui.components.AbstractComponent;
 
     import flash.geom.Point;
@@ -63,7 +65,6 @@ package com.agnither.spacetaxi.view.scenes.game
         private var _viewport: Rectangle;
         private var _basePivotX: Number;
         private var _basePivotY: Number;
-        private var _baseScale: Number;
 
         private var _aiming: Boolean;
 
@@ -86,15 +87,15 @@ package com.agnither.spacetaxi.view.scenes.game
             _background.y = stage.stageHeight * 0.5;
             addChild(_background);
 
-            _starsParallax1 = new ParallaxLayer(0.1, 30, 0.4);
+            _starsParallax1 = new ParallaxLayer(0.1, 60, 0.4);
             addChild(_starsParallax1);
             _starsParallax1.init();
 
-            _starsParallax2 = new ParallaxLayer(0.15, 20, 0.6);
+            _starsParallax2 = new ParallaxLayer(0.15, 40, 0.6);
             addChild(_starsParallax2);
             _starsParallax2.init();
 
-            _starsParallax3 = new ParallaxLayer(0.2, 10, 0.8);
+            _starsParallax3 = new ParallaxLayer(0.2, 20, 0.8);
             addChild(_starsParallax3);
             _starsParallax3.init();
 
@@ -130,6 +131,7 @@ package com.agnither.spacetaxi.view.scenes.game
         override protected function activate():void
         {
             _space = Application.appController.space;
+            _space.addEventListener(Space.RESTART, handleRestart);
             _space.addEventListener(Space.SHOW_TRAJECTORY, handleShowTrajectory);
             _space.addEventListener(Space.UPDATE_TRAJECTORY, handleUpdateTrajectory);
             _space.addEventListener(Space.HIDE_TRAJECTORY, handleHideTrajectory);
@@ -164,7 +166,6 @@ package com.agnither.spacetaxi.view.scenes.game
             _objectsContainer.addChild(_shipView);
 
             _viewport = _space.viewport;
-            _baseScale = Math.min(stage.stageWidth / _viewport.width, stage.stageHeight / _viewport.height) * 0.85;
             _basePivotX = _viewport.x + _viewport.width / 2;
             _basePivotY = _viewport.y + _viewport.height / 2;
 
@@ -172,8 +173,6 @@ package com.agnither.spacetaxi.view.scenes.game
             _container.y = stage.stageHeight / 2;
             _container.pivotX = _basePivotX;
             _container.pivotY = _basePivotY;
-            _container.scaleX = _baseScale;
-            _container.scaleY = _baseScale;
 
             _previousDot = new Point();
 
@@ -187,6 +186,7 @@ package com.agnither.spacetaxi.view.scenes.game
 
         override protected function deactivate():void
         {
+            _space.removeEventListener(Space.RESTART, handleRestart);
             _space.removeEventListener(Space.SHOW_TRAJECTORY, handleShowTrajectory);
             _space.removeEventListener(Space.UPDATE_TRAJECTORY, handleUpdateTrajectory);
             _space.removeEventListener(Space.HIDE_TRAJECTORY, handleHideTrajectory);
@@ -272,6 +272,12 @@ package com.agnither.spacetaxi.view.scenes.game
             }
         }
 
+        private function handleRestart(event: Event):void
+        {
+            deactivate();
+            activate();
+        }
+
         private function handleShowTrajectory(event: Event):void
         {
             resetTrajectory();
@@ -339,19 +345,34 @@ package com.agnither.spacetaxi.view.scenes.game
 
         private function handleStep(event: Event):void
         {
-            var sx: Number = Math.max(_basePivotX - _viewport.width, Math.min(_shipView.x, _basePivotX + _viewport.width));
-            var sy: Number = Math.max(_basePivotY - _viewport.height, Math.min(_shipView.y, _basePivotY + _viewport.height));
-            var scale: Number = 1 - ((Math.abs((sx-_basePivotX) / _viewport.width) + Math.abs((sy-_basePivotY) / _viewport.height))) * 0.25;
+            if (!_aimMode)
+            {
+                updateTrajectory(_space.flightTime);
+            }
+
+            var dx: Number = _shipView.x - _basePivotX;
+            var dy: Number = _shipView.y - _basePivotY;
+
+            var sx: Number = Math.abs(dx);
+            var sy: Number = Math.abs(dy);
+            var scale: Number = Math.min(stage.stageWidth / sx, stage.stageHeight / sy, Application.scaleFactor) * 0.85;
+
+            if (sx > _viewport.width * 2 || sy > _viewport.height * 2)
+            {
+                if (!_shipView.getBounds(stage).intersects(new Rectangle(0, 0, stage.stageWidth, stage.stageHeight)))
+                {
+                    TaskSystem.getInstance().addTask(new RestartGameTask());
+                }
+
+                return;
+            }
 
             Starling.juggler.tween(_container, event != null ? 0.3 : 0, {
-                pivotX: (_basePivotX + sx) / 2,
-                pivotY: (_basePivotY + sy) / 2,
-                scaleX: _baseScale * scale,
-                scaleY: _baseScale * scale
+                scaleX: scale,
+                scaleY: scale,
+                pivotX: _basePivotX + dx * 0.5,
+                pivotY: _basePivotY + dy * 0.5
             });
-
-            var dx: Number = sx - _basePivotX;
-            var dy: Number = sy - _basePivotY;
 
             Starling.juggler.tween(_background, event != null ? 0.3 : 0, {
                 x: stage.stageWidth * 0.5 - dx * 0.05,
@@ -370,16 +391,6 @@ package com.agnither.spacetaxi.view.scenes.game
                 x: -dx,
                 y: -dy
             });
-
-            if (!_aimMode)
-            {
-                updateTrajectory(_space.flightTime);
-            }
-
-            if (!_shipView.getBounds(stage).intersects(new Rectangle(0, 0, stage.stageWidth, stage.stageHeight)))
-            {
-                _space.ship.crash();
-            }
         }
 
         public function advanceTime(time: Number):void

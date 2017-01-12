@@ -21,10 +21,12 @@ package com.agnither.spacetaxi.model
 
     import starling.animation.IAnimatable;
     import starling.core.Starling;
+    import starling.events.Event;
     import starling.events.EventDispatcher;
 
     public class Space extends EventDispatcher implements IAnimatable
     {
+        public static const RESTART: String = "Space.RESTART";
         public static const SHOW_TRAJECTORY: String = "Space.SHOW_TRAJECTORY";
         public static const UPDATE_TRAJECTORY: String = "Space.UPDATE_TRAJECTORY";
         public static const HIDE_TRAJECTORY: String = "Space.HIDE_TRAJECTORY";
@@ -34,7 +36,7 @@ package com.agnither.spacetaxi.model
         public static const DISTANCE_POWER: Number = 2;
         public static const DELTA: Number = 0.15;
         public static const MIN_SPEED: Number = 1;
-        public static const DAMAGE_SPEED: Number = 20;
+        public static const DAMAGE_SPEED: Number = 40;
         public static const CONTROL_SPEED: Number = 100;
         public static const MAX_SPEED: Number = 1000;
         public static const TRAJECTORY_STEPS: Number = 250; // default 50
@@ -125,7 +127,7 @@ package com.agnither.spacetaxi.model
         public function init(level: LevelVO):void
         {
             _ship = new Ship(10, 1, level.ship.rotation);
-            _ship.place(level.ship.x, level.ship.y);
+            _ship.place(level.ship.position.x, level.ship.position.y);
             _ship.landPrepare(null);
 
             _planets = new <Planet>[];
@@ -160,6 +162,7 @@ package com.agnither.spacetaxi.model
             }
             
             _orderController = new OrderController();
+            _orderController.addEventListener(OrderController.DONE, handleOrdersDone);
             for (i = 0; i < level.orders.length; i++)
             {
                 var order: OrderVO = level.orders[i];
@@ -167,11 +170,18 @@ package com.agnither.spacetaxi.model
                 var arrival: Zone = new Zone(i, order.arrival, _planetsDict[order.arrival.planet]);
                 _zoneController.addZone(departure);
                 _zoneController.addZone(arrival);
-                _orderController.addOrder(new Order(order.cost, 100, departure, arrival));
+                _orderController.addOrder(new Order(order.cost, order.wave, 100, departure, arrival));
             }
             _orderController.start();
         }
         
+        public function restart(level: LevelVO):void
+        {
+            destroy();
+            init(level);
+            dispatchEventWith(RESTART);
+        }
+
         public function destroy():void
         {
             Starling.juggler.removeDelayedCalls(computeTrajectory);
@@ -202,7 +212,8 @@ package com.agnither.spacetaxi.model
             
             _zoneController.destroy();
             _zoneController = null;
-            
+
+            _orderController.removeEventListener(OrderController.DONE, handleOrdersDone);
             _orderController.destroy();
             _orderController = null;
         }
@@ -267,6 +278,7 @@ package com.agnither.spacetaxi.model
             if (_ship.landed && _ship.fuel > 0 && _trajectory.length > 5)
             {
                 launchShip(_ship);
+                _orderController.increment(1);
 
                 _time = 0;
                 _flightTime = 0;
@@ -435,8 +447,6 @@ package com.agnither.spacetaxi.model
 
         public function advanceTime(delta: Number):void
         {
-            _orderController.step(delta);
-
             if (_ship.landed || _ship.crashed) return;
 
             var scaleSize: Number = 50 * DELTA;
@@ -459,6 +469,11 @@ package com.agnither.spacetaxi.model
             }
 
             dispatchEventWith(STEP);
+        }
+
+        private function handleOrdersDone(event: Event):void
+        {
+            trace("WIN");
         }
     }
 }

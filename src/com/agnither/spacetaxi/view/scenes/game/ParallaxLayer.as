@@ -21,7 +21,7 @@ package com.agnither.spacetaxi.view.scenes.game
         private var _amount: int;
         private var _scale: Number;
         
-        private var _stars: Image;
+        private var _stars: Sprite;
         
         override public function set x(value: Number):void
         {
@@ -50,28 +50,22 @@ package com.agnither.spacetaxi.view.scenes.game
         
         public function init():void
         {
-            var renderTexture: RenderTexture = new RenderTexture(1024, 1024);
+            _stars = new Sprite();
             for (var i:int = 0; i < _amount; i++)
             {
                 var rand: int = Math.random() * stars.length;
                 var star: Image = new Image(Application.assetsManager.getTexture("stars/" + stars[rand]));
                 star.scaleX = _scale;
                 star.scaleY = _scale;
-                star.x = Math.random() * (renderTexture.width - star.width);
-                star.y = Math.random() * (renderTexture.height - star.height);
-                renderTexture.draw(star);
+                star.x = Math.random() * (stage.stageWidth * 2 - star.width);
+                star.y = Math.random() * (stage.stageHeight * 2 - star.height);
+                _stars.addChild(star);
             }
-
-            _stars = new Image(renderTexture);
             _stars.pivotX = _stars.width * 0.5;
             _stars.pivotY = _stars.height * 0.5;
-            _stars.tileGrid = new Rectangle(0, 0, _stars.width, _stars.height);
-            _stars.width = stage.stageWidth * 2;
-            _stars.height = stage.stageHeight * 2;
             _stars.x = stage.stageWidth * 0.5;
             _stars.y = stage.stageHeight * 0.5;
             addChild(_stars);
-
         }
     }
 }

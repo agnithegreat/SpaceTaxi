@@ -4,59 +4,106 @@
       {
         "children":[
           {
-            "cls":"starling.display.Image",
-            "constructorParams":[
+            "children":[
               {
-                "cls":"starling.textures.Texture",
-                "textureName":"game_screen/coin"
+                "cls":"starling.display.Image",
+                "constructorParams":[
+                  {
+                    "cls":"starling.textures.Texture",
+                    "textureName":"game_screen/coin"
+                  }
+                ],
+                "customParams":{},
+                "params":{
+                  "name":"coin"
+                }
+              },
+              {
+                "cls":"starling.text.TextField",
+                "constructorParams":[
+                  {
+                    "value":200
+                  },
+                  {
+                    "value":100
+                  },
+                  {
+                    "value":""
+                  }
+                ],
+                "customParams":{},
+                "params":{
+                  "autoSize":"horizontal",
+                  "batchable":true,
+                  "format":{
+                    "cls":"starling.text.TextFormat",
+                    "customParams":{},
+                    "params":{
+                      "color":16777215,
+                      "font":"dragu_medium",
+                      "horizontalAlign":"left",
+                      "size":100
+                    }
+                  },
+                  "height":120,
+                  "name":"_moneyTF",
+                  "style":{
+                    "cls":"starling.styles.DistanceFieldStyle",
+                    "customParams":{},
+                    "params":{
+                      "mode":"basic",
+                      "softness":0.13
+                    }
+                  },
+                  "text":"300",
+                  "width":170.31,
+                  "x":184,
+                  "y":10
+                }
               }
             ],
+            "cls":"feathers.controls.LayoutGroup",
             "customParams":{},
             "params":{
-              "name":"coin"
+              "layout":{
+                "cls":"feathers.layout.HorizontalLayout",
+                "customParams":{},
+                "params":{
+                  "gap":40,
+                  "verticalAlign":"middle"
+                }
+              },
+              "layoutData":{
+                "cls":"feathers.layout.AnchorLayoutData",
+                "customParams":{},
+                "params":{
+                  "left":40,
+                  "top":40
+                }
+              },
+              "name":"layoutGroup"
             }
           },
           {
-            "cls":"starling.text.TextField",
-            "constructorParams":[
-              {
-                "value":200
-              },
-              {
-                "value":100
-              },
-              {
-                "value":""
-              }
-            ],
-            "customParams":{},
+            "cls":"starling.display.Sprite",
+            "customParams":{
+              "customComponentClass":"com.agnither.spacetaxi.view.gui.game.IndicatorView",
+              "source":"fuel_indicator"
+            },
             "params":{
-              "autoSize":"horizontal",
-              "batchable":true,
-              "format":{
-                "cls":"starling.text.TextFormat",
-                "customParams":{},
-                "params":{
-                  "color":16777215,
-                  "font":"dragu_medium",
-                  "horizontalAlign":"left",
-                  "size":80
-                }
-              },
-              "height":105,
-              "name":"_moneyTF",
-              "style":{
-                "cls":"starling.styles.DistanceFieldStyle",
-                "customParams":{},
-                "params":{
-                  "mode":"basic",
-                  "softness":0.13
-                }
-              },
-              "text":"300",
-              "width":136.25,
-              "x":154,
-              "y":18
+              "name":"_fuelIndicator",
+              "x":434.31
+            }
+          },
+          {
+            "cls":"starling.display.Sprite",
+            "customParams":{
+              "customComponentClass":"com.agnither.spacetaxi.view.gui.game.IndicatorView",
+              "source":"durability_indicator"
+            },
+            "params":{
+              "name":"_durabilityIndicator",
+              "x":986.31
             }
           }
         ],
@@ -67,8 +114,7 @@
             "cls":"feathers.layout.HorizontalLayout",
             "customParams":{},
             "params":{
-              "gap":10,
-              "verticalAlign":"middle"
+              "gap":80
             }
           },
           "layoutData":{
@@ -80,66 +126,8 @@
             }
           },
           "name":"layoutGroup",
+          "width":984,
           "x":40,
-          "y":40
-        }
-      },
-      {
-        "children":[
-          {
-            "cls":"starling.display.Sprite",
-            "customParams":{
-              "customComponentClass":"com.agnither.spacetaxi.view.gui.game.IndicatorView",
-              "source":"fuel_indicator"
-            },
-            "params":{
-              "name":"_fuelIndicator"
-            }
-          },
-          {
-            "cls":"starling.display.Sprite",
-            "customParams":{
-              "customComponentClass":"com.agnither.spacetaxi.view.gui.game.IndicatorView",
-              "source":"durability_indicator"
-            },
-            "params":{
-              "name":"_durabilityIndicator",
-              "x":512
-            }
-          },
-          {
-            "cls":"starling.display.Sprite",
-            "customParams":{
-              "customComponentClass":"com.agnither.spacetaxi.view.gui.game.IndicatorView",
-              "source":"capacity_indicator"
-            },
-            "params":{
-              "name":"_capacityIndicator",
-              "x":1024
-            }
-          }
-        ],
-        "cls":"feathers.controls.LayoutGroup",
-        "customParams":{},
-        "params":{
-          "layout":{
-            "cls":"feathers.layout.HorizontalLayout",
-            "customParams":{},
-            "params":{
-              "gap":40
-            }
-          },
-          "layoutData":{
-            "cls":"feathers.layout.AnchorLayoutData",
-            "customParams":{},
-            "params":{
-              "left":420,
-              "top":40
-            }
-          },
-          "name":"layoutGroup",
-          "width":1351,
-          "x":420,
           "y":40
         }
       },

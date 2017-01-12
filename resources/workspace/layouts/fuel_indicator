@@ -103,7 +103,7 @@
         "customParams":{},
         "params":{}
       },
-      "name":"root",
+      "name":"_root",
       "width":472
     }
   },

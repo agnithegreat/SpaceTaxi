@@ -60,7 +60,6 @@ package com.agnither.spacetaxi.view.gui.items
 
             _levelNameTF.text = "Level " + (_level.id+1);
 
-
             _planetBtn.addEventListener(Event.TRIGGERED, handleTriggered);
             
             if (_level.stars > 0)
@@ -82,8 +81,8 @@ package com.agnither.spacetaxi.view.gui.items
                 });
             } else {
                 _glow.visible = false;
-                _planetBtn.scaleX = 0.9;
-                _planetBtn.scaleY = 0.9;
+                _planetBtn.scaleX = 0.8;
+                _planetBtn.scaleY = 0.8;
             }
         }
         
