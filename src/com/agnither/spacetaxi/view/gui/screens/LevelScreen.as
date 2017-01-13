@@ -46,6 +46,7 @@ package com.agnither.spacetaxi.view.gui.screens
         public var _pageIndicator: PageIndicator;
 
         private var _page: int;
+        private var _episode: int;
 
         public function LevelScreen()
         {
@@ -81,7 +82,8 @@ package com.agnither.spacetaxi.view.gui.screens
             _levels.snapToPages = true;
             _levels.clipContent = false;
 
-            _page = 0;
+            _page = -1;
+            _episode = -1;
         }
 
         override protected function activate():void
@@ -91,16 +93,31 @@ package com.agnither.spacetaxi.view.gui.screens
             _starsTF.text = "" + episode.stars + "/" + episode.starsTotal;
 
             var levels: Vector.<LevelVO> = Application.appController.levelsController.levels;
+            var current: int;
             for (var i:int = 0; i < levels.length; i++)
             {
-                _levels.addChild(new LevelView(levels[i]));
+                var level: LevelVO = levels[i];
+                if (level.id <= Application.appController.player.progress.level)
+                {
+                    current = i / 3;
+                }
+                _levels.addChild(new LevelView(level));
             }
 
             _pageIndicator.validate();
             _levels.validate();
             _pageIndicator.pageCount = _levels.horizontalPageCount;
+            
+            if (_episode != episode.id)
+            {
+                _episode = episode.id;
+                _page = -1;
+            }
+            if (_page == -1)
+            {
+                _page = current;
+            }
 
-            // TODO: show page with last unlocked level
             showPage(_page, false);
 
             _backBtn.addEventListener(Event.TRIGGERED, handleBack);
@@ -127,7 +144,7 @@ package com.agnither.spacetaxi.view.gui.screens
         {
             _page = index;
 
-            _levels.scrollToPageIndex(index, 0);
+            _levels.scrollToPageIndex(index, 0, animate ? NaN : 0);
             _leftButton.visible = index > 0;
             _rightButton.visible = index < _levels.horizontalPageCount-1;
 
@@ -141,8 +158,6 @@ package com.agnither.spacetaxi.view.gui.screens
 
         private function handleBack(event: Event):void
         {
-            _page = 0;
-
             SoundManager.playSound(SoundManager.CLICK);
             Application.appController.states.goBack();
         }

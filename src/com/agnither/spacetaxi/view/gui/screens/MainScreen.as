@@ -4,7 +4,6 @@
 package com.agnither.spacetaxi.view.gui.screens
 {
     import com.agnither.spacetaxi.Application;
-    import com.agnither.spacetaxi.Application;
     import com.agnither.spacetaxi.managers.sound.SoundManager;
     import com.agnither.spacetaxi.tasks.logic.StartGameTask;
     import com.agnither.spacetaxi.view.gui.items.FakeShipView;
@@ -17,7 +16,6 @@ package com.agnither.spacetaxi.view.gui.screens
     import starling.display.Image;
     import starling.display.Sprite;
     import starling.events.Event;
-    import starling.extensions.TextureMaskStyle;
 
     import starlingbuilder.engine.util.StageUtil;
     import starlingbuilder.extensions.uicomponents.ContainerButton;
@@ -103,6 +101,25 @@ package com.agnither.spacetaxi.view.gui.screens
                 _ship.rotation = time;
             });
 
+            _shipShadow1.mask = _planet1Mask;
+            _shipShadow2.mask = _planet2Mask;
+
+            _shipContainer.addChild(new FakeShipView());
+
+            StageUtil.fitAll(_root, Application.guiSize.width, Application.guiSize.height, Application.viewport.width, Application.viewport.height);
+
+            _back.width = stage.stageWidth;
+            _back.height = stage.stageHeight;
+        }
+
+        override protected function activate():void
+        {
+            _achievementsButton.addEventListener(Event.TRIGGERED, handleAchievements);
+            _chooseLevelButton.addEventListener(Event.TRIGGERED, handleChooseLevel);
+            _freeCoinsButton.addEventListener(Event.TRIGGERED, handleFreeCoins);
+            _garageButton.addEventListener(Event.TRIGGERED, handleGarage);
+            _playButton.addEventListener(Event.TRIGGERED, handlePlay);
+
             var max: int = Application.appController.player.progress.level + 2;
             var rand1: int = Math.random() * max;
             var rand2: int = rand1;
@@ -113,24 +130,18 @@ package com.agnither.spacetaxi.view.gui.screens
 
             _planet1.texture = Application.assetsManager.getTexture("planets/" + SKINS[rand1]);
             _planet1Mask.texture = _planet1.texture;
-            _shipShadow1.mask = _planet1Mask;
 
             _planet2.texture = Application.assetsManager.getTexture("planets/" + SKINS[rand2]);
             _planet2Mask.texture = _planet2.texture;
-            _shipShadow2.mask = _planet2Mask;
+        }
 
-            _shipContainer.addChild(new FakeShipView());
-
-            _achievementsButton.addEventListener(Event.TRIGGERED, handleAchievements);
-            _chooseLevelButton.addEventListener(Event.TRIGGERED, handleChooseLevel);
-            _freeCoinsButton.addEventListener(Event.TRIGGERED, handleFreeCoins);
-            _garageButton.addEventListener(Event.TRIGGERED, handleGarage);
-            _playButton.addEventListener(Event.TRIGGERED, handlePlay);
-
-            StageUtil.fitAll(_root, Application.guiSize.width, Application.guiSize.height, Application.viewport.width, Application.viewport.height);
-
-            _back.width = stage.stageWidth;
-            _back.height = stage.stageHeight;
+        override protected function deactivate():void
+        {
+            _achievementsButton.removeEventListener(Event.TRIGGERED, handleAchievements);
+            _chooseLevelButton.removeEventListener(Event.TRIGGERED, handleChooseLevel);
+            _freeCoinsButton.removeEventListener(Event.TRIGGERED, handleFreeCoins);
+            _garageButton.removeEventListener(Event.TRIGGERED, handleGarage);
+            _playButton.removeEventListener(Event.TRIGGERED, handlePlay);
         }
 
         private function handleAchievements(event: Event):void

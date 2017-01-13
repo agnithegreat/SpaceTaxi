@@ -60,7 +60,7 @@ package com.agnither.spacetaxi.view.gui.screens
             _episodes.snapToPages = true;
             _episodes.clipContent = false;
 
-            _page = 0;
+            _page = -1;
         }
         
         override protected function activate():void
@@ -69,15 +69,26 @@ package com.agnither.spacetaxi.view.gui.screens
             var total: int = 0;
 
             var episodes: Vector.<EpisodeVO> = Application.appController.levelsController.episodes;
+            var current: int;
             for (var i:int = 0; i < episodes.length; i++)
             {
                 sum += episodes[i].stars;
                 total += episodes[i].starsTotal;
-                _episodes.addChild(new EpisodeView(episodes[i]));
+                var episode: EpisodeVO = episodes[i];
+                if (episode.levels.length > 0 && episode.levels[0].id <= Application.appController.player.progress.level)
+                {
+                    current = i;
+                }
+                _episodes.addChild(new EpisodeView(episode));
             }
             _episodes.validate();
 
             _starsTF.text = "" + sum + "/" + total;
+
+            if (_page == -1)
+            {
+                _page = current;
+            }
 
             showPage(_page, false);
             
@@ -103,7 +114,7 @@ package com.agnither.spacetaxi.view.gui.screens
         {
             _page = index;
             
-            _episodes.scrollToPageIndex(index, 0);
+            _episodes.scrollToPageIndex(index, 0, animate ? NaN : 0);
             _leftButton.visible = index > 0;
             _rightButton.visible = index < _episodes.horizontalPageCount-1;
 
