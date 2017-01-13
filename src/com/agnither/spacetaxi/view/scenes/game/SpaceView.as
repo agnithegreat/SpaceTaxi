@@ -341,6 +341,12 @@ package com.agnither.spacetaxi.view.scenes.game
                     dot.x = point.x;
                     dot.y = point.y;
                     _trajectory.addChild(dot);
+
+                    if (!_aimMode)
+                    {
+                        Starling.juggler.tween(dot, 0.5, {delay: 0.5, alpha: 0, onComplete: dot.removeFromParent, onCompleteArgs: [true]});
+                    }
+
                     _dotCounter++;
                     _previousDot = point;
                 }
@@ -386,29 +392,32 @@ package com.agnither.spacetaxi.view.scenes.game
                 return;
             }
 
+            var ddx: int = 2 * _delta.x + dx;
+            var ddy: int = 2 * _delta.y + dy;
+
             Starling.juggler.tween(_container, event != null ? 0.3 : 0, {
                 scaleX: scale,
                 scaleY: scale,
-                pivotX: _delta.x + _basePivotX + dx * 0.5,
-                pivotY: _delta.y + _basePivotY + dy * 0.5
+                pivotX: _basePivotX + ddx * 0.5,
+                pivotY: _basePivotY + ddy * 0.5
             });
 
             Starling.juggler.tween(_background, event != null ? 0.3 : 0, {
-                x: stage.stageWidth * 0.5 - dx * 0.05,
-                y: stage.stageHeight * 0.5 - dy * 0.05
+                x: stage.stageWidth * 0.5 - ddx * 0.05,
+                y: stage.stageHeight * 0.5 - ddy * 0.05
             });
 
             Starling.juggler.tween(_starsParallax1, event != null ? 0.3 : 0, {
-                x: -dx,
-                y: -dy
+                x: -ddx,
+                y: -ddy
             });
             Starling.juggler.tween(_starsParallax2, event != null ? 0.3 : 0, {
-                x: -dx,
-                y: -dy
+                x: -ddx,
+                y: -ddy
             });
             Starling.juggler.tween(_starsParallax3, event != null ? 0.3 : 0, {
-                x: -dx,
-                y: -dy
+                x: -ddx,
+                y: -ddy
             });
         }
 

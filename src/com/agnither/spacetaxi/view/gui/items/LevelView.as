@@ -33,10 +33,13 @@ package com.agnither.spacetaxi.view.gui.items
         public var _star2: Button;
         public var _star3: Button;
 
+        public var _arrow: Image;
+
         public var _glow: Image;
         public var _planetBtn: ContainerButton;
         public var _planetImage: Image;
         public var _shadow: Image;
+        public var _shadowSymbol: Image;
 
         public var _levelNameTF: TextField;
 
@@ -55,6 +58,7 @@ package com.agnither.spacetaxi.view.gui.items
             _star1.touchable = false;
             _star2.touchable = false;
             _star3.touchable = false;
+            _arrow.touchable = false;
 
             _planetImage.texture = Application.assetsManager.getTexture("planets/" + (_level.episode+1) + "/" + (_level.id % 12 + 1));
 
@@ -69,7 +73,9 @@ package com.agnither.spacetaxi.view.gui.items
 
             _planetBtn.visible = !locked;
             _shadow.visible = locked;
+            _shadowSymbol.visible = locked;
             _glow.visible = current;
+            _arrow.visible = current;
 
             if (result != null && result.stars > 0)
             {
@@ -84,10 +90,16 @@ package com.agnither.spacetaxi.view.gui.items
 
             if (current)
             {
-                Animator.create(2, Math.random() * Math.PI * 2, function (time: Number):void
+                Animator.create(2, Math.random() * Math.PI * 2, function (time:Number):void
                 {
                     _glow.alpha = 0.75 + Math.cos(time) * 0.25;
-                    _shadow.alpha = 0.75 + Math.cos(time) * 0.25;
+                    _glow.rotation = time * 0.25;
+                    _arrow.pivotY = _arrow.height * Math.sin(time) * 0.5;
+                });
+            } else {
+                Animator.create(1, Math.random() * Math.PI * 2, function (time: Number):void
+                {
+                    _shadow.rotation = -time * 0.125;
                 });
             }
         }

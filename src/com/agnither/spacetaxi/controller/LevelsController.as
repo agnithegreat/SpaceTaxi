@@ -7,15 +7,22 @@ package com.agnither.spacetaxi.controller
 
     public class LevelsController
     {
+        private var _levels: Vector.<LevelVO>;
+        public function get levels():Vector.<LevelVO> 
+        {
+            return _levels;
+        }
+        
+        private var _currentLevel: int;
+        public function get currentLevel():LevelVO
+        {
+            return _levels[_currentLevel];
+        }
+        
         private var _episodes: Vector.<EpisodeVO>;
         public function get episodes():Vector.<EpisodeVO>
         {
             return _episodes;
-        }
-        
-        public function get levels():Vector.<LevelVO> 
-        {
-            return currentEpisode.levels;
         }
 
         private var _currentEpisode: int;
@@ -23,15 +30,10 @@ package com.agnither.spacetaxi.controller
         {
             return _episodes[_currentEpisode];
         }
-        
-        private var _currentLevel: int;
-        public function get currentLevel():LevelVO
-        {
-            return levels[_currentLevel];
-        }
 
         public function LevelsController()
         {
+            _levels = new <LevelVO>[];
             _episodes = new <EpisodeVO>[];
         }
 
@@ -51,6 +53,7 @@ package com.agnither.spacetaxi.controller
                 var episode: EpisodeVO = _episodes[ep];
                 var level: LevelVO = LevelParser.parse(i, ep, data.length > i ? data[i] : null);
                 episode.levels.push(level);
+                _levels.push(level);
             }
         }
 
@@ -62,6 +65,10 @@ package com.agnither.spacetaxi.controller
         public function selectLevel(level: int):void
         {
             _currentLevel = level;
+            while (_currentLevel > 0 && currentLevel.ship == null)
+            {
+                _currentLevel--;
+            }
         }
     }
 }

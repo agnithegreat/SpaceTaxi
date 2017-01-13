@@ -67,6 +67,23 @@
             }
           },
           {
+            "cls":"starling.display.Image",
+            "constructorParams":[
+              {
+                "cls":"starling.textures.Texture",
+                "textureName":"level_screen/next_level_symbol"
+              }
+            ],
+            "customParams":{},
+            "params":{
+              "name":"_shadowSymbol",
+              "pivotX":150,
+              "pivotY":160,
+              "x":300,
+              "y":350
+            }
+          },
+          {
             "cls":"starling.display.Button",
             "constructorParams":[
               {
@@ -154,6 +171,23 @@
               "width":120,
               "x":400,
               "y":95
+            }
+          },
+          {
+            "cls":"starling.display.Image",
+            "constructorParams":[
+              {
+                "cls":"starling.textures.Texture",
+                "textureName":"level_screen/arrow"
+              }
+            ],
+            "customParams":{},
+            "params":{
+              "name":"_arrow",
+              "pivotX":65,
+              "pivotY":65,
+              "x":300,
+              "y":65
             }
           },
           {

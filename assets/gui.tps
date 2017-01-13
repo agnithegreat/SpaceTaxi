@@ -4,7 +4,7 @@
         <key>fileFormatVersion</key>
         <int>4</int>
         <key>texturePackerVersion</key>
-        <string>4.3.1</string>
+        <string>4.3.3</string>
         <key>fileName</key>
         <string>/Users/agnither/projects/Idea/SpaceTaxi/assets/gui.tps</string>
         <key>autoSDSettings</key>
@@ -560,6 +560,19 @@
                 <rect>125,125,250,250</rect>
                 <key>scale9Paddings</key>
                 <rect>125,125,250,250</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">assets/gui/level_screen/next_level_symbol.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>75,80,150,160</rect>
+                <key>scale9Paddings</key>
+                <rect>75,80,150,160</rect>
                 <key>scale9FromFile</key>
                 <false/>
             </struct>

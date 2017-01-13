@@ -92,7 +92,7 @@ package com.agnither.spacetaxi.view.gui.screens
             _episodeNameTF.text = episode.name;
             _starsTF.text = "" + episode.stars + "/" + episode.starsTotal;
 
-            var levels: Vector.<LevelVO> = Application.appController.levelsController.levels;
+            var levels: Vector.<LevelVO> = Application.appController.levelsController.currentEpisode.levels;
             var current: int;
             for (var i:int = 0; i < levels.length; i++)
             {
