@@ -45,8 +45,8 @@ package com.agnither.spacetaxi.view.gui.game
                 _baseScale = _back.mask.scaleX;
             }
 
-            _back.mask.scaleX = _baseScale * (_max + 1) / (_amount + 1);
-            _root.width = _back.x + _back.mask.width;
+//            _back.mask.scaleX = _baseScale * (_max + 1) / (_amount + 1);
+//            _root.width = _back.x + _back.mask.width;
         }
 
         public function update(value: int, animate: Boolean = true):void

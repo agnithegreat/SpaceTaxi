@@ -141,6 +141,8 @@ package com.agnither.spacetaxi.view.gui.screens
 
         private function handleBack(event: Event):void
         {
+            _page = 0;
+
             SoundManager.playSound(SoundManager.CLICK);
             Application.appController.states.goBack();
         }

@@ -14,8 +14,8 @@
             "customParams":{},
             "params":{
               "name":"_glow",
-              "pivotX":300,
-              "pivotY":300,
+              "pivotX":275,
+              "pivotY":275,
               "x":300,
               "y":350
             }
@@ -27,7 +27,7 @@
                 "constructorParams":[
                   {
                     "cls":"starling.textures.Texture",
-                    "textureName":"planets/3"
+                    "textureName":"planets/0"
                   }
                 ],
                 "customParams":{},
@@ -35,8 +35,8 @@
                   "name":"_planetImage",
                   "pivotX":250,
                   "pivotY":250,
-                  "scaleX":0.8,
-                  "scaleY":0.8
+                  "scaleX":0.7,
+                  "scaleY":0.7
                 }
               }
             ],
@@ -45,6 +45,23 @@
             "params":{
               "name":"_planetBtn",
               "scaleWhenDown":1,
+              "x":300,
+              "y":350
+            }
+          },
+          {
+            "cls":"starling.display.Image",
+            "constructorParams":[
+              {
+                "cls":"starling.textures.Texture",
+                "textureName":"level_screen/next_level"
+              }
+            ],
+            "customParams":{},
+            "params":{
+              "name":"_shadow",
+              "pivotX":250,
+              "pivotY":250,
               "x":300,
               "y":350
             }

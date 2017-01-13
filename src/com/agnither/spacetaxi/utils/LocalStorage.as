@@ -4,9 +4,12 @@
 package com.agnither.spacetaxi.utils
 {
     import flash.net.SharedObject;
+    import flash.utils.ByteArray;
 
     public class LocalStorage
     {
+        public static const progress: LocalStorage = new LocalStorage("progress");
+        
         public static const platform: LocalStorage = new LocalStorage("platform");
         public static const auth: LocalStorage = new LocalStorage("auth");
         public static const settings: LocalStorage = new LocalStorage("settings");
@@ -20,13 +23,18 @@ package com.agnither.spacetaxi.utils
         
         public function write(key: String, value: Object):void
         {
-            _sharedObject.data[key] = value;
+            var ba: ByteArray = new ByteArray();
+            ba.writeObject(value);
+            _sharedObject.data[key] = ba;
             _sharedObject.flush();
         }
 
         public function read(key: String):Object
         {
-            return _sharedObject.data[key];
+            var ba: ByteArray = _sharedObject.data[key] as ByteArray;
+            if (ba == null) return null;
+            ba.position = 0;
+            return ba.readObject();
         }
 
         public function hasProperty(key: String):Boolean

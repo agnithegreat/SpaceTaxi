@@ -5,16 +5,15 @@ package com.agnither.spacetaxi.view.gui.items
 {
     import com.agnither.spacetaxi.Application;
     import com.agnither.spacetaxi.managers.sound.SoundManager;
+    import com.agnither.spacetaxi.model.player.Progress;
+    import com.agnither.spacetaxi.model.player.vo.LevelResultVO;
     import com.agnither.spacetaxi.tasks.logic.StartGameTask;
     import com.agnither.spacetaxi.view.utils.Animator;
     import com.agnither.spacetaxi.vo.LevelVO;
     import com.agnither.tasks.global.TaskSystem;
     import com.agnither.utils.gui.components.AbstractComponent;
 
-    import feathers.controls.LayoutGroup;
-
     import starling.core.Starling;
-
     import starling.display.Button;
     import starling.display.ButtonState;
     import starling.display.Image;
@@ -37,6 +36,7 @@ package com.agnither.spacetaxi.view.gui.items
         public var _glow: Image;
         public var _planetBtn: ContainerButton;
         public var _planetImage: Image;
+        public var _shadow: Image;
 
         public var _levelNameTF: TextField;
 
@@ -56,33 +56,39 @@ package com.agnither.spacetaxi.view.gui.items
             _star2.touchable = false;
             _star3.touchable = false;
 
-            _planetImage.texture = Application.assetsManager.getTexture("planets/" + _level.planets[0].skin);
+            _planetImage.texture = Application.assetsManager.getTexture("planets/" + (_level.episode+1) + "/" + (_level.id % 12 + 1));
 
             _levelNameTF.text = "Level " + (_level.id+1);
 
             _planetBtn.addEventListener(Event.TRIGGERED, handleTriggered);
-            
-            if (_level.stars > 0)
+
+            var progress: Progress = Application.appController.player.progress;
+            var current: Boolean = _level.id == progress.level;
+            var locked: Boolean = _level.id > progress.level;
+            var result: LevelResultVO = progress.getLevelResult(_level.id);
+
+            _planetBtn.visible = !locked;
+            _shadow.visible = locked;
+            _glow.visible = current;
+
+            if (result != null && result.stars > 0)
             {
-                _star1.state = _level.stars >= 1 ? ButtonState.UP : ButtonState.DOWN;
-                _star2.state = _level.stars >= 2 ? ButtonState.UP : ButtonState.DOWN;
-                _star3.state = _level.stars >= 3 ? ButtonState.UP : ButtonState.DOWN;
+                _star1.state = result.stars >= 1 ? ButtonState.UP : ButtonState.DOWN;
+                _star2.state = result.stars >= 2 ? ButtonState.UP : ButtonState.DOWN;
+                _star3.state = result.stars >= 3 ? ButtonState.UP : ButtonState.DOWN;
             } else {
                 _star1.visible = false;
                 _star2.visible = false;
                 _star3.visible = false;
             }
 
-            if (_level.current)
+            if (current)
             {
                 Animator.create(2, Math.random() * Math.PI * 2, function (time: Number):void
                 {
                     _glow.alpha = 0.75 + Math.cos(time) * 0.25;
+                    _shadow.alpha = 0.75 + Math.cos(time) * 0.25;
                 });
-            } else {
-                _glow.visible = false;
-                _planetBtn.scaleX = 0.8;
-                _planetBtn.scaleY = 0.8;
             }
         }
         
@@ -95,8 +101,15 @@ package com.agnither.spacetaxi.view.gui.items
         private function handleTriggered(event: Event):void
         {
             SoundManager.playSound(SoundManager.CLICK);
-            Application.appController.selectLevel(_level.id);
-            TaskSystem.getInstance().addTask(new StartGameTask());
+            TaskSystem.getInstance().addTask(new StartGameTask(_level.id));
+        }
+        
+        override public function dispose():void
+        {
+            _planetBtn.removeEventListener(Event.TRIGGERED, handleTriggered);
+            _level = null;
+            
+            super.dispose();
         }
     }
 }

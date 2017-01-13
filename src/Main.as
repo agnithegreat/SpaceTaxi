@@ -5,7 +5,11 @@ package
 {
     import com.agnither.spacetaxi.Application;
     import com.agnither.spacetaxi.Config;
-    import com.mesmotronic.ane.AndroidFullScreen;
+
+    BUILD::android
+    {
+        import com.mesmotronic.ane.AndroidFullScreen;
+    }
 
     import flash.display.StageQuality;
     import flash.display3D.Context3DTextureFormat;

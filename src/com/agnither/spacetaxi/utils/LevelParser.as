@@ -22,10 +22,8 @@ package com.agnither.spacetaxi.utils
 
             data.id = id;
             data.episode = episode;
-            
-            // TODO: remove hardcode
-            data.current = id == 0;
-            data.stars = 0;
+
+            if (level == null) return data;
             
             data.viewport = new Rectangle(level.viewport.x, level.viewport.y, level.viewport.width, level.viewport.height);
             

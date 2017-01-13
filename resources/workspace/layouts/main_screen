@@ -64,7 +64,7 @@
             "constructorParams":[
               {
                 "cls":"starling.textures.Texture",
-                "textureName":"planets/1"
+                "textureName":"planets/0"
               }
             ],
             "customParams":{},
@@ -83,7 +83,7 @@
             "constructorParams":[
               {
                 "cls":"starling.textures.Texture",
-                "textureName":"planets/1"
+                "textureName":"planets/0"
               }
             ],
             "customParams":{},
@@ -93,6 +93,11 @@
               "pivotY":250,
               "scaleX":0.4,
               "scaleY":0.4,
+              "style":{
+                "cls":"starling.extensions.TextureMaskStyle",
+                "customParams":{},
+                "params":{}
+              },
               "x":394.5,
               "y":254
             }
@@ -102,7 +107,7 @@
             "constructorParams":[
               {
                 "cls":"starling.textures.Texture",
-                "textureName":"planets/1"
+                "textureName":"planets/0"
               }
             ],
             "customParams":{},
@@ -121,7 +126,7 @@
             "constructorParams":[
               {
                 "cls":"starling.textures.Texture",
-                "textureName":"planets/1"
+                "textureName":"planets/0"
               }
             ],
             "customParams":{},
@@ -131,6 +136,11 @@
               "pivotY":250,
               "scaleX":0.4,
               "scaleY":0.4,
+              "style":{
+                "cls":"starling.extensions.TextureMaskStyle",
+                "customParams":{},
+                "params":{}
+              },
               "x":812.5,
               "y":221
             }
@@ -253,7 +263,7 @@
           },
           "name":"center",
           "width":1185,
-          "x":1455,
+          "x":431,
           "y":300
         }
       },
@@ -316,8 +326,8 @@
           },
           "name":"center",
           "width":688,
-          "x":1704,
-          "y":2401
+          "x":680,
+          "y":865
         }
       },
       {
@@ -443,7 +453,7 @@
           },
           "name":"bottom_left",
           "x":100,
-          "y":2972
+          "y":1436
         }
       },
       {
@@ -505,7 +515,7 @@
             }
           },
           "name":"top_right",
-          "x":3996,
+          "x":1948,
           "y":100
         }
       },
@@ -568,15 +578,15 @@
             }
           },
           "name":"bottom_right",
-          "x":3981,
-          "y":2972
+          "x":1933,
+          "y":1436
         }
       }
     ],
     "cls":"feathers.controls.LayoutGroup",
     "customParams":{},
     "params":{
-      "height":3072,
+      "height":1536,
       "layout":{
         "cls":"feathers.layout.AnchorLayout",
         "customParams":{},
@@ -593,7 +603,7 @@
         }
       },
       "name":"_root",
-      "width":4096
+      "width":2048
     }
   },
   "setting":{

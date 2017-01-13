@@ -9,9 +9,6 @@ package com.agnither.spacetaxi.vo
     {
         public var id: int;
         public var episode: int;
-        public var stars: int;
-        public var current: Boolean;
-        
         public var ship: ShipVO;
         public var planets: Vector.<PlanetVO>;
         public var orders: Vector.<OrderVO>;

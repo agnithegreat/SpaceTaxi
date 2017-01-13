@@ -30,13 +30,13 @@ package com.agnither.spacetaxi.model
         public static const SHOW_TRAJECTORY: String = "Space.SHOW_TRAJECTORY";
         public static const UPDATE_TRAJECTORY: String = "Space.UPDATE_TRAJECTORY";
         public static const HIDE_TRAJECTORY: String = "Space.HIDE_TRAJECTORY";
-        public static const STEP: String = "Space.STEP";
+        public static const LEVEL_COMPLETE: String = "Space.LEVEL_COMPLETE";
 
         public static const G: Number = 6.67;
         public static const DISTANCE_POWER: Number = 2;
         public static const DELTA: Number = 0.15;
         public static const MIN_SPEED: Number = 1;
-        public static const DAMAGE_SPEED: Number = 40;
+        public static const DAMAGE_SPEED: Number = 35;
         public static const CONTROL_SPEED: Number = 100;
         public static const MAX_SPEED: Number = 1000;
         public static const TRAJECTORY_STEPS: Number = 250; // default 50
@@ -391,16 +391,19 @@ package com.agnither.spacetaxi.model
                 {
                     if (planet.type.solid)
                     {
-                        if (planet.type.safe)
+                        if (_ship == ship)
                         {
-                            if (ship.speedMod >= DAMAGE_SPEED)
+                            if (planet.type.safe)
                             {
-                                ship.collide(1);
-                                _orderController.checkDamage(1);
+                                if (ship.speedMod >= DAMAGE_SPEED)
+                                {
+                                    ship.collide(1);
+                                    _orderController.checkDamage(1);
+                                }
+                            } else {
+                                ship.crash();
+                                _orderController.checkDamage(ship.durability);
                             }
-                        } else {
-                            ship.crash();
-                            _orderController.checkDamage(ship.durability);
                         }
 
                         ship.rotate(GeomUtils.getVectorDelta(ship.speed, shipPlanet) * 2 - Math.PI);
@@ -467,13 +470,11 @@ package com.agnither.spacetaxi.model
             {
                 _ship.landPrepare(_landPlanet);
             }
-
-            dispatchEventWith(STEP);
         }
 
         private function handleOrdersDone(event: Event):void
         {
-            trace("WIN");
+            dispatchEventWith(LEVEL_COMPLETE);
         }
     }
 }

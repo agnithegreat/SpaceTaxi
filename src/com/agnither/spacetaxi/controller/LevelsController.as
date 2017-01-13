@@ -29,7 +29,7 @@ package com.agnither.spacetaxi.controller
         {
             return levels[_currentLevel];
         }
-        
+
         public function LevelsController()
         {
             _episodes = new <EpisodeVO>[];
@@ -38,18 +38,18 @@ package com.agnither.spacetaxi.controller
         public function init():void
         {
             // TODO: remove any hardcode!!!
-            
+
             _episodes.push(EpisodeVO.milkyway);
             _episodes.push(EpisodeVO.maelstrom);
             _episodes.push(EpisodeVO.soon);
 
             var data: Object = Application.assetsManager.getObject("levels");
-            for (var i: int = 0; i < data.length; i++)
+            const amount: int = 24;
+            for (var i: int = 0; i < amount; i++)
             {
-                var id: int = i % 12;
                 var ep: int = int(i / 12);
                 var episode: EpisodeVO = _episodes[ep];
-                var level: LevelVO = LevelParser.parse(id, ep, data[i]);
+                var level: LevelVO = LevelParser.parse(i, ep, data.length > i ? data[i] : null);
                 episode.levels.push(level);
             }
         }

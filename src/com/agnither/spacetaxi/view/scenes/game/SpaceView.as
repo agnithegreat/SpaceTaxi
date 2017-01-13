@@ -20,6 +20,7 @@ package com.agnither.spacetaxi.view.scenes.game
     import starling.core.Starling;
     import starling.display.Image;
     import starling.display.Sprite;
+    import starling.events.EnterFrameEvent;
     import starling.events.Event;
     import starling.events.Touch;
     import starling.events.TouchEvent;
@@ -69,6 +70,9 @@ package com.agnither.spacetaxi.view.scenes.game
         private var _aiming: Boolean;
 
         private var _time: Number;
+
+        private var _touch: Point;
+        private var _delta: Point;
 
         public function SpaceView()
         {
@@ -135,7 +139,6 @@ package com.agnither.spacetaxi.view.scenes.game
             _space.addEventListener(Space.SHOW_TRAJECTORY, handleShowTrajectory);
             _space.addEventListener(Space.UPDATE_TRAJECTORY, handleUpdateTrajectory);
             _space.addEventListener(Space.HIDE_TRAJECTORY, handleHideTrajectory);
-            _space.addEventListener(Space.STEP, handleStep);
 
             for (var i: int = 0; i < _space.planets.length; i++)
             {
@@ -176,9 +179,13 @@ package com.agnither.spacetaxi.view.scenes.game
 
             _previousDot = new Point();
 
+            _delta = new Point();
+            _touch = null;
+
+            Starling.current.stage.addEventListener(EnterFrameEvent.ENTER_FRAME, handleEnterFrame);
             Starling.current.stage.addEventListener(TouchEvent.TOUCH, handleTouch);
 
-            handleStep(null);
+            handleEnterFrame(null);
 
             _time = 0;
             Starling.juggler.add(this);
@@ -190,7 +197,6 @@ package com.agnither.spacetaxi.view.scenes.game
             _space.removeEventListener(Space.SHOW_TRAJECTORY, handleShowTrajectory);
             _space.removeEventListener(Space.UPDATE_TRAJECTORY, handleUpdateTrajectory);
             _space.removeEventListener(Space.HIDE_TRAJECTORY, handleHideTrajectory);
-            _space.removeEventListener(Space.STEP, handleStep);
             _space = null;
 
             while (_planets.length > 0)
@@ -219,6 +225,7 @@ package com.agnither.spacetaxi.view.scenes.game
             _shipView.destroy();
             _shipView = null;
 
+            Starling.current.stage.removeEventListener(EnterFrameEvent.ENTER_FRAME, handleEnterFrame);
             Starling.current.stage.removeEventListener(TouchEvent.TOUCH, handleTouch);
 
             Starling.juggler.remove(this);
@@ -239,6 +246,7 @@ package com.agnither.spacetaxi.view.scenes.game
             var touch: Touch = event.getTouch(stage);
             if (touch != null)
             {
+                var position: Point = touch.getLocation(_shipView);
                 switch (touch.phase)
                 {
                     case TouchPhase.HOVER:
@@ -246,16 +254,24 @@ package com.agnither.spacetaxi.view.scenes.game
                         break;
                     }
                     case TouchPhase.BEGAN:
-                    case TouchPhase.MOVED:
                     {
-                        var position: Point = touch.getLocation(_shipView);
-                        if (Point.distance(position, new Point()) <= 50)
+                        if (Point.distance(position, new Point()) <= 100)
                         {
                             _aiming = true;
+                        } else {
+                            _touch = touch.getLocation(stage);
                         }
+                        break;
+                    }
+                    case TouchPhase.MOVED:
+                    {
                         if (_aiming)
                         {
                             _space.setPullPoint(position.x, position.y);
+                        } else {
+                            position = touch.getLocation(stage);
+                            _delta.x = _touch.x - position.x;
+                            _delta.y = _touch.y - position.y;
                         }
                         break;
                     }
@@ -266,6 +282,9 @@ package com.agnither.spacetaxi.view.scenes.game
                             _space.launch();
                             _aiming = false;
                         }
+                        _touch = null;
+                        _delta.x = 0;
+                        _delta.y = 0;
                         break;
                     }
                 }
@@ -343,7 +362,7 @@ package com.agnither.spacetaxi.view.scenes.game
             _dotCounter = 0;
         }
 
-        private function handleStep(event: Event):void
+        private function handleEnterFrame(event: EnterFrameEvent):void
         {
             if (!_aimMode)
             {
@@ -370,8 +389,8 @@ package com.agnither.spacetaxi.view.scenes.game
             Starling.juggler.tween(_container, event != null ? 0.3 : 0, {
                 scaleX: scale,
                 scaleY: scale,
-                pivotX: _basePivotX + dx * 0.5,
-                pivotY: _basePivotY + dy * 0.5
+                pivotX: _delta.x + _basePivotX + dx * 0.5,
+                pivotY: _delta.y + _basePivotY + dy * 0.5
             });
 
             Starling.juggler.tween(_background, event != null ? 0.3 : 0, {

@@ -3,6 +3,9 @@
  */
 package com.agnither.spacetaxi.vo
 {
+    import com.agnither.spacetaxi.Application;
+    import com.agnither.spacetaxi.model.player.vo.LevelResultVO;
+
     public class EpisodeVO
     {
         public static function get milkyway():EpisodeVO
@@ -12,6 +15,7 @@ package com.agnither.spacetaxi.vo
             episode.name = "Milky Way";
             episode.skin = "milkyway_episode";
             episode.levels = new <LevelVO>[];
+            episode.locked = false;
             return episode;
         }
 
@@ -22,6 +26,7 @@ package com.agnither.spacetaxi.vo
             episode.name = "Maelstrom";
             episode.skin = "maelstorm_episode";
             episode.levels = new <LevelVO>[];
+            episode.locked = false;
             return episode;
         }
 
@@ -32,6 +37,7 @@ package com.agnither.spacetaxi.vo
             episode.name = "Soon";
             episode.skin = "secret_episode";
             episode.levels = new <LevelVO>[];
+            episode.locked = true;
             return episode;
         }
 
@@ -39,13 +45,18 @@ package com.agnither.spacetaxi.vo
         public var name: String;
         public var skin: String;
         public var levels: Vector.<LevelVO>;
+        public var locked: Boolean;
 
         public function get stars():int
         {
             var sum: int = 0;
             for (var i:int = 0; i < levels.length; i++)
             {
-                sum += levels[i].stars;
+                var result: LevelResultVO = Application.appController.player.progress.getLevelResult(levels[i].id);
+                if (result != null)
+                {
+                    sum += result.stars;
+                }
             }
             return sum;
         }

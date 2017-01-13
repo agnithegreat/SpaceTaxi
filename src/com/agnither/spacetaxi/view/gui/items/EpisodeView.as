@@ -8,6 +8,8 @@ package com.agnither.spacetaxi.view.gui.items
     import com.agnither.spacetaxi.vo.EpisodeVO;
     import com.agnither.utils.gui.components.AbstractComponent;
 
+    import feathers.controls.LayoutGroup;
+
     import starling.core.Starling;
 
     import starling.display.Image;
@@ -26,6 +28,7 @@ package com.agnither.spacetaxi.view.gui.items
         public var _episodeBtn: ContainerButton;
         public var _episodeImage: Image;
 
+        public var _stars: LayoutGroup;
         public var _starsTF: TextField;
 
         public var _episodeTF: TextField;
@@ -49,6 +52,9 @@ package com.agnither.spacetaxi.view.gui.items
             _episodeNameTF.text = _episode.name;
             _starsTF.text = "" + _episode.stars + "/" + _episode.starsTotal;
 
+            _episodeBtn.touchable = !_episode.locked;
+            _stars.visible = !_episode.locked;
+
             _episodeBtn.addEventListener(Event.TRIGGERED, handleTriggered);
         }
         
@@ -63,6 +69,14 @@ package com.agnither.spacetaxi.view.gui.items
             SoundManager.playSound(SoundManager.CLICK);
             Application.appController.selectEpisode(_episode.id-1);
             Application.appController.states.levelState();
+        }
+
+        override public function dispose():void
+        {
+            _episodeBtn.removeEventListener(Event.TRIGGERED, handleTriggered);
+            _episode = null;
+
+            super.dispose();
         }
     }
 }

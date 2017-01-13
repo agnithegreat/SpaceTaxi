@@ -550,6 +550,19 @@
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
+            <key type="filename">assets/gui/level_screen/next_level.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>125,125,250,250</rect>
+                <key>scale9Paddings</key>
+                <rect>125,125,250,250</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
             <key type="filename">assets/gui/level_screen/star_big.png</key>
             <key type="filename">assets/gui/level_screen/star_big_empty.png</key>
             <struct type="IndividualSpriteSettings">

@@ -4,6 +4,7 @@
 package com.agnither.spacetaxi.view.gui.screens
 {
     import com.agnither.spacetaxi.Application;
+    import com.agnither.spacetaxi.Application;
     import com.agnither.spacetaxi.managers.sound.SoundManager;
     import com.agnither.spacetaxi.tasks.logic.StartGameTask;
     import com.agnither.spacetaxi.view.gui.items.FakeShipView;
@@ -23,7 +24,7 @@ package com.agnither.spacetaxi.view.gui.screens
 
     public class MainScreen extends Screen
     {
-        public static var SKINS: Array = ["1", "2", "3", "5", "6", "7", "8", "9", "10", "12", "np_01", "np_03", "np_04", "np_05", "np_06", "np_07", "np_08", "np_09", "np_10", "np_11", "np_12"];
+        public static var SKINS: Array = ["0", "1/1", "1/2", "1/3", "1/4", "1/5", "1/6", "1/7", "1/8", "1/9", "1/10", "1/11", "1/12", "2/1", "2/2", "2/3", "2/4", "2/5", "2/6", "2/7", "2/8", "2/9", "2/10", "2/11", "2/12"];
 
         public var _root: LayoutGroup;
 
@@ -102,22 +103,20 @@ package com.agnither.spacetaxi.view.gui.screens
                 _ship.rotation = time;
             });
 
-            var rand1: int = Math.random() * SKINS.length;
+            var max: int = Application.appController.player.progress.level + 2;
+            var rand1: int = Math.random() * max;
             var rand2: int = rand1;
             while (rand2 == rand1)
             {
-                rand2 = Math.random() * SKINS.length;
+                rand2 = Math.random() * max;
             }
 
             _planet1.texture = Application.assetsManager.getTexture("planets/" + SKINS[rand1]);
-            _planet1Mask.texture = Application.assetsManager.getTexture("planets/" + SKINS[rand1]);
-            _planet2.texture = Application.assetsManager.getTexture("planets/" + SKINS[rand2]);
-            _planet2Mask.texture = Application.assetsManager.getTexture("planets/" + SKINS[rand2]);
-
-            _planet1Mask.style = new TextureMaskStyle();
+            _planet1Mask.texture = _planet1.texture;
             _shipShadow1.mask = _planet1Mask;
 
-            _planet2Mask.style = new TextureMaskStyle();
+            _planet2.texture = Application.assetsManager.getTexture("planets/" + SKINS[rand2]);
+            _planet2Mask.texture = _planet2.texture;
             _shipShadow2.mask = _planet2Mask;
 
             _shipContainer.addChild(new FakeShipView());

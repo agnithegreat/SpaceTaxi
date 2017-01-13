@@ -60,18 +60,58 @@
                   "x":184,
                   "y":10
                 }
+              },
+              {
+                "cls":"starling.text.TextField",
+                "constructorParams":[
+                  {
+                    "value":200
+                  },
+                  {
+                    "value":100
+                  },
+                  {
+                    "value":""
+                  }
+                ],
+                "customParams":{},
+                "params":{
+                  "autoSize":"horizontal",
+                  "batchable":true,
+                  "format":{
+                    "cls":"starling.text.TextFormat",
+                    "customParams":{},
+                    "params":{
+                      "color":16777215,
+                      "font":"dragu_medium",
+                      "horizontalAlign":"left",
+                      "size":60
+                    }
+                  },
+                  "height":100,
+                  "name":"_addTF",
+                  "style":{
+                    "cls":"starling.styles.DistanceFieldStyle",
+                    "customParams":{},
+                    "params":{
+                      "mode":"basic",
+                      "softness":0.13
+                    }
+                  },
+                  "text":"+100",
+                  "width":131.25,
+                  "x":184,
+                  "y":130
+                }
               }
             ],
             "cls":"feathers.controls.LayoutGroup",
             "customParams":{},
             "params":{
               "layout":{
-                "cls":"feathers.layout.HorizontalLayout",
+                "cls":"feathers.layout.AnchorLayout",
                 "customParams":{},
-                "params":{
-                  "gap":40,
-                  "verticalAlign":"middle"
-                }
+                "params":{}
               },
               "layoutData":{
                 "cls":"feathers.layout.AnchorLayoutData",
@@ -81,7 +121,7 @@
                   "top":40
                 }
               },
-              "name":"layoutGroup"
+              "name":"money"
             }
           },
           {
@@ -110,6 +150,7 @@
         "cls":"feathers.controls.LayoutGroup",
         "customParams":{},
         "params":{
+          "height":140,
           "layout":{
             "cls":"feathers.layout.HorizontalLayout",
             "customParams":{},
@@ -126,7 +167,7 @@
             }
           },
           "name":"layoutGroup",
-          "width":984,
+          "width":1717.06,
           "x":40,
           "y":40
         }

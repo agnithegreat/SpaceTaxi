@@ -1,56 +1,57 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with TexturePacker http://www.codeandweb.com/texturepacker-->
-<!-- $TexturePacker:SmartUpdate:1a6a09520da1a53ba4351e9e689b69f1:9528e4a7e9f5eb262e85470ad8cf016e:336e91466504ac11351905e0c428ebfd$ -->
+<!-- $TexturePacker:SmartUpdate:939fe87e1eacd53ada4209f876ac87ac:7269a6c661cc154e6446358e9727848d:336e91466504ac11351905e0c428ebfd$ -->
 <TextureAtlas imagePath="gui.png" width="4096" height="4096">
     <SubTexture name="episode_screen/maelstorm_episode" x="1377" y="4" width="1332" height="616" frameX="-101" frameY="-40" frameWidth="1443" frameHeight="700"/>
     <SubTexture name="episode_screen/milkyway_episode" x="4" y="4" width="1367" height="770" frameX="-16" frameY="-15" frameWidth="1400" frameHeight="800"/>
     <SubTexture name="episode_screen/navigation" x="3399" y="1697" rotated="true" width="172" height="152"/>
     <SubTexture name="episode_screen/secret_episode" x="2715" y="4" width="1288" height="972" frameX="-21" frameY="-28" frameWidth="1400" frameHeight="1000"/>
-    <SubTexture name="game_screen/capacity" x="293" y="2177" width="133" height="132"/>
+    <SubTexture name="game_screen/capacity" x="2222" y="2153" width="133" height="132"/>
     <SubTexture name="game_screen/capacity_index_empty" x="2609" y="1379" rotated="true" width="57" height="197"/>
     <SubTexture name="game_screen/capacity_index_full" x="4009" y="579" rotated="true" width="59" height="196"/>
-    <SubTexture name="game_screen/coin" x="4" y="2041" width="144" height="140"/>
-    <SubTexture name="game_screen/fuel" x="436" y="2041" width="133" height="133"/>
+    <SubTexture name="game_screen/coin" x="528" y="2188" width="144" height="140"/>
+    <SubTexture name="game_screen/fuel" x="1762" y="2000" width="133" height="133"/>
     <SubTexture name="game_screen/fuel_index_full" x="4009" y="231" rotated="true" width="59" height="342"/>
     <SubTexture name="game_screen/fuel_life_index_empty" x="2306" y="1202" width="342" height="57"/>
-    <SubTexture name="game_screen/life" x="154" y="2177" width="133" height="133"/>
+    <SubTexture name="game_screen/life" x="1762" y="2139" width="133" height="133"/>
     <SubTexture name="game_screen/life_index_full" x="4009" y="781" rotated="true" width="58" height="342"/>
-    <SubTexture name="game_screen/settings" x="432" y="2180" width="118" height="118"/>
+    <SubTexture name="game_screen/settings" x="1901" y="2233" width="118" height="118"/>
     <SubTexture name="garage_screen/armor" x="2709" y="982" width="883" height="709"/>
     <SubTexture name="garage_screen/arrow_seats" x="2662" y="921" rotated="true" width="41" height="57"/>
     <SubTexture name="garage_screen/back" x="4009" y="4" rotated="true" width="78" height="84"/>
     <SubTexture name="garage_screen/button_buycoins" x="2306" y="788" width="385" height="127"/>
-    <SubTexture name="garage_screen/button_inventory" x="2118" y="2153" width="472" height="125"/>
+    <SubTexture name="garage_screen/button_inventory" x="669" y="2455" width="472" height="125"/>
     <SubTexture name="garage_screen/fuel" x="4" y="780" width="744" height="739"/>
-    <SubTexture name="garage_screen/radar" x="3399" y="1931" width="691" height="657" frameX="0" frameY="-9" frameWidth="691" frameHeight="702"/>
+    <SubTexture name="garage_screen/radar" x="4" y="1525" width="691" height="657" frameX="0" frameY="-9" frameWidth="691" frameHeight="702"/>
     <SubTexture name="garage_screen/seats" x="2609" y="1697" width="784" height="522" frameX="0" frameY="-20" frameWidth="784" frameHeight="565"/>
-    <SubTexture name="garage_screen/shiel_armor" x="4" y="2187" width="128" height="128"/>
-    <SubTexture name="level_screen/arrow" x="1740" y="2313" width="96" height="142"/>
+    <SubTexture name="garage_screen/shiel_armor" x="2361" y="2153" width="128" height="128"/>
+    <SubTexture name="level_screen/arrow" x="528" y="2334" rotated="true" width="142" height="96"/>
     <SubTexture name="level_screen/bar_active" x="2662" y="984" width="40" height="40"/>
     <SubTexture name="level_screen/bar_empty" x="2662" y="1030" width="40" height="40"/>
     <SubTexture name="level_screen/dots" x="4009" y="94" width="78" height="24"/>
-    <SubTexture name="level_screen/glow_active" x="1309" y="1484" width="537" height="537" frameX="-31" frameY="-31" frameWidth="600" frameHeight="600"/>
+    <SubTexture name="level_screen/glow_active" x="701" y="1912" width="537" height="537" frameX="-6" frameY="-6" frameWidth="550" frameHeight="550"/>
     <SubTexture name="level_screen/navigation" x="2609" y="1265" width="94" height="108"/>
-    <SubTexture name="level_screen/star_big" x="154" y="2041" width="135" height="130" frameX="-7" frameY="-10" frameWidth="150" frameHeight="150"/>
-    <SubTexture name="level_screen/star_big_empty" x="295" y="2041" width="135" height="130" frameX="-7" frameY="-10" frameWidth="150" frameHeight="150"/>
+    <SubTexture name="level_screen/next_level" x="3598" y="1129" width="493" height="488" frameX="-3" frameY="-6" frameWidth="500" frameHeight="500"/>
+    <SubTexture name="level_screen/star_big" x="528" y="2436" width="135" height="130" frameX="-7" frameY="-10" frameWidth="150" frameHeight="150"/>
+    <SubTexture name="level_screen/star_big_empty" x="528" y="2572" width="135" height="130" frameX="-7" frameY="-10" frameWidth="150" frameHeight="150"/>
     <SubTexture name="main_screen/achievements" x="2306" y="626" width="398" height="156"/>
-    <SubTexture name="main_screen/achievements_teaser" x="1222" y="2027" width="512" height="505"/>
+    <SubTexture name="main_screen/achievements_teaser" x="1244" y="2000" width="512" height="505"/>
     <SubTexture name="main_screen/choose_level" x="2306" y="921" width="350" height="275"/>
-    <SubTexture name="main_screen/choose_level_teaser" x="698" y="1912" width="518" height="513"/>
+    <SubTexture name="main_screen/choose_level_teaser" x="4" y="2188" width="518" height="513"/>
     <SubTexture name="main_screen/free_coins" x="3598" y="982" width="301" height="140"/>
-    <SubTexture name="main_screen/free_coins_teaser" x="1852" y="1638" width="432" height="426"/>
-    <SubTexture name="main_screen/garage" x="1740" y="2027" rotated="true" width="103" height="280"/>
+    <SubTexture name="main_screen/free_coins_teaser" x="4" y="2707" width="432" height="426"/>
+    <SubTexture name="main_screen/garage" x="2003" y="1484" width="280" height="103"/>
     <SubTexture name="main_screen/garage_teaser" x="754" y="1366" width="549" height="540"/>
     <SubTexture name="main_screen/logo_express" x="2306" y="1265" rotated="true" width="297" height="882"/>
     <SubTexture name="main_screen/logo_glow" x="1377" y="626" width="923" height="852" frameX="-11" frameY="-82" frameWidth="948" frameHeight="948"/>
-    <SubTexture name="main_screen/logo_kosmos" x="3598" y="1129" rotated="true" width="477" height="796"/>
-    <SubTexture name="main_screen/play_button" x="4" y="1525" width="688" height="510" frameX="0" frameY="0" frameWidth="688" frameHeight="521"/>
-    <SubTexture name="main_screen/play_button_txt" x="1849" y="2070" width="263" height="130"/>
+    <SubTexture name="main_screen/logo_kosmos" x="3598" y="1623" rotated="true" width="477" height="796"/>
+    <SubTexture name="main_screen/play_button" x="1309" y="1484" width="688" height="510" frameX="0" frameY="0" frameWidth="688" frameHeight="521"/>
+    <SubTexture name="main_screen/play_button_txt" x="2003" y="1593" width="263" height="130"/>
     <SubTexture name="main_screen/ship_shadow" x="4009" y="124" rotated="true" width="67" height="101"/>
     <SubTexture name="upgrades_screen/circle" x="3905" y="982" rotated="true" width="96" height="102"/>
     <SubTexture name="upgrades_screen/dotted_line" x="4082" y="124" rotated="true" width="10" height="45" frameX="0" frameY="0" frameWidth="52" frameHeight="10"/>
-    <SubTexture name="upgrades_screen/quest_item" x="575" y="2041" rotated="true" width="112" height="118"/>
-    <SubTexture name="upgrades_screen/upgrade_button" x="1849" y="2206" rotated="true" width="213" height="498" frameX="-1" frameY="-1" frameWidth="500" frameHeight="215"/>
-    <SubTexture name="upgrades_screen/upgrade_button_inactive" x="1852" y="1484" width="435" height="148" frameX="-32" frameY="-33" frameWidth="500" frameHeight="215"/>
+    <SubTexture name="upgrades_screen/quest_item" x="1762" y="2278" width="118" height="112"/>
+    <SubTexture name="upgrades_screen/upgrade_button" x="2003" y="1729" rotated="true" width="213" height="498" frameX="-1" frameY="-1" frameWidth="500" frameHeight="215"/>
+    <SubTexture name="upgrades_screen/upgrade_button_inactive" x="3399" y="1855" rotated="true" width="148" height="435" frameX="-32" frameY="-33" frameWidth="500" frameHeight="215"/>
     <SubTexture name="upgrades_screen/upgrade_icon_bg" x="754" y="780" width="580" height="580"/>
 </TextureAtlas>

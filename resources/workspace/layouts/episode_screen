@@ -42,7 +42,7 @@
             "cls":"feathers.controls.ScrollContainer",
             "customParams":{},
             "params":{
-              "height":1400,
+              "height":1536,
               "layout":{
                 "cls":"feathers.layout.HorizontalLayout",
                 "customParams":{},
@@ -75,8 +75,7 @@
             }
           },
           "name":"center",
-          "x":324,
-          "y":68
+          "x":324
         }
       },
       {
@@ -275,7 +274,8 @@
             ],
             "customParams":{},
             "params":{
-              "name":"icon"
+              "name":"icon",
+              "y":-25
             }
           },
           {
@@ -293,6 +293,7 @@
             ],
             "customParams":{},
             "params":{
+              "autoSize":"horizontal",
               "batchable":true,
               "format":{
                 "cls":"starling.text.TextFormat",
@@ -314,9 +315,8 @@
                 }
               },
               "text":"10/36",
-              "width":280,
-              "x":170,
-              "y":25
+              "width":268.75,
+              "x":170
             }
           }
         ],

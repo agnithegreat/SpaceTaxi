@@ -26,7 +26,7 @@
         "params":{
           "name":"_episodeBtn",
           "scaleWhenDown":1,
-          "y":400
+          "y":450
         }
       },
       {
@@ -46,7 +46,6 @@
             ],
             "customParams":{},
             "params":{
-              "autoScale":true,
               "batchable":true,
               "format":{
                 "cls":"starling.text.TextFormat",
@@ -86,7 +85,6 @@
             ],
             "customParams":{},
             "params":{
-              "autoScale":true,
               "batchable":true,
               "format":{
                 "cls":"starling.text.TextFormat",
@@ -109,7 +107,7 @@
               },
               "text":"Milky Way",
               "width":1400,
-              "y":120
+              "y":140
             }
           }
         ],
@@ -145,7 +143,9 @@
             ],
             "customParams":{},
             "params":{
-              "name":"icon"
+              "name":"icon",
+              "x":-25,
+              "y":-25
             }
           },
           {
@@ -163,6 +163,7 @@
             ],
             "customParams":{},
             "params":{
+              "autoSize":"horizontal",
               "batchable":true,
               "format":{
                 "cls":"starling.text.TextFormat",
@@ -174,19 +175,19 @@
                   "size":100
                 }
               },
-              "height":100,
+              "height":120,
               "name":"_starsTF",
               "style":{
                 "cls":"starling.styles.DistanceFieldStyle",
                 "customParams":{},
                 "params":{
-                  "mode":"basic"
+                  "mode":"basic",
+                  "softness":0.09
                 }
               },
               "text":"10/36",
-              "width":280,
-              "x":170,
-              "y":25
+              "width":268.75,
+              "x":150
             }
           }
         ],
@@ -202,21 +203,20 @@
             "cls":"feathers.layout.AnchorLayoutData",
             "customParams":{},
             "params":{
-              "bottom":80,
+              "bottom":120,
               "horizontalCenter":0
             }
           },
-          "name":"bottom_center",
-          "width":450,
-          "x":475,
-          "y":1170
+          "name":"_stars",
+          "x":491,
+          "y":1291
         }
       }
     ],
     "cls":"feathers.controls.LayoutGroup",
     "customParams":{},
     "params":{
-      "height":1400,
+      "height":1536,
       "layout":{
         "cls":"feathers.layout.AnchorLayout",
         "customParams":{},
@@ -235,7 +235,7 @@
     "canvasColor":0,
     "canvasSize":{
       "x":1400,
-      "y":1400
+      "y":1536
     }
   },
   "version":"2.0"

@@ -34,10 +34,11 @@ package com.agnither.spacetaxi.view.gui.screens
         public var _fuelIndicator: IndicatorView;
 
         public var _moneyTF: TextField;
+        public var _addTF: TextField;
 
         private var _space: Space;
 
-        private var _money: int = -1;
+        private var _moneyVal: int = -1;
 
         public function GameScreen()
         {
@@ -68,6 +69,8 @@ package com.agnither.spacetaxi.view.gui.screens
             handleUpdate(null);
 
             _settingsButton.addEventListener(Event.TRIGGERED, handleSettings);
+
+            _addTF.alpha = 0;
         }
 
         override protected function deactivate():void
@@ -99,10 +102,17 @@ package com.agnither.spacetaxi.view.gui.screens
             _durabilityIndicator.update(ship.durability, event != null);
 
             var moneyVal: int = Application.appController.space.orders.money;
-            if (_money != moneyVal)
+            if (_moneyVal != moneyVal)
             {
-                _money = moneyVal;
-                Starling.juggler.tween(this, event != null ? 0.5 : 0, {"money": _money});
+                if (event != null)
+                {
+                    _addTF.text = "+" + (moneyVal - _moneyVal);
+                    _addTF.alpha = 1;
+                    Starling.juggler.tween(_addTF, 1, {"alpha": 0});
+                }
+
+                _moneyVal = moneyVal;
+                Starling.juggler.tween(this, event != null ? 0.5 : 0, {"money": _moneyVal});
             }
         }
 
