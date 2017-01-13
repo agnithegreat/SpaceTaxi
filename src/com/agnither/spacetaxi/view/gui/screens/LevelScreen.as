@@ -68,11 +68,11 @@ package com.agnither.spacetaxi.view.gui.screens
             _pageIndicator.interactionMode = PageIndicatorInteractionMode.PRECISE;
             _pageIndicator.normalSymbolFactory = function():DisplayObject
             {
-                return new Image(Application.assetsManager.getTexture("level_screen/bar_empty"));
+                return new Image(Application.assetsManager.getTexture("common/bar_empty"));
             };
             _pageIndicator.selectedSymbolFactory = function():DisplayObject
             {
-                return new Image(Application.assetsManager.getTexture("level_screen/bar_active"));
+                return new Image(Application.assetsManager.getTexture("common/bar_active"));
             };
 
             _back.width = stage.stageWidth;

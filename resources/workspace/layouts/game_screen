@@ -10,7 +10,7 @@
                 "constructorParams":[
                   {
                     "cls":"starling.textures.Texture",
-                    "textureName":"game_screen/coin"
+                    "textureName":"common/coin"
                   }
                 ],
                 "customParams":{},
@@ -179,7 +179,7 @@
             "constructorParams":[
               {
                 "cls":"starling.textures.Texture",
-                "textureName":"game_screen/settings"
+                "textureName":"common/settings"
               }
             ],
             "customParams":{},

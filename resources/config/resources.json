@@ -8,14 +8,11 @@
       "layouts/main_screen",
       "layouts/game_screen",
       "layouts/fuel_indicator",
-      "layouts/capacity_indicator",
       "layouts/durability_indicator",
       "layouts/episode_screen",
       "layouts/episode",
       "layouts/level_screen",
       "layouts/level",
-
-      "textures/space_pattern.png",
 
       "textures/gui.png",
       "textures/gui.xml",
@@ -24,14 +21,9 @@
 
       "textures/ship/ship_skeleton.json",
       "textures/ship/ship_texture.json",
-      "textures/ship/ship_texture.png",
 
-      "textures/fonts/dragu_bold.png",
       "textures/fonts/dragu_bold.fnt",
-      "textures/fonts/dragu_medium.png",
-      "textures/fonts/dragu_medium.fnt",
-      "textures/fonts/adventure.png",
-      "textures/fonts/adventure.fnt"
+      "textures/fonts/dragu_medium.fnt"
     ]
   },
   "sounds": {

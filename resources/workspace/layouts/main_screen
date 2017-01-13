@@ -37,12 +37,12 @@
             "customParams":{},
             "params":{
               "name":"_glow",
-              "pivotX":474,
-              "pivotY":474,
-              "scaleX":1.25,
-              "scaleY":1.25,
-              "x":592.5,
-              "y":305
+              "pivotX":350.5,
+              "pivotY":350.5,
+              "scaleX":2,
+              "scaleY":2,
+              "x":604,
+              "y":302
             }
           },
           {

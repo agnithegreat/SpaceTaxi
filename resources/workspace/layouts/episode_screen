@@ -85,7 +85,7 @@
             "constructorParams":[
               {
                 "cls":"starling.textures.Texture",
-                "textureName":"episode_screen/navigation"
+                "textureName":"common/navigate_big"
               }
             ],
             "customParams":{},
@@ -134,7 +134,7 @@
             "constructorParams":[
               {
                 "cls":"starling.textures.Texture",
-                "textureName":"episode_screen/navigation"
+                "textureName":"common/navigate_big"
               }
             ],
             "customParams":{},
@@ -185,7 +185,7 @@
                 "constructorParams":[
                   {
                     "cls":"starling.textures.Texture",
-                    "textureName":"garage_screen/back"
+                    "textureName":"common/back"
                   }
                 ],
                 "customParams":{},

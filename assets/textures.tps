@@ -4,7 +4,7 @@
         <key>fileFormatVersion</key>
         <int>4</int>
         <key>texturePackerVersion</key>
-        <string>4.3.1</string>
+        <string>4.3.3</string>
         <key>fileName</key>
         <string>/Users/agnither/projects/Idea/SpaceTaxi/assets/textures.tps</string>
         <key>autoSDSettings</key>
@@ -245,19 +245,6 @@
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">assets/game/misc/glow.png</key>
-            <struct type="IndividualSpriteSettings">
-                <key>pivotPoint</key>
-                <point_f>0.5,0.5</point_f>
-                <key>scale9Enabled</key>
-                <false/>
-                <key>scale9Borders</key>
-                <rect>121,76,241,151</rect>
-                <key>scale9Paddings</key>
-                <rect>121,76,241,151</rect>
-                <key>scale9FromFile</key>
-                <false/>
-            </struct>
             <key type="filename">assets/game/misc/loot_box.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
@@ -346,6 +333,32 @@
                 <rect>153,143,307,287</rect>
                 <key>scale9Paddings</key>
                 <rect>153,143,307,287</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">assets/game/ship_texture.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>512,256,1024,512</rect>
+                <key>scale9Paddings</key>
+                <rect>512,256,1024,512</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">assets/game/space_pattern.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>256,256,512,512</rect>
+                <key>scale9Paddings</key>
+                <rect>256,256,512,512</rect>
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
