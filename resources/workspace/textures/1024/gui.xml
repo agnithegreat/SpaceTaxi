@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with TexturePacker http://www.codeandweb.com/texturepacker-->
+<!-- $TexturePacker:SmartUpdate:48c96f48b1035942799fc954bca78e0d:f7a475031192c342f526281c98d97907:298a8c87037b1387d385db5bb085372e$ -->
+<TextureAtlas imagePath="gui.png" width="1024" height="2048">
+    <SubTexture name="common/back" x="654" y="395" rotated="true" width="35" height="41" frameX="-1" frameY="-4" frameWidth="42" frameHeight="39"/>
+    <SubTexture name="common/bar_active" x="986" y="592" width="20" height="20"/>
+    <SubTexture name="common/bar_empty" x="986" y="618" width="20" height="20"/>
+    <SubTexture name="common/coin" x="279" y="1439" width="69" height="66"/>
+    <SubTexture name="common/navigate_big" x="910" y="1280" rotated="true" width="86" height="76"/>
+    <SubTexture name="common/navigation" x="355" y="1282" width="47" height="54"/>
+    <SubTexture name="common/settings" x="946" y="1767" width="59" height="59"/>
+    <SubTexture name="episode_screen/maelstorm_episode" x="695" y="4" rotated="true" width="285" height="652" frameX="-53" frameY="-21" frameWidth="722" frameHeight="350"/>
+    <SubTexture name="episode_screen/milkyway_episode" x="4" y="4" width="685" height="385" frameX="-7" frameY="-8" frameWidth="700" frameHeight="400"/>
+    <SubTexture name="episode_screen/secret_episode" x="4" y="395" width="644" height="481" frameX="-10" frameY="-18" frameWidth="700" frameHeight="500"/>
+    <SubTexture name="game_screen/fuel" x="265" y="1654" width="67" height="67"/>
+    <SubTexture name="game_screen/fuel_index_full" x="986" y="61" rotated="true" width="30" height="171"/>
+    <SubTexture name="game_screen/fuel_life_index_empty" x="986" y="238" rotated="true" width="29" height="171"/>
+    <SubTexture name="game_screen/life" x="873" y="1696" width="67" height="67"/>
+    <SubTexture name="game_screen/life_index_full" x="986" y="415" rotated="true" width="29" height="171"/>
+    <SubTexture name="level_screen/arrow" x="946" y="1696" width="65" height="65"/>
+    <SubTexture name="level_screen/glow_active" x="4" y="1815" rotated="true" width="210" height="220" frameX="0" frameY="-5" frameWidth="220" frameHeight="220"/>
+    <SubTexture name="level_screen/glow_active_circle" x="4" y="1282" width="269" height="269" frameX="-3" frameY="-3" frameWidth="275" frameHeight="275"/>
+    <SubTexture name="level_screen/next_level" x="619" y="1556" width="248" height="246" frameX="-1" frameY="-2" frameWidth="250" frameHeight="250"/>
+    <SubTexture name="level_screen/next_level_symbol" x="451" y="1026" rotated="true" width="157" height="144" frameX="-6" frameY="-2" frameWidth="150" frameHeight="160"/>
+    <SubTexture name="level_screen/star_big" x="265" y="1583" width="69" height="65" frameX="-3" frameY="-5" frameWidth="75" frameHeight="75"/>
+    <SubTexture name="level_screen/star_big_empty" x="279" y="1511" width="69" height="66" frameX="-3" frameY="-5" frameWidth="75" frameHeight="75"/>
+    <SubTexture name="main_screen/achievements" x="910" y="1362" rotated="true" width="78" height="199"/>
+    <SubTexture name="main_screen/achievements_teaser" x="4" y="1557" width="255" height="252" frameX="0" frameY="0" frameWidth="256" frameHeight="253"/>
+    <SubTexture name="main_screen/choose_level" x="451" y="882" width="175" height="138"/>
+    <SubTexture name="main_screen/choose_level_teaser" x="355" y="1395" width="258" height="257" frameX="0" frameY="0" frameWidth="259" frameHeight="257"/>
+    <SubTexture name="main_screen/free_coins" x="279" y="1282" rotated="true" width="70" height="151"/>
+    <SubTexture name="main_screen/free_coins_teaser" x="408" y="1176" width="216" height="213"/>
+    <SubTexture name="main_screen/garage" x="873" y="1567" width="140" height="52"/>
+    <SubTexture name="main_screen/garage_teaser" x="630" y="1280" width="274" height="270" frameX="-1" frameY="0" frameWidth="275" frameHeight="270"/>
+    <SubTexture name="main_screen/logo_express" x="4" y="882" width="441" height="149"/>
+    <SubTexture name="main_screen/logo_glow" x="654" y="662" width="351" height="351"/>
+    <SubTexture name="main_screen/logo_kosmos" x="4" y="1037" width="398" height="239"/>
+    <SubTexture name="main_screen/play_button" x="632" y="1019" width="339" height="255" frameX="-3" frameY="0" frameWidth="344" frameHeight="261"/>
+    <SubTexture name="main_screen/play_button_txt" x="873" y="1625" width="132" height="65"/>
+    <SubTexture name="main_screen/ship_shadow" x="986" y="4" rotated="true" width="34" height="51"/>
+</TextureAtlas>

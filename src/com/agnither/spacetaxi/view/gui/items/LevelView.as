@@ -36,6 +36,7 @@ package com.agnither.spacetaxi.view.gui.items
         public var _arrow: Image;
 
         public var _glow: Image;
+        public var _glowCircle: Image;
         public var _planetBtn: ContainerButton;
         public var _planetImage: Image;
         public var _shadow: Image;
@@ -75,6 +76,7 @@ package com.agnither.spacetaxi.view.gui.items
             _shadow.visible = locked;
             _shadowSymbol.visible = locked;
             _glow.visible = current;
+            _glowCircle.visible = current;
             _arrow.visible = current;
 
             if (result != null && result.stars > 0)
@@ -93,7 +95,7 @@ package com.agnither.spacetaxi.view.gui.items
                 Animator.create(2, Math.random() * Math.PI * 2, function (time:Number):void
                 {
                     _glow.alpha = 0.75 + Math.cos(time) * 0.25;
-                    _glow.rotation = time * 0.25;
+                    _glowCircle.rotation = time * 0.25;
                     _arrow.pivotY = _arrow.height * Math.sin(time) * 0.5;
                 });
             } else {

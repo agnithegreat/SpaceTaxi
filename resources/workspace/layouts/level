@@ -8,7 +8,7 @@
             "constructorParams":[
               {
                 "cls":"starling.textures.Texture",
-                "textureName":"level_screen/glow_active"
+                "textureName":"level_screen/glow_active_circle"
               }
             ],
             "customParams":{},
@@ -16,6 +16,23 @@
               "name":"_glow",
               "pivotX":275,
               "pivotY":275,
+              "x":300,
+              "y":350
+            }
+          },
+          {
+            "cls":"starling.display.Image",
+            "constructorParams":[
+              {
+                "cls":"starling.textures.Texture",
+                "textureName":"level_screen/glow_active"
+              }
+            ],
+            "customParams":{},
+            "params":{
+              "name":"_glowCircle",
+              "pivotX":220,
+              "pivotY":220,
               "x":300,
               "y":350
             }
@@ -35,8 +52,8 @@
                   "name":"_planetImage",
                   "pivotX":250,
                   "pivotY":250,
-                  "scaleX":0.7,
-                  "scaleY":0.7
+                  "scaleX":0.75,
+                  "scaleY":0.75
                 }
               }
             ],
@@ -280,7 +297,8 @@
     "canvasSize":{
       "x":550,
       "y":700
-    }
+    },
+    "hidden":"0000001100000"
   },
   "version":"2.0"
 }

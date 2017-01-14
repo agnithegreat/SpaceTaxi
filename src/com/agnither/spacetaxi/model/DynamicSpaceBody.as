@@ -16,7 +16,19 @@ package com.agnither.spacetaxi.model
         {
             return Math.sqrt(_speed.x * _speed.x + _speed.y * _speed.y);
         }
+        
+        protected var _maxSpeed: Number;
+        public function get maxSpeed():Number
+        {
+            return _maxSpeed;
+        }
 
+        protected var _stable: Boolean;
+        public function get stable():Boolean
+        {
+            return _stable;
+        }
+        
         public function DynamicSpaceBody(radius: int, mass: Number)
         {
             _speed = new Point();
@@ -63,6 +75,11 @@ package com.agnither.spacetaxi.model
             
             _speed.x = 0;
             _speed.y = 0;
+        }
+        
+        public function crash():void
+        {
+            _alive = false;
         }
 
         override public function destroy():void

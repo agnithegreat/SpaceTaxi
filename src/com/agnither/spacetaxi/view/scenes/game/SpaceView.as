@@ -5,10 +5,12 @@ package com.agnither.spacetaxi.view.scenes.game
 {
     import com.agnither.spacetaxi.Application;
     import com.agnither.spacetaxi.model.Collectible;
+    import com.agnither.spacetaxi.model.Meteor;
     import com.agnither.spacetaxi.model.Planet;
     import com.agnither.spacetaxi.model.Space;
     import com.agnither.spacetaxi.model.orders.Zone;
     import com.agnither.spacetaxi.tasks.logic.RestartGameTask;
+    import com.agnither.spacetaxi.view.scenes.game.effects.CometEffect;
     import com.agnither.spacetaxi.view.scenes.game.effects.ExplosionEffect;
     import com.agnither.tasks.global.TaskSystem;
     import com.agnither.utils.gui.components.AbstractComponent;
@@ -46,6 +48,7 @@ package com.agnither.spacetaxi.view.scenes.game
         private var _starsParallax3: ParallaxLayer;
 
         private var _container: Sprite;
+        private var _animationsContainer: Sprite;
         private var _planetsContainer: Sprite;
         private var _zonesContainer: Sprite;
         private var _objectsContainer: Sprite;
@@ -111,6 +114,9 @@ package com.agnither.spacetaxi.view.scenes.game
             _container = new Sprite();
             addChild(_container);
 
+            _animationsContainer = new Sprite();
+            _container.addChild(_animationsContainer);
+
             _planetsContainer = new Sprite();
             _container.addChild(_planetsContainer);
 
@@ -135,6 +141,7 @@ package com.agnither.spacetaxi.view.scenes.game
         override protected function activate():void
         {
             _space = Application.appController.space;
+            _space.addEventListener(Space.NEW_METEOR, handleNewMeteor);
             _space.addEventListener(Space.RESTART, handleRestart);
             _space.addEventListener(Space.SHOW_TRAJECTORY, handleShowTrajectory);
             _space.addEventListener(Space.UPDATE_TRAJECTORY, handleUpdateTrajectory);
@@ -193,6 +200,7 @@ package com.agnither.spacetaxi.view.scenes.game
 
         override protected function deactivate():void
         {
+            _space.removeEventListener(Space.NEW_METEOR, handleNewMeteor);
             _space.removeEventListener(Space.RESTART, handleRestart);
             _space.removeEventListener(Space.SHOW_TRAJECTORY, handleShowTrajectory);
             _space.removeEventListener(Space.UPDATE_TRAJECTORY, handleUpdateTrajectory);
@@ -216,6 +224,8 @@ package com.agnither.spacetaxi.view.scenes.game
                 var orderView: ZoneView = _zones.shift();
                 orderView.destroy();
             }
+
+            _animationsContainer.removeChildren(0, -1, true);
 
             resetTrajectory();
 
@@ -291,6 +301,12 @@ package com.agnither.spacetaxi.view.scenes.game
             }
         }
 
+        private function handleNewMeteor(event: Event):void
+        {
+            var meteorView: MeteorView = new MeteorView(event.data as Meteor);
+            _animationsContainer.addChild(meteorView);
+        }
+
         private function handleRestart(event: Event):void
         {
             deactivate();
@@ -344,7 +360,7 @@ package com.agnither.spacetaxi.view.scenes.game
 
                     if (!_aimMode)
                     {
-                        Starling.juggler.tween(dot, 0.5, {delay: 0.5, alpha: 0, onComplete: dot.removeFromParent, onCompleteArgs: [true]});
+                        Starling.juggler.tween(dot, 0.5, {delay: 3, alpha: 0, onComplete: dot.removeFromParent, onCompleteArgs: [true]});
                     }
 
                     _dotCounter++;
@@ -370,6 +386,14 @@ package com.agnither.spacetaxi.view.scenes.game
 
         private function handleEnterFrame(event: EnterFrameEvent):void
         {
+            if (Math.random() < 0.005)
+            {
+                var comet: CometEffect = new CometEffect();
+                comet.x = _viewport.x + Math.random() * _viewport.width;
+                comet.y = _viewport.y + Math.random() * _viewport.height;
+                _animationsContainer.addChild(comet);
+            }
+
             if (!_aimMode)
             {
                 updateTrajectory(_space.flightTime);

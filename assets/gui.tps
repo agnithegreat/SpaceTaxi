@@ -13,7 +13,7 @@
                 <key>scale</key>
                 <double>1</double>
                 <key>extension</key>
-                <string></string>
+                <string>2048</string>
                 <key>spriteFilter</key>
                 <string></string>
                 <key>acceptFractionalValues</key>
@@ -21,9 +21,26 @@
                 <key>maxTextureSize</key>
                 <QSize>
                     <key>width</key>
-                    <int>-1</int>
+                    <int>4096</int>
                     <key>height</key>
-                    <int>-1</int>
+                    <int>4096</int>
+                </QSize>
+            </struct>
+            <struct type="AutoSDSettings">
+                <key>scale</key>
+                <double>0.5</double>
+                <key>extension</key>
+                <string>1024</string>
+                <key>spriteFilter</key>
+                <string></string>
+                <key>acceptFractionalValues</key>
+                <false/>
+                <key>maxTextureSize</key>
+                <QSize>
+                    <key>width</key>
+                    <int>2048</int>
+                    <key>height</key>
+                    <int>2048</int>
                 </QSize>
             </struct>
         </array>
@@ -150,7 +167,7 @@
             <key>data</key>
             <struct type="DataFile">
                 <key>name</key>
-                <filename>../resources/workspace/textures/gui.xml</filename>
+                <filename>../resources/workspace/textures/{v}/gui.xml</filename>
             </struct>
         </map>
         <key>multiPack</key>
@@ -276,20 +293,6 @@
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">assets/gui/dragu_bold.png</key>
-            <key type="filename">assets/gui/dragu_medium.png</key>
-            <struct type="IndividualSpriteSettings">
-                <key>pivotPoint</key>
-                <point_f>0.5,0.5</point_f>
-                <key>scale9Enabled</key>
-                <false/>
-                <key>scale9Borders</key>
-                <rect>128,128,256,256</rect>
-                <key>scale9Paddings</key>
-                <rect>128,128,256,256</rect>
-                <key>scale9FromFile</key>
-                <false/>
-            </struct>
             <key type="filename">assets/gui/episode_screen/maelstorm_episode.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
@@ -405,6 +408,19 @@
                 <rect>150,150,300,300</rect>
                 <key>scale9Paddings</key>
                 <rect>150,150,300,300</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">assets/gui/level_screen/glow_active_circle.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>138,138,275,275</rect>
+                <key>scale9Paddings</key>
+                <rect>138,138,275,275</rect>
                 <key>scale9FromFile</key>
                 <false/>
             </struct>

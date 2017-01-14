@@ -44,10 +44,11 @@ package com.agnither.spacetaxi
             viewport.width = stage.stageWidth;
             viewport.height = stage.stageHeight;
 
+            graphicPack = Math.round(viewport.width / 1024) * 1024;
             scaleFactor = 2 * viewport.height / guiSize.height;
-//            Application.scaleFactor = graphicPack / guiSize.height;
+//            Application.scaleFactor = graphicPack / guiSize.width;
 
-            assetsManager = new AssetMediator(1, true);
+            assetsManager = new AssetMediator(graphicPack / guiSize.width, true);
             assetsManager.verbose = Config.debug;
 
             const linkers:Array = [AnchorLayout, HorizontalLayout, VerticalLayout, TiledRowsLayout, TextureMaskStyle, DistanceFieldStyle];

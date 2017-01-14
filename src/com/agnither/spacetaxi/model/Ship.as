@@ -23,18 +23,6 @@ package com.agnither.spacetaxi.model
             return _rotation;
         }
         
-        protected var _landed: Boolean;
-        public function get landed():Boolean
-        {
-            return _landed;
-        }
-        
-        protected var _crashed: Boolean;
-        public function get crashed():Boolean
-        {
-            return _crashed;
-        }
-
         protected var _fuel: int;
         public function get fuel():int
         {
@@ -66,12 +54,17 @@ package com.agnither.spacetaxi.model
         private var _landing: Boolean;
 
         private var _signal: String;
+        
+        private var _clone: Boolean;
 
-        public function Ship(radius: int, mass: Number, rotation: Number)
+        public function Ship(radius: int, mass: Number, rotation: Number, clone: Boolean = false)
         {
             super(radius, mass);
             
             _rotation = rotation;
+            _maxSpeed = 100;
+            
+            _clone = clone;
 
             reset();
         }
@@ -80,8 +73,7 @@ package com.agnither.spacetaxi.model
         {
             super.reset();
             
-            _landed = false;
-            _crashed = false;
+            _stable = false;
 
             // TODO: FUEL - setup
             _fuelMax = 3;
@@ -103,10 +95,10 @@ package com.agnither.spacetaxi.model
                 _planet.removeEventListener(SpaceBody.UPDATE, handlePlanetUpdate);
                 _planet = null;
             }
-            _landed = false;
+            _stable = false;
             _landing = false;
 
-            if (fuel > 0)
+            if (!_clone && fuel > 0)
             {
                 _fuel -= fuel;
                 
@@ -140,7 +132,7 @@ package com.agnither.spacetaxi.model
         {
             dispatchEventWith(COLLIDE, false, power);
 
-            if (power > 0)
+            if (!_clone && power > 0)
             {
                 _durability -= power;
                 
@@ -170,7 +162,7 @@ package com.agnither.spacetaxi.model
             _planet.addEventListener(SpaceBody.UPDATE, handlePlanetUpdate);
             
             stop();
-            _landed = true;
+            _stable = true;
             dispatchEventWith(LAND);
         }
 
@@ -184,11 +176,12 @@ package com.agnither.spacetaxi.model
             }
         }
 
-        public function crash():void
+        override public function crash():void
         {
+            super.crash();
+            
             _durability = 0;
             stop();
-            _crashed = true;
             dispatchEventWith(CRASH);
         }
 
@@ -226,7 +219,7 @@ package com.agnither.spacetaxi.model
         
         override public function clone():SpaceBody
         {
-            var body: Ship = new Ship(_radius, _mass, _rotation);
+            var body: Ship = new Ship(_radius, _mass, _rotation, true);
             body.place(_position.x, _position.y);
             body.accelerate(_speed.x, _speed.y);
             return body;

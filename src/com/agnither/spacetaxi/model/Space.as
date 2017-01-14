@@ -26,6 +26,7 @@ package com.agnither.spacetaxi.model
 
     public class Space extends EventDispatcher implements IAnimatable
     {
+        public static const NEW_METEOR: String = "Space.NEW_METEOR";
         public static const RESTART: String = "Space.RESTART";
         public static const SHOW_TRAJECTORY: String = "Space.SHOW_TRAJECTORY";
         public static const UPDATE_TRAJECTORY: String = "Space.UPDATE_TRAJECTORY";
@@ -38,10 +39,9 @@ package com.agnither.spacetaxi.model
         public static const MIN_SPEED: Number = 1;
         public static const DAMAGE_SPEED: Number = 35;
         public static const CONTROL_SPEED: Number = 100;
-        public static const MAX_SPEED: Number = 1000;
         public static const TRAJECTORY_STEPS: Number = 250; // default 50
         public static const TRAJECTORY_LENGTH: Number = 10000; // default 100
-        public static const PULL_MULTIPLIER: Number = 0.1;
+        public static const PULL_MULTIPLIER: Number = 0.05;
         public static const PULL_SCALE: int = 1;
 
         private var _ship: Ship;
@@ -61,6 +61,12 @@ package com.agnither.spacetaxi.model
         public function get collectibles():Vector.<Collectible>
         {
             return _collectibles;
+        }
+        
+        private var _dynamics: Vector.<DynamicSpaceBody>;
+        public function get dynamics():Vector.<DynamicSpaceBody>
+        {
+            return _dynamics;
         }
         
         private var _viewport: Rectangle;
@@ -88,6 +94,8 @@ package com.agnither.spacetaxi.model
         }
 
         private var _time: Number = 0;
+        
+        private var _shipTime: Number = 0;
         private var _flightTime: Number = 0;
         public function get flightTime():Number 
         {
@@ -145,6 +153,8 @@ package com.agnither.spacetaxi.model
                 collectible.place(coll.position.x, coll.position.y);
                 _collectibles.push(collectible);
             }
+            
+            _dynamics = new <DynamicSpaceBody>[];
 
             _viewport = level.viewport;
             _center = new Point();
@@ -153,6 +163,9 @@ package com.agnither.spacetaxi.model
 
             _pullPoint = new Point();
             _trajectory = new <Point>[];
+            
+            _time = 0;
+            _shipTime = 0;
 
             _zoneController = new ZoneController();
             for (i = 0; i < level.zones.length; i++)
@@ -203,6 +216,13 @@ package com.agnither.spacetaxi.model
             _planetsDict = null;
             _planets = null;
 
+            while (_dynamics.length > 0)
+            {
+                var body: DynamicSpaceBody = _dynamics.shift();
+                body.destroy();
+            }
+            _dynamics = null;
+
             _landPlanet = null;
 
             _viewport = null;
@@ -220,7 +240,7 @@ package com.agnither.spacetaxi.model
 
         public function setPullPoint(x: int, y: int):void
         {
-            if (_ship.landed && _ship.fuel > 0)
+            if (_ship.stable && _ship.fuel > 0)
             {
                 var px: int = -Math.round(x * PULL_MULTIPLIER / PULL_SCALE) * PULL_SCALE;
                 var py: int = -Math.round(y * PULL_MULTIPLIER / PULL_SCALE) * PULL_SCALE;
@@ -235,7 +255,7 @@ package com.agnither.spacetaxi.model
 
         public function updateTrajectory():void
         {
-            if (_ship.landed)
+            if (_ship.stable)
             {
                 Starling.juggler.removeDelayedCalls(computeTrajectory);
                 _trajectory.length = 0;
@@ -253,7 +273,7 @@ package com.agnither.spacetaxi.model
         {
             var i: int = 0;
             var durability: int = ship.durability;
-            while (!ship.landed && !ship.crashed && i < TRAJECTORY_STEPS)
+            while (!ship.stable && ship.alive && i < TRAJECTORY_STEPS)
             {
                 i++;
                 _trajectory.push(ship.position.clone());
@@ -267,7 +287,7 @@ package com.agnither.spacetaxi.model
             if (_trajectory.length <= 5) return;
             dispatchEventWith(UPDATE_TRAJECTORY);
 
-            if (!ship.landed && !ship.crashed)
+            if (!ship.stable && ship.alive)
             {
                 Starling.juggler.delayCall(computeTrajectory, 0.01, ship);
             }
@@ -275,12 +295,12 @@ package com.agnither.spacetaxi.model
 
         public function launch():void
         {
-            if (_ship.landed && _ship.fuel > 0 && _trajectory.length > 5)
+            if (_ship.stable && _ship.fuel > 0 && _trajectory.length > 5)
             {
                 launchShip(_ship);
                 _orderController.increment(1);
 
-                _time = 0;
+                _shipTime = 0;
                 _flightTime = 0;
 
                 dispatchEventWith(HIDE_TRAJECTORY);
@@ -302,38 +322,39 @@ package com.agnither.spacetaxi.model
             ship.accelerate(_pullPoint.x, _pullPoint.y);
         }
 
-        private function step(ship: Ship, delta: Number):void
+        private function step(body: DynamicSpaceBody, delta: Number):void
         {
-            if (!ship.landed)
+            if (!body.stable)
             {
-                checkMove(ship, delta);
-                checkGravity(ship);
-                checkSpeed(ship);
-                ship.update();
+                checkMove(body, delta);
+                checkDistance(body);
+                checkGravity(body);
+                checkSpeed(body);
+                body.update();
             }
         }
 
-        private function checkMove(ship: Ship, delta: Number):void
+        private function checkMove(body: DynamicSpaceBody, delta: Number):void
         {
-            var d: Number = Point.distance(ship.speed, new Point());
+            var d: Number = Point.distance(body.speed, new Point());
             var controlSpeedMultiplier: Number = d / CONTROL_SPEED;
             var maxDelta: Number = controlSpeedMultiplier > 1 ? delta / controlSpeedMultiplier : delta;
             var currentDelta: Number = maxDelta;
-            while (!ship.landed && currentDelta > 0)
+            while (!body.stable && currentDelta > 0)
             {
-                var planetCollided: Planet = checkCollisions(ship, currentDelta);
+                var planetCollided: Planet = checkCollisions(body, currentDelta);
                 if (planetCollided != null)
                 {
-                    if (!ship.crashed)
+                    if (body is Ship && body.alive)
                     {
-                        checkLand(ship, planetCollided);
+                        checkLand(body as Ship, planetCollided);
                     }
                 }
                 
-                var collectible: Collectible = checkCollectible(ship, currentDelta);
-                if (collectible != null)
+                if (body == _ship)
                 {
-                    if (ship == _ship)
+                    var collectible: Collectible = checkCollectible(_ship, currentDelta);
+                    if (collectible != null)
                     {
                         // TODO: add reward, do some stuff
                         SoundManager.playSound(SoundManager.BOX_TAKE);
@@ -342,9 +363,9 @@ package com.agnither.spacetaxi.model
                     }
                 }
                 
-                if (!ship.crashed)
+                if (body.alive)
                 {
-                    ship.move(currentDelta);
+                    body.move(currentDelta);
                 }
 
                 delta -= currentDelta;
@@ -352,64 +373,76 @@ package com.agnither.spacetaxi.model
             }
         }
 
-        private function checkGravity(ship: Ship):void
+        private function checkDistance(body: DynamicSpaceBody):void
+        {
+            var d: Number = Point.distance(body.position, _viewport.topLeft.add(new Point(_viewport.width * 0.5, _viewport.height * 0.5)));
+            if (d > _viewport.width * 4 || d > _viewport.height * 4)
+            {
+                body.crash();
+            }
+        }
+
+        private function checkGravity(body: DynamicSpaceBody):void
         {
             var acX: Number = 0;
             var acY: Number = 0;
             for (var i:int = 0; i < _planets.length; i++)
             {
                 var planet: Planet = _planets[i];
-                var d: Number = Point.distance(planet.position, ship.position);
-                var angle: Number = Math.atan2(planet.y - ship.y, planet.x - ship.x);
+                var d: Number = Point.distance(planet.position, body.position);
+                var angle: Number = Math.atan2(planet.y - body.y, planet.x - body.x);
                 var accMod: Number = G * planet.mass / Math.pow(d, DISTANCE_POWER);
                 acX += accMod * Math.cos(angle);
                 acY += accMod * Math.sin(angle);
             }
-            ship.accelerate(acX, acY);
-            ship.update();
+            body.accelerate(acX, acY);
+            body.update();
         }
 
-        private function checkSpeed(ship: Ship):void
+        private function checkSpeed(body: DynamicSpaceBody):void
         {
-            var d: Number = Point.distance(ship.speed, new Point());
-            var maxSpeedMultiplier: Number = d / MAX_SPEED;
+            var d: Number = Point.distance(body.speed, new Point());
+            var maxSpeedMultiplier: Number = d / body.maxSpeed;
             if (maxSpeedMultiplier > 1)
             {
-                ship.multiply(1 / maxSpeedMultiplier);
+                body.multiply(1 / maxSpeedMultiplier);
             }
         }
 
-        private function checkCollisions(ship: Ship, delta: Number):Planet
+        private function checkCollisions(body: DynamicSpaceBody, delta: Number):Planet
         {
-            var nextPosition: Point = new Point(ship.position.x + ship.speed.x * delta, ship.position.y + ship.speed.y * delta);
+            var nextPosition: Point = new Point(body.position.x + body.speed.x * delta, body.position.y + body.speed.y * delta);
             for (var i: int = 0; i < _planets.length; i++)
             {
                 var planet: Planet = _planets[i];
-                var shipPlanet: Point = planet.position.subtract(nextPosition);
+                var bodyPlanet: Point = planet.position.subtract(nextPosition);
                 var d: Number = Point.distance(planet.position, nextPosition);
-                if (d <= ship.radius + planet.radius)
+                if (d <= body.radius + planet.radius)
                 {
                     if (planet.type.solid)
                     {
-                        if (_ship == ship)
+                        if (planet.type.safe)
                         {
-                            if (planet.type.safe)
+                            if (body.speedMod >= DAMAGE_SPEED)
                             {
-                                if (ship.speedMod >= DAMAGE_SPEED)
+                                if (body == _ship)
                                 {
-                                    ship.collide(1);
+                                    _ship.collide(1);
                                     _orderController.checkDamage(1);
                                 }
-                            } else {
-                                ship.crash();
-                                _orderController.checkDamage(ship.durability);
+                            }
+                        } else {
+                            if (body == _ship)
+                            {
+                                _ship.collide(int.MAX_VALUE);
+                                _orderController.checkDamage(int.MAX_VALUE);
                             }
                         }
 
-                        ship.rotate(GeomUtils.getVectorDelta(ship.speed, shipPlanet) * 2 - Math.PI);
-                        ship.multiply(planet.bounce * 0.01);
+                        body.rotate(GeomUtils.getVectorDelta(body.speed, bodyPlanet) * 2 - Math.PI);
+                        body.multiply(body is Ship ? planet.bounce * 0.01 : 1);
                         return planet;
-                    } else if (d <= ship.radius*2)
+                    } else if (d <= body.radius*2)
                     {
                         return planet;
                     }
@@ -441,26 +474,56 @@ package com.agnither.spacetaxi.model
                 _landPlanet = planet;
                 ship.land(_landPlanet);
 
-                if (_ship == ship)
+                if (ship == _ship)
                 {
                     _zoneController.checkZones(_ship);
                 }
             }
         }
 
+        private function createMeteor():void
+        {
+            var meteor: Meteor = new Meteor(1, 1);
+            meteor.place(_viewport.x + Math.random() * _viewport.width, _viewport.height + Math.random() * _viewport.height);
+            _dynamics.push(meteor);
+            dispatchEventWith(NEW_METEOR, false, meteor);
+        }
+
         public function advanceTime(delta: Number):void
         {
-            if (_ship.landed || _ship.crashed) return;
+            var max: int = _viewport.width * _viewport.height * 0.00001;
+            if (_dynamics.length < max && Math.random() < 0.005)
+            {
+                createMeteor();
+            }
+
+            _time += delta;
+            var amount: int = _time * 1000 * DELTA;
+            _time -= amount / (1000 * DELTA);
+            for (var i: int = 0; i < amount; i++)
+            {
+                for (var j:int = 0; j < _dynamics.length; j++)
+                {
+                    if (_dynamics[j].alive)
+                    {
+                        step(_dynamics[j], DELTA);
+                    } else {
+                        _dynamics.splice(j--, 1);
+                    }
+                }
+            }
+            
+            if (_ship.stable || !_ship.alive) return;
 
             var scaleSize: Number = 50 * DELTA;
             var fromStart: Number = _flightTime / scaleSize;
             var toEnd: Number = ship.speedMod >= DAMAGE_SPEED ? 1 : (_trajectoryTime - _flightTime) / scaleSize;
             var timeScale: Number = Math.sqrt(Math.max(0.01, Math.min(1, fromStart, toEnd)));
 
-            _time += delta * timeScale;
-            var amount: int = _time * 1000 * DELTA;
-            _time -= amount / (1000 * DELTA);
-            for (var i:int = 0; i < amount; i++)
+            _shipTime += delta * timeScale;
+            amount = _shipTime * 1000 * DELTA;
+            _shipTime -= amount / (1000 * DELTA);
+            for (i = 0; i < amount; i++)
             {
                 step(_ship, DELTA);
                 _flightTime += DELTA;

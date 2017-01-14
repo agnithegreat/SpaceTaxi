@@ -38,11 +38,18 @@ package com.agnither.spacetaxi.model
         {
             return _position.y;
         }
+
+        protected var _alive: Boolean;
+        public function get alive():Boolean
+        {
+            return _alive;
+        }
         
         public function SpaceBody(radius: int, mass: int)
         {
             _radius = radius;
             _mass = mass;
+            _alive = true;
             
             _position = new Point();
         }
@@ -71,7 +78,7 @@ package com.agnither.spacetaxi.model
 
         public function reset():void
         {
-            
+            _alive = true;
         }
         
         public function destroy():void

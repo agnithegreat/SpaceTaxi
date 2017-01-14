@@ -14,16 +14,18 @@
       "layouts/level_screen",
       "layouts/level",
 
-      "textures/gui.png",
-      "textures/gui.xml",
-      "textures/textures.png",
-      "textures/textures.xml",
+      "textures/*/gui.png",
+      "textures/*/gui.xml",
+      "textures/*/textures.png",
+      "textures/*/textures.xml",
 
       "textures/ship/ship_skeleton.json",
       "textures/ship/ship_texture.json",
 
       "textures/fonts/dragu_bold.fnt",
-      "textures/fonts/dragu_medium.fnt"
+      "textures/fonts/dragu_bold.png",
+      "textures/fonts/dragu_medium.fnt",
+      "textures/fonts/dragu_medium.png"
     ]
   },
   "sounds": {
