@@ -9,6 +9,7 @@ package com.agnither.spacetaxi.model
     import com.agnither.spacetaxi.managers.sound.SoundManager;
     import com.agnither.spacetaxi.model.orders.Zone;
     import com.agnither.spacetaxi.utils.GeomUtils;
+    import com.agnither.spacetaxi.utils.ShipAI;
     import com.agnither.spacetaxi.vo.CollectibleVO;
     import com.agnither.spacetaxi.vo.LevelVO;
     import com.agnither.spacetaxi.vo.OrderVO;
@@ -33,29 +34,36 @@ package com.agnither.spacetaxi.model
         public static const HIDE_TRAJECTORY: String = "Space.HIDE_TRAJECTORY";
         public static const LEVEL_COMPLETE: String = "Space.LEVEL_COMPLETE";
 
-        public static const G: Number = 6.67;
+        public static const G: Number = 66.7;
         public static const DISTANCE_POWER: Number = 2;
         public static const DELTA: Number = 0.15;
-        public static const MIN_SPEED: Number = 1;
-        public static const DAMAGE_SPEED: Number = 35;
+        public static const MIN_SPEED: Number = 5;
+        public static const DAMAGE_SPEED: Number = 40;
         public static const CONTROL_SPEED: Number = 100;
-        public static const TRAJECTORY_STEPS: Number = 250; // default 50
-        public static const TRAJECTORY_LENGTH: Number = 10000; // default 100
-        public static const PULL_MULTIPLIER: Number = 0.05;
-        public static const PULL_SCALE: int = 1;
+        public static const TRAJECTORY_STEPS: Number = 100; // 50 min, 250 max
+        public static const TRAJECTORY_LENGTH: Number = 200; // 100 min, 100000 max
 
         private var _ship: Ship;
         public function get ship():Ship
         {
             return _ship;
         }
-        
+
+        private var _shipAI: ShipAI;
+
         private var _planets: Vector.<Planet>;
         private var _planetsDict: Dictionary;
         public function get planets():Vector.<Planet>
         {
             return _planets;
         }
+        
+        private var _portals: Vector.<Portal>;
+        public function get portals():Vector.<Portal>
+        {
+            return _portals;
+        }
+        private var _portalsMatrix: Dictionary;
         
         private var _collectibles: Vector.<Collectible>;
         public function get collectibles():Vector.<Collectible>
@@ -82,10 +90,6 @@ package com.agnither.spacetaxi.model
         }
         
         private var _pullPoint: Point;
-        public function get pullPoint():Point
-        {
-            return _pullPoint;
-        }
 
         private var _trajectory: Vector.<Point>;
         public function get trajectory():Vector.<Point>
@@ -121,12 +125,20 @@ package com.agnither.spacetaxi.model
         }
 
         private var _landPlanet: Planet;
-        
-        private var _danger: Boolean;
-        public function get danger():Boolean
+
+        private var _phantom: Ship;
+        public function get phantom():Ship
         {
-            return _danger;
+            return _phantom;
         }
+
+        private var _moves: int;
+        public function get moves():int
+        {
+            return _moves;
+        }
+
+        private var _complete: Boolean;
 
         public function Space()
         {
@@ -137,6 +149,8 @@ package com.agnither.spacetaxi.model
             _ship = new Ship(10, 1, level.ship.rotation);
             _ship.place(level.ship.position.x, level.ship.position.y);
             _ship.landPrepare(null);
+
+            _shipAI = new ShipAI(this, _ship);
 
             _planets = new <Planet>[];
             _planetsDict = new Dictionary();
@@ -161,11 +175,24 @@ package com.agnither.spacetaxi.model
             _center.x = _viewport.x + _viewport.width / 2;
             _center.y = _viewport.y + _viewport.height / 2;
 
+            _portals = new <Portal>[];
+            var portal1: Portal = new Portal(15);
+            portal1.place(_viewport.x + Math.random() * _viewport.width, _viewport.y + Math.random() * _viewport.height);
+            _portals.push(portal1);
+            var portal2: Portal = new Portal(15);
+            portal2.place(_viewport.x + Math.random() * _viewport.width, _viewport.y + Math.random() * _viewport.height);
+            _portals.push(portal2);
+            portal1.connection = portal2;
+            portal2.connection = portal1;
+            _portalsMatrix = new Dictionary();
+
             _pullPoint = new Point();
             _trajectory = new <Point>[];
             
             _time = 0;
             _shipTime = 0;
+            _moves = 0;
+            _complete = false;
 
             _zoneController = new ZoneController();
             for (i = 0; i < level.zones.length; i++)
@@ -202,6 +229,15 @@ package com.agnither.spacetaxi.model
             _ship.destroy();
             _ship = null;
             
+            _shipAI.destroy();
+            _shipAI = null;
+
+            if (_phantom != null)
+            {
+                _phantom.destroy();
+                _phantom = null;
+            }
+            
             while (_collectibles.length > 0)
             {
                 var collectible: Collectible = _collectibles.shift();
@@ -215,6 +251,14 @@ package com.agnither.spacetaxi.model
             }
             _planetsDict = null;
             _planets = null;
+
+            while (_portals.length > 0)
+            {
+                var portal: Portal = _portals.shift();
+                portal.destroy();
+            }
+            _portalsMatrix = null;
+            _portals = null;
 
             while (_dynamics.length > 0)
             {
@@ -238,41 +282,43 @@ package com.agnither.spacetaxi.model
             _orderController = null;
         }
 
-        public function setPullPoint(x: int, y: int):void
+        public function setPullPoint(angle: Number, power: Number, full: Boolean, show: Boolean):void
         {
             if (_ship.stable && _ship.fuel > 0)
             {
-                var px: int = -Math.round(x * PULL_MULTIPLIER / PULL_SCALE) * PULL_SCALE;
-                var py: int = -Math.round(y * PULL_MULTIPLIER / PULL_SCALE) * PULL_SCALE;
-                if (px != _pullPoint.x || py != _pullPoint.y)
-                {
-                    _pullPoint.x = px;
-                    _pullPoint.y = py;
-                    updateTrajectory();
-                }
+                var planet: Planet = _ship.planet;
+                var d: Number = Point.distance(planet.position, _ship.position);
+                var pow: Number = Math.sqrt(G * planet.mass / d * power);
+                _pullPoint.x = Math.cos(angle) * pow;
+                _pullPoint.y = Math.sin(angle) * pow;
+                updateTrajectory(full, show);
             }
         }
 
-        public function updateTrajectory():void
+        public function updateTrajectory(full: Boolean, show: Boolean):void
         {
             if (_ship.stable)
             {
                 Starling.juggler.removeDelayedCalls(computeTrajectory);
                 _trajectory.length = 0;
                 _trajectoryTime = 0;
-                _danger = false;
                 dispatchEventWith(SHOW_TRAJECTORY);
+                
+                if (_phantom != null)
+                {
+                    _phantom.destroy();
+                    _phantom = null;
+                }
 
-                var ship: Ship = _ship.clone() as Ship;
-                launchShip(ship, true);
-                computeTrajectory(ship);
+                _phantom = _ship.clone() as Ship;
+                launchShip(_phantom);
+                computeTrajectory(_phantom, show, full);
             }
         }
 
-        private function computeTrajectory(ship: Ship):void
+        private function computeTrajectory(ship: Ship, show: Boolean, full: Boolean):void
         {
             var i: int = 0;
-            var durability: int = ship.durability;
             while (!ship.stable && ship.alive && i < TRAJECTORY_STEPS)
             {
                 i++;
@@ -280,25 +326,28 @@ package com.agnither.spacetaxi.model
                 step(ship, DELTA);
                 _trajectoryTime += DELTA;
             }
-            if (ship.durability < durability)
-            {
-                _danger = true;
-            }
-            if (_trajectory.length <= 5) return;
-            dispatchEventWith(UPDATE_TRAJECTORY);
 
-            if (!ship.stable && ship.alive)
+            if (_trajectory.length <= 10) return;
+
+            if (show)
             {
-                Starling.juggler.delayCall(computeTrajectory, 0.01, ship);
+                dispatchEventWith(UPDATE_TRAJECTORY);
+            }
+
+            if ((_trajectory.length < TRAJECTORY_LENGTH || full) && !ship.stable && ship.alive)
+            {
+                Starling.juggler.delayCall(computeTrajectory, 0, ship, show, full);
             }
         }
 
         public function launch():void
         {
-            if (_ship.stable && _ship.fuel > 0 && _trajectory.length > 5)
+            if (_ship.stable && _ship.fuel > 0 && _trajectory.length > 10)
             {
+                computeTrajectory(_phantom, false, true);
+
                 launchShip(_ship);
-                _orderController.increment(1);
+                _moves++;
 
                 _shipTime = 0;
                 _flightTime = 0;
@@ -316,9 +365,9 @@ package com.agnither.spacetaxi.model
             Starling.juggler.add(planet);
         }
 
-        private function launchShip(ship: Ship, test: Boolean = false):void
+        public function launchShip(ship: Ship):void
         {
-            ship.launch(test ? 0 : 1);
+            ship.launch(1);
             ship.accelerate(_pullPoint.x, _pullPoint.y);
         }
 
@@ -327,11 +376,28 @@ package com.agnither.spacetaxi.model
             if (!body.stable)
             {
                 checkMove(body, delta);
-                checkDistance(body);
-                checkGravity(body);
+                checkGravity(body, delta);
                 checkSpeed(body);
+                checkCollectibles(body as Ship);
+                checkPortals(body);
                 body.update();
             }
+        }
+
+        private function checkGravity(body: DynamicSpaceBody, delta: Number):void
+        {
+            var acX: Number = 0;
+            var acY: Number = 0;
+            for (var i:int = 0; i < _planets.length; i++)
+            {
+                var planet: Planet = _planets[i];
+                var d: Number = Point.distance(planet.position, body.position);
+                var angle: Number = Math.atan2(planet.y - body.y, planet.x - body.x);
+                var accMod: Number = G * planet.mass / Math.pow(d, DISTANCE_POWER) * delta;
+                acX += accMod * Math.cos(angle);
+                acY += accMod * Math.sin(angle);
+            }
+            body.accelerate(acX, acY);
         }
 
         private function checkMove(body: DynamicSpaceBody, delta: Number):void
@@ -353,16 +419,9 @@ package com.agnither.spacetaxi.model
                 
                 if (body == _ship)
                 {
-                    var collectible: Collectible = checkCollectible(_ship, currentDelta);
-                    if (collectible != null)
-                    {
-                        // TODO: add reward, do some stuff
-                        SoundManager.playSound(SoundManager.BOX_TAKE);
-                        collectible.collect();
-                        _collectibles.splice(_collectibles.indexOf(collectible), 1);
-                    }
+
                 }
-                
+
                 if (body.alive)
                 {
                     body.move(currentDelta);
@@ -371,31 +430,6 @@ package com.agnither.spacetaxi.model
                 delta -= currentDelta;
                 currentDelta = Math.min(delta, maxDelta);
             }
-        }
-
-        private function checkDistance(body: DynamicSpaceBody):void
-        {
-            var d: Number = Point.distance(body.position, _viewport.topLeft.add(new Point(_viewport.width * 0.5, _viewport.height * 0.5)));
-            if (d > _viewport.width * 4 || d > _viewport.height * 4)
-            {
-                body.crash();
-            }
-        }
-
-        private function checkGravity(body: DynamicSpaceBody):void
-        {
-            var acX: Number = 0;
-            var acY: Number = 0;
-            for (var i:int = 0; i < _planets.length; i++)
-            {
-                var planet: Planet = _planets[i];
-                var d: Number = Point.distance(planet.position, body.position);
-                var angle: Number = Math.atan2(planet.y - body.y, planet.x - body.x);
-                var accMod: Number = G * planet.mass / Math.pow(d, DISTANCE_POWER);
-                acX += accMod * Math.cos(angle);
-                acY += accMod * Math.sin(angle);
-            }
-            body.accelerate(acX, acY);
             body.update();
         }
 
@@ -406,6 +440,49 @@ package com.agnither.spacetaxi.model
             if (maxSpeedMultiplier > 1)
             {
                 body.multiply(1 / maxSpeedMultiplier);
+            }
+        }
+
+        private function checkCollectibles(ship: Ship):void
+        {
+            if (ship == _ship)
+            {
+                for (var i: int = 0; i < _collectibles.length; i++)
+                {
+                    var collectible: Collectible = _collectibles[i];
+                    var d: Number = Point.distance(collectible.position, ship.position);
+                    if (d <= ship.radius + collectible.radius)
+                    {
+                        // TODO: add reward, do some stuff
+                        SoundManager.playSound(SoundManager.BOX_TAKE);
+                        collectible.collect();
+
+                        _collectibles.splice(i--, 1);
+                    }
+                }
+            }
+        }
+
+        private function checkPortals(body: DynamicSpaceBody):void
+        {
+            var portalCollision: Portal;
+            for (var i: int = 0; i < _portals.length; i++)
+            {
+                var portal: Portal = _portals[i];
+                var d: Number = Point.distance(portal.position, body.position);
+                if (d <= body.radius + portal.radius)
+                {
+                    portalCollision = portal;
+                }
+            }
+            if (portalCollision == null)
+            {
+                delete _portalsMatrix[body];
+            } else if (_portalsMatrix[body] != portalCollision)
+            {
+                var delta:Point = body.position.subtract(portalCollision.position);
+                body.place(portalCollision.connection.position.x + delta.x, portalCollision.connection.position.y + delta.y);
+                _portalsMatrix[body] = portalCollision.connection;
             }
         }
 
@@ -421,46 +498,27 @@ package com.agnither.spacetaxi.model
                 {
                     if (planet.type.solid)
                     {
-                        if (planet.type.safe)
+                        var damage: int = 0;
+                        if (!planet.type.safe)
                         {
-                            if (body.speedMod >= DAMAGE_SPEED)
-                            {
-                                if (body == _ship)
-                                {
-                                    _ship.collide(1);
-                                    _orderController.checkDamage(1);
-                                }
-                            }
-                        } else {
-                            if (body == _ship)
-                            {
-                                _ship.collide(int.MAX_VALUE);
-                                _orderController.checkDamage(int.MAX_VALUE);
-                            }
+                            damage = int.MAX_VALUE;
+                        } else if (body.speedMod >= DAMAGE_SPEED)
+                        {
+                            damage = 1;
                         }
-
-                        body.rotate(GeomUtils.getVectorDelta(body.speed, bodyPlanet) * 2 - Math.PI);
-                        body.multiply(body is Ship ? planet.bounce * 0.01 : 1);
+                        
+                        if (damage > 0 && body is Ship)
+                        {
+                            (body as Ship).collide(damage);
+                        } else {
+                            body.rotate(GeomUtils.getVectorDelta(body.speed, bodyPlanet) * 2 - Math.PI);
+                            body.multiply(body is Ship ? planet.bounce * 0.01 : 1);
+                        }
                         return planet;
                     } else if (d <= body.radius*2)
                     {
                         return planet;
                     }
-                }
-            }
-            return null;
-        }
-
-        private function checkCollectible(ship: Ship, delta: Number):Collectible
-        {
-            var nextPosition: Point = new Point(ship.position.x + ship.speed.x * delta, ship.position.y + ship.speed.y * delta);
-            for (var i: int = 0; i < _collectibles.length; i++)
-            {
-                var collectible: Collectible = _collectibles[i];
-                var d: Number = Point.distance(collectible.position, nextPosition);
-                if (d <= ship.radius + collectible.radius)
-                {
-                    return collectible;
                 }
             }
             return null;
@@ -491,15 +549,22 @@ package com.agnither.spacetaxi.model
 
         public function advanceTime(delta: Number):void
         {
+            _time += delta;
+            var amount: int = _time * 1000 * DELTA;
+            _time -= amount / (1000 * DELTA);
+            
+            processMeteors(amount);
+            processShip(delta);
+        }
+
+        public function processMeteors(amount: Number):void
+        {
             var max: int = _viewport.width * _viewport.height * 0.00001;
             if (_dynamics.length < max && Math.random() < 0.005)
             {
                 createMeteor();
             }
 
-            _time += delta;
-            var amount: int = _time * 1000 * DELTA;
-            _time -= amount / (1000 * DELTA);
             for (var i: int = 0; i < amount; i++)
             {
                 for (var j:int = 0; j < _dynamics.length; j++)
@@ -512,6 +577,14 @@ package com.agnither.spacetaxi.model
                     }
                 }
             }
+        }
+        
+        private function processShip(delta: Number):void
+        {
+//            if (_ship.stable)
+//            {
+//                _shipAI.compute();
+//            }
             
             if (_ship.stable || !_ship.alive) return;
 
@@ -521,9 +594,9 @@ package com.agnither.spacetaxi.model
             var timeScale: Number = Math.sqrt(Math.max(0.01, Math.min(1, fromStart, toEnd)));
 
             _shipTime += delta * timeScale;
-            amount = _shipTime * 1000 * DELTA;
+            var amount: int = _shipTime * 1000 * DELTA;
             _shipTime -= amount / (1000 * DELTA);
-            for (i = 0; i < amount; i++)
+            for (var i: int = 0; i < amount; i++)
             {
                 step(_ship, DELTA);
                 _flightTime += DELTA;
@@ -533,11 +606,16 @@ package com.agnither.spacetaxi.model
             {
                 _ship.landPrepare(_landPlanet);
             }
+
+            if (_complete)
+            {
+                dispatchEventWith(LEVEL_COMPLETE);
+            }
         }
 
         private function handleOrdersDone(event: Event):void
         {
-            dispatchEventWith(LEVEL_COMPLETE);
+            _complete = true;
         }
     }
 }

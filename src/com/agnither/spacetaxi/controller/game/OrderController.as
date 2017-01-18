@@ -110,22 +110,6 @@ package com.agnither.spacetaxi.controller.game
             }
         }
         
-        public function increment(value: int):void
-        {
-            for (var i:int = 0; i < _orders.length; i++)
-            {
-                _orders[i].wait(value);
-            }
-        }
-
-        public function checkDamage(value: int):void
-        {
-            for (var i:int = 0; i < _orders.length; i++)
-            {
-                _orders[i].damage(value);
-            }
-        }
-        
         public function destroy():void
         {
             while (_orders.length > 0)

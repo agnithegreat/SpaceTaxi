@@ -10,6 +10,7 @@ package com.agnither.spacetaxi.view.scenes.game
     import com.agnither.spacetaxi.model.Space;
     import com.agnither.spacetaxi.model.orders.Zone;
     import com.agnither.spacetaxi.tasks.logic.RestartGameTask;
+    import com.agnither.spacetaxi.utils.LevelParser;
     import com.agnither.spacetaxi.view.scenes.game.effects.CometEffect;
     import com.agnither.spacetaxi.view.scenes.game.effects.ExplosionEffect;
     import com.agnither.tasks.global.TaskSystem;
@@ -49,12 +50,13 @@ package com.agnither.spacetaxi.view.scenes.game
 
         private var _container: Sprite;
         private var _animationsContainer: Sprite;
-        private var _planetsContainer: Sprite;
+        private var _lowerContainer: Sprite;
         private var _zonesContainer: Sprite;
         private var _objectsContainer: Sprite;
-        private var _effectsContainer: Sprite;
+        private var _upperContainer: Sprite;
 
         private var _planets: Vector.<PlanetView>;
+        private var _portals: Vector.<PortalView>;
         private var _collectibles: Vector.<CollectibleView>;
         private var _zones: Vector.<ZoneView>;
         private var _shipView: ShipView;
@@ -117,10 +119,11 @@ package com.agnither.spacetaxi.view.scenes.game
             _animationsContainer = new Sprite();
             _container.addChild(_animationsContainer);
 
-            _planetsContainer = new Sprite();
-            _container.addChild(_planetsContainer);
+            _lowerContainer = new Sprite();
+            _container.addChild(_lowerContainer);
 
             _planets = new <PlanetView>[];
+            _portals = new <PortalView>[];
             _collectibles = new <CollectibleView>[];
 
             _zonesContainer = new Sprite();
@@ -134,8 +137,8 @@ package com.agnither.spacetaxi.view.scenes.game
             _objectsContainer = new Sprite();
             _container.addChild(_objectsContainer);
 
-            _effectsContainer = new Sprite();
-            _container.addChild(_effectsContainer);
+            _upperContainer = new Sprite();
+            _container.addChild(_upperContainer);
         }
 
         override protected function activate():void
@@ -147,12 +150,27 @@ package com.agnither.spacetaxi.view.scenes.game
             _space.addEventListener(Space.UPDATE_TRAJECTORY, handleUpdateTrajectory);
             _space.addEventListener(Space.HIDE_TRAJECTORY, handleHideTrajectory);
 
+            _viewport = _space.viewport;
+            _basePivotX = _viewport.x + _viewport.width / 2;
+            _basePivotY = _viewport.y + _viewport.height / 2;
+
+            _container.x = stage.stageWidth / 2;
+            _container.y = stage.stageHeight / 2;
+            _container.pivotX = _basePivotX;
+            _container.pivotY = _basePivotY;
+
             for (var i: int = 0; i < _space.planets.length; i++)
             {
                 var planet: Planet = _space.planets[i];
                 var planetView: PlanetView = new PlanetView(planet);
-                _planetsContainer.addChild(planetView);
+                _lowerContainer.addChild(planetView);
                 _planets.push(planetView);
+
+                if (LevelParser.colors[planet.skin] != null)
+                {
+                    var sputnikView: SputnikView = new SputnikView(planet, _upperContainer, _lowerContainer);
+                    _upperContainer.addChild(sputnikView);
+                }
             }
 
             for (i = 0; i < _space.collectibles.length; i++)
@@ -170,19 +188,17 @@ package com.agnither.spacetaxi.view.scenes.game
                 _zonesContainer.addChild(zoneView);
                 _zones.push(zoneView);
             }
+            
+            for (i = 0; i < _space.portals.length; i++)
+            {
+                var portalView: PortalView = new PortalView(_space.portals[i]);
+                _portals.push(portalView);
+                _lowerContainer.addChild(portalView);
+            }
 
             _shipView = new ShipView(_space.ship);
             _shipView.addEventListener(ShipView.EXPLODE, handleExplode);
             _objectsContainer.addChild(_shipView);
-
-            _viewport = _space.viewport;
-            _basePivotX = _viewport.x + _viewport.width / 2;
-            _basePivotY = _viewport.y + _viewport.height / 2;
-
-            _container.x = stage.stageWidth / 2;
-            _container.y = stage.stageHeight / 2;
-            _container.pivotX = _basePivotX;
-            _container.pivotY = _basePivotY;
 
             _previousDot = new Point();
 
@@ -210,22 +226,31 @@ package com.agnither.spacetaxi.view.scenes.game
             while (_planets.length > 0)
             {
                 var planetView: PlanetView = _planets.shift();
-                planetView.destroy();
+                planetView.removeFromParent(true);
+            }
+
+            while (_portals.length > 0)
+            {
+                var portalView: PortalView = _portals.shift();
+                portalView.removeFromParent(true);
             }
 
             while (_collectibles.length > 0)
             {
                 var collectibleView: CollectibleView = _collectibles.shift();
-                collectibleView.destroy();
+                collectibleView.removeFromParent(true);
             }
 
             while (_zones.length > 0)
             {
                 var orderView: ZoneView = _zones.shift();
-                orderView.destroy();
+                orderView.removeFromParent(true);
             }
-
+            
             _animationsContainer.removeChildren(0, -1, true);
+            
+            _lowerContainer.removeChildren(0, -1, true);
+            _upperContainer.removeChildren(0, -1, true);
 
             resetTrajectory();
 
@@ -248,7 +273,7 @@ package com.agnither.spacetaxi.view.scenes.game
             var explosion: ExplosionEffect = new ExplosionEffect();
             explosion.x = _shipView.x;
             explosion.y = _shipView.y;
-            _effectsContainer.addChild(explosion);
+            _upperContainer.addChild(explosion);
         }
 
         private function handleTouch(event: TouchEvent):void
@@ -256,7 +281,10 @@ package com.agnither.spacetaxi.view.scenes.game
             var touch: Touch = event.getTouch(stage);
             if (touch != null)
             {
-                var position: Point = touch.getLocation(_shipView);
+                var position: Point = touch.getLocation(stage);
+                var shipPos: Point = _shipView.localToGlobal(new Point());
+                var distance: Number = Point.distance(position, shipPos);
+                const segment: int = 100 * Application.scaleFactor;
                 switch (touch.phase)
                 {
                     case TouchPhase.HOVER:
@@ -265,7 +293,7 @@ package com.agnither.spacetaxi.view.scenes.game
                     }
                     case TouchPhase.BEGAN:
                     {
-                        if (Point.distance(position, new Point()) <= 100)
+                        if (distance <= segment)
                         {
                             _aiming = true;
                         } else {
@@ -277,7 +305,9 @@ package com.agnither.spacetaxi.view.scenes.game
                     {
                         if (_aiming)
                         {
-                            _space.setPullPoint(position.x, position.y);
+                            var angle: Number = Math.atan2(shipPos.y - _shipView.offset.y - position.y, shipPos.x - _shipView.offset.x - position.x);
+                            var power: Number = Math.pow(distance / segment, 2);
+                            _space.setPullPoint(angle, power, false, true);
                         } else {
                             position = touch.getLocation(stage);
                             _delta.x = _touch.x - position.x;
@@ -404,7 +434,7 @@ package com.agnither.spacetaxi.view.scenes.game
 
             var sx: Number = Math.abs(dx);
             var sy: Number = Math.abs(dy);
-            var scale: Number = Math.min(stage.stageWidth / sx, stage.stageHeight / sy, Application.scaleFactor) * 0.85;
+            var scale: Number = Math.min(stage.stageWidth / sx, stage.stageHeight / sy, Application.scaleFactor) * 0.75;
 
             if (sx > _viewport.width * 2 || sy > _viewport.height * 2)
             {

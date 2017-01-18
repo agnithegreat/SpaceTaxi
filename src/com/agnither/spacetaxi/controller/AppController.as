@@ -82,8 +82,11 @@ package com.agnither.spacetaxi.controller
 
         private function handleLevelComplete(event: Event):void
         {
-            _player.progress.setLevelResult(_levelsController.currentLevel.id, _space.orders.money, 1);
+            _player.progress.setLevelResult(_levelsController.currentLevel.id, _space.orders.money, _levelsController.currentLevel.countStars(_space.moves));
             _player.progress.save();
+
+            selectLevel(_levelsController.currentLevel.id+1);
+            restartGame();
         }
     }
 }

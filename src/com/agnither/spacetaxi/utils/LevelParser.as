@@ -13,9 +13,22 @@ package com.agnither.spacetaxi.utils
 
     import flash.geom.Point;
     import flash.geom.Rectangle;
+    import flash.utils.Dictionary;
 
     public class LevelParser
     {
+        public static const colors: Dictionary = new Dictionary();
+        
+        public static function init():void
+        {
+            colors["1/2"] = 0x5491ae;
+            colors["1/4"] = 0xc0605f;
+            colors["1/8"] = 0x79c13c;
+            colors["2/2"] = 0x00b6f5;
+            colors["2/3"] = 0x00d73a;
+            colors["2/4"] = 0xdf0414;
+        }
+        
         public static function parse(id: int, episode: int, level: Object):LevelVO
         {
             var data: LevelVO = new LevelVO();
@@ -24,6 +37,9 @@ package com.agnither.spacetaxi.utils
             data.episode = episode;
 
             if (level == null) return data;
+            
+            data.title = level.settings.title;
+            data.stars = level.settings.stars;
             
             data.viewport = new Rectangle(level.viewport.x, level.viewport.y, level.viewport.width, level.viewport.height);
             

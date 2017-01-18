@@ -22,7 +22,7 @@ package com.agnither.spacetaxi.view.scenes.game
         public function PlanetView(planet: Planet)
         {
             super();
-            
+
             _planet = planet;
             _planet.addEventListener(SpaceBody.UPDATE, handleUpdate);
 
@@ -46,16 +46,16 @@ package com.agnither.spacetaxi.view.scenes.game
             scaleX = (1 + Math.cos(_planet.time) * _planet.scale);
             scaleY = (1 + Math.cos(_planet.time + Math.PI) * _planet.scale);
         }
-        
-        public function destroy():void
+
+        override public function dispose():void
         {
             _planet.removeEventListener(SpaceBody.UPDATE, handleUpdate);
             _planet = null;
-            
+
             _image.removeFromParent(true);
             _image = null;
-            
-            removeFromParent(true);
+
+            super.dispose();
         }
     }
 }

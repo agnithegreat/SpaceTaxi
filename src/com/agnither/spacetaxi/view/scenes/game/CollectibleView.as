@@ -48,10 +48,10 @@ package com.agnither.spacetaxi.view.scenes.game
 
         private function handleCollect(event: Event):void
         {
-            destroy();
+            removeFromParent(true);
         }
 
-        public function destroy():void
+        override public function dispose():void
         {
             Starling.juggler.remove(this);
 
@@ -67,7 +67,7 @@ package com.agnither.spacetaxi.view.scenes.game
                 _image = null;
             }
 
-            removeFromParent(true);
+            super.dispose();
         }
     }
 }

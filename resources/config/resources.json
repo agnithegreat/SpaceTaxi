@@ -22,6 +22,8 @@
       "textures/ship/ship_skeleton.json",
       "textures/ship/ship_texture.json",
 
+      "textures/fonts/dragu_gold.fnt",
+      "textures/fonts/dragu_gold.png",
       "textures/fonts/dragu_bold.fnt",
       "textures/fonts/dragu_bold.png",
       "textures/fonts/dragu_medium.fnt",

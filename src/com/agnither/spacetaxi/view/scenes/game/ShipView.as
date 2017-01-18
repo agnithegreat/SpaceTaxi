@@ -33,6 +33,10 @@ package com.agnither.spacetaxi.view.scenes.game
         private var _delayed: Boolean;
 
         private var _offset: Point;
+        public function get offset():Point
+        {
+            return _offset;
+        }
         
         public function ShipView(ship: Ship)
         {

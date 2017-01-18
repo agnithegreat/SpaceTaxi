@@ -214,6 +214,25 @@
         </struct>
         <key>individualSpriteSettings</key>
         <map type="IndividualSpriteSettingsMap">
+            <key type="filename">assets/game/misc/Energy/black.png</key>
+            <key type="filename">assets/game/misc/Energy/blue.png</key>
+            <key type="filename">assets/game/misc/Energy/green.png</key>
+            <key type="filename">assets/game/misc/Energy/purple.png</key>
+            <key type="filename">assets/game/misc/Energy/rainbow.png</key>
+            <key type="filename">assets/game/misc/Energy/red.png</key>
+            <key type="filename">assets/game/misc/Energy/yellow.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>15,30,30,60</rect>
+                <key>scale9Paddings</key>
+                <rect>15,30,30,60</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
             <key type="filename">assets/game/misc/Glow/glow_01.png</key>
             <key type="filename">assets/game/misc/Glow/glow_02.png</key>
             <key type="filename">assets/game/misc/Glow/glow_03.png</key>
@@ -366,6 +385,60 @@
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
+            <key type="filename">assets/game/misc/Portal/portal_bottom.png</key>
+            <key type="filename">assets/game/misc/Portal/portal_over.png</key>
+            <key type="filename">assets/game/planets/0.png</key>
+            <key type="filename">assets/game/planets/1/1.png</key>
+            <key type="filename">assets/game/planets/1/10.png</key>
+            <key type="filename">assets/game/planets/1/11.png</key>
+            <key type="filename">assets/game/planets/1/12.png</key>
+            <key type="filename">assets/game/planets/1/2.png</key>
+            <key type="filename">assets/game/planets/1/3.png</key>
+            <key type="filename">assets/game/planets/1/4.png</key>
+            <key type="filename">assets/game/planets/1/5.png</key>
+            <key type="filename">assets/game/planets/1/6.png</key>
+            <key type="filename">assets/game/planets/1/7.png</key>
+            <key type="filename">assets/game/planets/1/8.png</key>
+            <key type="filename">assets/game/planets/1/9.png</key>
+            <key type="filename">assets/game/planets/2/1.png</key>
+            <key type="filename">assets/game/planets/2/10.png</key>
+            <key type="filename">assets/game/planets/2/11.png</key>
+            <key type="filename">assets/game/planets/2/12.png</key>
+            <key type="filename">assets/game/planets/2/2.png</key>
+            <key type="filename">assets/game/planets/2/3.png</key>
+            <key type="filename">assets/game/planets/2/4.png</key>
+            <key type="filename">assets/game/planets/2/5.png</key>
+            <key type="filename">assets/game/planets/2/6.png</key>
+            <key type="filename">assets/game/planets/2/7.png</key>
+            <key type="filename">assets/game/planets/2/8.png</key>
+            <key type="filename">assets/game/planets/2/9.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>125,125,250,250</rect>
+                <key>scale9Paddings</key>
+                <rect>125,125,250,250</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">assets/game/misc/Sputnik/01.png</key>
+            <key type="filename">assets/game/misc/Sputnik/02.png</key>
+            <key type="filename">assets/game/misc/Sputnik/shadow.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>50,50,100,100</rect>
+                <key>scale9Paddings</key>
+                <rect>50,50,100,100</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
             <key type="filename">assets/game/misc/comet.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
@@ -428,43 +501,6 @@
                 <rect>11,11,22,22</rect>
                 <key>scale9Paddings</key>
                 <rect>11,11,22,22</rect>
-                <key>scale9FromFile</key>
-                <false/>
-            </struct>
-            <key type="filename">assets/game/planets/0.png</key>
-            <key type="filename">assets/game/planets/1/1.png</key>
-            <key type="filename">assets/game/planets/1/10.png</key>
-            <key type="filename">assets/game/planets/1/11.png</key>
-            <key type="filename">assets/game/planets/1/12.png</key>
-            <key type="filename">assets/game/planets/1/2.png</key>
-            <key type="filename">assets/game/planets/1/3.png</key>
-            <key type="filename">assets/game/planets/1/4.png</key>
-            <key type="filename">assets/game/planets/1/5.png</key>
-            <key type="filename">assets/game/planets/1/6.png</key>
-            <key type="filename">assets/game/planets/1/7.png</key>
-            <key type="filename">assets/game/planets/1/8.png</key>
-            <key type="filename">assets/game/planets/1/9.png</key>
-            <key type="filename">assets/game/planets/2/1.png</key>
-            <key type="filename">assets/game/planets/2/10.png</key>
-            <key type="filename">assets/game/planets/2/11.png</key>
-            <key type="filename">assets/game/planets/2/12.png</key>
-            <key type="filename">assets/game/planets/2/2.png</key>
-            <key type="filename">assets/game/planets/2/3.png</key>
-            <key type="filename">assets/game/planets/2/4.png</key>
-            <key type="filename">assets/game/planets/2/5.png</key>
-            <key type="filename">assets/game/planets/2/6.png</key>
-            <key type="filename">assets/game/planets/2/7.png</key>
-            <key type="filename">assets/game/planets/2/8.png</key>
-            <key type="filename">assets/game/planets/2/9.png</key>
-            <struct type="IndividualSpriteSettings">
-                <key>pivotPoint</key>
-                <point_f>0.5,0.5</point_f>
-                <key>scale9Enabled</key>
-                <false/>
-                <key>scale9Borders</key>
-                <rect>125,125,250,250</rect>
-                <key>scale9Paddings</key>
-                <rect>125,125,250,250</rect>
                 <key>scale9FromFile</key>
                 <false/>
             </struct>

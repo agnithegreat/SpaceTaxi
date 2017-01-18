@@ -63,7 +63,7 @@ package com.agnither.spacetaxi.view.gui.items
 
             _planetImage.texture = Application.assetsManager.getTexture("planets/" + (_level.episode+1) + "/" + (_level.id % 12 + 1));
 
-            _levelNameTF.text = "Level " + (_level.id+1);
+            _levelNameTF.text = _level.title || "Level " + (_level.id+1);
 
             _planetBtn.addEventListener(Event.TRIGGERED, handleTriggered);
 

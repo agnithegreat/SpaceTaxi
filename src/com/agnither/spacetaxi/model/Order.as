@@ -12,7 +12,7 @@ package com.agnither.spacetaxi.model
         private var _money: int;
         public function get money():int
         {
-            return Math.max(0, _money);
+            return _money;
         }
         
         private var _wave: int;
@@ -20,8 +20,6 @@ package com.agnither.spacetaxi.model
         {
             return _wave;
         }
-
-        private var _time: int;
 
         private var _departure: Zone;
         public function get departure():Zone
@@ -64,15 +62,12 @@ package com.agnither.spacetaxi.model
         public function activate():void
         {
             _active = true;
-            _time = 0;
-
             _departure.active = true;
         }
 
         public function start():void
         {
             _started = true;
-
             _departure.active = false;
             _arrival.active = true;
         }
@@ -84,22 +79,6 @@ package com.agnither.spacetaxi.model
             _completed = true;
 
             _arrival.active = false;
-        }
-
-        public function damage(value: int):void
-        {
-            if (_started)
-            {
-                _time += value;
-            }
-        }
-
-        public function wait(value: int):void
-        {
-            if (_active)
-            {
-                _time += value;
-            }
         }
         
         public function destroy():void

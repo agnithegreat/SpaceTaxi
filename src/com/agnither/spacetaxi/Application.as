@@ -6,6 +6,7 @@ package com.agnither.spacetaxi
     import com.agnither.spacetaxi.controller.AppController;
     import com.agnither.spacetaxi.managers.windows.WindowManager;
     import com.agnither.spacetaxi.tasks.init.InitTask;
+    import com.agnither.spacetaxi.utils.LevelParser;
     import com.agnither.spacetaxi.view.Fonts;
     import com.agnither.tasks.global.TaskSystem;
 
@@ -45,7 +46,7 @@ package com.agnither.spacetaxi
             viewport.height = stage.stageHeight;
 
             graphicPack = Math.round(viewport.width / 1024) * 1024;
-            scaleFactor = 2 * viewport.height / guiSize.height;
+            scaleFactor = 2.5 * viewport.width / guiSize.width;
 //            Application.scaleFactor = graphicPack / guiSize.width;
 
             assetsManager = new AssetMediator(graphicPack / guiSize.width, true);
@@ -55,6 +56,8 @@ package com.agnither.spacetaxi
             uiBuilder = new UIBuilder(assetsManager);
             
             appController = new AppController();
+
+            LevelParser.init();
 
             WindowManager.init(this, viewport);
 

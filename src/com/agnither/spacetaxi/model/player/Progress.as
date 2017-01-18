@@ -36,8 +36,14 @@ package com.agnither.spacetaxi.model.player
         {
             var progress: LevelResultVO = _levels[id] is LevelResultVO ? _levels[id] : new LevelResultVO();
             progress.level = id;
-            progress.money = money;
-            progress.stars = stars;
+            if (progress.money < money)
+            {
+                progress.money = money;
+            }
+            if (progress.stars < stars)
+            {
+                progress.stars = stars;
+            }
             _levels[id] = progress;
 
             if (_level < id+1)

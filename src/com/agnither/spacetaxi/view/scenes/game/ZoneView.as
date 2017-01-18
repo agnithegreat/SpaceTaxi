@@ -136,7 +136,7 @@ package com.agnither.spacetaxi.view.scenes.game
             }
         }
         
-        public function destroy():void
+        override public function dispose():void
         {
             if (_zone.planet != null)
             {
@@ -151,7 +151,7 @@ package com.agnither.spacetaxi.view.scenes.game
             _animation.removeFromParent(true);
             _animation = null;
 
-            removeFromParent(true);
+            super.dispose();
         }
     }
 }

@@ -40,23 +40,15 @@
                     "customParams":{},
                     "params":{
                       "color":16777215,
-                      "font":"dragu_medium",
+                      "font":"dragu_gold",
                       "horizontalAlign":"left",
                       "size":100
                     }
                   },
                   "height":120,
                   "name":"_moneyTF",
-                  "style":{
-                    "cls":"starling.styles.DistanceFieldStyle",
-                    "customParams":{},
-                    "params":{
-                      "mode":"basic",
-                      "softness":0.13
-                    }
-                  },
                   "text":"300",
-                  "width":170.31,
+                  "width":165,
                   "x":184,
                   "y":10
                 }
@@ -132,7 +124,7 @@
             },
             "params":{
               "name":"_fuelIndicator",
-              "x":434.31
+              "x":429
             }
           },
           {
@@ -143,7 +135,7 @@
             },
             "params":{
               "name":"_durabilityIndicator",
-              "x":986.31
+              "x":981
             }
           }
         ],

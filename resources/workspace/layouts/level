@@ -222,7 +222,7 @@
             ],
             "customParams":{},
             "params":{
-              "autoScale":true,
+              "autoSize":"vertical",
               "batchable":true,
               "format":{
                 "cls":"starling.text.TextFormat",
@@ -230,10 +230,11 @@
                 "params":{
                   "color":16777215,
                   "font":"dragu_bold",
-                  "size":80
+                  "size":80,
+                  "verticalAlign":"top"
                 }
               },
-              "height":100,
+              "height":63.75,
               "name":"_levelNameTF",
               "style":{
                 "cls":"starling.styles.DistanceFieldStyle",
@@ -244,8 +245,8 @@
                 }
               },
               "text":"Secret Planet",
-              "width":550,
-              "x":25,
+              "width":500,
+              "x":50,
               "y":550
             }
           }
