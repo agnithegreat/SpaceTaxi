@@ -14,6 +14,7 @@ package com.agnither.spacetaxi.model
     import com.agnither.spacetaxi.vo.LevelVO;
     import com.agnither.spacetaxi.vo.OrderVO;
     import com.agnither.spacetaxi.vo.PlanetVO;
+    import com.agnither.spacetaxi.vo.PortalVO;
     import com.agnither.spacetaxi.vo.ZoneVO;
 
     import flash.geom.Point;
@@ -159,6 +160,23 @@ package com.agnither.spacetaxi.model
                 addPlanet(level.planets[i]);
             }
 
+            _portals = new <Portal>[];
+            _portalsMatrix = new Dictionary();
+            for (i = 0; i < level.portals.length; i++)
+            {
+                var port: PortalVO = level.portals[i];
+                var portal: Portal = new Portal(15);
+                portal.place(port.position.x, port.position.y);
+                _portals.push(portal);
+
+                if (i % 2 == 1)
+                {
+                    previous.connection = portal;
+                    portal.connection = previous;
+                }
+                var previous: Portal = portal;
+            }
+
             _collectibles = new <Collectible>[];
             for (i = 0; i < level.collectibles.length; i++)
             {
@@ -174,17 +192,6 @@ package com.agnither.spacetaxi.model
             _center = new Point();
             _center.x = _viewport.x + _viewport.width / 2;
             _center.y = _viewport.y + _viewport.height / 2;
-
-            _portals = new <Portal>[];
-            var portal1: Portal = new Portal(15);
-            portal1.place(_viewport.x + Math.random() * _viewport.width, _viewport.y + Math.random() * _viewport.height);
-            _portals.push(portal1);
-            var portal2: Portal = new Portal(15);
-            portal2.place(_viewport.x + Math.random() * _viewport.width, _viewport.y + Math.random() * _viewport.height);
-            _portals.push(portal2);
-            portal1.connection = portal2;
-            portal2.connection = portal1;
-            _portalsMatrix = new Dictionary();
 
             _pullPoint = new Point();
             _trajectory = new <Point>[];

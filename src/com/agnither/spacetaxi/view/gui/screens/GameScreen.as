@@ -79,6 +79,9 @@ package com.agnither.spacetaxi.view.gui.screens
             _space.ship.removeEventListener(SpaceBody.UPDATE, handleUpdate);
             _space.orders.removeEventListener(OrderController.UPDATE, handleUpdate);
             _space = null;
+
+            Starling.juggler.removeTweens(this);
+            _moneyVal = -1;
             
             _settingsButton.removeEventListener(Event.TRIGGERED, handleSettings);
         }

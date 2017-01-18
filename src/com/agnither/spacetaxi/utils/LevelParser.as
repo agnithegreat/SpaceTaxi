@@ -8,6 +8,7 @@ package com.agnither.spacetaxi.utils
     import com.agnither.spacetaxi.vo.ObjectVO;
     import com.agnither.spacetaxi.vo.OrderVO;
     import com.agnither.spacetaxi.vo.PlanetVO;
+    import com.agnither.spacetaxi.vo.PortalVO;
     import com.agnither.spacetaxi.vo.ShipVO;
     import com.agnither.spacetaxi.vo.ZoneVO;
 
@@ -57,6 +58,17 @@ package com.agnither.spacetaxi.utils
                 planets.push(planet);
             }
             data.planets = planets;
+
+            var portals: Vector.<PortalVO> = new <PortalVO>[];
+            for (i = 0; i < level.portals.length; i++)
+            {
+                var port: Object = level.portals[i];
+                var portal: PortalVO = new PortalVO();
+                portal.position = new Point(port.x, port.y);
+                portal.radius = port.radius;
+                portals.push(portal);
+            }
+            data.portals = portals;
 
             var ship: ShipVO = new ShipVO();
             ship.position = new Point(level.ship.x, level.ship.y);
