@@ -231,6 +231,7 @@
                 ],
                 "customParams":{},
                 "params":{
+                  "autoSize":"bothDirections",
                   "batchable":true,
                   "format":{
                     "cls":"starling.text.TextFormat",
@@ -242,7 +243,7 @@
                       "size":100
                     }
                   },
-                  "height":100,
+                  "height":78.13,
                   "name":"_backTF",
                   "style":{
                     "cls":"starling.styles.DistanceFieldStyle",
@@ -252,8 +253,8 @@
                     }
                   },
                   "text":"Back",
-                  "width":280,
-                  "x":120
+                  "width":207.81,
+                  "x":104
                 }
               }
             ],
@@ -360,8 +361,7 @@
             ],
             "customParams":{},
             "params":{
-              "name":"icon",
-              "y":-25
+              "name":"icon"
             }
           },
           {
@@ -379,7 +379,7 @@
             ],
             "customParams":{},
             "params":{
-              "autoSize":"horizontal",
+              "autoSize":"bothDirections",
               "batchable":true,
               "format":{
                 "cls":"starling.text.TextFormat",
@@ -391,7 +391,7 @@
                   "size":100
                 }
               },
-              "height":100,
+              "height":76.56,
               "name":"_starsTF",
               "style":{
                 "cls":"starling.styles.DistanceFieldStyle",
@@ -402,7 +402,8 @@
               },
               "text":"10/36",
               "width":268.75,
-              "x":170
+              "x":170,
+              "y":37
             }
           }
         ],
@@ -411,9 +412,12 @@
         "params":{
           "height":150,
           "layout":{
-            "cls":"feathers.layout.AnchorLayout",
+            "cls":"feathers.layout.HorizontalLayout",
             "customParams":{},
-            "params":{}
+            "params":{
+              "gap":20,
+              "verticalAlign":"middle"
+            }
           },
           "layoutData":{
             "cls":"feathers.layout.AnchorLayoutData",
@@ -452,13 +456,13 @@
             "cls":"feathers.layout.AnchorLayoutData",
             "customParams":{},
             "params":{
-              "bottom":50,
+              "bottom":100,
               "horizontalCenter":0
             }
           },
           "name":"bottom_center",
           "x":952,
-          "y":1438
+          "y":1388
         }
       }
     ],

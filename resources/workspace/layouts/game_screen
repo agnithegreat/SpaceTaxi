@@ -6,51 +6,73 @@
           {
             "children":[
               {
-                "cls":"starling.display.Image",
-                "constructorParams":[
+                "children":[
                   {
-                    "cls":"starling.textures.Texture",
-                    "textureName":"common/coin"
-                  }
-                ],
-                "customParams":{},
-                "params":{
-                  "name":"coin"
-                }
-              },
-              {
-                "cls":"starling.text.TextField",
-                "constructorParams":[
-                  {
-                    "value":200
-                  },
-                  {
-                    "value":100
-                  },
-                  {
-                    "value":""
-                  }
-                ],
-                "customParams":{},
-                "params":{
-                  "autoSize":"horizontal",
-                  "batchable":true,
-                  "format":{
-                    "cls":"starling.text.TextFormat",
+                    "cls":"starling.display.Image",
+                    "constructorParams":[
+                      {
+                        "cls":"starling.textures.Texture",
+                        "textureName":"common/coin"
+                      }
+                    ],
                     "customParams":{},
                     "params":{
-                      "color":16777215,
-                      "font":"dragu_gold",
-                      "horizontalAlign":"left",
-                      "size":100
+                      "name":"coin"
                     }
                   },
-                  "height":120,
-                  "name":"_moneyTF",
-                  "text":"300",
-                  "width":165,
-                  "x":184,
-                  "y":10
+                  {
+                    "cls":"starling.text.TextField",
+                    "constructorParams":[
+                      {
+                        "value":200
+                      },
+                      {
+                        "value":100
+                      },
+                      {
+                        "value":""
+                      }
+                    ],
+                    "customParams":{},
+                    "params":{
+                      "autoSize":"bothDirections",
+                      "batchable":true,
+                      "format":{
+                        "cls":"starling.text.TextFormat",
+                        "customParams":{},
+                        "params":{
+                          "color":16777215,
+                          "font":"dragu_gold",
+                          "horizontalAlign":"left",
+                          "size":100
+                        }
+                      },
+                      "height":68,
+                      "name":"_moneyTF",
+                      "text":"300",
+                      "width":165,
+                      "x":178,
+                      "y":32
+                    }
+                  }
+                ],
+                "cls":"feathers.controls.LayoutGroup",
+                "customParams":{},
+                "params":{
+                  "layout":{
+                    "cls":"feathers.layout.HorizontalLayout",
+                    "customParams":{},
+                    "params":{
+                      "gap":40,
+                      "verticalAlign":"middle"
+                    }
+                  },
+                  "layoutData":{
+                    "cls":"feathers.layout.AnchorLayoutData",
+                    "customParams":{},
+                    "params":{}
+                  },
+                  "name":"money"
                 }
               },
               {
@@ -68,7 +90,7 @@
                 ],
                 "customParams":{},
                 "params":{
-                  "autoSize":"horizontal",
+                  "autoSize":"bothDirections",
                   "batchable":true,
                   "format":{
                     "cls":"starling.text.TextFormat",
@@ -80,7 +102,7 @@
                       "size":60
                     }
                   },
-                  "height":75,
+                  "height":45,
                   "name":"_addTF",
                   "style":{
                     "cls":"starling.styles.DistanceFieldStyle",
@@ -92,7 +114,7 @@
                   },
                   "text":"+100",
                   "width":131.25,
-                  "x":184,
+                  "x":171.5,
                   "y":120
                 }
               }
@@ -108,12 +130,9 @@
               "layoutData":{
                 "cls":"feathers.layout.AnchorLayoutData",
                 "customParams":{},
-                "params":{
-                  "left":40,
-                  "top":40
-                }
+                "params":{}
               },
-              "name":"money"
+              "name":"container"
             }
           },
           {
@@ -124,7 +143,7 @@
             },
             "params":{
               "name":"_fuelIndicator",
-              "x":429
+              "x":423
             }
           },
           {
@@ -135,7 +154,7 @@
             },
             "params":{
               "name":"_durabilityIndicator",
-              "x":981
+              "x":975
             }
           }
         ],

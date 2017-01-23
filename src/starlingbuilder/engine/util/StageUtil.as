@@ -221,6 +221,8 @@ package starlingbuilder.engine.util
                     }
                 }
             }
+
+            root.validate();
         }
 
         public static function fitPopup(root: LayoutGroup, designWidth:int, designHeight:int, deviceWidth:int, deviceHeight:int):void
@@ -229,6 +231,7 @@ package starlingbuilder.engine.util
 
             root.scaleX = scale;
             root.scaleY = scale;
+            root.validate();
         }
     }
 }

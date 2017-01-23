@@ -13,6 +13,7 @@ package com.agnither.spacetaxi.view.gui.popups
     import com.agnither.spacetaxi.tasks.logic.RestartGameTask;
     import com.agnither.spacetaxi.tasks.logic.SelectLevelTask;
     import com.agnither.spacetaxi.view.gui.items.FakeShipView;
+    import com.agnither.spacetaxi.view.utils.Animator;
     import com.agnither.spacetaxi.vo.LevelVO;
     import com.agnither.tasks.global.TaskSystem;
     import com.agnither.utils.gui.components.Popup;
@@ -23,6 +24,7 @@ package com.agnither.spacetaxi.view.gui.popups
     import starling.core.Starling;
 
     import starling.display.Button;
+    import starling.display.Image;
     import starling.display.MovieClip;
     import starling.display.Sprite;
     import starling.events.Event;
@@ -37,8 +39,9 @@ package com.agnither.spacetaxi.view.gui.popups
 
         public var _ship: Sprite;
         
+        public var _glow: Image;
         public var _glowMC: MovieClip;
-        
+
         public var _replayButton: ContainerButton;
         public var _nextButton: ContainerButton;
 
@@ -65,10 +68,17 @@ package com.agnither.spacetaxi.view.gui.popups
             _star2.touchable = false;
             _star3.touchable = false;
 
+            _glowMC.touchable = false;
+
             _root.pivotX = _root.width * 0.5;
             _root.pivotY = _root.height * 0.5;
 
             StageUtil.fitPopup(_root, Application.guiSize.width, Application.guiSize.height, Application.viewport.width, Application.viewport.height);
+
+            Animator.create(0.125, 0, function (time: Number):void
+            {
+                _glow.rotation = time;
+            });
         }
 
         override protected function activate():void
@@ -87,6 +97,7 @@ package com.agnither.spacetaxi.view.gui.popups
             _star3.state = result != null && result.stars >= 3 ? ButtonState.DOWN : ButtonState.UP;
             
             _rewardTF.text = String(result.money);
+            _root.validate();
 
             Starling.juggler.add(_glowMC);
         }

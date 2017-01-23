@@ -6,11 +6,13 @@ package com.agnither.spacetaxi.view.gui.screens
     import com.agnither.spacetaxi.Application;
     import com.agnither.spacetaxi.controller.game.OrderController;
     import com.agnither.spacetaxi.managers.sound.SoundManager;
+    import com.agnither.spacetaxi.managers.windows.WindowManager;
     import com.agnither.spacetaxi.model.Ship;
     import com.agnither.spacetaxi.model.Space;
     import com.agnither.spacetaxi.model.SpaceBody;
     import com.agnither.spacetaxi.tasks.logic.EndGameTask;
     import com.agnither.spacetaxi.view.gui.game.IndicatorView;
+    import com.agnither.spacetaxi.view.gui.popups.PausePopup;
     import com.agnither.tasks.global.TaskSystem;
     import com.agnither.utils.gui.components.Screen;
 
@@ -122,7 +124,7 @@ package com.agnither.spacetaxi.view.gui.screens
         private function handleSettings(event: Event):void
         {
             SoundManager.playSound(SoundManager.CLICK);
-            TaskSystem.getInstance().addTask(new EndGameTask());
+            WindowManager.showPopup(new PausePopup(), true);
         }
 
         public function set money(value: int):void

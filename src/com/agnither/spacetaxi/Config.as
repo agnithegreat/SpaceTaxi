@@ -4,6 +4,7 @@
 package com.agnither.spacetaxi
 {
     import com.agnither.spacetaxi.managers.Services;
+    import com.agnither.spacetaxi.model.player.Volume;
 
     public class Config
     {
@@ -15,6 +16,8 @@ package com.agnither.spacetaxi
         public static var version: String = ""; // set from InitTask
 
         public static var userId: Boolean = Services.deviceId;
+        
+        public static var volume: Volume = new Volume();
         
         public static var ai: Boolean = false;
         

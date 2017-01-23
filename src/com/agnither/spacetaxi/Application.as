@@ -4,6 +4,7 @@
 package com.agnither.spacetaxi
 {
     import com.agnither.spacetaxi.controller.AppController;
+    import com.agnither.spacetaxi.managers.sound.SoundManager;
     import com.agnither.spacetaxi.managers.windows.WindowManager;
     import com.agnither.spacetaxi.tasks.init.InitTask;
     import com.agnither.spacetaxi.utils.LevelParser;
@@ -59,6 +60,8 @@ package com.agnither.spacetaxi
             uiBuilder = new UIBuilder(assetsManager);
             
             appController = new AppController();
+            
+            SoundManager.init();
 
             LevelParser.init();
 

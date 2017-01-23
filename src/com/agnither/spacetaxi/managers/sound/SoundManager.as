@@ -5,6 +5,9 @@ package com.agnither.spacetaxi.managers.sound
 {
     import by.blooddy.crypto.MD5;
 
+    import com.agnither.spacetaxi.Config;
+    import com.agnither.spacetaxi.model.player.Volume;
+
     import flash.desktop.NativeApplication;
     import flash.media.AudioPlaybackMode;
     import flash.media.Sound;
@@ -14,7 +17,6 @@ package com.agnither.spacetaxi.managers.sound
     import flash.utils.getDefinitionByName;
 
     import starling.core.Starling;
-
     import starling.events.Event;
 
     public class SoundManager
@@ -43,20 +45,14 @@ package com.agnither.spacetaxi.managers.sound
 
         public static function getSound(name: String):Sound
         {
-//            var sound: Sound = Application.assetsManager.getSound(name);
             var SoundClass: Class = getDefinitionByName(name) as Class;
             return SoundClass != null ? new SoundClass() : null;
         }
 
-//        public static function get volume():Volume
-//        {
-//            return ApplicationModel.volume;
-//        }
-
         public static function init():void
         {
             SoundMixer.audioPlaybackMode = AudioPlaybackMode.AMBIENT;
-//            volume.addEventListener(Volume.UPDATE, handleUpdate);
+            Config.volume.addEventListener(Volume.UPDATE, handleUpdate);
 
             NativeApplication.nativeApplication.addEventListener("activate", handleActivate);
             NativeApplication.nativeApplication.addEventListener("deactivate", handleDeactivate);
@@ -67,9 +63,9 @@ package com.agnither.spacetaxi.managers.sound
             if (playing[name]) return;
 
             var sound: Sound = getSound(name);
-            var container: SoundContainer = new SoundContainer(sound, true);
+            var container: SoundContainer = new SoundContainer(sound, true, true);
             container.play();
-//            container.volume = container.music ? volume.music : volume.sound;
+            container.volume = Config.volume.music;
 
             playing[name] = container;
         }
@@ -90,9 +86,9 @@ package com.agnither.spacetaxi.managers.sound
         public static function playSound(name: String, loop: Boolean = false):String
         {
             var sound: Sound = getSound(name);
-            var container: SoundContainer = new SoundContainer(sound, loop);
+            var container: SoundContainer = new SoundContainer(sound, loop, false);
             container.play();
-//            container.volume = container.music ? volume.music : volume.sound;
+            container.volume = Config.volume.sound;
             
             var key: String = name + "." + MD5.hash(String(Math.random()));
             playing[key] = container;
@@ -133,7 +129,7 @@ package com.agnither.spacetaxi.managers.sound
                 var container: SoundContainer = playing[key];
                 if (container.alive)
                 {
-//                    container.volume = container.music ? volume.music : volume.sound;
+                    container.volume = container.music ? Config.volume.music : Config.volume.sound;
                 } else {
                     delete playing[key];
                 }
@@ -142,12 +138,12 @@ package com.agnither.spacetaxi.managers.sound
 
         private static function handleActivate(event: Object):void
         {
-            SoundMixer.soundTransform = new SoundTransform(1);
+            tweenVolume(1, 0.3);
         }
 
         private static function handleDeactivate(event: Object):void
         {
-            SoundMixer.soundTransform = new SoundTransform(0);
+            tweenVolume(0, 0.3);
         }
     }
 }
@@ -162,16 +158,23 @@ class SoundContainer
     private var _sound: Sound;
     private var _soundChannel: SoundChannel;
     private var _loop: Boolean;
+    private var _music: Boolean;
     
     public function get alive():Boolean
     {
         return _sound != null;
     }
+    
+    public function get music():Boolean
+    {
+        return _music;
+    }
 
-    public function SoundContainer(sound: Sound, loop: Boolean)
+    public function SoundContainer(sound: Sound, loop: Boolean, music: Boolean)
     {
         _sound = sound;
         _loop = loop;
+        _music = music;
     }
 
     public function play():void

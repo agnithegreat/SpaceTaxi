@@ -17,6 +17,7 @@
       "layouts/level_done_popup",
       "layouts/level_fail_popup",
       "layouts/level_start_popup",
+      "layouts/pause_popup",
 
       "textures/*/gui.png",
       "textures/*/gui.xml",

@@ -32,24 +32,27 @@
         }
       },
       {
-        "children":[
+        "cls":"starling.display.MovieClip",
+        "constructorParams":[
           {
-            "cls":"starling.display.MovieClip",
-            "constructorParams":[
-              {
-                "cls":"__AS3__.vec.Vector.<starling.textures.Texture>",
-                "label":"prefix",
-                "name":"textures",
-                "value":"pop_up/glow_button"
-              }
-            ],
-            "customParams":{},
-            "params":{
-              "name":"_glowMC",
-              "pivotX":250,
-              "pivotY":250
-            }
-          },
+            "cls":"__AS3__.vec.Vector.<starling.textures.Texture>",
+            "label":"prefix",
+            "name":"textures",
+            "value":"pop_up/glow_button"
+          }
+        ],
+        "customParams":{},
+        "params":{
+          "currentFrame":1,
+          "name":"_glowMC",
+          "pivotX":250,
+          "pivotY":250,
+          "x":500,
+          "y":1077
+        }
+      },
+      {
+        "children":[
           {
             "cls":"starling.display.Image",
             "constructorParams":[
@@ -128,6 +131,7 @@
         "customParams":{},
         "params":{
           "autoSize":"vertical",
+          "batchable":true,
           "format":{
             "cls":"starling.text.TextFormat",
             "customParams":{},
@@ -186,6 +190,7 @@
             "customParams":{},
             "params":{
               "autoSize":"bothDirections",
+              "batchable":true,
               "format":{
                 "cls":"starling.text.TextFormat",
                 "customParams":{},
@@ -200,8 +205,8 @@
               "name":"_rewardTF",
               "text":"1000",
               "width":183.12,
-              "x":109,
-              "y":10
+              "x":102.8,
+              "y":12
             }
           }
         ],
@@ -209,9 +214,12 @@
         "customParams":{},
         "params":{
           "layout":{
-            "cls":"feathers.layout.AnchorLayout",
+            "cls":"feathers.layout.HorizontalLayout",
             "customParams":{},
-            "params":{}
+            "params":{
+              "gap":20,
+              "verticalAlign":"middle"
+            }
           },
           "layoutData":{
             "cls":"feathers.layout.AnchorLayoutData",
@@ -221,7 +229,7 @@
             }
           },
           "name":"container",
-          "x":354,
+          "x":357,
           "y":848
         }
       }
@@ -238,7 +246,10 @@
       "layoutData":{
         "cls":"feathers.layout.AnchorLayoutData",
         "customParams":{},
-        "params":{}
+        "params":{
+          "percentHeight":100,
+          "percentWidth":100
+        }
       },
       "name":"_root",
       "width":1000

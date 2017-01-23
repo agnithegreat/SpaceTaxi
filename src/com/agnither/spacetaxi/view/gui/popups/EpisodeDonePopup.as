@@ -43,6 +43,8 @@ package com.agnither.spacetaxi.view.gui.popups
 
         override protected function initialize():void
         {
+            _glowMC.touchable = false;
+
             _root.pivotX = _root.width * 0.5;
             _root.pivotY = _root.height * 0.5;
 
@@ -56,6 +58,7 @@ package com.agnither.spacetaxi.view.gui.popups
             _okButton.addEventListener(Event.TRIGGERED, handleTriggered);
 
             _rewardTF.text = String(episode.reward);
+            _root.validate();
 
             Starling.juggler.add(_glowMC);
         }

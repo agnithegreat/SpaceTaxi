@@ -62,6 +62,8 @@ package com.agnither.spacetaxi.view.gui.popups
             _star2.touchable = false;
             _star3.touchable = false;
 
+            _glowMC.touchable = false;
+
             _root.pivotX = _root.width * 0.5;
             _root.pivotY = _root.height * 0.5;
 
@@ -75,8 +77,10 @@ package com.agnither.spacetaxi.view.gui.popups
             _playButton.addEventListener(Event.TRIGGERED, handleTriggered);
 
             _titleTF.text = level.title;
+//            _descriptionTF.text = level.title;
 
             _rewardTF.text = String(level.reward);
+            _root.validate();
 
             var progress: Progress = Application.appController.player.progress;
             var result: LevelResultVO = progress.getLevelResult(level.id);
