@@ -98,17 +98,11 @@ package com.agnither.spacetaxi.model
             _stable = false;
             _landing = false;
 
-            if (!_clone && fuel > 0)
+            _fuel -= fuel;
+
+            if (!_clone && _fuel < 2 && _signal == null)
             {
-                _fuel -= fuel;
-                
-                // TODO: LOW FUEL
-                if (_fuel < 2 && _signal == null)
-                {
-                    _signal = SoundManager.playSound(SoundManager.LOW_FUEL, true);
-                }
-                
-                // TODO: NO FUEL
+                _signal = SoundManager.playSound(SoundManager.LOW_FUEL, true);
             }
 
             dispatchEventWith(LAUNCH);
@@ -132,20 +126,15 @@ package com.agnither.spacetaxi.model
         {
             dispatchEventWith(COLLIDE, false, power);
 
-            if (!_clone && power > 0)
+            _durability -= power;
+            if (_durability <= 0)
             {
-                _durability -= power;
-                
-                // TODO: LOW DURABILITY
-                if (_durability < 2 && _signal == null)
-                {
-                    _signal = SoundManager.playSound(SoundManager.LOW_FUEL, true);
-                }
-                
-                if (_durability <= 0)
-                {
-                    crash();
-                }
+                crash();
+            }
+
+            if (!_clone && _durability < 2 && _signal == null)
+            {
+                _signal = SoundManager.playSound(SoundManager.LOW_FUEL, true);
             }
         }
 
@@ -209,6 +198,15 @@ package com.agnither.spacetaxi.model
         }
 
         public function repair():void
+        {
+            if (_signal != null)
+            {
+                SoundManager.stopSound(_signal);
+                _signal = null;
+            }
+        }
+        
+        public function mute():void
         {
             if (_signal != null)
             {

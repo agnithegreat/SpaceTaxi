@@ -24,11 +24,21 @@ package com.agnither.spacetaxi.vo
         public function countStars(moves: int):int
         {
             var count: int = 3;
-            while (count > 0 && stars[count-1] < moves)
+            while (count > 1 && stars[3-count] < moves)
             {
                 count--;
             }
             return count;
+        }
+        
+        public function get reward():int
+        {
+            var sum: int = 0;
+            for (var i:int = 0; i < orders.length; i++)
+            {
+                sum += orders[i].cost;
+            }
+            return sum;
         }
     }
 }

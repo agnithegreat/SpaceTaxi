@@ -425,6 +425,10 @@
                 <false/>
             </struct>
             <key type="filename">assets/gui/level_screen/next_level.png</key>
+            <key type="filename">assets/gui/pop_up/glow_button_01.png</key>
+            <key type="filename">assets/gui/pop_up/glow_button_02.png</key>
+            <key type="filename">assets/gui/pop_up/glow_button_03.png</key>
+            <key type="filename">assets/gui/pop_up/glow_button_04.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
@@ -643,6 +647,189 @@
                 <rect>20,29,40,59</rect>
                 <key>scale9Paddings</key>
                 <rect>20,29,40,59</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">assets/gui/pop_up/back.png</key>
+            <key type="filename">assets/gui/pop_up/back_lose.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>242,242,483,483</rect>
+                <key>scale9Paddings</key>
+                <rect>242,242,483,483</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">assets/gui/pop_up/button_next.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>84,84,167,168</rect>
+                <key>scale9Paddings</key>
+                <rect>84,84,167,168</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">assets/gui/pop_up/button_replay.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>51,51,102,102</rect>
+                <key>scale9Paddings</key>
+                <rect>51,51,102,102</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">assets/gui/pop_up/check.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>41,43,81,86</rect>
+                <key>scale9Paddings</key>
+                <rect>41,43,81,86</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">assets/gui/pop_up/check_glow.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>95,95,190,190</rect>
+                <key>scale9Paddings</key>
+                <rect>95,95,190,190</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">assets/gui/pop_up/cup.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>163,165,325,330</rect>
+                <key>scale9Paddings</key>
+                <rect>163,165,325,330</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">assets/gui/pop_up/dialogue.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>398,52,796,104</rect>
+                <key>scale9Paddings</key>
+                <rect>398,52,796,104</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">assets/gui/pop_up/level_done_glow.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>305,305,610,610</rect>
+                <key>scale9Paddings</key>
+                <rect>305,305,610,610</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">assets/gui/pop_up/level_done_img.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>210,106,420,212</rect>
+                <key>scale9Paddings</key>
+                <rect>210,106,420,212</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">assets/gui/pop_up/menu.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>29,23,57,46</rect>
+                <key>scale9Paddings</key>
+                <rect>29,23,57,46</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">assets/gui/pop_up/next.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>46,35,92,69</rect>
+                <key>scale9Paddings</key>
+                <rect>46,35,92,69</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">assets/gui/pop_up/replay.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>29,34,57,67</rect>
+                <key>scale9Paddings</key>
+                <rect>29,34,57,67</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">assets/gui/pop_up/try_again_bottom.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>180,140,359,279</rect>
+                <key>scale9Paddings</key>
+                <rect>180,140,359,279</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">assets/gui/pop_up/try_again_dust.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>93,126,185,251</rect>
+                <key>scale9Paddings</key>
+                <rect>93,126,185,251</rect>
                 <key>scale9FromFile</key>
                 <false/>
             </struct>

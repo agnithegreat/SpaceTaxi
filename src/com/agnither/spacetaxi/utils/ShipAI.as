@@ -144,7 +144,7 @@ package com.agnither.spacetaxi.utils
                     } else {
                         _power = 0.5;
 
-                        while (Math.abs(GeomUtils.getAngleDelta(angle, _baseAngle)) > Math.PI * 0.5)
+                        do
                         {
                             _sign *= -1;
                             if (_sign == -1)
@@ -152,6 +152,7 @@ package com.agnither.spacetaxi.utils
                                 _angleMod += angleStep;
                             }
                         }
+                        while (Math.abs(GeomUtils.getAngleDelta(angle, _baseAngle)) > Math.PI * 0.5);
                     }
                 }
             }

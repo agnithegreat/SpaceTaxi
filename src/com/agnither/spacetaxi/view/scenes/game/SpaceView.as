@@ -9,6 +9,7 @@ package com.agnither.spacetaxi.view.scenes.game
     import com.agnither.spacetaxi.model.Planet;
     import com.agnither.spacetaxi.model.Space;
     import com.agnither.spacetaxi.model.orders.Zone;
+    import com.agnither.spacetaxi.tasks.logic.LevelFailTask;
     import com.agnither.spacetaxi.tasks.logic.RestartGameTask;
     import com.agnither.spacetaxi.utils.LevelParser;
     import com.agnither.spacetaxi.view.scenes.game.effects.CometEffect;
@@ -145,6 +146,7 @@ package com.agnither.spacetaxi.view.scenes.game
         {
             _space = Application.appController.space;
             _space.addEventListener(Space.NEW_METEOR, handleNewMeteor);
+            _space.addEventListener(Space.PAUSE, handlePause);
             _space.addEventListener(Space.RESTART, handleRestart);
             _space.addEventListener(Space.SHOW_TRAJECTORY, handleShowTrajectory);
             _space.addEventListener(Space.UPDATE_TRAJECTORY, handleUpdateTrajectory);
@@ -217,6 +219,7 @@ package com.agnither.spacetaxi.view.scenes.game
         override protected function deactivate():void
         {
             _space.removeEventListener(Space.NEW_METEOR, handleNewMeteor);
+            _space.removeEventListener(Space.PAUSE, handlePause);
             _space.removeEventListener(Space.RESTART, handleRestart);
             _space.removeEventListener(Space.SHOW_TRAJECTORY, handleShowTrajectory);
             _space.removeEventListener(Space.UPDATE_TRAJECTORY, handleUpdateTrajectory);
@@ -337,6 +340,20 @@ package com.agnither.spacetaxi.view.scenes.game
             _animationsContainer.addChild(meteorView);
         }
 
+        private function handlePause(event: Event):void
+        {
+            if (event.data)
+            {
+                Starling.current.stage.removeEventListener(EnterFrameEvent.ENTER_FRAME, handleEnterFrame);
+                Starling.current.stage.removeEventListener(TouchEvent.TOUCH, handleTouch);
+                Starling.juggler.remove(this);
+            } else {
+                Starling.current.stage.addEventListener(EnterFrameEvent.ENTER_FRAME, handleEnterFrame);
+                Starling.current.stage.addEventListener(TouchEvent.TOUCH, handleTouch);
+                Starling.juggler.add(this);
+            }              
+        }
+
         private function handleRestart(event: Event):void
         {
             deactivate();
@@ -398,12 +415,6 @@ package com.agnither.spacetaxi.view.scenes.game
                 }
             }
             _trajectoryLength = end;
-
-            // TODO: figure out: use _space.danger or not
-//            for (i = 0; i < _trajectory.numChildren; i++)
-//            {
-//                (_trajectory.getChildAt(i) as Image).color = _space.danger ? 0xFF0000 : 0xFFFFFF;
-//            }
         }
 
         private function resetTrajectory():void
@@ -413,7 +424,7 @@ package com.agnither.spacetaxi.view.scenes.game
 
             _dotCounter = 0;
         }
-
+        
         private function handleEnterFrame(event: EnterFrameEvent):void
         {
             if (Math.random() < 0.005)
@@ -434,13 +445,13 @@ package com.agnither.spacetaxi.view.scenes.game
 
             var sx: Number = Math.abs(dx);
             var sy: Number = Math.abs(dy);
-            var scale: Number = Math.min(stage.stageWidth / sx, stage.stageHeight / sy, Application.scaleFactor) * 0.75;
+            var scale: Number = Math.min(stage.stageWidth / sx, stage.stageHeight / sy, Application.scaleFactor) * 0.85;
 
             if (sx > _viewport.width * 2 || sy > _viewport.height * 2)
             {
                 if (!_shipView.getBounds(stage).intersects(new Rectangle(0, 0, stage.stageWidth, stage.stageHeight)))
                 {
-                    TaskSystem.getInstance().addTask(new RestartGameTask());
+                    TaskSystem.getInstance().addTask(new LevelFailTask());
                 }
 
                 return;

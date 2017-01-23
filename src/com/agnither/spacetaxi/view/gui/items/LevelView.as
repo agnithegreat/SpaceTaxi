@@ -7,7 +7,7 @@ package com.agnither.spacetaxi.view.gui.items
     import com.agnither.spacetaxi.managers.sound.SoundManager;
     import com.agnither.spacetaxi.model.player.Progress;
     import com.agnither.spacetaxi.model.player.vo.LevelResultVO;
-    import com.agnither.spacetaxi.tasks.logic.StartGameTask;
+    import com.agnither.spacetaxi.tasks.logic.SelectLevelTask;
     import com.agnither.spacetaxi.view.utils.Animator;
     import com.agnither.spacetaxi.vo.LevelVO;
     import com.agnither.tasks.global.TaskSystem;
@@ -115,7 +115,7 @@ package com.agnither.spacetaxi.view.gui.items
         private function handleTriggered(event: Event):void
         {
             SoundManager.playSound(SoundManager.CLICK);
-            TaskSystem.getInstance().addTask(new StartGameTask(_level.id));
+            TaskSystem.getInstance().addTask(new SelectLevelTask(_level.id));
         }
         
         override public function dispose():void

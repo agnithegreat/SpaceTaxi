@@ -59,7 +59,7 @@ package com.agnither.spacetaxi.view.scenes.game
             _animation.animation.gotoAndStopByFrame("launch");
             _animation.rotation = _ship.rotation + Math.PI * 0.5;
 
-            _mount = _animation.getChildAt(2) as StarlingArmatureDisplay;
+            _mount = _animation.getChildAt(1) as StarlingArmatureDisplay;
 
             _offset = new Point();
 

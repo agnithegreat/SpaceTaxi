@@ -3,6 +3,7 @@
  */
 package com.agnither.spacetaxi.managers.windows
 {
+    import com.agnither.spacetaxi.managers.sound.SoundManager;
     import com.agnither.utils.gui.components.AbstractComponent;
     import com.agnither.utils.gui.components.Popup;
     import com.agnither.utils.gui.components.Screen;
@@ -115,6 +116,8 @@ package com.agnither.spacetaxi.managers.windows
         {
             if (tween)
             {
+                SoundManager.tweenVolume(50, 0.3);
+
                 _popupDarkLayer.visible = true;
                 _popupDarkLayer.alpha = 0;
                 Starling.juggler.tween(_popupDarkLayer, 0.3, {
@@ -147,6 +150,8 @@ package com.agnither.spacetaxi.managers.windows
             popup = popup || _currentPopup;
             if (tween)
             {
+                SoundManager.tweenVolume(100, 0.3);
+
                 _popupDarkLayer.alpha = 0.7;
                 Starling.juggler.tween(_popupDarkLayer, 0.3, {
                     alpha: 0

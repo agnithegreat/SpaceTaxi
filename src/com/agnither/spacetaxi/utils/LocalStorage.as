@@ -9,8 +9,9 @@ package com.agnither.spacetaxi.utils
     public class LocalStorage
     {
         public static const progress: LocalStorage = new LocalStorage("progress");
-        
         public static const platform: LocalStorage = new LocalStorage("platform");
+        public static const logging: LocalStorage = new LocalStorage("logging");
+        
         public static const auth: LocalStorage = new LocalStorage("auth");
         public static const settings: LocalStorage = new LocalStorage("settings");
         

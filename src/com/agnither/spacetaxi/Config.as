@@ -3,6 +3,8 @@
  */
 package com.agnither.spacetaxi
 {
+    import com.agnither.spacetaxi.managers.Services;
+
     public class Config
     {
         public static const FACEBOOK_APP_ID: String = "630268433718548";
@@ -12,6 +14,10 @@ package com.agnither.spacetaxi
 
         public static var version: String = ""; // set from InitTask
 
+        public static var userId: Boolean = Services.deviceId;
+        
+        public static var ai: Boolean = false;
+        
         public static var support: String = "support@dieselpuppet.com";
         public static var subject: String = "Player ID %s, Russian Lotto, GP, version %s";
     }

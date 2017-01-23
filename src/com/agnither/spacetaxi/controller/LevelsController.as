@@ -19,6 +19,11 @@ package com.agnither.spacetaxi.controller
             return _levels[_currentLevel];
         }
         
+        public function getLevel(id: int):LevelVO
+        {
+            return _levels[id];
+        }
+        
         private var _episodes: Vector.<EpisodeVO>;
         public function get episodes():Vector.<EpisodeVO>
         {

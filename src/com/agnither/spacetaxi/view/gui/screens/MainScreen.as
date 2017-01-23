@@ -5,7 +5,7 @@ package com.agnither.spacetaxi.view.gui.screens
 {
     import com.agnither.spacetaxi.Application;
     import com.agnither.spacetaxi.managers.sound.SoundManager;
-    import com.agnither.spacetaxi.tasks.logic.StartGameTask;
+    import com.agnither.spacetaxi.tasks.logic.SelectLevelTask;
     import com.agnither.spacetaxi.view.gui.items.FakeShipView;
     import com.agnither.spacetaxi.view.utils.Animator;
     import com.agnither.tasks.global.TaskSystem;
@@ -16,7 +16,6 @@ package com.agnither.spacetaxi.view.gui.screens
     import starling.display.Image;
     import starling.display.Sprite;
     import starling.events.Event;
-    import starling.text.TextField;
 
     import starlingbuilder.engine.util.StageUtil;
     import starlingbuilder.extensions.uicomponents.ContainerButton;
@@ -105,7 +104,7 @@ package com.agnither.spacetaxi.view.gui.screens
             _shipShadow1.mask = _planet1Mask;
             _shipShadow2.mask = _planet2Mask;
 
-            _shipContainer.addChild(new FakeShipView());
+            _shipContainer.addChild(new FakeShipView(0.35, Math.PI * 0.5, true));
 
             StageUtil.fitAll(_root, Application.guiSize.width, Application.guiSize.height, Application.viewport.width, Application.viewport.height);
 
@@ -169,7 +168,7 @@ package com.agnither.spacetaxi.view.gui.screens
         private function handlePlay(event: Event):void
         {
             SoundManager.playSound(SoundManager.CLICK);
-            TaskSystem.getInstance().addTask(new StartGameTask());
+            TaskSystem.getInstance().addTask(new SelectLevelTask());
         }
     }
 }

@@ -104,17 +104,15 @@
             <FilePathAndPathInPackage file-path="$MODULE_DIR$/resources/config" path-in-package="config" />
             <FilePathAndPathInPackage file-path="$MODULE_DIR$/resources/workspace/textures" path-in-package="textures" />
             <FilePathAndPathInPackage file-path="$MODULE_DIR$/resources/sounds" path-in-package="sounds" />
-            <FilePathAndPathInPackage file-path="$MODULE_DIR$/resources/launch/Default-568h@2x.png" path-in-package="Default-568h@2x.png" />
-            <FilePathAndPathInPackage file-path="$MODULE_DIR$/resources/launch/Default-667h@2x.png" path-in-package="Default-667h@2x.png" />
+            <FilePathAndPathInPackage file-path="$MODULE_DIR$/resources/workspace/layouts" path-in-package="layouts" />
+            <FilePathAndPathInPackage file-path="$MODULE_DIR$/resources/levels" path-in-package="levels" />
+            <FilePathAndPathInPackage file-path="$MODULE_DIR$/resources/launch/Default-Landscape-568h@2x.png" path-in-package="Default-Landscape-568h@2x.png" />
+            <FilePathAndPathInPackage file-path="$MODULE_DIR$/resources/launch/Default-Landscape-667h@2x.png" path-in-package="Default-Landscape-667h@2x.png" />
             <FilePathAndPathInPackage file-path="$MODULE_DIR$/resources/launch/Default-Landscape-736h@3x.png" path-in-package="Default-Landscape-736h@3x.png" />
             <FilePathAndPathInPackage file-path="$MODULE_DIR$/resources/launch/Default-Landscape.png" path-in-package="Default-Landscape.png" />
             <FilePathAndPathInPackage file-path="$MODULE_DIR$/resources/launch/Default-Landscape@2x.png" path-in-package="Default-Landscape@2x.png" />
-            <FilePathAndPathInPackage file-path="$MODULE_DIR$/resources/launch/Default-Portrait-736h@3x.png" path-in-package="Default-Portrait-736h@3x.png" />
-            <FilePathAndPathInPackage file-path="$MODULE_DIR$/resources/launch/Default-Portrait.png" path-in-package="Default-Portrait.png" />
-            <FilePathAndPathInPackage file-path="$MODULE_DIR$/resources/launch/Default-Portrait@2x.png" path-in-package="Default-Portrait@2x.png" />
+            <FilePathAndPathInPackage file-path="$MODULE_DIR$/resources/launch/Default.png" path-in-package="Default.png" />
             <FilePathAndPathInPackage file-path="$MODULE_DIR$/resources/launch/Default@2x.png" path-in-package="Default@2x.png" />
-            <FilePathAndPathInPackage file-path="$MODULE_DIR$/resources/workspace/layouts" path-in-package="layouts" />
-            <FilePathAndPathInPackage file-path="$MODULE_DIR$/resources/levels" path-in-package="levels" />
           </files-to-package>
           <AirSigningOptions keystore-path="$MODULE_DIR$/keys/ios/virich_dev.p12" provisioning-profile-path="$MODULE_DIR$/keys/ios/Kosmos_Dev.mobileprovision" />
         </packaging-ios>

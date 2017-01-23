@@ -19,6 +19,9 @@ package
     [SWF (frameRate=60, width=1024, height=768, backgroundColor="#000000")]
     public class Main extends StarlingMainBase
     {
+        [Embed (source="logo.png")]
+        private var Splash: Class;
+        
         public function Main()
         {
             BUILD::android
@@ -33,6 +36,10 @@ package
         {
             super.initialize();
 
+            Application.splash = new Splash();
+            addChild(Application.splash);
+            resize();
+
             stage.quality = StageQuality.BEST;
             TextField.defaultTextureFormat = Context3DTextureFormat.BGRA;
         }
@@ -42,6 +49,20 @@ package
             super.initializeStarling();
 
             showStats = Config.debug;
+        }
+
+        override protected function resize():void
+        {
+            if (Application.splash == null) return;
+
+            Application.splash.scaleX = 1;
+            Application.splash.scaleY = 1;
+
+            var scale: Number = Math.max(stage.stageWidth / Application.splash.width, stage.stageHeight / Application.splash.height);
+            Application.splash.scaleX = scale;
+            Application.splash.scaleY = scale;
+            Application.splash.x = (stage.stageWidth - Application.splash.width) * 0.5;
+            Application.splash.y = (stage.stageHeight - Application.splash.height) * 0.5;
         }
     }
 }

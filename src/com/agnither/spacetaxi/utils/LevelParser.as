@@ -22,12 +22,12 @@ package com.agnither.spacetaxi.utils
         
         public static function init():void
         {
-            colors["1/2"] = 0x5491ae;
-            colors["1/4"] = 0xc0605f;
-            colors["1/8"] = 0x79c13c;
-            colors["2/2"] = 0x00b6f5;
-            colors["2/3"] = 0x00d73a;
-            colors["2/4"] = 0xdf0414;
+            colors["1/2"] = 0x18dce6;
+            colors["1/4"] = 0xf64b2c;
+            colors["1/8"] = 0x77da1b;
+            colors["2/2"] = 0x00c3ee;
+            colors["2/3"] = 0x81ee00;
+            colors["2/4"] = 0xee002d;
         }
         
         public static function parse(id: int, episode: int, level: Object):LevelVO

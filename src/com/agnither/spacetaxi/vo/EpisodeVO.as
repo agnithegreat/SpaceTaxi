@@ -15,6 +15,7 @@ package com.agnither.spacetaxi.vo
             episode.name = "Milky Way";
             episode.skin = "milkyway_episode";
             episode.levels = new <LevelVO>[];
+            episode.reward = 1000;
             episode.locked = false;
             return episode;
         }
@@ -26,6 +27,7 @@ package com.agnither.spacetaxi.vo
             episode.name = "Maelstrom";
             episode.skin = "maelstorm_episode";
             episode.levels = new <LevelVO>[];
+            episode.reward = 2000;
             episode.locked = false;
             return episode;
         }
@@ -37,6 +39,7 @@ package com.agnither.spacetaxi.vo
             episode.name = "Soon";
             episode.skin = "secret_episode";
             episode.levels = new <LevelVO>[];
+            episode.reward = 3000;
             episode.locked = true;
             return episode;
         }
@@ -45,6 +48,7 @@ package com.agnither.spacetaxi.vo
         public var name: String;
         public var skin: String;
         public var levels: Vector.<LevelVO>;
+        public var reward: int;
         public var locked: Boolean;
 
         public function get stars():int

@@ -8,12 +8,8 @@ package com.agnither.spacetaxi.tasks.logic
 
     public class StartGameTask extends SimpleTask
     {
-        private var _level: int;
-        
-        public function StartGameTask(level: int = -1):void
+        public function StartGameTask():void
         {
-            _level = level;
-            
             super();
         }
         
@@ -21,12 +17,6 @@ package com.agnither.spacetaxi.tasks.logic
         {
             super.execute(token);
             
-            if (_level == -1)
-            {
-                _level = Application.appController.player.progress.level;
-            }
-
-            Application.appController.selectLevel(_level);
             Application.appController.startGame();
             Application.appController.states.gameState();
 

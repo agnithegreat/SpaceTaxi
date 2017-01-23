@@ -11,13 +11,15 @@ package com.agnither.spacetaxi.controller
 
     import flash.utils.Dictionary;
 
-    public class StateController
+    import starling.events.EventDispatcher;
+
+    public class StateController extends EventDispatcher
     {
         public static const MAIN: String = "StateController.MAIN";
         public static const EPISODE: String = "StateController.EPISODE";
         public static const LEVEL: String = "StateController.LEVEL";
         public static const GAME: String = "StateController.GAME";
-        
+
         private var _statesStack: Array;
         public function get currentState():String 
         {
@@ -34,8 +36,8 @@ package com.agnither.spacetaxi.controller
             return _statesStack.length == 1;
         }
         
-        private var _screens: Dictionary;
         private var _scenes: Dictionary;
+        private var _screens: Dictionary;
 
         public function StateController()
         {
@@ -43,14 +45,14 @@ package com.agnither.spacetaxi.controller
 
         public function init():void
         {
+            _scenes = new Dictionary();
+            _scenes[GAME] = new SpaceView();
+            
             _screens = new Dictionary();
             _screens[MAIN] = new MainScreen();
             _screens[EPISODE] = new EpisodeScreen();
             _screens[LEVEL] = new LevelScreen();
             _screens[GAME] = new GameScreen();
-
-            _scenes = new Dictionary();
-            _scenes[GAME] = new SpaceView();
 
             _statesStack = [];
         }

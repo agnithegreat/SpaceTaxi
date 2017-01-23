@@ -13,6 +13,8 @@ package com.agnither.spacetaxi.managers.sound
     import flash.utils.Dictionary;
     import flash.utils.getDefinitionByName;
 
+    import starling.core.Starling;
+
     import starling.events.Event;
 
     public class SoundManager
@@ -106,6 +108,22 @@ package com.agnither.spacetaxi.managers.sound
                 container.destroy();
                 delete playing[uniqueName];
             }
+        }
+
+        public static function tweenVolume(value: int, time: Number):void
+        {
+            Starling.juggler.removeTweens(SoundManager);
+            Starling.juggler.tween(SoundManager, time, {volume: value});
+        }
+        
+        public static function set volume(value: int):void
+        {
+            SoundMixer.soundTransform = new SoundTransform(value * 0.01);
+        }
+
+        public static function get volume():int
+        {
+            return SoundMixer.soundTransform.volume * 100;
         }
 
         private static function handleUpdate(event: Event):void

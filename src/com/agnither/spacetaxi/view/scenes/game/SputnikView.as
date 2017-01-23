@@ -18,6 +18,8 @@ package com.agnither.spacetaxi.view.scenes.game
 
     public class SputnikView extends Sprite implements IAnimatable
     {
+        public static var skins: Array = ["01", "02"];
+
         private var _planet: Planet;
 
         private var _baseScale: Number;
@@ -59,7 +61,8 @@ package com.agnither.spacetaxi.view.scenes.game
             _shadow.mask = _shadowMask;
             addChild(_shadow);
 
-            _sputnik = new Image(Application.assetsManager.getTexture("misc/Sputnik/01"));
+            var rand: int = Math.random() * skins.length;
+            _sputnik = new Image(Application.assetsManager.getTexture("misc/Sputnik/" + skins[rand]));
             _sputnik.pivotX = _sputnik.width * 0.5;
             _sputnik.pivotY = _sputnik.height * 0.5;
             _sputnik.color = LevelParser.colors[_planet.skin];

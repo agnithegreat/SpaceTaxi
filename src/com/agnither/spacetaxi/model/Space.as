@@ -3,6 +3,7 @@
  */
 package com.agnither.spacetaxi.model
 {
+    import com.agnither.spacetaxi.Config;
     import com.agnither.spacetaxi.controller.game.OrderController;
     import com.agnither.spacetaxi.controller.game.ZoneController;
     import com.agnither.spacetaxi.enums.PlanetType;
@@ -29,6 +30,7 @@ package com.agnither.spacetaxi.model
     public class Space extends EventDispatcher implements IAnimatable
     {
         public static const NEW_METEOR: String = "Space.NEW_METEOR";
+        public static const PAUSE: String = "Space.PAUSE";
         public static const RESTART: String = "Space.RESTART";
         public static const SHOW_TRAJECTORY: String = "Space.SHOW_TRAJECTORY";
         public static const UPDATE_TRAJECTORY: String = "Space.UPDATE_TRAJECTORY";
@@ -140,6 +142,12 @@ package com.agnither.spacetaxi.model
         }
 
         private var _complete: Boolean;
+        
+        private var _win: Boolean;
+        public function get win():Boolean
+        {
+            return _win;
+        }
 
         public function Space()
         {
@@ -200,6 +208,7 @@ package com.agnither.spacetaxi.model
             _shipTime = 0;
             _moves = 0;
             _complete = false;
+            _win = false;
 
             _zoneController = new ZoneController();
             for (i = 0; i < level.zones.length; i++)
@@ -222,11 +231,26 @@ package com.agnither.spacetaxi.model
             _orderController.start();
         }
         
+        public function pause(value: Boolean):void
+        {
+            if (value)
+            {
+                _ship.mute();
+            }
+            dispatchEventWith(PAUSE, false, value);
+        }
+        
         public function restart(level: LevelVO):void
         {
             destroy();
             init(level);
             dispatchEventWith(RESTART);
+        }
+
+        public function lose():void
+        {
+            _complete = true;
+            _win = false;
         }
 
         public function destroy():void
@@ -588,12 +612,19 @@ package com.agnither.spacetaxi.model
         
         private function processShip(delta: Number):void
         {
-//            if (_ship.stable)
-//            {
-//                _shipAI.compute();
-//            }
-            
-            if (_ship.stable || !_ship.alive) return;
+            if (_complete)
+            {
+                dispatchEventWith(LEVEL_COMPLETE);
+                return;
+            }
+
+            if (!_ship.alive || (_ship.stable && _ship.fuel == 0))
+            {
+                lose();
+                return;
+            }
+
+            if (_ship.stable) return;
 
             var scaleSize: Number = 50 * DELTA;
             var fromStart: Number = _flightTime / scaleSize;
@@ -613,15 +644,16 @@ package com.agnither.spacetaxi.model
             {
                 _ship.landPrepare(_landPlanet);
             }
-
-            if (_complete)
+            
+            if (Config.ai)
             {
-                dispatchEventWith(LEVEL_COMPLETE);
+                _shipAI.compute();
             }
         }
 
         private function handleOrdersDone(event: Event):void
         {
+            _win = true;
             _complete = true;
         }
     }

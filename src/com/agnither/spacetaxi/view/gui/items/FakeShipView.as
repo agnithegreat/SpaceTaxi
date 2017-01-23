@@ -13,21 +13,26 @@ package com.agnither.spacetaxi.view.gui.items
         private var _animation: StarlingArmatureDisplay;
         private var _mount: StarlingArmatureDisplay;
         
-        public function FakeShipView()
+        public function FakeShipView(scale: Number, rotation: Number, launch: Boolean)
         {
             super();
 
             _animation = StarlingFactory.factory.buildArmatureDisplay("Ship", "ship");
-            _animation.scaleX = 0.35;
-            _animation.scaleY = 0.35;
+            _animation.scaleX = scale;
+            _animation.scaleY = scale;
             addChild(_animation);
             _animation.animation.gotoAndStopByFrame("launch");
-            _animation.rotation = Math.PI * 0.5;
+            _animation.rotation = rotation;
 
-            _mount = _animation.getChildAt(2) as StarlingArmatureDisplay;
-            
-            _animation.animation.gotoAndPlayByFrame("launch");
-            _mount.animation.gotoAndPlayByFrame("close");
+            _mount = _animation.getChildAt(1) as StarlingArmatureDisplay;
+
+            if (launch)
+            {
+                _animation.animation.gotoAndPlayByFrame("launch");
+                _mount.animation.gotoAndStopByFrame("open");
+            } else {
+                _mount.animation.gotoAndStopByFrame("close");
+            }
         }
 
         public function destroy():void

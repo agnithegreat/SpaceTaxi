@@ -13,6 +13,10 @@
       "layouts/episode",
       "layouts/level_screen",
       "layouts/level",
+      "layouts/episode_done_popup",
+      "layouts/level_done_popup",
+      "layouts/level_fail_popup",
+      "layouts/level_start_popup",
 
       "textures/*/gui.png",
       "textures/*/gui.xml",

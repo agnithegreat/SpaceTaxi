@@ -30,6 +30,8 @@ package com.agnither.spacetaxi.view.scenes.game
             _image = new Image(Application.assetsManager.getTexture("misc/" + _collectible.type));
             _image.pivotX = _image.width * 0.5;
             _image.pivotY = _image.height * 0.5;
+            _image.scaleX = 0.5;
+            _image.scaleY = 0.5;
             addChild(_image);
 
             x = _collectible.x;
