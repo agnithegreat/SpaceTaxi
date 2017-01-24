@@ -138,7 +138,7 @@ package com.agnither.spacetaxi.managers.sound
 
         private static function handleActivate(event: Object):void
         {
-            tweenVolume(1, 0.3);
+            tweenVolume(100, 0.3);
         }
 
         private static function handleDeactivate(event: Object):void

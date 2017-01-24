@@ -208,7 +208,7 @@ package com.agnither.spacetaxi.view.scenes.game
             _touch = null;
 
             Starling.current.stage.addEventListener(EnterFrameEvent.ENTER_FRAME, handleEnterFrame);
-            Starling.current.stage.addEventListener(TouchEvent.TOUCH, handleTouch);
+            addEventListener(TouchEvent.TOUCH, handleTouch);
 
             handleEnterFrame(null);
 
@@ -264,7 +264,7 @@ package com.agnither.spacetaxi.view.scenes.game
             _shipView = null;
 
             Starling.current.stage.removeEventListener(EnterFrameEvent.ENTER_FRAME, handleEnterFrame);
-            Starling.current.stage.removeEventListener(TouchEvent.TOUCH, handleTouch);
+            removeEventListener(TouchEvent.TOUCH, handleTouch);
 
             Starling.juggler.remove(this);
         }

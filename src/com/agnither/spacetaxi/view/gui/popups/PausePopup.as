@@ -128,21 +128,25 @@ package com.agnither.spacetaxi.view.gui.popups
                 case _musicOnBtn:
                 {
                     Config.volume.setMusic(false);
+                    Config.volume.save();
                     break;
                 }
                 case _musicOffBtn:
                 {
                     Config.volume.setMusic(true);
+                    Config.volume.save();
                     break;
                 }
                 case _soundOnBtn:
                 {
                     Config.volume.setSound(false);
+                    Config.volume.save();
                     break;
                 }
                 case _soundOffBtn:
                 {
                     Config.volume.setSound(true);
+                    Config.volume.save();
                     break;
                 }
             }
