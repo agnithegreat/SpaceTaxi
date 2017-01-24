@@ -26,6 +26,10 @@ package com.agnither.spacetaxi.tasks.init
             addTask(new LoadBaseTask());
             addTask(new LoadResourcesTask("common"));
             addTask(new InitApplicationTask());
+            BUILD::debug
+            {
+                addTask(new InitReplayTask());
+            }
 
             super.execute(token);
         }

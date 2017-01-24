@@ -7,6 +7,7 @@ package com.agnither.spacetaxi.model
     import com.agnither.spacetaxi.controller.game.OrderController;
     import com.agnither.spacetaxi.controller.game.ZoneController;
     import com.agnither.spacetaxi.enums.PlanetType;
+    import com.agnither.spacetaxi.managers.analytics.GamePlayAnalytics;
     import com.agnither.spacetaxi.managers.sound.SoundManager;
     import com.agnither.spacetaxi.model.orders.Zone;
     import com.agnither.spacetaxi.utils.GeomUtils;
@@ -229,6 +230,8 @@ package com.agnither.spacetaxi.model
                 _orderController.addOrder(new Order(order.cost, order.wave, 100, departure, arrival));
             }
             _orderController.start();
+            
+            GamePlayAnalytics.startLevel(level.id);
         }
         
         public function pause(value: Boolean):void
@@ -317,6 +320,8 @@ package com.agnither.spacetaxi.model
         {
             if (_ship.stable && _ship.fuel > 0)
             {
+                GamePlayAnalytics.setMovement(angle, power);
+                
                 var planet: Planet = _ship.planet;
                 var d: Number = Point.distance(planet.position, _ship.position);
                 var pow: Number = Math.sqrt(G * planet.mass / d * power);
@@ -375,6 +380,8 @@ package com.agnither.spacetaxi.model
         {
             if (_ship.stable && _ship.fuel > 0 && _trajectory.length > 10)
             {
+                GamePlayAnalytics.launch();
+                
                 computeTrajectory(_phantom, false, true);
 
                 launchShip(_ship);

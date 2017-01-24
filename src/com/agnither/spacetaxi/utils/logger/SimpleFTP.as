@@ -8,10 +8,11 @@ package com.agnither.spacetaxi.utils.logger
     import flash.events.ProgressEvent;
     import flash.events.SecurityErrorEvent;
     import flash.net.Socket;
+    import flash.utils.ByteArray;
 
     public class SimpleFTP {
 
-        public static function putFile(host:String, user:String, pass:String, path:String, fileName: String, contents: String):void
+        public static function putFile(host:String, user:String, pass:String, path:String, fileName: String, contents: ByteArray):void
         {
             var s:SimpleFTP = new SimpleFTP(host, user, pass);
             s.putFile(path, fileName, contents);
@@ -24,7 +25,7 @@ package com.agnither.spacetaxi.utils.logger
         private var dataPort:int;
         private var path:Array;
         private var fileName:String;
-        private var contents: String;
+        private var contents: ByteArray;
         private var step:int;
         private var sa:Array;
 
@@ -36,7 +37,7 @@ package com.agnither.spacetaxi.utils.logger
             ctrlSocket.addEventListener(SecurityErrorEvent.SECURITY_ERROR, error);
         }
 
-        private function putFile(path:String, fileName: String, contents: String):void {
+        private function putFile(path:String, fileName: String, contents: ByteArray):void {
             this.path = path.split("/");
             this.fileName = fileName;
             this.contents = contents;
@@ -51,7 +52,7 @@ package com.agnither.spacetaxi.utils.logger
         }
 
         private function response(res:String, contents:String = null):void {
-            step = 13;
+            step = 10;
             write("QUIT");
         }
 
@@ -136,7 +137,7 @@ package com.agnither.spacetaxi.utils.logger
                 case 8:
                     if (st == "125" || st == "150") {
                         step++;
-                        dataSocket.writeUTFBytes(contents);
+                        dataSocket.writeBytes(contents);
                         dataSocket.flush();
                         dataSocket.close();
                     } else {
@@ -148,36 +149,6 @@ package com.agnither.spacetaxi.utils.logger
                     response(res); // regardless if the res is "226" or not.
                     break;
                 case 10:
-                    if (st == "227") {
-                        step++;
-                        sa = res.substring(res.indexOf("(") + 1, res.indexOf(")")).split(",");
-                        dataIP = sa[0] + "." + sa[1] + "." + sa[2] + "." + sa[3];
-                        dataPort = parseInt(sa[4]) * 256 + parseInt(sa[5]);
-                        contents = "";
-                        dataSocket.addEventListener(ProgressEvent.SOCKET_DATA,
-                                function (event:ProgressEvent):void {
-                                    contents += dataSocket.readUTFBytes(dataSocket.bytesAvailable);
-                                });
-                        dataSocket.connect(dataIP, dataPort);
-                        write("RETR " + path);
-                    } else
-                        response(res);
-                    break;
-                case 11:
-                    if (st == "125")
-                        step++;
-                    else {
-                        dataSocket.close();
-                        response(res);
-                    }
-                    break;
-                case 12:
-                    if (st == "226") // succeeded
-                        response(res, contents);
-                    else
-                        response(res);
-                    break;
-                case 13:
                     ctrlSocket.close();
                     break;
             }

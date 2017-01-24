@@ -3,9 +3,12 @@
  */
 package com.agnither.spacetaxi.controller
 {
+    import com.agnither.spacetaxi.Config;
+    import com.agnither.spacetaxi.managers.analytics.GamePlayAnalytics;
     import com.agnither.spacetaxi.managers.windows.WindowManager;
     import com.agnither.spacetaxi.model.Space;
     import com.agnither.spacetaxi.model.player.Player;
+    import com.agnither.spacetaxi.utils.logger.Logger;
     import com.agnither.spacetaxi.view.gui.popups.EpisodeDonePopup;
     import com.agnither.spacetaxi.view.gui.popups.LevelDonePopup;
     import com.agnither.spacetaxi.view.gui.popups.LevelFailPopup;
@@ -98,6 +101,11 @@ package com.agnither.spacetaxi.controller
 
         private function handleLevelComplete(event: Event):void
         {
+            if (Config.replay == null)
+            {
+                Logger.sendReplay(GamePlayAnalytics.exportData());
+            }
+
             pauseGame(true);
 
             if (_space.win)

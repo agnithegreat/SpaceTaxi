@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with TexturePacker http://www.codeandweb.com/texturepacker-->
-<!-- $TexturePacker:SmartUpdate:52e8806f75ddfa0e62d03f9371fa0c3d:8005394aeea6d33669b71776c51290ec:298a8c87037b1387d385db5bb085372e$ -->
+<!-- $TexturePacker:SmartUpdate:44d74d754947f7099bc5c4958e164c61:d1a91e699848e7e1a9c3a7b81b668bd3:298a8c87037b1387d385db5bb085372e$ -->
 <TextureAtlas imagePath="gui.png" width="4096" height="4096">
     <SubTexture name="characters/00" x="3838" y="1488" width="241" height="303" frameX="-60" frameY="0" frameWidth="350" frameHeight="350"/>
     <SubTexture name="characters/01" x="3742" y="2262" width="268" height="229" frameX="-41" frameY="-71" frameWidth="350" frameHeight="350"/>
@@ -62,6 +62,8 @@
     <SubTexture name="pop_up/glow_button_02" x="2564" y="1328" rotated="true" width="373" height="372" frameX="-64" frameY="-63" frameWidth="500" frameHeight="500"/>
     <SubTexture name="pop_up/glow_button_03" x="520" y="2859" width="408" height="409" frameX="-46" frameY="-45" frameWidth="500" frameHeight="500"/>
     <SubTexture name="pop_up/glow_button_04" x="4" y="2766" width="450" height="451" frameX="-25" frameY="-24" frameWidth="500" frameHeight="500"/>
+    <SubTexture name="pop_up/glow_button_05" x="520" y="2859" width="408" height="409" frameX="-46" frameY="-45" frameWidth="500" frameHeight="500"/>
+    <SubTexture name="pop_up/glow_button_06" x="2564" y="1328" rotated="true" width="373" height="372" frameX="-64" frameY="-63" frameWidth="500" frameHeight="500"/>
     <SubTexture name="pop_up/level_done_glow" x="4" y="840" width="1220" height="1203" frameX="0" frameY="-8" frameWidth="1220" frameHeight="1220"/>
     <SubTexture name="pop_up/level_done_img" x="2943" y="1601" width="840" height="424"/>
     <SubTexture name="pop_up/menu" x="1458" y="2069" rotated="true" width="92" height="114"/>

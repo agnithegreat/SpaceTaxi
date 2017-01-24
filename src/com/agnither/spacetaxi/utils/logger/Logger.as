@@ -3,6 +3,8 @@
  */
 package com.agnither.spacetaxi.utils.logger
 {
+    import by.blooddy.crypto.MD5;
+
     import com.agnither.spacetaxi.Application;
     import com.agnither.spacetaxi.Config;
     import com.agnither.spacetaxi.utils.LocalStorage;
@@ -13,6 +15,8 @@ package com.agnither.spacetaxi.utils.logger
     import flash.globalization.DateTimeFormatter;
     import flash.globalization.LocaleID;
     import flash.system.Capabilities;
+    import flash.utils.ByteArray;
+    import flash.utils.ByteArray;
 
     public class Logger
     {
@@ -71,12 +75,30 @@ package com.agnither.spacetaxi.utils.logger
             _stream.close();
         }
 
-        public static function send():void
+        public static function sendLog():void
         {
             _stream.open(_file, FileMode.READ);
-            var contents: String = _stream.readUTFBytes(_stream.bytesAvailable);
+            var contents: ByteArray = new ByteArray();
+            _stream.readBytes(contents);
             _stream.close();
-            SimpleFTP.putFile("ftp.drivehq.com", "agnither", "Z01Q02bn5feh", "Kosmos/logs", Config.platform + "_" + Config.version + "_" + Config.userId + "_" + _file.name, contents);
+            var filename: String = Config.platform + "_" + Config.version + "_" + Config.userId + "_" + _file.name;
+            sendFile(contents, "Kosmos/logs", filename);
+        }
+
+        public static function sendReplay(replay: ByteArray):void
+        {
+            var hash: String = MD5.hashBytes(replay);
+
+            var contents: ByteArray = new ByteArray();
+            replay.readBytes(contents);
+            var filename: String = Config.platform + "_" + Config.version + "_" + Config.userId + "_" + hash + ".replay";
+            sendFile(contents, "Kosmos/replays", filename);
+        }
+        
+        public static function sendFile(contents: ByteArray, path: String, filename: String):void
+        {
+            SimpleFTP.putFile("ftp.drivehq.com", "agnither", "Z01Q02bn5feh", path, filename, contents);
+            
         }
     }
 }

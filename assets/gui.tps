@@ -214,6 +214,27 @@
         </struct>
         <key>individualSpriteSettings</key>
         <map type="IndividualSpriteSettingsMap">
+            <key type="filename">assets/gui/characters/00.png</key>
+            <key type="filename">assets/gui/characters/01.png</key>
+            <key type="filename">assets/gui/characters/02.png</key>
+            <key type="filename">assets/gui/characters/03.png</key>
+            <key type="filename">assets/gui/characters/04.png</key>
+            <key type="filename">assets/gui/characters/05.png</key>
+            <key type="filename">assets/gui/characters/06.png</key>
+            <key type="filename">assets/gui/characters/07.png</key>
+            <key type="filename">assets/gui/characters/08.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>88,88,175,175</rect>
+                <key>scale9Paddings</key>
+                <rect>88,88,175,175</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
             <key type="filename">assets/gui/common/back.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
@@ -429,6 +450,8 @@
             <key type="filename">assets/gui/pop_up/glow_button_02.png</key>
             <key type="filename">assets/gui/pop_up/glow_button_03.png</key>
             <key type="filename">assets/gui/pop_up/glow_button_04.png</key>
+            <key type="filename">assets/gui/pop_up/glow_button_05.png</key>
+            <key type="filename">assets/gui/pop_up/glow_button_06.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
@@ -651,7 +674,6 @@
                 <false/>
             </struct>
             <key type="filename">assets/gui/pop_up/back.png</key>
-            <key type="filename">assets/gui/pop_up/back_lose.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
@@ -661,6 +683,20 @@
                 <rect>242,242,483,483</rect>
                 <key>scale9Paddings</key>
                 <rect>242,242,483,483</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">assets/gui/pop_up/button_music_off.png</key>
+            <key type="filename">assets/gui/pop_up/button_music_on.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>24,34,48,67</rect>
+                <key>scale9Paddings</key>
+                <rect>24,34,48,67</rect>
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
@@ -687,6 +723,20 @@
                 <rect>51,51,102,102</rect>
                 <key>scale9Paddings</key>
                 <rect>51,51,102,102</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">assets/gui/pop_up/button_sound_off.png</key>
+            <key type="filename">assets/gui/pop_up/button_sound_on.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>33,31,66,61</rect>
+                <key>scale9Paddings</key>
+                <rect>33,31,66,61</rect>
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
@@ -804,6 +854,19 @@
                 <rect>29,34,57,67</rect>
                 <key>scale9Paddings</key>
                 <rect>29,34,57,67</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">assets/gui/pop_up/resume.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>18,28,36,56</rect>
+                <key>scale9Paddings</key>
+                <rect>18,28,36,56</rect>
                 <key>scale9FromFile</key>
                 <false/>
             </struct>

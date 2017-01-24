@@ -6,6 +6,14 @@ package
     import com.agnither.spacetaxi.Application;
     import com.agnither.spacetaxi.Config;
 
+    import flash.desktop.NativeApplication;
+
+    import flash.events.InvokeEvent;
+    import flash.filesystem.File;
+    import flash.filesystem.FileMode;
+    import flash.filesystem.FileStream;
+    import flash.utils.ByteArray;
+
     BUILD::android
     {
         import com.mesmotronic.ane.AndroidFullScreen;
@@ -42,6 +50,25 @@ package
 
             stage.quality = StageQuality.BEST;
             TextField.defaultTextureFormat = Context3DTextureFormat.BGRA;
+
+            BUILD::debug
+            {
+                NativeApplication.nativeApplication.addEventListener(InvokeEvent.INVOKE, handleInitializationArgs);
+
+                function handleInitializationArgs(event: InvokeEvent):void
+                {
+                    var args:Array = event.arguments as Array;
+                    if (args.length > 0)
+                    {
+                        var file: File = new File(String(args[0]));
+                        var fileStream: FileStream = new FileStream();
+                        fileStream.open(file, FileMode.READ);
+                        Config.replay = new ByteArray();
+                        fileStream.readBytes(Config.replay);
+                        fileStream.close();
+                    }
+                }
+            }
         }
 
         override protected function initializeStarling():void
@@ -66,3 +93,4 @@ package
         }
     }
 }
+

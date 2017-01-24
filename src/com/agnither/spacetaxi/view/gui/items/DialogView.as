@@ -9,6 +9,8 @@ package com.agnither.spacetaxi.view.gui.items
     import feathers.controls.LayoutGroup;
 
     import starling.core.Starling;
+
+    import starling.core.Starling;
     import starling.display.Image;
     import starling.display.Sprite;
     import starling.events.Touch;
@@ -62,12 +64,12 @@ package com.agnither.spacetaxi.view.gui.items
         
         override protected function activate():void
         {
-            stage.addEventListener(TouchEvent.TOUCH, handleTouch);
+            Starling.current.stage.addEventListener(TouchEvent.TOUCH, handleTouch);
         }
 
         override protected function deactivate():void
         {
-            stage.removeEventListener(TouchEvent.TOUCH, handleTouch);
+            Starling.current.stage.removeEventListener(TouchEvent.TOUCH, handleTouch);
         }
 
         private function nextLetter():void
@@ -105,11 +107,12 @@ package com.agnither.spacetaxi.view.gui.items
         
         private function close():void
         {
+            Starling.juggler.removeDelayedCalls(nextLetter);
+            Starling.juggler.removeDelayedCalls(close);
+
             var fn: Function = _close;
             _close = null;
             fn();
-            
-            Starling.juggler.removeDelayedCalls(close);
         }
 
         private function handleTouch(event: TouchEvent):void

@@ -20,7 +20,6 @@ package com.agnither.spacetaxi.view.gui.popups
     import feathers.controls.LayoutGroup;
 
     import starling.core.Starling;
-
     import starling.display.Button;
     import starling.display.MovieClip;
     import starling.display.Sprite;
@@ -28,7 +27,6 @@ package com.agnither.spacetaxi.view.gui.popups
     import starling.text.TextField;
 
     import starlingbuilder.engine.util.StageUtil;
-
     import starlingbuilder.extensions.uicomponents.ContainerButton;
 
     public class LevelStartPopup extends Popup
