@@ -10,16 +10,14 @@ package com.agnither.spacetaxi.view.gui.screens
     import com.agnither.spacetaxi.model.Ship;
     import com.agnither.spacetaxi.model.Space;
     import com.agnither.spacetaxi.model.SpaceBody;
-    import com.agnither.spacetaxi.tasks.logic.EndGameTask;
     import com.agnither.spacetaxi.view.gui.game.IndicatorView;
     import com.agnither.spacetaxi.view.gui.items.DialogView;
     import com.agnither.spacetaxi.view.gui.popups.PausePopup;
-    import com.agnither.tasks.global.TaskSystem;
     import com.agnither.utils.gui.components.Screen;
 
     import feathers.controls.LayoutGroup;
-
-    import starling.core.Starling;
+    import feathers.layout.AnchorLayout;
+    import feathers.layout.AnchorLayoutData;
 
     import starling.core.Starling;
     import starling.display.Button;
@@ -115,6 +113,8 @@ package com.agnither.spacetaxi.view.gui.screens
 
         private function showDialog():void
         {
+            // TODO: make a dialog system
+
             _hide.visible = true;
             _dialog = new DialogView();
             _dialogContainer.addChild(_dialog);
@@ -123,9 +123,10 @@ package com.agnither.spacetaxi.view.gui.screens
                 "Hello, challenger! I have a job that suits perfectly! See this hostile planet dead ahead? Those guys have some stuff I would like to buy. Bring it to me, and your effort will be payed off. Hurry, I don't like to wait.",
                 "characters/01",
                 false,
-                trace,
                 nextDialog
             );
+            (_dialogContainer.layoutData as AnchorLayoutData).left = NaN;
+            (_dialogContainer.layoutData as AnchorLayoutData).right = 0;
             _dialog.visible = true;
         }
 
@@ -135,9 +136,10 @@ package com.agnither.spacetaxi.view.gui.screens
                 "No problem, pal. I will do it for you. Wait a parsec!",
                 "characters/00",
                 true,
-                trace,
                 hideDialog
             );
+            (_dialogContainer.layoutData as AnchorLayoutData).right = NaN;
+            (_dialogContainer.layoutData as AnchorLayoutData).left = 0;
         }
 
         private function hideDialog():void
