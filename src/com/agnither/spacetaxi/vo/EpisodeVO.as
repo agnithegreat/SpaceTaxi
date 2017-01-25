@@ -69,5 +69,10 @@ package com.agnither.spacetaxi.vo
         {
             return levels.length * 3;
         }
+        
+        public function get lastLevel():LevelVO
+        {
+            return levels[levels.length-1];
+        }
     }
 }

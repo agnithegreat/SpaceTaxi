@@ -25,10 +25,6 @@ package com.agnither.spacetaxi.tasks.init
 
         override protected function processComplete():void
         {
-            Application.splash.parent.removeChild(Application.splash);
-            Application.splash.bitmapData = null;
-            Application.splash = null;
-
             StarlingFactory.factory.parseDragonBonesData(
                 Application.assetsManager.getObject("ship_skeleton")
             );

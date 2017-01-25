@@ -90,6 +90,47 @@
             "constructorParams":[
               {
                 "cls":"starling.textures.Texture",
+                "textureName":"pop_up/menu"
+              }
+            ],
+            "customParams":{},
+            "params":{
+              "name":"icon",
+              "pivotX":57,
+              "pivotY":46
+            }
+          }
+        ],
+        "cls":"starlingbuilder.extensions.uicomponents.ContainerButton",
+        "customParams":{},
+        "params":{
+          "name":"_menuButton",
+          "x":300,
+          "y":1074
+        }
+      },
+      {
+        "children":[
+          {
+            "cls":"starling.display.Image",
+            "constructorParams":[
+              {
+                "cls":"starling.textures.Texture",
+                "textureName":"pop_up/button_small"
+              }
+            ],
+            "customParams":{},
+            "params":{
+              "name":"back",
+              "pivotX":102,
+              "pivotY":102
+            }
+          },
+          {
+            "cls":"starling.display.Image",
+            "constructorParams":[
+              {
+                "cls":"starling.textures.Texture",
                 "textureName":"pop_up/replay"
               }
             ],
@@ -105,7 +146,7 @@
         "customParams":{},
         "params":{
           "name":"_replayButton",
-          "x":394,
+          "x":700,
           "y":1074
         }
       },
@@ -124,7 +165,7 @@
           "name":"_glowMC",
           "pivotX":250,
           "pivotY":250,
-          "x":598,
+          "x":500,
           "y":1077
         }
       },
@@ -165,7 +206,7 @@
         "customParams":{},
         "params":{
           "name":"_nextButton",
-          "x":598,
+          "x":500,
           "y":1077
         }
       },

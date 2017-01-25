@@ -1,4 +1,14 @@
 {
+  "preloader": {
+    "cache": false,
+    "folder": "",
+    "assets": [
+      "layouts/preloader",
+
+      "textures/*/preloader.png",
+      "textures/*/preloader.xml"
+    ]
+  },
   "common": {
     "cache": false,
     "folder": "",
@@ -19,7 +29,8 @@
       "layouts/level_start_popup",
       "layouts/pause_popup",
       "layouts/settings_popup",
-      "layouts/dialog",
+      "layouts/modal_popup",
+      "layouts/dialog_popup",
 
       "textures/*/gui.png",
       "textures/*/gui.xml",

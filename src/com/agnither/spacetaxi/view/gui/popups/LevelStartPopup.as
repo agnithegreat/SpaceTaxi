@@ -36,6 +36,7 @@ package com.agnither.spacetaxi.view.gui.popups
         public var _glowMC: MovieClip;
 
         public var _playButton: ContainerButton;
+        public var _closeButton: ContainerButton;
 
         public var _titleTF: TextField;
         public var _descriptionTF: TextField;
@@ -73,7 +74,8 @@ package com.agnither.spacetaxi.view.gui.popups
         override protected function activate():void
         {
             var level: LevelVO = Application.appController.levelsController.currentLevel;
-            
+
+            _closeButton.addEventListener(Event.TRIGGERED, handleTriggered);
             _playButton.addEventListener(Event.TRIGGERED, handleTriggered);
 
             _titleTF.text = level.title;
@@ -93,6 +95,7 @@ package com.agnither.spacetaxi.view.gui.popups
 
         override protected function deactivate():void
         {
+            _closeButton.removeEventListener(Event.TRIGGERED, handleTriggered);
             _playButton.removeEventListener(Event.TRIGGERED, handleTriggered);
 
             Starling.juggler.remove(_glowMC);
@@ -112,13 +115,29 @@ package com.agnither.spacetaxi.view.gui.popups
         {
             SoundManager.playSound(SoundManager.CLICK);
             WindowManager.closePopup(this, true);
-
-            if (Application.appController.states.currentState == StateController.GAME)
+            
+            switch (event.currentTarget)
             {
-                TaskSystem.getInstance().addTask(new RestartGameTask());
-            } else {
-                TaskSystem.getInstance().addTask(new StartGameTask());
+                case _closeButton:
+                {
+                    if (Application.appController.states.currentState == StateController.GAME)
+                    {
+                        TaskSystem.getInstance().addTask(new EndGameTask());
+                    }
+                    break;
+                }
+                case _playButton:
+                {
+                    if (Application.appController.states.currentState == StateController.GAME)
+                    {
+                        TaskSystem.getInstance().addTask(new RestartGameTask());
+                    } else {
+                        TaskSystem.getInstance().addTask(new StartGameTask());
+                    }
+                    break;
+                }
             }
+            
         }
     }
 }

@@ -308,7 +308,7 @@ package com.agnither.spacetaxi.view.scenes.game
                     {
                         if (_aiming)
                         {
-                            var angle: Number = Math.atan2(shipPos.y - _shipView.offset.y - position.y, shipPos.x - _shipView.offset.x - position.x);
+                            var angle: Number = Math.atan2(shipPos.y + _shipView.offset.y - position.y, shipPos.x + _shipView.offset.x - position.x);
                             var power: Number = Math.pow(distance / segment, 2);
                             _space.setPullPoint(angle, power, false, true);
                         } else {

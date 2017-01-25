@@ -80,7 +80,7 @@ package com.agnither.spacetaxi.managers.analytics
         {
             if (_replay == null) return;
 
-            _startTime = (new Date()).time;
+            _startTime = (new Date()).time - _replay.movements[0].time;
 
             _last = -1;
             _space = space;

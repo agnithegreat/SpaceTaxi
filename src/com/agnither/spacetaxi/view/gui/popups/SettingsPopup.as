@@ -29,6 +29,8 @@ package com.agnither.spacetaxi.view.gui.popups
         public var _loginTF: TextField;
         public var _soundTF: TextField;
 
+        public var _closeButton: ContainerButton;
+        
         public var _fbButton: Button;
         public var _vkButton: Button;
 
@@ -64,6 +66,7 @@ package com.agnither.spacetaxi.view.gui.popups
 
         override protected function activate():void
         {
+            _closeButton.addEventListener(Event.TRIGGERED, handleTriggered);
             _fbButton.addEventListener(Event.TRIGGERED, handleTriggered);
             _vkButton.addEventListener(Event.TRIGGERED, handleTriggered);
             _musicOnBtn.addEventListener(Event.TRIGGERED, handleTriggered);
@@ -78,6 +81,7 @@ package com.agnither.spacetaxi.view.gui.popups
 
         override protected function deactivate():void
         {
+            _closeButton.removeEventListener(Event.TRIGGERED, handleTriggered);
             _fbButton.removeEventListener(Event.TRIGGERED, handleTriggered);
             _vkButton.removeEventListener(Event.TRIGGERED, handleTriggered);
             _musicOnBtn.removeEventListener(Event.TRIGGERED, handleTriggered);
@@ -106,6 +110,12 @@ package com.agnither.spacetaxi.view.gui.popups
 
             switch (event.currentTarget)
             {
+                case _closeButton:
+                {
+                    WindowManager.closePopup(this, true);
+                    break;
+                }
+                    
                 case _fbButton:
                 {
                     break;

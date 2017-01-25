@@ -190,13 +190,13 @@
             "constructorParams":[
               {
                 "cls":"starling.textures.Texture",
-                "textureName":"common/settings"
+                "textureName":"common/pause"
               }
             ],
             "customParams":{},
             "params":{
               "height":118,
-              "name":"_settingsButton",
+              "name":"_pauseButton",
               "textFormat":{
                 "cls":"starling.text.TextFormat",
                 "constructorParams":[],
@@ -223,62 +223,6 @@
           "width":118,
           "x":1890,
           "y":40
-        }
-      },
-      {
-        "cls":"starling.display.Quad",
-        "constructorParams":[
-          {
-            "name":"width",
-            "type":"Number",
-            "value":2048
-          },
-          {
-            "name":"height",
-            "type":"Number",
-            "value":1536
-          }
-        ],
-        "customParams":{},
-        "params":{
-          "alpha":0.5,
-          "color":0,
-          "name":"_hide"
-        }
-      },
-      {
-        "children":[
-          {
-            "cls":"starling.display.Sprite",
-            "customParams":{
-              "customComponentClass":"com.agnither.spacetaxi.view.gui.items.DialogView",
-              "forEditor":true,
-              "source":"dialog"
-            },
-            "params":{
-              "name":"_dialog"
-            }
-          }
-        ],
-        "cls":"feathers.controls.LayoutGroup",
-        "customParams":{},
-        "params":{
-          "height":350,
-          "layout":{
-            "cls":"feathers.layout.AnchorLayout",
-            "customParams":{},
-            "params":{}
-          },
-          "layoutData":{
-            "cls":"feathers.layout.AnchorLayoutData",
-            "customParams":{},
-            "params":{
-              "bottom":0
-            }
-          },
-          "name":"_dialogContainer",
-          "width":2048,
-          "y":1186
         }
       }
     ],

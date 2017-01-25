@@ -34,6 +34,7 @@ package com.agnither.spacetaxi.managers.windows
         private static var _loaderDarkLayer: Quad;
         private static var _hintLayer: Layer;
 
+        private static var _popupsQueue: Vector.<Popup>;
         private static var _popupsStack: Vector.<Popup>;
 
         private static var _currentScreen: Screen;
@@ -70,7 +71,7 @@ package com.agnither.spacetaxi.managers.windows
             _scene.addChild(_screenTweenLayer);
 
             _popupDarkLayer = new Quad(_viewport.width, _viewport.height, 0xFF000000);
-            _popupDarkLayer.alpha = 0.7;
+            _popupDarkLayer.alpha = 0;
             _popupDarkLayer.visible = false;
             _scene.addChild(_popupDarkLayer);
 
@@ -91,6 +92,7 @@ package com.agnither.spacetaxi.managers.windows
 //            _loader = new LoaderView();
 
             _popupsStack = new <Popup>[];
+            _popupsQueue = new <Popup>[];
         }
         
         public static function showScene(scene: AbstractComponent):void
@@ -116,12 +118,22 @@ package com.agnither.spacetaxi.managers.windows
         {
             if (tween)
             {
-                SoundManager.playSound(SoundManager.POPUP_OPEN);
+                var index: int = _popupsQueue.indexOf(popup);
+                if (index < 0)
+                {
+                    _popupsQueue.push(popup);
+                    if (_popupsQueue.length > 1) return;
+                } else if (index > 0) return;
+
+                if (popup.sound)
+                {
+                    SoundManager.playSound(SoundManager.POPUP_OPEN);
+                }
                 
                 SoundManager.tweenMusicVolume(50, 0.3);
 
+                Starling.juggler.removeTweens(_popupDarkLayer);
                 _popupDarkLayer.visible = true;
-                _popupDarkLayer.alpha = 0;
                 Starling.juggler.tween(_popupDarkLayer, 0.3, {
                     alpha: 0.7
                 });
@@ -147,19 +159,27 @@ package com.agnither.spacetaxi.managers.windows
             }
         }
         
-        public static function closePopup(popup: Popup, tween: Boolean = false):void
+        public static function closePopup(popup: Popup = null, tween: Boolean = false):void
         {
             popup = popup || _currentPopup;
+            if (!popup) return;
+
             if (tween)
             {
-                SoundManager.playSound(SoundManager.POPUP_CLOSE);
-                
-                SoundManager.tweenMusicVolume(100, 0.3);
+                if (popup.sound)
+                {
+                    SoundManager.playSound(SoundManager.POPUP_CLOSE);
+                }
 
-                _popupDarkLayer.alpha = 0.7;
-                Starling.juggler.tween(_popupDarkLayer, 0.3, {
-                    alpha: 0
-                });
+                if (_popupsQueue.length <= 1)
+                {
+                    SoundManager.tweenMusicVolume(100, 0.3);
+                    
+                    Starling.juggler.removeTweens(_popupDarkLayer);
+                    Starling.juggler.tween(_popupDarkLayer, 0.3, {
+                        alpha: 0
+                    });
+                }
 
                 Starling.juggler.tween(popup, 0.3, {
                     x: _viewport.width * (popup.tweenPosition.x + 0.5),
@@ -169,6 +189,12 @@ package com.agnither.spacetaxi.managers.windows
                     onCompleteArgs: [popup]
                 });
             } else {
+                var index: int = _popupsQueue.indexOf(popup);
+                if (index >= 0)
+                {
+                    _popupsQueue.splice(index, 1);
+                }
+
                 var id: int = _popupsStack.indexOf(popup);
                 if (id >= 0)
                 {
@@ -221,12 +247,16 @@ package com.agnither.spacetaxi.managers.windows
 
                 _popupLayer.removeChild(popup);
             }
-            
+
             _currentPopup = _popupsStack.length > 0 ? _popupsStack[_popupsStack.length-1] : null;
             if (_currentPopup != null)
             {
                 _currentPopup.show();
                 _popupLayer.addChild(_currentPopup);
+            } else if (_popupsQueue.length > 0)
+            {
+                _currentPopup = _popupsQueue[0];
+                showPopup(_currentPopup, true);
             }
             updateScreenFreeze();
         }

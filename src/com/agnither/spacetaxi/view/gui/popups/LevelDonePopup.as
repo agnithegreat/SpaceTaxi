@@ -42,6 +42,7 @@ package com.agnither.spacetaxi.view.gui.popups
         public var _glow: Image;
         public var _glowMC: MovieClip;
 
+        public var _menuButton: ContainerButton;
         public var _replayButton: ContainerButton;
         public var _nextButton: ContainerButton;
 
@@ -87,6 +88,7 @@ package com.agnither.spacetaxi.view.gui.popups
         {
             _level = Application.appController.levelsController.currentLevel;
 
+            _menuButton.addEventListener(Event.TRIGGERED, handleTriggered);
             _replayButton.addEventListener(Event.TRIGGERED, handleTriggered);
             _nextButton.addEventListener(Event.TRIGGERED, handleTriggered);
 
@@ -106,6 +108,7 @@ package com.agnither.spacetaxi.view.gui.popups
 
         override protected function deactivate():void
         {
+            _menuButton.removeEventListener(Event.TRIGGERED, handleTriggered);
             _replayButton.removeEventListener(Event.TRIGGERED, handleTriggered);
             _nextButton.removeEventListener(Event.TRIGGERED, handleTriggered);
 
@@ -118,10 +121,7 @@ package com.agnither.spacetaxi.view.gui.popups
         {
             WindowManager.closePopup(this, true);
 
-            if (Application.appController.states.currentState == StateController.GAME)
-            {
-                TaskSystem.getInstance().addTask(new EndGameTask());
-            }
+            TaskSystem.getInstance().addTask(new EndGameTask());
         }
 
         private function handleTriggered(event: Event):void
@@ -131,6 +131,11 @@ package com.agnither.spacetaxi.view.gui.popups
             
             switch (event.currentTarget)
             {
+                case _menuButton:
+                {
+                    TaskSystem.getInstance().addTask(new EndGameTask());
+                    break;
+                }
                 case _replayButton:
                 {
                     TaskSystem.getInstance().addTask(new RestartGameTask());

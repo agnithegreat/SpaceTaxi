@@ -80,14 +80,14 @@
             "constructorParams":[
               {
                 "cls":"starling.textures.Texture",
-                "textureName":"pop_up/check"
+                "textureName":"pop_up/next"
               }
             ],
             "customParams":{},
             "params":{
               "name":"icon",
-              "pivotX":81,
-              "pivotY":86
+              "pivotX":92,
+              "pivotY":69
             }
           }
         ],
@@ -389,6 +389,51 @@
           "width":120,
           "x":620,
           "y":288
+        }
+      },
+      {
+        "children":[
+          {
+            "cls":"starling.display.Image",
+            "constructorParams":[
+              {
+                "cls":"starling.textures.Texture",
+                "textureName":"pop_up/button_big"
+              }
+            ],
+            "customParams":{},
+            "params":{
+              "name":"back",
+              "pivotX":121,
+              "pivotY":122,
+              "scaleX":0.5,
+              "scaleY":0.5
+            }
+          },
+          {
+            "cls":"starling.display.Image",
+            "constructorParams":[
+              {
+                "cls":"starling.textures.Texture",
+                "textureName":"pop_up/button_close"
+              }
+            ],
+            "customParams":{},
+            "params":{
+              "name":"icon",
+              "pivotX":35,
+              "pivotY":37
+            }
+          }
+        ],
+        "cls":"starlingbuilder.extensions.uicomponents.ContainerButton",
+        "customParams":{},
+        "params":{
+          "name":"_closeButton",
+          "pivotX":211,
+          "pivotY":66,
+          "x":1133.5,
+          "y":260
         }
       }
     ],

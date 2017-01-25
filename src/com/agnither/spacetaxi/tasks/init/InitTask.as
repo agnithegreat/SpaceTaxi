@@ -24,7 +24,8 @@ package com.agnither.spacetaxi.tasks.init
             Config.version = xml.ns::versionNumber;
 
             addTask(new LoadBaseTask());
-            addTask(new LoadResourcesTask("common"));
+            addTask(new LoadResourcesTask("preloader"));
+            addTask(new InitPreloaderTask());
             addTask(new InitApplicationTask());
             BUILD::debug
             {

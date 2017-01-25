@@ -4,14 +4,17 @@
 package com.agnither.spacetaxi.controller
 {
     import com.agnither.spacetaxi.Config;
+    import com.agnither.spacetaxi.controller.game.DialogController;
     import com.agnither.spacetaxi.managers.analytics.GamePlayAnalytics;
     import com.agnither.spacetaxi.managers.windows.WindowManager;
     import com.agnither.spacetaxi.model.Space;
     import com.agnither.spacetaxi.model.player.Player;
+    import com.agnither.spacetaxi.model.player.vo.EpisodeResultVO;
     import com.agnither.spacetaxi.utils.logger.Logger;
     import com.agnither.spacetaxi.view.gui.popups.EpisodeDonePopup;
     import com.agnither.spacetaxi.view.gui.popups.LevelDonePopup;
     import com.agnither.spacetaxi.view.gui.popups.LevelFailPopup;
+    import com.agnither.spacetaxi.view.gui.popups.ModalPopup;
 
     import starling.core.Starling;
     import starling.events.Event;
@@ -30,6 +33,12 @@ package com.agnither.spacetaxi.controller
             return _levelsController;
         }
         
+        private var _dialogController: DialogController;
+        public function get dialogController():DialogController
+        {
+            return _dialogController;
+        }
+        
         private var _player: Player;
         public function get player():Player
         {
@@ -46,6 +55,7 @@ package com.agnither.spacetaxi.controller
         {
             _stateController = new StateController();
             _levelsController = new LevelsController();
+            _dialogController = new DialogController();
             _player = new Player();
 
             _space = new Space();
@@ -55,6 +65,7 @@ package com.agnither.spacetaxi.controller
         {
             _stateController.init();
             _levelsController.init();
+            _dialogController.init();
             _player.init();
         }
 
@@ -73,6 +84,7 @@ package com.agnither.spacetaxi.controller
             _space.init(_levelsController.currentLevel);
             _space.addEventListener(Space.LEVEL_COMPLETE, handleLevelComplete);
             pauseGame(false);
+            _dialogController.start();
         }
 
         public function restartGame():void
@@ -115,17 +127,19 @@ package com.agnither.spacetaxi.controller
         {
             if (_space.win)
             {
-                // TODO: check if episode is done, and is done first time
-                if (false)
+                var lastLevelInEpisode: Boolean = _levelsController.currentLevel == _levelsController.currentEpisode.lastLevel;
+                var result: EpisodeResultVO = _player.progress.getEpisodeResult(_levelsController.currentEpisode.id);
+                if (lastLevelInEpisode && result == null)
                 {
                     _player.progress.setEpisodeResult(_levelsController.currentLevel.episode);
                     WindowManager.showPopup(new EpisodeDonePopup(), true);
-                }
 
+                    WindowManager.showPopup(new ModalPopup(), true);
+                }
+                
                 _player.progress.setLevelResult(_levelsController.currentLevel.id, _space.orders.money, _levelsController.currentLevel.countStars(_space.moves));
                 _player.progress.save();
 
-                // TODO: sequence popups
                 WindowManager.showPopup(new LevelDonePopup(), true);
             } else {
                 WindowManager.showPopup(new LevelFailPopup(), true);

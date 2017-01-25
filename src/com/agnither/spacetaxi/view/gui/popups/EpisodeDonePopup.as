@@ -37,7 +37,7 @@ package com.agnither.spacetaxi.view.gui.popups
         {
             super(0, 1);
 
-            var data: Object = Application.assetsManager.getObject("level_done_popup");
+            var data: Object = Application.assetsManager.getObject("episode_done_popup");
             addChild(Application.uiBuilder.create(data, true, this) as Sprite);
         }
 

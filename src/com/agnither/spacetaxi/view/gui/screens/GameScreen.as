@@ -11,17 +11,13 @@ package com.agnither.spacetaxi.view.gui.screens
     import com.agnither.spacetaxi.model.Space;
     import com.agnither.spacetaxi.model.SpaceBody;
     import com.agnither.spacetaxi.view.gui.game.IndicatorView;
-    import com.agnither.spacetaxi.view.gui.items.DialogView;
     import com.agnither.spacetaxi.view.gui.popups.PausePopup;
     import com.agnither.utils.gui.components.Screen;
 
     import feathers.controls.LayoutGroup;
-    import feathers.layout.AnchorLayout;
-    import feathers.layout.AnchorLayoutData;
 
     import starling.core.Starling;
     import starling.display.Button;
-    import starling.display.Quad;
     import starling.display.Sprite;
     import starling.events.Event;
     import starling.text.TextField;
@@ -32,17 +28,13 @@ package com.agnither.spacetaxi.view.gui.screens
     {
         public var _root: LayoutGroup;
         
-        public var _settingsButton: Button;
+        public var _pauseButton: Button;
 
         public var _durabilityIndicator: IndicatorView;
         public var _fuelIndicator: IndicatorView;
 
         public var _moneyTF: TextField;
         public var _addTF: TextField;
-
-        public var _hide: Quad;
-        public var _dialog: DialogView;
-        public var _dialogContainer: LayoutGroup;
 
         private var _space: Space;
 
@@ -66,9 +58,6 @@ package com.agnither.spacetaxi.view.gui.screens
             _durabilityIndicator.init(IndicatorView.DURABILITY, ship.durabilityMax, 9);
 
             StageUtil.fitAll(_root, Application.guiSize.width, Application.guiSize.height, Application.viewport.width, Application.viewport.height);
-
-            _hide.width = stage.stageWidth;
-            _hide.height = stage.stageHeight;
         }
         
         override protected function activate():void
@@ -79,7 +68,7 @@ package com.agnither.spacetaxi.view.gui.screens
             _space.orders.addEventListener(OrderController.UPDATE, handleUpdate);
             handleUpdate(null);
 
-            _settingsButton.addEventListener(Event.TRIGGERED, handleSettings);
+            _pauseButton.addEventListener(Event.TRIGGERED, handlePause);
 
             _addTF.alpha = 0;
 
@@ -93,16 +82,10 @@ package com.agnither.spacetaxi.view.gui.screens
             _space.orders.removeEventListener(OrderController.UPDATE, handleUpdate);
             _space = null;
 
-            if (_dialog != null)
-            {
-                _dialog.removeFromParent(true);
-                _dialog = null;
-            }
-
             Starling.juggler.removeTweens(this);
             _moneyVal = -1;
-            
-            _settingsButton.removeEventListener(Event.TRIGGERED, handleSettings);
+
+            _pauseButton.removeEventListener(Event.TRIGGERED, handlePause);
         }
         
         override public function tryClose():Boolean
@@ -115,44 +98,7 @@ package com.agnither.spacetaxi.view.gui.screens
         {
             // TODO: make a dialog system
 
-            _hide.visible = true;
-            _dialog = new DialogView();
-            _dialogContainer.addChild(_dialog);
-            SoundManager.tweenMusicVolume(50, 0.3);
-
-            _dialog.init(
-                "Hello, challenger! I have a job that suits you perfectly! See this hostile planet dead ahead? Those guys have some stuff I would like to buy. Bring it to me, and your effort will be payed off. Hurry, I don't like to wait.",
-                "characters/01",
-                false,
-                nextDialog
-            );
-            (_dialogContainer.layoutData as AnchorLayoutData).left = NaN;
-            (_dialogContainer.layoutData as AnchorLayoutData).right = 0;
-            _dialog.visible = true;
-        }
-
-        private function nextDialog():void
-        {
-            _dialog.init(
-                "No problem, pal. I will do it for you. Wait a parsec!",
-                "characters/00",
-                true,
-                hideDialog
-            );
-            (_dialogContainer.layoutData as AnchorLayoutData).right = NaN;
-            (_dialogContainer.layoutData as AnchorLayoutData).left = 0;
-        }
-
-        private function hideDialog():void
-        {
-            SoundManager.tweenMusicVolume(100, 0.3);
-            _hide.visible = false;
-
-            if (_dialog != null)
-            {
-                _dialog.removeFromParent(true);
-                _dialog = null;
-            }
+            
         }
 
         private function handleRestart(event: Event):void
@@ -182,7 +128,7 @@ package com.agnither.spacetaxi.view.gui.screens
             }
         }
 
-        private function handleSettings(event: Event):void
+        private function handlePause(event: Event):void
         {
             SoundManager.playSound(SoundManager.CLICK);
             WindowManager.showPopup(new PausePopup(), true);

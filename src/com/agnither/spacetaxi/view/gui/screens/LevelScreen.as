@@ -156,6 +156,11 @@ package com.agnither.spacetaxi.view.gui.screens
                 var level: LevelView = _levels.getChildAt(i) as LevelView;
                 level.setActive(int(i / amount) == _levels.horizontalPageIndex, animate);
             }
+
+            if (animate)
+            {
+                SoundManager.playSound(SoundManager.SWISH);
+            }
         }
 
         private function handleBack(event: Event):void
@@ -166,19 +171,16 @@ package com.agnither.spacetaxi.view.gui.screens
 
         private function handleLeft(event: Event):void
         {
-            SoundManager.playSound(SoundManager.SWISH);
             _pageIndicator.selectedIndex--;
         }
 
         private function handleRight(event: Event):void
         {
-            SoundManager.playSound(SoundManager.SWISH);
             _pageIndicator.selectedIndex++;
         }
 
         private function handleChangePage(event: Event):void
         {
-//            SoundManager.playSound(SoundManager.SWISH);
             showPage(_pageIndicator.selectedIndex);
         }
 
