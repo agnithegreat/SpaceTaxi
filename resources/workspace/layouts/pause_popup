@@ -23,7 +23,7 @@
             "constructorParams":[
               {
                 "cls":"starling.textures.Texture",
-                "textureName":"pop_up/button_replay"
+                "textureName":"pop_up/button_small"
               }
             ],
             "customParams":{},
@@ -64,7 +64,7 @@
             "constructorParams":[
               {
                 "cls":"starling.textures.Texture",
-                "textureName":"pop_up/button_replay"
+                "textureName":"pop_up/button_small"
               }
             ],
             "customParams":{},
@@ -105,7 +105,7 @@
             "constructorParams":[
               {
                 "cls":"starling.textures.Texture",
-                "textureName":"pop_up/button_next"
+                "textureName":"pop_up/button_big"
               }
             ],
             "customParams":{},
@@ -164,10 +164,10 @@
             "params":{
               "color":16777215,
               "font":"dragu_medium",
-              "size":68
+              "size":90
             }
           },
-          "height":52.06,
+          "height":68.91,
           "name":"_levelTF",
           "style":{
             "cls":"starling.styles.DistanceFieldStyle",
@@ -178,9 +178,9 @@
             }
           },
           "text":"Level 12",
-          "width":450,
-          "x":275,
-          "y":220
+          "width":550,
+          "x":225,
+          "y":250
         }
       },
       {
@@ -199,31 +199,31 @@
         "customParams":{},
         "params":{
           "autoScale":true,
-          "autoSize":"vertical",
           "batchable":true,
           "format":{
             "cls":"starling.text.TextFormat",
             "customParams":{},
             "params":{
               "color":16777215,
-              "font":"dragu_medium",
-              "size":90
+              "font":"dragu_bold",
+              "size":100,
+              "verticalAlign":"top"
             }
           },
-          "height":82.97,
+          "height":120,
           "name":"_titleTF",
           "style":{
             "cls":"starling.styles.DistanceFieldStyle",
             "customParams":{},
             "params":{
               "mode":"basic",
-              "softness":0.14
+              "softness":0.1
             }
           },
-          "text":"Running Low",
-          "width":650,
-          "x":175,
-          "y":300
+          "text":"JOURNEY BEGINS",
+          "width":700,
+          "x":149,
+          "y":374
         }
       },
       {
@@ -248,23 +248,23 @@
             "params":{
               "color":16777215,
               "font":"dragu_medium",
-              "size":58
+              "size":55
             }
           },
-          "height":250,
+          "height":275,
           "name":"_descriptionTF",
           "style":{
             "cls":"starling.styles.DistanceFieldStyle",
             "customParams":{},
             "params":{
               "mode":"basic",
-              "softness":0.14
+              "softness":0.18
             }
           },
           "text":"Once upon a time in far far galaxy there was a lost ship",
           "width":800,
-          "x":100,
-          "y":400
+          "x":99,
+          "y":460
         }
       },
       {

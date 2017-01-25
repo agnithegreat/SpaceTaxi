@@ -24,7 +24,6 @@ package com.agnither.spacetaxi
         public static var replay: ByteArray;
         public static var ai: Boolean = false;
         
-        public static var support: String = "support@dieselpuppet.com";
-        public static var subject: String = "Player ID %s, Russian Lotto, GP, version %s";
+        public static var feedbackLink: String = "https://docs.google.com/forms/d/e/1FAIpQLSf2btrhF_mPoKD9yME0FzPIEbJOSvqKy5tlxIuWx_Q5ciK7NQ/viewform?entry.349077040=%user_id%";
     }
 }

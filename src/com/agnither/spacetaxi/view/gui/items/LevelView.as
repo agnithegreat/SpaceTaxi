@@ -7,7 +7,7 @@ package com.agnither.spacetaxi.view.gui.items
     import com.agnither.spacetaxi.managers.sound.SoundManager;
     import com.agnither.spacetaxi.model.player.Progress;
     import com.agnither.spacetaxi.model.player.vo.LevelResultVO;
-    import com.agnither.spacetaxi.tasks.logic.SelectLevelTask;
+    import com.agnither.spacetaxi.tasks.logic.game.SelectLevelTask;
     import com.agnither.spacetaxi.view.utils.Animator;
     import com.agnither.spacetaxi.vo.LevelVO;
     import com.agnither.tasks.global.TaskSystem;
@@ -39,8 +39,8 @@ package com.agnither.spacetaxi.view.gui.items
         public var _glowCircle: Image;
         public var _planetBtn: ContainerButton;
         public var _planetImage: Image;
+        public var _shadowBtn: ContainerButton;
         public var _shadow: Image;
-        public var _shadowSymbol: Image;
 
         public var _levelNameTF: TextField;
 
@@ -66,6 +66,7 @@ package com.agnither.spacetaxi.view.gui.items
             _levelNameTF.text = _level.title || "Level " + (_level.id+1);
 
             _planetBtn.addEventListener(Event.TRIGGERED, handleTriggered);
+            _shadowBtn.addEventListener(Event.TRIGGERED, handleTriggered);
 
             var progress: Progress = Application.appController.player.progress;
             var current: Boolean = _level.id == progress.level;
@@ -73,8 +74,7 @@ package com.agnither.spacetaxi.view.gui.items
             var result: LevelResultVO = progress.getLevelResult(_level.id);
 
             _planetBtn.visible = !locked;
-            _shadow.visible = locked;
-            _shadowSymbol.visible = locked;
+            _shadowBtn.visible = locked;
             _glow.visible = current;
             _glowCircle.visible = current;
             _arrow.visible = current;
@@ -114,8 +114,14 @@ package com.agnither.spacetaxi.view.gui.items
 
         private function handleTriggered(event: Event):void
         {
-            SoundManager.playSound(SoundManager.CLICK);
-            TaskSystem.getInstance().addTask(new SelectLevelTask(_level.id));
+            if (event.currentTarget == _planetBtn)
+            {
+                SoundManager.playSound(SoundManager.CLICK);
+                TaskSystem.getInstance().addTask(new SelectLevelTask(_level.id));
+            } else if (event.currentTarget == _shadowBtn)
+            {
+                SoundManager.playSound(SoundManager.UNAVAILABLE_PLANET);
+            }
         }
         
         override public function dispose():void

@@ -67,35 +67,43 @@
             }
           },
           {
-            "cls":"starling.display.Image",
-            "constructorParams":[
+            "children":[
               {
-                "cls":"starling.textures.Texture",
-                "textureName":"level_screen/next_level"
+                "cls":"starling.display.Image",
+                "constructorParams":[
+                  {
+                    "cls":"starling.textures.Texture",
+                    "textureName":"level_screen/next_level"
+                  }
+                ],
+                "customParams":{},
+                "params":{
+                  "name":"_shadow",
+                  "pivotX":250,
+                  "pivotY":250
+                }
+              },
+              {
+                "cls":"starling.display.Image",
+                "constructorParams":[
+                  {
+                    "cls":"starling.textures.Texture",
+                    "textureName":"level_screen/next_level_symbol"
+                  }
+                ],
+                "customParams":{},
+                "params":{
+                  "name":"symbol",
+                  "pivotX":150,
+                  "pivotY":160
+                }
               }
             ],
+            "cls":"starlingbuilder.extensions.uicomponents.ContainerButton",
             "customParams":{},
             "params":{
-              "name":"_shadow",
-              "pivotX":250,
-              "pivotY":250,
-              "x":300,
-              "y":350
-            }
-          },
-          {
-            "cls":"starling.display.Image",
-            "constructorParams":[
-              {
-                "cls":"starling.textures.Texture",
-                "textureName":"level_screen/next_level_symbol"
-              }
-            ],
-            "customParams":{},
-            "params":{
-              "name":"_shadowSymbol",
-              "pivotX":150,
-              "pivotY":160,
+              "name":"_shadowBtn",
+              "scaleWhenDown":1,
               "x":300,
               "y":350
             }
@@ -298,8 +306,7 @@
     "canvasSize":{
       "x":550,
       "y":700
-    },
-    "hidden":"0000001100000"
+    }
   },
   "version":"2.0"
 }

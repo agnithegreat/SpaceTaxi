@@ -9,8 +9,8 @@ package com.agnither.spacetaxi.view.scenes.game
     import com.agnither.spacetaxi.model.Planet;
     import com.agnither.spacetaxi.model.Space;
     import com.agnither.spacetaxi.model.orders.Zone;
-    import com.agnither.spacetaxi.tasks.logic.LevelFailTask;
-    import com.agnither.spacetaxi.tasks.logic.RestartGameTask;
+    import com.agnither.spacetaxi.tasks.logic.game.LevelFailTask;
+    import com.agnither.spacetaxi.tasks.logic.game.RestartGameTask;
     import com.agnither.spacetaxi.utils.LevelParser;
     import com.agnither.spacetaxi.view.scenes.game.effects.CometEffect;
     import com.agnither.spacetaxi.view.scenes.game.effects.ExplosionEffect;

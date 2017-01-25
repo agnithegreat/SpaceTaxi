@@ -116,7 +116,9 @@ package com.agnither.spacetaxi.managers.windows
         {
             if (tween)
             {
-                SoundManager.tweenVolume(50, 0.3);
+                SoundManager.playSound(SoundManager.POPUP_OPEN);
+                
+                SoundManager.tweenMusicVolume(50, 0.3);
 
                 _popupDarkLayer.visible = true;
                 _popupDarkLayer.alpha = 0;
@@ -150,7 +152,9 @@ package com.agnither.spacetaxi.managers.windows
             popup = popup || _currentPopup;
             if (tween)
             {
-                SoundManager.tweenVolume(100, 0.3);
+                SoundManager.playSound(SoundManager.POPUP_CLOSE);
+                
+                SoundManager.tweenMusicVolume(100, 0.3);
 
                 _popupDarkLayer.alpha = 0.7;
                 Starling.juggler.tween(_popupDarkLayer, 0.3, {

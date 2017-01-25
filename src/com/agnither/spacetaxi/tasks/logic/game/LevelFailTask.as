@@ -1,14 +1,16 @@
 /**
  * Created by agnither on 28.04.16.
  */
-package com.agnither.spacetaxi.tasks.logic
+package com.agnither.spacetaxi.tasks.logic.game
 {
     import com.agnither.spacetaxi.Application;
+    import com.agnither.spacetaxi.managers.windows.WindowManager;
+    import com.agnither.spacetaxi.view.gui.popups.LevelFailPopup;
     import com.agnither.tasks.abstract.SimpleTask;
 
-    public class EndGameTask extends SimpleTask
+    public class LevelFailTask extends SimpleTask
     {
-        public function EndGameTask():void
+        public function LevelFailTask():void
         {
             super();
         }
@@ -16,9 +18,8 @@ package com.agnither.spacetaxi.tasks.logic
         override public function execute(token: Object):void
         {
             super.execute(token);
-
-            Application.appController.states.goBack();
-            Application.appController.endGame();
+            
+            Application.appController.space.lose();
 
             complete();
         }

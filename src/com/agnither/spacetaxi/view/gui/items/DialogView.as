@@ -4,11 +4,10 @@
 package com.agnither.spacetaxi.view.gui.items
 {
     import com.agnither.spacetaxi.Application;
+    import com.agnither.spacetaxi.managers.sound.SoundManager;
     import com.agnither.utils.gui.components.AbstractComponent;
 
     import feathers.controls.LayoutGroup;
-
-    import starling.core.Starling;
 
     import starling.core.Starling;
     import starling.display.Image;
@@ -54,6 +53,7 @@ package com.agnither.spacetaxi.view.gui.items
             _started = false;
             _skip = false;
 
+            Starling.juggler.delayCall(nextSound, 0);
             Starling.juggler.delayCall(nextLetter, 0);
         }
 
@@ -70,6 +70,15 @@ package com.agnither.spacetaxi.view.gui.items
         override protected function deactivate():void
         {
             Starling.current.stage.removeEventListener(TouchEvent.TOUCH, handleTouch);
+        }
+
+        private function nextSound():void
+        {
+            var sounds: Array = [SoundManager.DIALOG_MORSE_1, SoundManager.DIALOG_MORSE_2, SoundManager.DIALOG_MORSE_3];
+            var delays: Array = [0.5, 0.6, 0.9];
+            var rand: int = sounds.length * Math.random();
+            SoundManager.playSound(sounds[rand]);
+            Starling.juggler.delayCall(nextSound, delays[rand]);
         }
 
         private function nextLetter():void
@@ -92,7 +101,8 @@ package com.agnither.spacetaxi.view.gui.items
                 } else if ([",", ";"].indexOf(char) >= 0)
                 {
                     Starling.juggler.delayCall(nextLetter, 0.2);
-                } else if (char == " ") {
+                } else if (char == " ")
+                {
                     Starling.juggler.delayCall(nextLetter, 0.1);
                 } else {
                     Starling.juggler.delayCall(nextLetter, 0);
@@ -102,11 +112,13 @@ package com.agnither.spacetaxi.view.gui.items
         
         private function free():void
         {
+            Starling.juggler.removeDelayedCalls(nextSound);
             Starling.juggler.delayCall(close, 3);
         }
-        
+
         private function close():void
         {
+            Starling.juggler.removeDelayedCalls(nextSound);
             Starling.juggler.removeDelayedCalls(nextLetter);
             Starling.juggler.removeDelayedCalls(close);
 

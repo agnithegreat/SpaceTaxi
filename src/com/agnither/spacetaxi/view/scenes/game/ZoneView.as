@@ -39,7 +39,7 @@ package com.agnither.spacetaxi.view.scenes.game
 
             _back = new Image(Application.assetsManager.getTexture("misc/glow_back"));
             _back.pivotX = _back.width * 0.5;
-            _back.pivotY = _back.height * 0.5;
+            _back.pivotY = _back.height * 0.4;
             _back.scaleX = scale;
             _back.scaleY = scale;
             addChild(_back);
@@ -48,7 +48,7 @@ package com.agnither.spacetaxi.view.scenes.game
             _animation = new MovieClip(textures);
             _animation.addEventListener(Event.COMPLETE, handleAnimationComplete);
             _animation.pivotX = _animation.width * 0.5;
-            _animation.pivotY = _animation.height * 0.5;
+            _animation.pivotY = _animation.height * 0.4;
             _animation.scaleX = scale;
             _animation.scaleY = scale;
             _animation.color = COLORS[_zone.id];
@@ -74,7 +74,7 @@ package com.agnither.spacetaxi.view.scenes.game
                 {
                     _sign = new Image(Application.assetsManager.getTexture("misc/symbol"));
                     _sign.pivotX = _sign.width * 0.5;
-                    _sign.pivotY = _sign.height * 0.4;
+                    _sign.pivotY = _sign.height * 0.5;
                     _sign.scaleX = 0.25;
                     _sign.scaleY = 0.25;
                     addChild(_sign);
@@ -90,7 +90,7 @@ package com.agnither.spacetaxi.view.scenes.game
                 {
                     _sign = new Image(Application.assetsManager.getTexture("misc/symbol_station"));
                     _sign.pivotX = _sign.width * 0.5;
-                    _sign.pivotY = _sign.height * 0.4;
+                    _sign.pivotY = _sign.height * 0.5;
                     _sign.scaleX = 0.25;
                     _sign.scaleY = 0.25;
                     addChild(_sign);

@@ -1,75 +1,83 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with TexturePacker http://www.codeandweb.com/texturepacker-->
-<!-- $TexturePacker:SmartUpdate:44d74d754947f7099bc5c4958e164c61:d1a91e699848e7e1a9c3a7b81b668bd3:298a8c87037b1387d385db5bb085372e$ -->
+<!-- $TexturePacker:SmartUpdate:aaefff6c970e5ada6532df4cab4f6b84:963c97e29c559e10025ea5a55a34d454:298a8c87037b1387d385db5bb085372e$ -->
 <TextureAtlas imagePath="gui.png" width="2048" height="2048">
-    <SubTexture name="characters/00" x="654" y="842" width="122" height="152" frameX="-29" frameY="0" frameWidth="175" frameHeight="175"/>
+    <SubTexture name="characters/00" x="620" y="932" rotated="true" width="152" height="122" frameX="-29" frameY="0" frameWidth="175" frameHeight="175"/>
     <SubTexture name="characters/01" x="662" y="295" width="135" height="116" frameX="-20" frameY="-35" frameWidth="175" frameHeight="175"/>
-    <SubTexture name="characters/02" x="654" y="417" rotated="true" width="132" height="112" frameX="-32" frameY="-15" frameWidth="175" frameHeight="175"/>
-    <SubTexture name="characters/03" x="649" y="1118" width="113" height="112" frameX="-31" frameY="-35" frameWidth="175" frameHeight="175"/>
-    <SubTexture name="characters/04" x="654" y="724" rotated="true" width="123" height="112" frameX="-32" frameY="-24" frameWidth="175" frameHeight="175"/>
-    <SubTexture name="characters/05" x="1920" y="826" width="122" height="119" frameX="-22" frameY="-28" frameWidth="175" frameHeight="175"/>
-    <SubTexture name="characters/06" x="644" y="1236" width="112" height="112" frameX="-32" frameY="-32" frameWidth="175" frameHeight="175"/>
-    <SubTexture name="characters/07" x="654" y="606" rotated="true" width="124" height="112" frameX="-32" frameY="-32" frameWidth="175" frameHeight="175"/>
-    <SubTexture name="characters/08" x="649" y="1000" rotated="true" width="116" height="112" frameX="-32" frameY="-32" frameWidth="175" frameHeight="175"/>
-    <SubTexture name="common/back" x="499" y="1687" rotated="true" width="35" height="41" frameX="-1" frameY="-4" frameWidth="42" frameHeight="39"/>
-    <SubTexture name="common/bar_active" x="771" y="1000" width="20" height="20"/>
-    <SubTexture name="common/bar_empty" x="771" y="1026" width="20" height="20"/>
-    <SubTexture name="common/coin" x="1419" y="650" width="69" height="66"/>
-    <SubTexture name="common/navigate_big" x="1942" y="617" rotated="true" width="86" height="76"/>
-    <SubTexture name="common/navigation" x="1986" y="310" rotated="true" width="54" height="47"/>
-    <SubTexture name="common/settings" x="394" y="1687" width="59" height="59"/>
+    <SubTexture name="characters/02" x="662" y="417" rotated="true" width="132" height="112" frameX="-32" frameY="-15" frameWidth="175" frameHeight="175"/>
+    <SubTexture name="characters/03" x="247" y="1909" rotated="true" width="112" height="113" frameX="-31" frameY="-35" frameWidth="175" frameHeight="175"/>
+    <SubTexture name="characters/04" x="1904" y="1319" rotated="true" width="123" height="112" frameX="-32" frameY="-24" frameWidth="175" frameHeight="175"/>
+    <SubTexture name="characters/05" x="4" y="1909" rotated="true" width="119" height="122" frameX="-22" frameY="-28" frameWidth="175" frameHeight="175"/>
+    <SubTexture name="characters/06" x="805" y="1421" width="112" height="112" frameX="-32" frameY="-32" frameWidth="175" frameHeight="175"/>
+    <SubTexture name="characters/07" x="1904" y="1201" rotated="true" width="124" height="112" frameX="-32" frameY="-32" frameWidth="175" frameHeight="175"/>
+    <SubTexture name="characters/08" x="129" y="1909" width="112" height="116" frameX="-32" frameY="-32" frameWidth="175" frameHeight="175"/>
+    <SubTexture name="common/back" x="620" y="467" rotated="true" width="35" height="41" frameX="-1" frameY="-4" frameWidth="42" frameHeight="39"/>
+    <SubTexture name="common/bar_active" x="2024" y="4" width="20" height="20"/>
+    <SubTexture name="common/bar_empty" x="2024" y="30" width="20" height="20"/>
+    <SubTexture name="common/coin" x="4" y="1272" rotated="true" width="66" height="69"/>
+    <SubTexture name="common/navigate_big" x="265" y="1275" rotated="true" width="86" height="76"/>
+    <SubTexture name="common/navigation" x="806" y="1243" width="47" height="54"/>
+    <SubTexture name="common/settings" x="265" y="1844" width="59" height="59"/>
     <SubTexture name="episode_screen/maelstorm_episode" x="4" y="114" width="652" height="285" frameX="-53" frameY="-21" frameWidth="722" frameHeight="350"/>
-    <SubTexture name="episode_screen/milkyway_episode" x="806" y="4" width="685" height="385" frameX="-7" frameY="-8" frameWidth="700" frameHeight="400"/>
-    <SubTexture name="episode_screen/secret_episode" x="4" y="405" width="644" height="481" frameX="-10" frameY="-18" frameWidth="700" frameHeight="500"/>
-    <SubTexture name="game_screen/fuel" x="1419" y="865" width="67" height="67"/>
-    <SubTexture name="game_screen/fuel_index_full" x="540" y="1676" width="171" height="30"/>
-    <SubTexture name="game_screen/fuel_life_index_empty" x="762" y="1236" rotated="true" width="29" height="171"/>
-    <SubTexture name="game_screen/life" x="1419" y="938" width="67" height="67"/>
-    <SubTexture name="game_screen/life_index_full" x="499" y="1734" width="171" height="29"/>
-    <SubTexture name="level_screen/arrow" x="1418" y="1065" width="65" height="65"/>
-    <SubTexture name="level_screen/glow_active" x="514" y="1769" rotated="true" width="210" height="220" frameX="0" frameY="-5" frameWidth="220" frameHeight="220"/>
-    <SubTexture name="level_screen/glow_active_circle" x="369" y="1168" width="269" height="269" frameX="-3" frameY="-3" frameWidth="275" frameHeight="275"/>
-    <SubTexture name="level_screen/next_level" x="262" y="1769" rotated="true" width="246" height="248" frameX="-1" frameY="-2" frameWidth="250" frameHeight="250"/>
-    <SubTexture name="level_screen/next_level_symbol" x="1896" y="951" width="144" height="157" frameX="-6" frameY="-2" frameWidth="150" frameHeight="160"/>
-    <SubTexture name="level_screen/star_big" x="1419" y="794" width="69" height="65" frameX="-3" frameY="-5" frameWidth="75" frameHeight="75"/>
-    <SubTexture name="level_screen/star_big_empty" x="1419" y="722" width="69" height="66" frameX="-3" frameY="-5" frameWidth="75" frameHeight="75"/>
-    <SubTexture name="main_screen/achievements" x="717" y="1676" width="199" height="78"/>
-    <SubTexture name="main_screen/achievements_teaser" x="4" y="1769" rotated="true" width="252" height="255" frameX="0" frameY="0" frameWidth="256" frameHeight="253"/>
+    <SubTexture name="episode_screen/milkyway_episode" x="806" y="82" width="685" height="385" frameX="-7" frameY="-8" frameWidth="700" frameHeight="400"/>
+    <SubTexture name="episode_screen/secret_episode" x="1532" y="493" rotated="true" width="481" height="644" frameX="-10" frameY="-18" frameWidth="700" frameHeight="500"/>
+    <SubTexture name="game_screen/fuel" x="805" y="1312" width="67" height="67"/>
+    <SubTexture name="game_screen/fuel_index_full" x="1497" y="82" rotated="true" width="30" height="171"/>
+    <SubTexture name="game_screen/fuel_life_index_empty" x="1497" y="346" rotated="true" width="29" height="171"/>
+    <SubTexture name="game_screen/life" x="816" y="1539" width="67" height="67"/>
+    <SubTexture name="game_screen/life_index_full" x="1497" y="523" rotated="true" width="29" height="171"/>
+    <SubTexture name="level_screen/arrow" x="609" y="1243" width="65" height="65"/>
+    <SubTexture name="level_screen/glow_active" x="589" y="1314" rotated="true" width="210" height="220" frameX="0" frameY="-5" frameWidth="220" frameHeight="220"/>
+    <SubTexture name="level_screen/glow_active_circle" x="541" y="1564" width="269" height="269" frameX="-3" frameY="-3" frameWidth="275" frameHeight="275"/>
+    <SubTexture name="level_screen/next_level" x="1243" y="473" width="248" height="246" frameX="-1" frameY="-2" frameWidth="250" frameHeight="250"/>
+    <SubTexture name="level_screen/next_level_symbol" x="620" y="782" rotated="true" width="157" height="144" frameX="-6" frameY="-2" frameWidth="150" frameHeight="160"/>
+    <SubTexture name="level_screen/star_big" x="148" y="1272" rotated="true" width="65" height="69" frameX="-3" frameY="-5" frameWidth="75" frameHeight="75"/>
+    <SubTexture name="level_screen/star_big_empty" x="76" y="1272" rotated="true" width="66" height="69" frameX="-3" frameY="-5" frameWidth="75" frameHeight="75"/>
+    <SubTexture name="main_screen/achievements" x="4" y="1357" rotated="true" width="78" height="199"/>
+    <SubTexture name="main_screen/achievements_teaser" x="4" y="1014" width="255" height="252" frameX="0" frameY="0" frameWidth="256" frameHeight="253"/>
     <SubTexture name="main_screen/choose_level" x="662" y="114" rotated="true" width="138" height="175"/>
-    <SubTexture name="main_screen/choose_level_teaser" x="1154" y="1004" width="258" height="257" frameX="0" frameY="0" frameWidth="259" frameHeight="257"/>
-    <SubTexture name="main_screen/free_coins" x="1419" y="395" rotated="true" width="70" height="151"/>
-    <SubTexture name="main_screen/free_coins_teaser" x="763" y="1413" rotated="true" width="213" height="216"/>
-    <SubTexture name="main_screen/garage" x="1986" y="363" rotated="true" width="52" height="140"/>
-    <SubTexture name="main_screen/garage_teaser" x="369" y="892" width="274" height="270" frameX="-1" frameY="0" frameWidth="275" frameHeight="270"/>
-    <SubTexture name="main_screen/logo_express" x="1495" y="493" width="441" height="149"/>
-    <SubTexture name="main_screen/logo_glow" x="797" y="1004" width="351" height="351"/>
-    <SubTexture name="main_screen/logo_kosmos" x="1492" y="866" width="398" height="239"/>
-    <SubTexture name="main_screen/play_button" x="4" y="1177" width="339" height="255" frameX="-3" frameY="0" frameWidth="344" frameHeight="261"/>
-    <SubTexture name="main_screen/play_button_txt" x="654" y="535" width="132" height="65"/>
-    <SubTexture name="main_screen/ship_shadow" x="459" y="1687" rotated="true" width="34" height="51"/>
-    <SubTexture name="pop_up/back" x="1497" y="4" width="483" height="483"/>
-    <SubTexture name="pop_up/button_music_off" x="340" y="1687" width="48" height="62" frameX="0" frameY="0" frameWidth="48" frameHeight="67"/>
-    <SubTexture name="pop_up/button_music_on" x="1418" y="1011" rotated="true" width="67" height="48"/>
-    <SubTexture name="pop_up/button_next" x="1920" y="699" rotated="true" width="122" height="121"/>
-    <SubTexture name="pop_up/button_replay" x="1942" y="509" width="102" height="102"/>
-    <SubTexture name="pop_up/button_sound_off" x="1986" y="238" rotated="true" width="55" height="66" frameX="0" frameY="0" frameWidth="66" frameHeight="61"/>
-    <SubTexture name="pop_up/button_sound_on" x="1986" y="77" width="57" height="61" frameX="0" frameY="0" frameWidth="66" frameHeight="61"/>
-    <SubTexture name="pop_up/check" x="644" y="1354" width="81" height="80" frameX="0" frameY="0" frameWidth="81" frameHeight="86"/>
-    <SubTexture name="pop_up/check_glow" x="1683" y="1111" width="187" height="187" frameX="-1" frameY="-2" frameWidth="190" frameHeight="190"/>
-    <SubTexture name="pop_up/cup" x="4" y="1438" rotated="true" width="330" height="325"/>
+    <SubTexture name="main_screen/choose_level_teaser" x="923" y="1135" width="258" height="257" frameX="0" frameY="0" frameWidth="259" frameHeight="257"/>
+    <SubTexture name="main_screen/free_coins" x="620" y="1060" width="151" height="70"/>
+    <SubTexture name="main_screen/free_coins_teaser" x="923" y="1398" width="216" height="213"/>
+    <SubTexture name="main_screen/garage" x="1904" y="1143" width="140" height="52"/>
+    <SubTexture name="main_screen/garage_teaser" x="265" y="1564" rotated="true" width="270" height="274" frameX="-1" frameY="0" frameWidth="275" frameHeight="270"/>
+    <SubTexture name="main_screen/glow" x="1524" y="1143" width="374" height="371" frameX="-3" frameY="-5" frameWidth="380" frameHeight="376"/>
+    <SubTexture name="main_screen/logo_adventure" x="800" y="473" width="437" height="130"/>
+    <SubTexture name="main_screen/logo_kosmos" x="783" y="890" width="399" height="239"/>
+    <SubTexture name="main_screen/play_button" x="4" y="1564" rotated="true" width="255" height="339" frameX="-3" frameY="0" frameWidth="344" frameHeight="261"/>
+    <SubTexture name="main_screen/play_button_txt" x="660" y="535" width="132" height="65"/>
+    <SubTexture name="main_screen/ray" x="806" y="4" width="723" height="72" frameX="-93" frameY="0" frameWidth="816" frameHeight="72"/>
+    <SubTexture name="main_screen/settings_button" x="88" y="1357" rotated="true" width="69" height="194"/>
+    <SubTexture name="main_screen/settings_icon" x="1497" y="315" rotated="true" width="30" height="25"/>
+    <SubTexture name="main_screen/ship_shadow" x="620" y="514" rotated="true" width="34" height="51"/>
+    <SubTexture name="pop_up/back" x="1535" y="4" width="483" height="483"/>
+    <SubTexture name="pop_up/button_big" x="1904" y="1437" rotated="true" width="122" height="121"/>
+    <SubTexture name="pop_up/button_fb" x="265" y="1089" rotated="true" width="88" height="87"/>
+    <SubTexture name="pop_up/button_feedback" x="365" y="1014" width="249" height="103"/>
+    <SubTexture name="pop_up/button_music_off" x="680" y="1243" width="48" height="62" frameX="0" frameY="0" frameWidth="48" frameHeight="67"/>
+    <SubTexture name="pop_up/button_music_on" x="816" y="1612" rotated="true" width="67" height="48"/>
+    <SubTexture name="pop_up/button_small" x="805" y="1135" width="102" height="102"/>
+    <SubTexture name="pop_up/button_sound_off" x="734" y="1251" width="66" height="55" frameX="0" frameY="0" frameWidth="66" frameHeight="61"/>
+    <SubTexture name="pop_up/button_sound_on" x="734" y="1136" rotated="true" width="61" height="57" frameX="0" frameY="0" frameWidth="66" frameHeight="61"/>
+    <SubTexture name="pop_up/button_vk" x="265" y="1182" rotated="true" width="88" height="87"/>
+    <SubTexture name="pop_up/check" x="609" y="1136" rotated="true" width="80" height="81" frameX="0" frameY="0" frameWidth="81" frameHeight="86"/>
+    <SubTexture name="pop_up/check_glow" x="403" y="1844" width="187" height="187" frameX="-1" frameY="-2" frameWidth="190" frameHeight="190"/>
+    <SubTexture name="pop_up/cup" x="1188" y="1090" rotated="true" width="330" height="325"/>
     <SubTexture name="pop_up/dialogue" x="4" y="4" width="796" height="104"/>
-    <SubTexture name="pop_up/glow_button_01" x="1154" y="1267" width="170" height="170" frameX="-40" frameY="-40" frameWidth="250" frameHeight="250"/>
-    <SubTexture name="pop_up/glow_button_02" x="1489" y="1111" width="188" height="188" frameX="-31" frameY="-31" frameWidth="250" frameHeight="250"/>
-    <SubTexture name="pop_up/glow_button_03" x="730" y="1760" width="206" height="206" frameX="-22" frameY="-22" frameWidth="250" frameHeight="250"/>
-    <SubTexture name="pop_up/glow_button_04" x="531" y="1443" width="226" height="227" frameX="-12" frameY="-11" frameWidth="250" frameHeight="250"/>
-    <SubTexture name="pop_up/glow_button_05" x="730" y="1760" width="206" height="206" frameX="-22" frameY="-22" frameWidth="250" frameHeight="250"/>
-    <SubTexture name="pop_up/glow_button_06" x="1489" y="1111" width="188" height="188" frameX="-31" frameY="-31" frameWidth="250" frameHeight="250"/>
-    <SubTexture name="pop_up/level_done_glow" x="803" y="395" width="610" height="603" frameX="0" frameY="-3" frameWidth="610" frameHeight="610"/>
-    <SubTexture name="pop_up/level_done_img" x="1494" y="648" width="420" height="212"/>
-    <SubTexture name="pop_up/menu" x="1986" y="144" width="57" height="46"/>
-    <SubTexture name="pop_up/next" x="1419" y="552" rotated="true" width="69" height="92"/>
-    <SubTexture name="pop_up/replay" x="1986" y="4" width="57" height="67"/>
-    <SubTexture name="pop_up/resume" x="1986" y="196" rotated="true" width="56" height="36"/>
-    <SubTexture name="pop_up/try_again_bottom" x="4" y="892" width="359" height="279"/>
-    <SubTexture name="pop_up/try_again_dust" x="340" y="1443" width="185" height="238" frameX="0" frameY="-13" frameWidth="185" frameHeight="251"/>
+    <SubTexture name="pop_up/feedback_icon" x="1497" y="259" rotated="true" width="30" height="50"/>
+    <SubTexture name="pop_up/glow_button_01" x="620" y="606" width="170" height="170" frameX="-40" frameY="-40" frameWidth="250" frameHeight="250"/>
+    <SubTexture name="pop_up/glow_button_02" x="163" y="1357" width="188" height="188" frameX="-31" frameY="-31" frameWidth="250" frameHeight="250"/>
+    <SubTexture name="pop_up/glow_button_03" x="1145" y="1421" width="206" height="206" frameX="-22" frameY="-22" frameWidth="250" frameHeight="250"/>
+    <SubTexture name="pop_up/glow_button_04" x="357" y="1314" width="226" height="227" frameX="-12" frameY="-11" frameWidth="250" frameHeight="250"/>
+    <SubTexture name="pop_up/glow_button_05" x="1145" y="1421" width="206" height="206" frameX="-22" frameY="-22" frameWidth="250" frameHeight="250"/>
+    <SubTexture name="pop_up/glow_button_06" x="163" y="1357" width="188" height="188" frameX="-31" frameY="-31" frameWidth="250" frameHeight="250"/>
+    <SubTexture name="pop_up/level_done_glow" x="4" y="405" width="610" height="603" frameX="0" frameY="-3" frameWidth="610" frameHeight="610"/>
+    <SubTexture name="pop_up/level_done_img" x="796" y="672" width="420" height="212"/>
+    <SubTexture name="pop_up/line" x="796" y="609" width="428" height="57" frameX="-1" frameY="0" frameWidth="429" frameHeight="57"/>
+    <SubTexture name="pop_up/menu" x="734" y="1199" width="57" height="46"/>
+    <SubTexture name="pop_up/next" x="265" y="1014" width="92" height="69"/>
+    <SubTexture name="pop_up/replay" x="330" y="1844" rotated="true" width="67" height="57"/>
+    <SubTexture name="pop_up/resume" x="620" y="405" width="36" height="56"/>
+    <SubTexture name="pop_up/try_again_bottom" x="1222" y="725" rotated="true" width="279" height="359"/>
+    <SubTexture name="pop_up/try_again_dust" x="365" y="1123" rotated="true" width="238" height="185" frameX="0" frameY="-13" frameWidth="185" frameHeight="251"/>
 </TextureAtlas>

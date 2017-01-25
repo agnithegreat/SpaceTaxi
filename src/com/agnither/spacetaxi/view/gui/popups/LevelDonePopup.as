@@ -9,9 +9,9 @@ package com.agnither.spacetaxi.view.gui.popups
     import com.agnither.spacetaxi.managers.windows.WindowManager;
     import com.agnither.spacetaxi.model.player.Progress;
     import com.agnither.spacetaxi.model.player.vo.LevelResultVO;
-    import com.agnither.spacetaxi.tasks.logic.EndGameTask;
-    import com.agnither.spacetaxi.tasks.logic.RestartGameTask;
-    import com.agnither.spacetaxi.tasks.logic.SelectLevelTask;
+    import com.agnither.spacetaxi.tasks.logic.game.EndGameTask;
+    import com.agnither.spacetaxi.tasks.logic.game.RestartGameTask;
+    import com.agnither.spacetaxi.tasks.logic.game.SelectLevelTask;
     import com.agnither.spacetaxi.view.gui.items.FakeShipView;
     import com.agnither.spacetaxi.view.utils.Animator;
     import com.agnither.spacetaxi.vo.LevelVO;
@@ -64,6 +64,8 @@ package com.agnither.spacetaxi.view.gui.popups
 
         override protected function initialize():void
         {
+            SoundManager.playSound(SoundManager.POPUP_WIN_LEVEL);
+            
             _star1.touchable = false;
             _star2.touchable = false;
             _star3.touchable = false;

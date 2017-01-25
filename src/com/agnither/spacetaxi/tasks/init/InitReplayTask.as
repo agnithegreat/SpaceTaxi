@@ -6,7 +6,7 @@ package com.agnither.spacetaxi.tasks.init
     import com.agnither.spacetaxi.Application;
     import com.agnither.spacetaxi.Config;
     import com.agnither.spacetaxi.managers.analytics.GamePlayAnalytics;
-    import com.agnither.spacetaxi.tasks.logic.StartGameTask;
+    import com.agnither.spacetaxi.tasks.logic.game.StartGameTask;
     import com.agnither.tasks.abstract.SimpleTask;
     import com.agnither.tasks.global.TaskSystem;
 

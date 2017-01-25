@@ -75,7 +75,7 @@
             "constructorParams":[
               {
                 "cls":"starling.textures.Texture",
-                "textureName":"pop_up/button_replay"
+                "textureName":"pop_up/button_small"
               }
             ],
             "customParams":{},
@@ -135,7 +135,7 @@
             "constructorParams":[
               {
                 "cls":"starling.textures.Texture",
-                "textureName":"pop_up/button_next"
+                "textureName":"pop_up/button_big"
               }
             ],
             "customParams":{},

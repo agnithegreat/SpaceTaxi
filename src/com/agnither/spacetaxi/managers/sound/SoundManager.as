@@ -21,27 +21,41 @@ package com.agnither.spacetaxi.managers.sound
 
     public class SoundManager
     {
-        public static const MENU: String = "sound.Menu";
-        public static const GAMEPLAY: String = "sound.Gameplay";
+        public static const MENU: String = "menu";
+        public static const GAMEPLAY: String = "gameplay";
 
-        public static const CHECK_GREEN: String = "sound.CheckGreen";
-        public static const COINS_LOOP: String = "sound.CoinsLoop";
-        public static const EARTHING_OTHER: String = "sound.EarthingOther";
-        public static const EARTHING: String = "sound.Earthing";
-        public static const EXPLOSION: String = "sound.Explosion";
-        public static const FLY: String = "sound.Fly";
-        public static const JUMP_PLANET: String = "sound.JumpPlanet";
-        public static const LEGS: String = "sound.Legs";
-        public static const OPEN_CLOSE: String = "sound.OpenClose";
-        public static const START: String = "sound.Start";
+        public static const CHECK_GREEN: String = "check_green";
+        public static const COINS_LOOP: String = "coins_loop";
+        public static const EARTHING_OTHER: String = "earthing_other";
+        public static const EARTHING: String = "earthing";
+        public static const EXPLOSION: String = "explosion";
+        public static const FLY: String = "fly";
+        public static const JUMP_PLANET: String = "jump_planet";
+        public static const LEGS: String = "legs";
+        public static const OPEN_CLOSE: String = "open_close";
+        public static const START: String = "start";
 
-        public static const FUEL_LOAD: String = "sound.FuelLoad";
-        public static const LOW_FUEL: String = "sound.LowFuel";
-        public static const CRASH: String = "sound.Crash";
-        public static const CLICK: String = "sound.Click";
-        public static const BOX_TAKE: String = "sound.BoxTake";
+        public static const FUEL_LOAD: String = "fuel_load";
+        public static const LOW_FUEL: String = "low_fuel";
+        public static const CRASH: String = "crash";
+        public static const CLICK: String = "click";
+        public static const BOX_TAKE: String = "box_take";
+
+        public static const BUY: String = "buy";
+        public static const DIALOG_MORSE_1: String = "dialog_morse_1";
+        public static const DIALOG_MORSE_2: String = "dialog_morse_2";
+        public static const DIALOG_MORSE_3: String = "dialog_morse_3";
+        public static const POPUP_CLOSE: String = "pop_up_close";
+        public static const POPUP_LOSE: String = "pop_up_lose";
+        public static const POPUP_OPEN: String = "pop_up_open";
+        public static const POPUP_REWARD: String = "pop_up_reward";
+        public static const POPUP_WIN_EPISODE: String = "pop_up_win_episode";
+        public static const POPUP_WIN_LEVEL: String = "pop_up_win_level";
+        public static const SWISH: String = "swish";
+        public static const UNAVAILABLE_PLANET: String = "unavalible_planet";
 
         private static var playing: Dictionary = new Dictionary(true);
+        private static var currentMusic: SoundContainer;
 
         public static function getSound(name: String):Sound
         {
@@ -68,6 +82,7 @@ package com.agnither.spacetaxi.managers.sound
             container.volume = Config.volume.music;
 
             playing[name] = container;
+            currentMusic = container;
         }
 
         public static function stopMusic(name: String):void
@@ -103,6 +118,15 @@ package com.agnither.spacetaxi.managers.sound
                 container.stop();
                 container.destroy();
                 delete playing[uniqueName];
+            }
+        }
+
+        public static function tweenMusicVolume(value: int, time: Number):void
+        {
+            if (currentMusic != null)
+            {
+                Starling.juggler.removeTweens(currentMusic);
+                Starling.juggler.tween(currentMusic, time, {volume: value * Config.volume.music * 0.01});
             }
         }
 
@@ -151,6 +175,7 @@ package com.agnither.spacetaxi.managers.sound
 import flash.events.Event;
 import flash.media.Sound;
 import flash.media.SoundChannel;
+import flash.media.SoundMixer;
 import flash.media.SoundTransform;
 
 class SoundContainer
@@ -202,6 +227,11 @@ class SoundContainer
         {
             _soundChannel.soundTransform = new SoundTransform(value * 0.01);
         }
+    }
+
+    public function get volume():int
+    {
+        return _soundChannel != null ? _soundChannel.soundTransform.volume * 100 : 0;
     }
 
     private function handleSoundComplete(event: Event):void

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with TexturePacker http://www.codeandweb.com/texturepacker-->
-<!-- $TexturePacker:SmartUpdate:8ae24e3ce905594df86ade0b8d27b062:7ba6994cc9d4ed799dfb4cc481d7c7c5:7dbf4876cc3e17b8fa41225b849fe824$ -->
+<!-- $TexturePacker:SmartUpdate:3e47f0b457ef0c88320493d469e8db0d:7ba6994cc9d4ed799dfb4cc481d7c7c5:7dbf4876cc3e17b8fa41225b849fe824$ -->
 <TextureAtlas imagePath="textures.png" width="4096" height="4096">
     <SubTexture name="misc/comet" x="3667" y="413" width="328" height="328"/>
     <SubTexture name="misc/dot" x="4058" y="1311" width="30" height="30"/>

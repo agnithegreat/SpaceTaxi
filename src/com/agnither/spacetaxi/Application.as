@@ -53,7 +53,7 @@ package com.agnither.spacetaxi
             scaleFactor = 2 * viewport.width / guiSize.width;
             graphicPack = Math.round(scaleFactor) * 1024;
 
-            assetsManager = new AssetMediator(graphicPack / guiSize.width);
+            assetsManager = new AssetMediator(graphicPack / guiSize.width, true);
             assetsManager.verbose = Config.debug;
 
             const linkers:Array = [AnchorLayout, HorizontalLayout, VerticalLayout, TiledRowsLayout, TextureMaskStyle, DistanceFieldStyle];

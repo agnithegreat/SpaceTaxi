@@ -91,7 +91,7 @@ package com.agnither.spacetaxi.view.gui.screens
             }
 
             showPage(_page, false);
-            
+
             _backBtn.addEventListener(Event.TRIGGERED, handleBack);
             _leftButton.addEventListener(Event.TRIGGERED, handleLeft);
             _rightButton.addEventListener(Event.TRIGGERED, handleRight);
@@ -112,6 +112,8 @@ package com.agnither.spacetaxi.view.gui.screens
 
         private function showPage(index: int, animate: Boolean = true):void
         {
+            if (animate && _page == index) return;
+            
             _page = index;
             
             _episodes.scrollToPageIndex(index, 0, animate ? NaN : 0);
@@ -134,19 +136,17 @@ package com.agnither.spacetaxi.view.gui.screens
 
         private function handleLeft(event: Event):void
         {
-            SoundManager.playSound(SoundManager.CLICK);
-
+            SoundManager.playSound(SoundManager.SWISH);
             showPage(_episodes.horizontalPageIndex-1);
         }
 
         private function handleRight(event: Event):void
         {
-            SoundManager.playSound(SoundManager.CLICK);
-
+            SoundManager.playSound(SoundManager.SWISH);
             showPage(_episodes.horizontalPageIndex+1);
         }
 
-        private function handleScrollEpisodes( event:Event ):void
+        private function handleScrollEpisodes(event: Event):void
         {
             showPage(_episodes.horizontalPageIndex);
         }

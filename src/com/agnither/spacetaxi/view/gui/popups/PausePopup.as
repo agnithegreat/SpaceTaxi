@@ -8,8 +8,8 @@ package com.agnither.spacetaxi.view.gui.popups
     import com.agnither.spacetaxi.managers.sound.SoundManager;
     import com.agnither.spacetaxi.managers.windows.WindowManager;
     import com.agnither.spacetaxi.model.player.Volume;
-    import com.agnither.spacetaxi.tasks.logic.EndGameTask;
-    import com.agnither.spacetaxi.tasks.logic.RestartGameTask;
+    import com.agnither.spacetaxi.tasks.logic.game.EndGameTask;
+    import com.agnither.spacetaxi.tasks.logic.game.RestartGameTask;
     import com.agnither.spacetaxi.vo.LevelVO;
     import com.agnither.tasks.global.TaskSystem;
     import com.agnither.utils.gui.components.Popup;
@@ -74,7 +74,7 @@ package com.agnither.spacetaxi.view.gui.popups
 
             _levelTF.text = "Level " + (level.id + 1);
             _titleTF.text = level.title;
-//            _descriptionTF.text = level.title;
+            _descriptionTF.text = "Transport every passenger to his destination to complete the level";
         }
 
         override protected function deactivate():void

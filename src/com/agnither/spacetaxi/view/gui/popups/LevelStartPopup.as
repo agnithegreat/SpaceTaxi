@@ -9,9 +9,9 @@ package com.agnither.spacetaxi.view.gui.popups
     import com.agnither.spacetaxi.managers.windows.WindowManager;
     import com.agnither.spacetaxi.model.player.Progress;
     import com.agnither.spacetaxi.model.player.vo.LevelResultVO;
-    import com.agnither.spacetaxi.tasks.logic.EndGameTask;
-    import com.agnither.spacetaxi.tasks.logic.RestartGameTask;
-    import com.agnither.spacetaxi.tasks.logic.StartGameTask;
+    import com.agnither.spacetaxi.tasks.logic.game.EndGameTask;
+    import com.agnither.spacetaxi.tasks.logic.game.RestartGameTask;
+    import com.agnither.spacetaxi.tasks.logic.game.StartGameTask;
     import com.agnither.spacetaxi.vo.LevelVO;
     import com.agnither.tasks.global.TaskSystem;
     import com.agnither.utils.gui.components.Popup;
@@ -56,6 +56,8 @@ package com.agnither.spacetaxi.view.gui.popups
 
         override protected function initialize():void
         {
+            SoundManager.playSound(SoundManager.POPUP_REWARD);
+
             _star1.touchable = false;
             _star2.touchable = false;
             _star3.touchable = false;
@@ -75,7 +77,7 @@ package com.agnither.spacetaxi.view.gui.popups
             _playButton.addEventListener(Event.TRIGGERED, handleTriggered);
 
             _titleTF.text = level.title;
-//            _descriptionTF.text = level.title;
+            _descriptionTF.text = "Transport every passenger to his destination to complete the level";
 
             _rewardTF.text = String(level.reward);
             _root.validate();

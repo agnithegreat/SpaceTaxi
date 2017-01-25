@@ -108,9 +108,14 @@ package com.agnither.spacetaxi.controller
 
             pauseGame(true);
 
+            Starling.juggler.delayCall(checkResults, 1);
+        }
+
+        private function checkResults():void
+        {
             if (_space.win)
             {
-                // TODO: check if episode is done, and is done first time 
+                // TODO: check if episode is done, and is done first time
                 if (false)
                 {
                     _player.progress.setEpisodeResult(_levelsController.currentLevel.episode);

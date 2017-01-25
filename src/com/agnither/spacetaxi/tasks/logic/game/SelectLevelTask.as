@@ -1,7 +1,7 @@
 /**
  * Created by agnither on 28.04.16.
  */
-package com.agnither.spacetaxi.tasks.logic
+package com.agnither.spacetaxi.tasks.logic.game
 {
     import com.agnither.spacetaxi.Application;
     import com.agnither.spacetaxi.managers.windows.WindowManager;

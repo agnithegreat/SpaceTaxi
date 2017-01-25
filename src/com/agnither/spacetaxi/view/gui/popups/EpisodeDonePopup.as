@@ -43,6 +43,8 @@ package com.agnither.spacetaxi.view.gui.popups
 
         override protected function initialize():void
         {
+            SoundManager.playSound(SoundManager.POPUP_WIN_EPISODE);
+            
             _glowMC.touchable = false;
 
             _root.pivotX = _root.width * 0.5;

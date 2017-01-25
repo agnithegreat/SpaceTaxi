@@ -118,7 +118,7 @@ package com.agnither.spacetaxi.view.gui.screens
             _hide.visible = true;
             _dialog = new DialogView();
             _dialogContainer.addChild(_dialog);
-            SoundManager.tweenVolume(50, 0.3);
+            SoundManager.tweenMusicVolume(50, 0.3);
 
             _dialog.init(
                 "Hello, challenger! I have a job that suits you perfectly! See this hostile planet dead ahead? Those guys have some stuff I would like to buy. Bring it to me, and your effort will be payed off. Hurry, I don't like to wait.",
@@ -145,7 +145,7 @@ package com.agnither.spacetaxi.view.gui.screens
 
         private function hideDialog():void
         {
-            SoundManager.tweenVolume(100, 0.3);
+            SoundManager.tweenMusicVolume(100, 0.3);
             _hide.visible = false;
 
             if (_dialog != null)
