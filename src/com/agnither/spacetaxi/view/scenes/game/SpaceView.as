@@ -10,7 +10,6 @@ package com.agnither.spacetaxi.view.scenes.game
     import com.agnither.spacetaxi.model.Space;
     import com.agnither.spacetaxi.model.orders.Zone;
     import com.agnither.spacetaxi.tasks.logic.game.LevelFailTask;
-    import com.agnither.spacetaxi.tasks.logic.game.RestartGameTask;
     import com.agnither.spacetaxi.utils.LevelParser;
     import com.agnither.spacetaxi.view.scenes.game.effects.CometEffect;
     import com.agnither.spacetaxi.view.scenes.game.effects.ExplosionEffect;
@@ -19,6 +18,7 @@ package com.agnither.spacetaxi.view.scenes.game
 
     import flash.geom.Point;
     import flash.geom.Rectangle;
+    import flash.utils.Dictionary;
 
     import starling.animation.IAnimatable;
     import starling.core.Starling;
@@ -58,6 +58,7 @@ package com.agnither.spacetaxi.view.scenes.game
 
         private var _planets: Vector.<PlanetView>;
         private var _portals: Vector.<PortalView>;
+        private var _portalsDict: Dictionary;
         private var _collectibles: Vector.<CollectibleView>;
         private var _zones: Vector.<ZoneView>;
         private var _shipView: ShipView;
@@ -72,10 +73,12 @@ package com.agnither.spacetaxi.view.scenes.game
         private var _viewport: Rectangle;
         private var _basePivotX: Number;
         private var _basePivotY: Number;
+        private var _stabilized: Boolean;
 
         private var _aiming: Boolean;
 
         private var _time: Number;
+        private var _lostTime: Number;
 
         private var _touch: Point;
         private var _delta: Point;
@@ -125,6 +128,7 @@ package com.agnither.spacetaxi.view.scenes.game
 
             _planets = new <PlanetView>[];
             _portals = new <PortalView>[];
+            _portalsDict = new Dictionary();
             _collectibles = new <CollectibleView>[];
 
             _zonesContainer = new Sprite();
@@ -152,14 +156,8 @@ package com.agnither.spacetaxi.view.scenes.game
             _space.addEventListener(Space.UPDATE_TRAJECTORY, handleUpdateTrajectory);
             _space.addEventListener(Space.HIDE_TRAJECTORY, handleHideTrajectory);
 
-            _viewport = _space.viewport;
-            _basePivotX = _viewport.x + _viewport.width / 2;
-            _basePivotY = _viewport.y + _viewport.height / 2;
-
             _container.x = stage.stageWidth / 2;
             _container.y = stage.stageHeight / 2;
-            _container.pivotX = _basePivotX;
-            _container.pivotY = _basePivotY;
 
             for (var i: int = 0; i < _space.planets.length; i++)
             {
@@ -195,6 +193,7 @@ package com.agnither.spacetaxi.view.scenes.game
             {
                 var portalView: PortalView = new PortalView(_space.portals[i]);
                 _portals.push(portalView);
+                _portalsDict[_space.portals[i]] = portalView;
                 _lowerContainer.addChild(portalView);
             }
 
@@ -205,6 +204,8 @@ package com.agnither.spacetaxi.view.scenes.game
             _previousDot = new Point();
 
             _delta = new Point();
+            _stabilized = false;
+            _lostTime = 0;
             _touch = null;
 
             Starling.current.stage.addEventListener(EnterFrameEvent.ENTER_FRAME, handleEnterFrame);
@@ -249,9 +250,9 @@ package com.agnither.spacetaxi.view.scenes.game
                 var orderView: ZoneView = _zones.shift();
                 orderView.removeFromParent(true);
             }
-            
+
             _animationsContainer.removeChildren(0, -1, true);
-            
+
             _lowerContainer.removeChildren(0, -1, true);
             _upperContainer.removeChildren(0, -1, true);
 
@@ -424,9 +425,25 @@ package com.agnither.spacetaxi.view.scenes.game
 
             _dotCounter = 0;
         }
-        
+
         private function handleEnterFrame(event: EnterFrameEvent):void
         {
+            if (_viewport != _space.viewport)
+            {
+                _viewport = _space.viewport;
+                _basePivotX = _viewport.x + _viewport.width / 2;
+                _basePivotY = _viewport.y + _viewport.height / 2;
+
+                if (!_stabilized)
+                {
+                    _container.pivotX = _basePivotX;
+                    _container.pivotY = _basePivotY;
+                    _stabilized = true;
+                }
+            }
+
+            if (_viewport == null) return;
+
             if (Math.random() < 0.005)
             {
                 var comet: CometEffect = new CometEffect();
@@ -449,12 +466,15 @@ package com.agnither.spacetaxi.view.scenes.game
 
             if (sx > _viewport.width * 2 || sy > _viewport.height * 2)
             {
-                if (!_shipView.getBounds(stage).intersects(new Rectangle(0, 0, stage.stageWidth, stage.stageHeight)))
+                _lostTime += event.passedTime;
+
+                if (_lostTime > 1)
                 {
                     TaskSystem.getInstance().addTask(new LevelFailTask());
                 }
-
                 return;
+            } else {
+                _lostTime = 0;
             }
 
             var ddx: int = 2 * _delta.x + dx;

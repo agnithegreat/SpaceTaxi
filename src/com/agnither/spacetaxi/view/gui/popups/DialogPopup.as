@@ -15,6 +15,9 @@ package com.agnither.spacetaxi.view.gui.popups
     import starling.core.Starling;
     import starling.display.Image;
     import starling.display.Sprite;
+    import starling.events.Touch;
+    import starling.events.TouchEvent;
+    import starling.events.TouchPhase;
     import starling.text.TextField;
 
     import starlingbuilder.engine.util.StageUtil;
@@ -65,18 +68,19 @@ package com.agnither.spacetaxi.view.gui.popups
 
             (_container.layoutData as AnchorLayoutData).left = _speech.left ? 0 : NaN;
             (_container.layoutData as AnchorLayoutData).right = _speech.left ? NaN : 0;
-            
-            touchable = false;
         }
         
         override protected function activate():void
         {
             Starling.juggler.delayCall(nextSound, 0);
             Starling.juggler.delayCall(nextLetter, 0);
+
+            addEventListener(TouchEvent.TOUCH, handleTouch);
         }
 
         override protected function deactivate():void
         {
+            removeEventListener(TouchEvent.TOUCH, handleTouch);
         }
 
         private function nextSound():void
@@ -140,6 +144,15 @@ package com.agnither.spacetaxi.view.gui.popups
             } else
             {
                 _skip = true;
+            }
+        }
+
+        private function handleTouch(event: TouchEvent):void
+        {
+            var touch: Touch = event.getTouch(this, TouchPhase.BEGAN);
+            if (touch != null)
+            {
+                cancelHandler();
             }
         }
     }

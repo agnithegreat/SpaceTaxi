@@ -26,7 +26,7 @@ package com.agnither.spacetaxi.view.scenes.game
             _planet = planet;
             _planet.addEventListener(SpaceBody.UPDATE, handleUpdate);
 
-            _baseScale = _planet.radius / 428 * 2;
+            _baseScale = _planet.radius / 400 * 2;
 
             _image = new Image(Application.assetsManager.getTexture("planets/" + _planet.skin));
             _image.pivotX = _image.width * 0.5;

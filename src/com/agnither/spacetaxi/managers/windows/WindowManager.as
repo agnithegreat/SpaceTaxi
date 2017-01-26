@@ -129,8 +129,8 @@ package com.agnither.spacetaxi.managers.windows
                 {
                     SoundManager.playSound(SoundManager.POPUP_OPEN);
                 }
-                
-                SoundManager.tweenMusicVolume(50, 0.3);
+
+                SoundManager.backgroundMode = true;
 
                 Starling.juggler.removeTweens(_popupDarkLayer);
                 _popupDarkLayer.visible = true;
@@ -158,7 +158,7 @@ package com.agnither.spacetaxi.managers.windows
                 rearrangePopups();
             }
         }
-        
+
         public static function closePopup(popup: Popup = null, tween: Boolean = false):void
         {
             popup = popup || _currentPopup;
@@ -173,8 +173,8 @@ package com.agnither.spacetaxi.managers.windows
 
                 if (_popupsQueue.length <= 1)
                 {
-                    SoundManager.tweenMusicVolume(100, 0.3);
-                    
+                    SoundManager.backgroundMode = false;
+
                     Starling.juggler.removeTweens(_popupDarkLayer);
                     Starling.juggler.tween(_popupDarkLayer, 0.3, {
                         alpha: 0

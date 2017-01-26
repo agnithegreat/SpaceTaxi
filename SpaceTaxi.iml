@@ -64,6 +64,7 @@
             <FilePathAndPathInPackage file-path="$MODULE_DIR$/resources/sounds" path-in-package="sounds" />
             <FilePathAndPathInPackage file-path="$MODULE_DIR$/resources/workspace/layouts" path-in-package="layouts" />
             <FilePathAndPathInPackage file-path="$MODULE_DIR$/resources/levels" path-in-package="levels" />
+            <FilePathAndPathInPackage file-path="$MODULE_DIR$/resources/icons/android/icons" path-in-package="icons" />
           </files-to-package>
         </packaging-android>
         <packaging-ios package-file-name="SpaceTaxi_Android" />
@@ -113,6 +114,7 @@
             <FilePathAndPathInPackage file-path="$MODULE_DIR$/resources/launch/Default-Landscape@2x.png" path-in-package="Default-Landscape@2x.png" />
             <FilePathAndPathInPackage file-path="$MODULE_DIR$/resources/launch/Default.png" path-in-package="Default.png" />
             <FilePathAndPathInPackage file-path="$MODULE_DIR$/resources/launch/Default@2x.png" path-in-package="Default@2x.png" />
+            <FilePathAndPathInPackage file-path="$MODULE_DIR$/resources/icons/ios/icons" path-in-package="icons" />
           </files-to-package>
           <AirSigningOptions keystore-path="$MODULE_DIR$/keys/ios/virich_dev.p12" provisioning-profile-path="$MODULE_DIR$/keys/ios/Kosmos_Dev.mobileprovision" />
         </packaging-ios>

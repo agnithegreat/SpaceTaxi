@@ -42,10 +42,15 @@ package com.agnither.spacetaxi.utils
             data.title = level.settings.title;
             data.stars = level.settings.stars;
             
-            data.viewport = new Rectangle(level.viewport.x, level.viewport.y, level.viewport.width, level.viewport.height);
+            data.viewports = new <Rectangle>[];
+            for (var i:int = 0; i < level.viewports.length; i++)
+            {
+                var viewport: Object = level.viewports[i];
+                data.viewports.push(new Rectangle(viewport.x, viewport.y, viewport.width, viewport.height));
+            }
             
             var planets: Vector.<PlanetVO> = new <PlanetVO>[];
-            for (var i:int = 0; i < level.planets.length; i++)
+            for (i = 0; i < level.planets.length; i++)
             {
                 var pl: Object = level.planets[i];
                 var planet: PlanetVO = new PlanetVO();

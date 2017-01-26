@@ -19,7 +19,7 @@ package com.agnither.spacetaxi.vo
         public var orders: Vector.<OrderVO>;
         public var zones: Vector.<ZoneVO>;
         public var collectibles: Vector.<CollectibleVO>;
-        public var viewport: Rectangle;
+        public var viewports: Vector.<Rectangle>;
         
         public function countStars(moves: int):int
         {

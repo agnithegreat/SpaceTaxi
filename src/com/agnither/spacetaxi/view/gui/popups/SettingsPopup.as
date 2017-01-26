@@ -152,6 +152,7 @@ package com.agnither.spacetaxi.view.gui.popups
                     
                 case _feedbackButton:
                 {
+//                    WindowManager.showPopup(new ModalPopup(), true);
                     TaskSystem.getInstance().addTask(new FeedbackTask());
                     break;
                 }

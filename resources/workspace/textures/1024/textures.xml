@@ -1,69 +1,69 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with TexturePacker http://www.codeandweb.com/texturepacker-->
-<!-- $TexturePacker:SmartUpdate:3e47f0b457ef0c88320493d469e8db0d:7ba6994cc9d4ed799dfb4cc481d7c7c5:7dbf4876cc3e17b8fa41225b849fe824$ -->
+<!-- $TexturePacker:SmartUpdate:c20bb8be30e147328b4f53416c49eb56:8cb37945e1db04800792d53707286fcb:7dbf4876cc3e17b8fa41225b849fe824$ -->
 <TextureAtlas imagePath="textures.png" width="2048" height="2048">
     <SubTexture name="misc/comet" x="1847" y="4" width="164" height="164"/>
     <SubTexture name="misc/dot" x="1977" y="320" width="15" height="15"/>
     <SubTexture name="misc/Energy/black" x="2016" y="194" width="28" height="60" frameX="0" frameY="0" frameWidth="30" frameHeight="60"/>
-    <SubTexture name="misc/Energy/blue" x="1494" y="778" width="30" height="60"/>
-    <SubTexture name="misc/Energy/green" x="1494" y="844" width="30" height="60"/>
-    <SubTexture name="misc/Energy/purple" x="1494" y="910" width="30" height="60"/>
-    <SubTexture name="misc/Energy/rainbow" x="1752" y="803" width="28" height="60" frameX="0" frameY="0" frameWidth="30" frameHeight="60"/>
-    <SubTexture name="misc/Energy/red" x="1494" y="976" width="30" height="60"/>
-    <SubTexture name="misc/Energy/yellow" x="1112" y="1166" width="30" height="60"/>
-    <SubTexture name="misc/Glow/glow_01" x="888" y="1142" width="106" height="84" frameX="-32" frameY="0" frameWidth="175" frameHeight="125"/>
-    <SubTexture name="misc/Glow/glow_02" x="1000" y="1166" width="106" height="84" frameX="-32" frameY="0" frameWidth="175" frameHeight="125"/>
-    <SubTexture name="misc/Glow/glow_03" x="888" y="1232" width="106" height="84" frameX="-32" frameY="0" frameWidth="175" frameHeight="125"/>
-    <SubTexture name="misc/Glow/glow_04" x="1000" y="1256" width="106" height="84" frameX="-32" frameY="0" frameWidth="175" frameHeight="125"/>
-    <SubTexture name="misc/Glow/glow_05" x="747" y="1237" width="106" height="84" frameX="-32" frameY="0" frameWidth="175" frameHeight="125"/>
-    <SubTexture name="misc/Glow/glow_06" x="859" y="1322" width="106" height="84" frameX="-32" frameY="0" frameWidth="175" frameHeight="125"/>
-    <SubTexture name="misc/Glow/glow_07" x="747" y="1327" width="106" height="84" frameX="-32" frameY="0" frameWidth="175" frameHeight="125"/>
-    <SubTexture name="misc/Glow/glow_08" x="501" y="1369" width="106" height="84" frameX="-32" frameY="0" frameWidth="175" frameHeight="125"/>
-    <SubTexture name="misc/Glow/glow_09" x="888" y="1142" width="106" height="84" frameX="-32" frameY="0" frameWidth="175" frameHeight="125"/>
-    <SubTexture name="misc/glow_back" x="1013" y="1088" width="129" height="72" frameX="-22" frameY="-36" frameWidth="175" frameHeight="125"/>
-    <SubTexture name="misc/loot_box" x="613" y="1369" rotated="true" width="97" height="91"/>
+    <SubTexture name="misc/Energy/blue" x="1998" y="680" width="30" height="60"/>
+    <SubTexture name="misc/Energy/green" x="1998" y="746" width="30" height="60"/>
+    <SubTexture name="misc/Energy/purple" x="1998" y="812" width="30" height="60"/>
+    <SubTexture name="misc/Energy/rainbow" x="1725" y="921" width="28" height="60" frameX="0" frameY="0" frameWidth="30" frameHeight="60"/>
+    <SubTexture name="misc/Energy/red" x="1725" y="789" width="30" height="60"/>
+    <SubTexture name="misc/Energy/yellow" x="1725" y="855" width="30" height="60"/>
+    <SubTexture name="misc/Glow/glow_01" x="365" y="1134" width="106" height="84" frameX="-32" frameY="0" frameWidth="175" frameHeight="125"/>
+    <SubTexture name="misc/Glow/glow_02" x="477" y="1210" width="106" height="84" frameX="-32" frameY="0" frameWidth="175" frameHeight="125"/>
+    <SubTexture name="misc/Glow/glow_03" x="365" y="1224" width="106" height="84" frameX="-32" frameY="0" frameWidth="175" frameHeight="125"/>
+    <SubTexture name="misc/Glow/glow_04" x="589" y="1227" width="106" height="84" frameX="-32" frameY="0" frameWidth="175" frameHeight="125"/>
+    <SubTexture name="misc/Glow/glow_05" x="477" y="1300" width="106" height="84" frameX="-32" frameY="0" frameWidth="175" frameHeight="125"/>
+    <SubTexture name="misc/Glow/glow_06" x="589" y="1317" width="106" height="84" frameX="-32" frameY="0" frameWidth="175" frameHeight="125"/>
+    <SubTexture name="misc/Glow/glow_07" x="4" y="1142" width="106" height="84" frameX="-32" frameY="0" frameWidth="175" frameHeight="125"/>
+    <SubTexture name="misc/Glow/glow_08" x="116" y="1142" width="106" height="84" frameX="-32" frameY="0" frameWidth="175" frameHeight="125"/>
+    <SubTexture name="misc/Glow/glow_09" x="365" y="1134" width="106" height="84" frameX="-32" frameY="0" frameWidth="175" frameHeight="125"/>
+    <SubTexture name="misc/glow_back" x="488" y="1132" width="129" height="72" frameX="-22" frameY="-36" frameWidth="175" frameHeight="125"/>
+    <SubTexture name="misc/loot_box" x="112" y="1232" rotated="true" width="97" height="91"/>
     <SubTexture name="misc/Meteor/01" x="1912" y="320" rotated="true" width="15" height="17"/>
-    <SubTexture name="misc/Meteor/02" x="233" y="1207" width="11" height="9"/>
-    <SubTexture name="misc/Meteor/03" x="233" y="1173" width="14" height="9"/>
+    <SubTexture name="misc/Meteor/02" x="1506" y="608" width="11" height="9"/>
+    <SubTexture name="misc/Meteor/03" x="1506" y="560" width="14" height="9"/>
     <SubTexture name="misc/Meteor/04" x="1891" y="320" rotated="true" width="15" height="18"/>
     <SubTexture name="misc/Meteor/05" x="2005" y="192" rotated="true" width="5" height="10"/>
     <SubTexture name="misc/Meteor/06" x="2005" y="208" rotated="true" width="5" height="7"/>
     <SubTexture name="misc/Meteor/07" x="2005" y="174" rotated="true" width="6" height="12"/>
     <SubTexture name="misc/Meteor/08" x="2005" y="221" width="4" height="4"/>
-    <SubTexture name="misc/Meteor/09" x="501" y="1140" width="8" height="13"/>
+    <SubTexture name="misc/Meteor/09" x="1506" y="594" rotated="true" width="13" height="8"/>
     <SubTexture name="misc/Meteor/10" x="1819" y="339" width="9" height="7"/>
-    <SubTexture name="misc/Portal/portal_bottom" x="1160" y="1027" width="101" height="102" frameX="-12" frameY="-11" frameWidth="125" frameHeight="125"/>
-    <SubTexture name="misc/Portal/portal_over" x="768" y="1142" width="114" height="89" frameX="-5" frameY="-18" frameWidth="125" frameHeight="125"/>
-    <SubTexture name="misc/Sputnik/01" x="1880" y="864" width="84" height="84" frameX="-7" frameY="-9" frameWidth="100" frameHeight="100"/>
-    <SubTexture name="misc/Sputnik/02" x="1880" y="954" width="84" height="84" frameX="-7" frameY="-9" frameWidth="100" frameHeight="100"/>
-    <SubTexture name="misc/Sputnik/shadow" x="1786" y="864" width="88" height="88" frameX="-6" frameY="-6" frameWidth="100" frameHeight="100"/>
-    <SubTexture name="misc/symbol" x="1013" y="1027" rotated="true" width="141" height="55"/>
-    <SubTexture name="misc/symbol_station" x="1148" y="1135" width="110" height="110"/>
-    <SubTexture name="planets/0" x="4" y="649" width="250" height="246" frameX="0" frameY="-4" frameWidth="250" frameHeight="250"/>
-    <SubTexture name="planets/1/1" x="1530" y="803" width="216" height="216" frameX="-18" frameY="-17" frameWidth="250" frameHeight="250"/>
-    <SubTexture name="planets/1/2" x="1537" y="291" width="250" height="250"/>
-    <SubTexture name="planets/1/3" x="1793" y="352" width="250" height="250"/>
-    <SubTexture name="planets/1/4" x="4" y="393" width="250" height="250"/>
-    <SubTexture name="planets/1/5" x="260" y="393" width="250" height="250"/>
-    <SubTexture name="planets/1/6" x="4" y="901" width="249" height="247" frameX="-1" frameY="-1" frameWidth="250" frameHeight="250"/>
-    <SubTexture name="planets/1/7" x="515" y="1141" width="226" height="222" frameX="-13" frameY="-17" frameWidth="250" frameHeight="250"/>
-    <SubTexture name="planets/1/8" x="516" y="393" width="250" height="250"/>
-    <SubTexture name="planets/1/9" x="259" y="1140" width="236" height="231" frameX="-8" frameY="-9" frameWidth="250" frameHeight="250"/>
-    <SubTexture name="planets/1/10" x="1267" y="778" width="221" height="221" frameX="-17" frameY="-13" frameWidth="250" frameHeight="250"/>
-    <SubTexture name="planets/1/11" x="515" y="649" rotated="true" width="247" height="244" frameX="-5" frameY="-2" frameWidth="250" frameHeight="250"/>
-    <SubTexture name="planets/1/12" x="4" y="1154" width="223" height="217" frameX="-17" frameY="-18" frameWidth="250" frameHeight="250"/>
-    <SubTexture name="planets/2/1" x="1018" y="522" width="250" height="250"/>
-    <SubTexture name="planets/2/2" x="772" y="393" width="240" height="250" frameX="-10" frameY="0" frameWidth="250" frameHeight="250"/>
-    <SubTexture name="planets/2/3" x="768" y="897" width="239" height="239" frameX="-5" frameY="-7" frameWidth="250" frameHeight="250"/>
-    <SubTexture name="planets/2/4" x="259" y="904" rotated="true" width="238" height="230" frameX="-8" frameY="-12" frameWidth="250" frameHeight="250"/>
-    <SubTexture name="planets/2/5" x="1274" y="522" width="250" height="250"/>
-    <SubTexture name="planets/2/6" x="1018" y="778" width="243" height="243" frameX="-3" frameY="-6" frameWidth="250" frameHeight="250"/>
-    <SubTexture name="planets/2/7" x="1530" y="547" width="250" height="250"/>
-    <SubTexture name="planets/2/8" x="1786" y="608" width="250" height="250"/>
-    <SubTexture name="planets/2/9" x="768" y="649" rotated="true" width="244" height="242" frameX="-3" frameY="-4" frameWidth="250" frameHeight="250"/>
-    <SubTexture name="planets/2/10" x="260" y="649" width="249" height="249" frameX="-1" frameY="0" frameWidth="250" frameHeight="250"/>
-    <SubTexture name="planets/2/11" x="1267" y="1005" width="203" height="203" frameX="-23" frameY="-26" frameWidth="250" frameHeight="250"/>
-    <SubTexture name="planets/2/12" x="515" y="899" width="238" height="236" frameX="-5" frameY="-8" frameWidth="250" frameHeight="250"/>
+    <SubTexture name="misc/Portal/portal_bottom" x="4" y="1232" rotated="true" width="102" height="101" frameX="-12" frameY="-11" frameWidth="125" frameHeight="125"/>
+    <SubTexture name="misc/Portal/portal_over" x="623" y="1132" width="114" height="89" frameX="-5" frameY="-18" frameWidth="125" frameHeight="125"/>
+    <SubTexture name="misc/Sputnik/01" x="112" y="1329" width="84" height="84" frameX="-7" frameY="-9" frameWidth="100" frameHeight="100"/>
+    <SubTexture name="misc/Sputnik/02" x="4" y="1339" width="84" height="84" frameX="-7" frameY="-9" frameWidth="100" frameHeight="100"/>
+    <SubTexture name="misc/Sputnik/shadow" x="215" y="1250" width="88" height="88" frameX="-6" frameY="-6" frameWidth="100" frameHeight="100"/>
+    <SubTexture name="misc/symbol" x="1977" y="878" width="55" height="141"/>
+    <SubTexture name="misc/symbol_station" x="249" y="1134" width="110" height="110"/>
+    <SubTexture name="planets/0" x="772" y="393" rotated="true" width="240" height="245" frameX="-2" frameY="-7" frameWidth="250" frameHeight="250"/>
+    <SubTexture name="planets/1/1" x="743" y="1130" width="203" height="202" frameX="-23" frameY="-24" frameWidth="250" frameHeight="250"/>
+    <SubTexture name="planets/1/2" x="771" y="888" width="236" height="236" frameX="-6" frameY="-7" frameWidth="250" frameHeight="250"/>
+    <SubTexture name="planets/1/3" x="1262" y="522" width="238" height="237" frameX="-5" frameY="-5" frameWidth="250" frameHeight="250"/>
+    <SubTexture name="planets/1/4" x="1018" y="522" width="238" height="238" frameX="-5" frameY="-5" frameWidth="250" frameHeight="250"/>
+    <SubTexture name="planets/1/5" x="771" y="644" width="238" height="238" frameX="-7" frameY="-5" frameWidth="250" frameHeight="250"/>
+    <SubTexture name="planets/1/6" x="503" y="894" width="234" height="232" frameX="-8" frameY="-9" frameWidth="250" frameHeight="250"/>
+    <SubTexture name="planets/1/7" x="1506" y="789" width="213" height="209" frameX="-18" frameY="-23" frameWidth="250" frameHeight="250"/>
+    <SubTexture name="planets/1/8" x="1015" y="766" width="237" height="237" frameX="-6" frameY="-7" frameWidth="250" frameHeight="250"/>
+    <SubTexture name="planets/1/9" x="1770" y="608" width="222" height="218" frameX="-14" frameY="-16" frameWidth="250" frameHeight="250"/>
+    <SubTexture name="planets/1/10" x="1258" y="1001" width="208" height="208" frameX="-21" frameY="-21" frameWidth="250" frameHeight="250"/>
+    <SubTexture name="planets/1/11" x="249" y="898" rotated="true" width="233" height="230" frameX="-10" frameY="-8" frameWidth="250" frameHeight="250"/>
+    <SubTexture name="planets/1/12" x="1761" y="832" width="210" height="204" frameX="-20" frameY="-23" frameWidth="250" frameHeight="250"/>
+    <SubTexture name="planets/2/1" x="1537" y="291" width="250" height="250"/>
+    <SubTexture name="planets/2/2" x="516" y="393" rotated="true" width="250" height="240" frameX="-10" frameY="0" frameWidth="250" frameHeight="250"/>
+    <SubTexture name="planets/2/3" x="4" y="897" width="239" height="239" frameX="-5" frameY="-7" frameWidth="250" frameHeight="250"/>
+    <SubTexture name="planets/2/4" x="1262" y="765" rotated="true" width="238" height="230" frameX="-8" frameY="-12" frameWidth="250" frameHeight="250"/>
+    <SubTexture name="planets/2/5" x="1793" y="352" width="250" height="250"/>
+    <SubTexture name="planets/2/6" x="254" y="649" width="243" height="243" frameX="-3" frameY="-6" frameWidth="250" frameHeight="250"/>
+    <SubTexture name="planets/2/7" x="4" y="393" width="250" height="250"/>
+    <SubTexture name="planets/2/8" x="260" y="393" width="250" height="250"/>
+    <SubTexture name="planets/2/9" x="4" y="649" rotated="true" width="244" height="242" frameX="-3" frameY="-4" frameWidth="250" frameHeight="250"/>
+    <SubTexture name="planets/2/10" x="516" y="639" width="249" height="249" frameX="-1" frameY="0" frameWidth="250" frameHeight="250"/>
+    <SubTexture name="planets/2/11" x="1013" y="1009" width="203" height="203" frameX="-23" frameY="-26" frameWidth="250" frameHeight="250"/>
+    <SubTexture name="planets/2/12" x="1526" y="547" width="238" height="236" frameX="-5" frameY="-8" frameWidth="250" frameHeight="250"/>
     <SubTexture name="planets/blackhole/circle_1" x="1847" y="174" width="152" height="140" frameX="-78" frameY="-73" frameWidth="307" frameHeight="287"/>
     <SubTexture name="planets/blackhole/circle_2" x="1537" y="4" width="304" height="281" frameX="-3" frameY="0" frameWidth="307" frameHeight="287"/>
     <SubTexture name="planets/blackhole/skull" x="2005" y="260" width="36" height="48" frameX="-138" frameY="-119" frameWidth="307" frameHeight="287"/>
@@ -71,22 +71,22 @@
     <SubTexture name="space_pattern" x="1019" y="4" width="512" height="512"/>
     <SubTexture name="stars/01" x="1819" y="314" width="19" height="19"/>
     <SubTexture name="stars/02" x="1933" y="320" width="16" height="16"/>
-    <SubTexture name="stars/03" x="747" y="1141" width="15" height="13"/>
+    <SubTexture name="stars/03" x="1506" y="522" width="15" height="13"/>
     <SubTexture name="stars/04" x="1793" y="320" rotated="true" width="20" height="21" frameX="0" frameY="0" frameWidth="22" frameHeight="20"/>
     <SubTexture name="stars/05" x="2017" y="44" width="26" height="21" frameX="0" frameY="-2" frameWidth="29" frameHeight="24"/>
     <SubTexture name="stars/06" x="2017" y="105" width="23" height="29" frameX="-4" frameY="0" frameWidth="29" frameHeight="30"/>
     <SubTexture name="stars/07" x="1819" y="291" width="21" height="17" frameX="-3" frameY="-2" frameWidth="24" frameHeight="21"/>
-    <SubTexture name="stars/08" x="1970" y="864" rotated="true" width="32" height="31" frameX="-1" frameY="-2" frameWidth="32" frameHeight="34"/>
-    <SubTexture name="stars/09" x="1112" y="1232" width="29" height="32" frameX="0" frameY="0" frameWidth="30" frameHeight="32"/>
+    <SubTexture name="stars/08" x="1998" y="608" rotated="true" width="32" height="31" frameX="-1" frameY="-2" frameWidth="32" frameHeight="34"/>
+    <SubTexture name="stars/09" x="1998" y="645" rotated="true" width="32" height="29" frameX="0" frameY="0" frameWidth="30" frameHeight="32"/>
     <SubTexture name="stars/10" x="2017" y="71" width="25" height="28" frameX="0" frameY="0" frameWidth="28" frameHeight="28"/>
     <SubTexture name="stars/11" x="2005" y="314" width="35" height="32" frameX="-2" frameY="0" frameWidth="38" frameHeight="34"/>
     <SubTexture name="stars/white_01" x="1844" y="320" width="19" height="19"/>
     <SubTexture name="stars/white_02" x="2017" y="140" width="21" height="21"/>
     <SubTexture name="stars/white_03" x="1955" y="320" width="16" height="16" frameX="0" frameY="0" frameWidth="17" frameHeight="16"/>
     <SubTexture name="stars/white_04" x="2017" y="4" width="27" height="34" frameX="-2" frameY="0" frameWidth="34" frameHeight="35"/>
-    <SubTexture name="stars/white_05" x="233" y="1154" width="14" height="13"/>
+    <SubTexture name="stars/white_05" x="1506" y="541" width="14" height="13"/>
     <SubTexture name="stars/white_06" x="1793" y="291" width="20" height="19" frameX="0" frameY="-1" frameWidth="20" frameHeight="20"/>
     <SubTexture name="stars/white_07" x="1869" y="320" width="16" height="18"/>
-    <SubTexture name="stars/white_08" x="233" y="1188" width="13" height="13"/>
+    <SubTexture name="stars/white_08" x="1506" y="575" width="13" height="13"/>
     <SubTexture name="stars/white_09" x="2017" y="167" width="21" height="21"/>
 </TextureAtlas>

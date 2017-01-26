@@ -4,6 +4,7 @@
 package com.agnither.spacetaxi.model
 {
     import com.agnither.spacetaxi.Config;
+    import com.agnither.spacetaxi.controller.game.DialogController;
     import com.agnither.spacetaxi.controller.game.OrderController;
     import com.agnither.spacetaxi.controller.game.ZoneController;
     import com.agnither.spacetaxi.enums.PlanetType;
@@ -12,7 +13,6 @@ package com.agnither.spacetaxi.model
     import com.agnither.spacetaxi.model.orders.Zone;
     import com.agnither.spacetaxi.utils.GeomUtils;
     import com.agnither.spacetaxi.utils.ShipAI;
-    import com.agnither.spacetaxi.vo.CollectibleVO;
     import com.agnither.spacetaxi.vo.LevelVO;
     import com.agnither.spacetaxi.vo.OrderVO;
     import com.agnither.spacetaxi.vo.PlanetVO;
@@ -81,18 +81,14 @@ package com.agnither.spacetaxi.model
             return _dynamics;
         }
         
+        private var _viewports: Vector.<Rectangle>;
+        
         private var _viewport: Rectangle;
         public function get viewport():Rectangle
         {
             return _viewport;
         }
 
-        private var _center: Point;
-        public function get center():Point
-        {
-            return _center;
-        }
-        
         private var _pullPoint: Point;
 
         private var _trajectory: Vector.<Point>;
@@ -126,6 +122,12 @@ package com.agnither.spacetaxi.model
         public function get orders():OrderController
         {
             return _orderController;
+        }
+
+        private var _dialogController: DialogController;
+        public function get dialogController():DialogController
+        {
+            return _dialogController;
         }
 
         private var _landPlanet: Planet;
@@ -186,21 +188,19 @@ package com.agnither.spacetaxi.model
                 var previous: Portal = portal;
             }
 
+            // TODO: enable collectibles
             _collectibles = new <Collectible>[];
-            for (i = 0; i < level.collectibles.length; i++)
-            {
-                var coll: CollectibleVO = level.collectibles[i];
-                var collectible: Collectible = new Collectible(coll);
-                collectible.place(coll.position.x, coll.position.y);
-                _collectibles.push(collectible);
-            }
+//            for (i = 0; i < level.collectibles.length; i++)
+//            {
+//                var coll: CollectibleVO = level.collectibles[i];
+//                var collectible: Collectible = new Collectible(coll);
+//                collectible.place(coll.position.x, coll.position.y);
+//                _collectibles.push(collectible);
+//            }
             
             _dynamics = new <DynamicSpaceBody>[];
 
-            _viewport = level.viewport;
-            _center = new Point();
-            _center.x = _viewport.x + _viewport.width / 2;
-            _center.y = _viewport.y + _viewport.height / 2;
+            _viewports = level.viewports;
 
             _pullPoint = new Point();
             _trajectory = new <Point>[];
@@ -230,6 +230,10 @@ package com.agnither.spacetaxi.model
                 _orderController.addOrder(new Order(order.cost, order.wave, 100, departure, arrival));
             }
             _orderController.start();
+
+            _dialogController = new DialogController();
+            _dialogController.init();
+            _dialogController.start();
             
             GamePlayAnalytics.startLevel(level.id);
         }
@@ -304,7 +308,7 @@ package com.agnither.spacetaxi.model
             _landPlanet = null;
 
             _viewport = null;
-            _center = null;
+            _viewports = null;
             _pullPoint = null;
             _trajectory = null;
             
@@ -591,8 +595,8 @@ package com.agnither.spacetaxi.model
             var amount: int = _time * 1000 * DELTA;
             _time -= amount / (1000 * DELTA);
             
-            processMeteors(amount);
             processShip(delta);
+            processMeteors(amount);
         }
 
         public function processMeteors(amount: Number):void
@@ -655,6 +659,24 @@ package com.agnither.spacetaxi.model
             if (Config.ai)
             {
                 _shipAI.compute();
+            }
+
+            var shipRect: Rectangle = new Rectangle(ship.x - ship.radius, ship.y - ship.radius, ship.radius * 2, ship.radius * 2);
+            if (_viewport == null || !_viewport.intersects(shipRect))
+            {
+                var nearest: Rectangle;
+                var distance: Number;
+                for (i = 0; i < _viewports.length; i++)
+                {
+                    var viewport: Rectangle = _viewports[i];
+                    var dist: Number = Point.distance(new Point(viewport.x + viewport.width * 0.5, viewport.y + viewport.height * 0.5), _ship.position);
+                    if (nearest == null || distance > dist)
+                    {
+                        nearest = viewport;
+                        distance = dist;
+                    }
+                    _viewport = nearest;
+                }
             }
         }
 

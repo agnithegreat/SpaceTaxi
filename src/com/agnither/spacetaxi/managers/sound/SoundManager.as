@@ -57,6 +57,8 @@ package com.agnither.spacetaxi.managers.sound
         private static var playing: Dictionary = new Dictionary(true);
         private static var currentMusic: SoundContainer;
 
+        private static var _backgroundMode: Boolean;
+
         public static function getSound(name: String):Sound
         {
             var SoundClass: Class = getDefinitionByName(name) as Class;
@@ -79,7 +81,9 @@ package com.agnither.spacetaxi.managers.sound
             var sound: Sound = getSound(name);
             var container: SoundContainer = new SoundContainer(sound, true, true);
             container.play();
-            container.volume = Config.volume.music;
+
+            var vol: Number = _backgroundMode ? 0.5 : 1;
+            container.tweenVolume(vol * Config.volume.music, 0.3);
 
             playing[name] = container;
             currentMusic = container;
@@ -121,12 +125,13 @@ package com.agnither.spacetaxi.managers.sound
             }
         }
 
-        public static function tweenMusicVolume(value: int, time: Number):void
+        public static function set backgroundMode(value: Boolean):void
         {
+            _backgroundMode = value;
+            var vol: Number = _backgroundMode ? 0.5 : 1;
             if (currentMusic != null)
             {
-                Starling.juggler.removeTweens(currentMusic);
-                Starling.juggler.tween(currentMusic, time, {volume: value * Config.volume.music * 0.01});
+                currentMusic.tweenVolume(vol * Config.volume.music, 0.3);
             }
         }
 
@@ -135,7 +140,7 @@ package com.agnither.spacetaxi.managers.sound
             Starling.juggler.removeTweens(SoundManager);
             Starling.juggler.tween(SoundManager, time, {volume: value});
         }
-        
+
         public static function set volume(value: int):void
         {
             SoundMixer.soundTransform = new SoundTransform(value * 0.01);
@@ -148,12 +153,18 @@ package com.agnither.spacetaxi.managers.sound
 
         private static function handleUpdate(event: Event):void
         {
+            var vol: Number = _backgroundMode ? 0.5 : 1;
             for (var key:String in playing)
             {
                 var container: SoundContainer = playing[key];
                 if (container.alive)
                 {
-                    container.volume = container.music ? Config.volume.music : Config.volume.sound;
+                    if (container.music)
+                    {
+                        container.tweenVolume(vol * Config.volume.music, 0.3);
+                    } else {
+                        container.volume = Config.volume.sound;
+                    }
                 } else {
                     delete playing[key];
                 }
@@ -175,8 +186,9 @@ package com.agnither.spacetaxi.managers.sound
 import flash.events.Event;
 import flash.media.Sound;
 import flash.media.SoundChannel;
-import flash.media.SoundMixer;
 import flash.media.SoundTransform;
+
+import starling.core.Starling;
 
 class SoundContainer
 {
@@ -204,7 +216,7 @@ class SoundContainer
 
     public function play():void
     {
-        _soundChannel = _sound.play(0, _loop ? int.MAX_VALUE : 0);
+        _soundChannel = _sound.play(0, _loop ? int.MAX_VALUE : 0, _music ? new SoundTransform(0) : null);
         if (_soundChannel != null)
         {
             _soundChannel.addEventListener(Event.SOUND_COMPLETE, handleSoundComplete);
@@ -219,6 +231,12 @@ class SoundContainer
             _soundChannel.stop();
             _soundChannel = null;
         }
+    }
+
+    public function tweenVolume(value: int, time: Number):void
+    {
+        Starling.juggler.removeTweens(this);
+        Starling.juggler.tween(this, time, {"volume": value});
     }
 
     public function set volume(value: int):void

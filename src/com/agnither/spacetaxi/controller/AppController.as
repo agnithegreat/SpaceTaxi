@@ -4,7 +4,6 @@
 package com.agnither.spacetaxi.controller
 {
     import com.agnither.spacetaxi.Config;
-    import com.agnither.spacetaxi.controller.game.DialogController;
     import com.agnither.spacetaxi.managers.analytics.GamePlayAnalytics;
     import com.agnither.spacetaxi.managers.windows.WindowManager;
     import com.agnither.spacetaxi.model.Space;
@@ -33,12 +32,6 @@ package com.agnither.spacetaxi.controller
             return _levelsController;
         }
         
-        private var _dialogController: DialogController;
-        public function get dialogController():DialogController
-        {
-            return _dialogController;
-        }
-        
         private var _player: Player;
         public function get player():Player
         {
@@ -55,7 +48,6 @@ package com.agnither.spacetaxi.controller
         {
             _stateController = new StateController();
             _levelsController = new LevelsController();
-            _dialogController = new DialogController();
             _player = new Player();
 
             _space = new Space();
@@ -65,7 +57,6 @@ package com.agnither.spacetaxi.controller
         {
             _stateController.init();
             _levelsController.init();
-            _dialogController.init();
             _player.init();
         }
 
@@ -84,7 +75,6 @@ package com.agnither.spacetaxi.controller
             _space.init(_levelsController.currentLevel);
             _space.addEventListener(Space.LEVEL_COMPLETE, handleLevelComplete);
             pauseGame(false);
-            _dialogController.start();
         }
 
         public function restartGame():void
