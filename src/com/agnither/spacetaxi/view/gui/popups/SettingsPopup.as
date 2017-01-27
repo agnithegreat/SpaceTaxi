@@ -52,8 +52,9 @@ package com.agnither.spacetaxi.view.gui.popups
 
         override protected function initialize():void
         {
-//            _loginTF.text = "Level " + (level.id + 1);
-//            _soundTF.text = level.title;
+            _loginTF.text = Application.uiBuilder.localization.getLocalizedText("LogIn");
+            _soundTF.text = Application.uiBuilder.localization.getLocalizedText("Sound");
+            _feedbackTF.text = Application.uiBuilder.localization.getLocalizedText("Support");
 
             _fbButton.enabled = false;
             _vkButton.enabled = false;

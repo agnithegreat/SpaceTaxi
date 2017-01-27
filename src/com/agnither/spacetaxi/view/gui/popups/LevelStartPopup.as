@@ -78,8 +78,8 @@ package com.agnither.spacetaxi.view.gui.popups
             _closeButton.addEventListener(Event.TRIGGERED, handleTriggered);
             _playButton.addEventListener(Event.TRIGGERED, handleTriggered);
 
-            _titleTF.text = level.title;
-            _descriptionTF.text = "Transport every passenger to his destination to complete the level";
+            _titleTF.text = Application.uiBuilder.localization.getLocalizedText("Level" + (level.id+1));
+            _descriptionTF.text = Application.uiBuilder.localization.getLocalizedText("LevelDescription");
 
             _rewardTF.text = String(level.reward);
             _root.validate();

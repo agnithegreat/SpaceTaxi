@@ -45,8 +45,10 @@ package com.agnither.spacetaxi.view.gui.popups
             _root.pivotX = _root.width * 0.5;
             _root.pivotY = _root.height * 0.5;
 
-            _firstTF.text = "Start";
-            _secondTF.text = "Later";
+            _titleTF.text = Application.uiBuilder.localization.getLocalizedText("Survey");
+            _descriptionTF.text = Application.uiBuilder.localization.getLocalizedText("SurveyDescription");
+            _firstTF.text = Application.uiBuilder.localization.getLocalizedText("Start");
+            _secondTF.text = Application.uiBuilder.localization.getLocalizedText("Later");
 
             StageUtil.fitPopup(_root, Application.guiSize.width, Application.guiSize.height, Application.viewport.width, Application.viewport.height);
         }

@@ -10,7 +10,6 @@ package com.agnither.spacetaxi.vo
         public var id: int;
         public var episode: int;
         
-        public var title: String;
         public var stars: Array;
         
         public var ship: ShipVO;

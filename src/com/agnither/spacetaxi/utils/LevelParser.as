@@ -39,7 +39,6 @@ package com.agnither.spacetaxi.utils
 
             if (level == null) return data;
             
-            data.title = level.settings.title;
             data.stars = level.settings.stars;
             
             data.viewports = new <Rectangle>[];

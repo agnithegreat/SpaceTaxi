@@ -102,18 +102,18 @@
                       "size":60
                     }
                   },
-                  "height":45,
+                  "height":43.8,
                   "name":"_addTF",
                   "style":{
                     "cls":"starling.styles.DistanceFieldStyle",
                     "customParams":{},
                     "params":{
                       "mode":"basic",
-                      "softness":0.13
+                      "softness":0.23
                     }
                   },
                   "text":"+100",
-                  "width":131.25,
+                  "width":131.4,
                   "x":171.5,
                   "y":120
                 }

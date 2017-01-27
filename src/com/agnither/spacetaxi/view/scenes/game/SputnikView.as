@@ -43,7 +43,7 @@ package com.agnither.spacetaxi.view.scenes.game
             
             _planet = planet;
             _planet.addEventListener(SpaceBody.UPDATE, handleUpdate);
-            _baseScale = _planet.radius / 428 * 2;
+            _baseScale = _planet.radius / 400 * 2;
 
             handleUpdate(null);
 

@@ -9,6 +9,7 @@ package com.agnither.spacetaxi.view.gui.popups
     import com.agnither.spacetaxi.managers.windows.WindowManager;
     import com.agnither.spacetaxi.tasks.logic.game.EndGameTask;
     import com.agnither.spacetaxi.tasks.logic.game.RestartGameTask;
+    import com.agnither.spacetaxi.utils.StringUtils;
     import com.agnither.spacetaxi.view.gui.items.FakeShipView;
     import com.agnither.tasks.global.TaskSystem;
     import com.agnither.utils.gui.components.Popup;
@@ -70,12 +71,12 @@ package com.agnither.spacetaxi.view.gui.popups
 
             if (Application.appController.space.ship.durability == 0)
             {
-                _titleTF.text = "SHIP IS CRASHED";
+                _titleTF.text = Application.uiBuilder.localization.getLocalizedText("ShipIsCrashed");
             } else if (Application.appController.space.ship.fuel == 0)
             {
-                _titleTF.text = "OUT OF FUEL";
+                _titleTF.text = Application.uiBuilder.localization.getLocalizedText("OutOfFuel");
             } else {
-                _titleTF.text = "SHIP IS LOST";
+                _titleTF.text = Application.uiBuilder.localization.getLocalizedText("ShipIsLost");
             }
 
             var reward: int = Application.appController.space.orders.money;

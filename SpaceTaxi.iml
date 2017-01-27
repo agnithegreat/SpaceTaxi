@@ -18,7 +18,7 @@
           <sdk name="AIRSDK_24" />
         </dependencies>
         <compiler-options>
-          <option name="additionalOptions" value="-define+=BUILD::debug,true -define+=BUILD::mobile,false -define+=BUILD::ios,false -define+=BUILD::android,false -advanced-telemetry=true" />
+          <option name="additionalOptions" value="-define+=BUILD::standalone,true -define+=BUILD::debug,true -define+=BUILD::mobile,false -define+=BUILD::ios,false -define+=BUILD::android,false -advanced-telemetry=true" />
         </compiler-options>
         <packaging-air-desktop use-generated-descriptor="false" custom-descriptor-path="$MODULE_DIR$/SpaceTaxi-desktop.xml" package-file-name="SpaceTaxi_Desktop">
           <files-to-package>
@@ -27,6 +27,7 @@
             <FilePathAndPathInPackage file-path="$MODULE_DIR$/resources/workspace/textures" path-in-package="textures" />
             <FilePathAndPathInPackage file-path="$MODULE_DIR$/resources/workspace/layouts" path-in-package="layouts" />
             <FilePathAndPathInPackage file-path="$MODULE_DIR$/resources/levels" path-in-package="levels" />
+            <FilePathAndPathInPackage file-path="$MODULE_DIR$/resources/workspace/localization" path-in-package="localization" />
           </files-to-package>
         </packaging-air-desktop>
         <packaging-android />
@@ -54,7 +55,7 @@
           <sdk name="AIRSDK_24" />
         </dependencies>
         <compiler-options>
-          <option name="additionalOptions" value="-define+=BUILD::debug,true -define+=BUILD::mobile,true -define+=BUILD::ios,false -define+=BUILD::android,true -advanced-telemetry=true" />
+          <option name="additionalOptions" value="-define+=BUILD::standalone,true -define+=BUILD::debug,true -define+=BUILD::mobile,true -define+=BUILD::ios,false -define+=BUILD::android,true -advanced-telemetry=true" />
         </compiler-options>
         <packaging-air-desktop />
         <packaging-android enabled="true" use-generated-descriptor="false" custom-descriptor-path="$MODULE_DIR$/SpaceTaxi-android.xml" package-file-name="SpaceTaxi_Android">
@@ -65,7 +66,9 @@
             <FilePathAndPathInPackage file-path="$MODULE_DIR$/resources/workspace/layouts" path-in-package="layouts" />
             <FilePathAndPathInPackage file-path="$MODULE_DIR$/resources/levels" path-in-package="levels" />
             <FilePathAndPathInPackage file-path="$MODULE_DIR$/resources/icons/android/icons" path-in-package="icons" />
+            <FilePathAndPathInPackage file-path="$MODULE_DIR$/resources/workspace/localization" path-in-package="localization" />
           </files-to-package>
+          <AirSigningOptions key-alias="kosmos" keystore-path="$MODULE_DIR$/keys/android/kosmos.jks" keystore-type="JKS" use-temp-certificate="false" />
         </packaging-android>
         <packaging-ios package-file-name="SpaceTaxi_Android" />
       </configuration>
@@ -91,7 +94,7 @@
           <sdk name="AIRSDK_24" />
         </dependencies>
         <compiler-options>
-          <option name="additionalOptions" value="-define+=BUILD::debug,true -define+=BUILD::mobile,true -define+=BUILD::ios,true -define+=BUILD::android,false -advanced-telemetry=true" />
+          <option name="additionalOptions" value="-define+=BUILD::standalone,true -define+=BUILD::debug,true -define+=BUILD::mobile,true -define+=BUILD::ios,true -define+=BUILD::android,false -advanced-telemetry=true" />
         </compiler-options>
         <packaging-air-desktop />
         <packaging-android use-generated-descriptor="false" custom-descriptor-path="$MODULE_DIR$/SpaceTaxi-android.xml" package-file-name="SpaceTaxi_IOS">
@@ -115,9 +118,32 @@
             <FilePathAndPathInPackage file-path="$MODULE_DIR$/resources/launch/Default.png" path-in-package="Default.png" />
             <FilePathAndPathInPackage file-path="$MODULE_DIR$/resources/launch/Default@2x.png" path-in-package="Default@2x.png" />
             <FilePathAndPathInPackage file-path="$MODULE_DIR$/resources/icons/ios/icons" path-in-package="icons" />
+            <FilePathAndPathInPackage file-path="$MODULE_DIR$/resources/workspace/localization" path-in-package="localization" />
           </files-to-package>
           <AirSigningOptions keystore-path="$MODULE_DIR$/keys/ios/virich_dev.p12" provisioning-profile-path="$MODULE_DIR$/keys/ios/Kosmos_Dev.mobileprovision" />
         </packaging-ios>
+      </configuration>
+      <configuration name="Space Taxi Web" pure-as="true" main-class="Main" output-file="Space_Taxi_Web.swf" output-folder="$MODULE_DIR$/build" use-html-wrapper="true" wrapper-template-path="$MODULE_DIR$/html-template">
+        <dependencies target-player="24.0">
+          <entries>
+            <entry module-name="MainBase" build-configuration-name="MainBase">
+              <dependency linkage="Merged" />
+            </entry>
+            <entry library-name="swc" library-level="project">
+              <dependency linkage="Merged" />
+            </entry>
+            <entry module-name="TaskManagement" build-configuration-name="TaskManagement">
+              <dependency linkage="Merged" />
+            </entry>
+          </entries>
+          <sdk name="AIRSDK_24" />
+        </dependencies>
+        <compiler-options>
+          <option name="additionalOptions" value="-define+=BUILD::standalone,false -define+=BUILD::debug,true -define+=BUILD::mobile,false -define+=BUILD::ios,false -define+=BUILD::android,false -advanced-telemetry=true" />
+        </compiler-options>
+        <packaging-air-desktop />
+        <packaging-android />
+        <packaging-ios />
       </configuration>
     </configurations>
     <compiler-options />

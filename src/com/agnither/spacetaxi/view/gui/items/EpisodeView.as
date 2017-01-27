@@ -5,6 +5,7 @@ package com.agnither.spacetaxi.view.gui.items
 {
     import com.agnither.spacetaxi.Application;
     import com.agnither.spacetaxi.managers.sound.SoundManager;
+    import com.agnither.spacetaxi.utils.StringUtils;
     import com.agnither.spacetaxi.vo.EpisodeVO;
     import com.agnither.utils.gui.components.AbstractComponent;
 
@@ -48,8 +49,8 @@ package com.agnither.spacetaxi.view.gui.items
         {
             _episodeImage.texture = Application.assetsManager.getTexture("episode_screen/" + _episode.skin);
 
-            _episodeTF.text = _episode.id + " episode";
-            _episodeNameTF.text = _episode.name;
+            _episodeTF.text = StringUtils.format(Application.uiBuilder.localization.getLocalizedText("Episode"), _episode.id);
+            _episodeNameTF.text = Application.uiBuilder.localization.getLocalizedText("Episode" + _episode.id);
             _starsTF.text = "" + _episode.stars + "/" + _episode.starsTotal;
 
             _episodeBtn.touchable = !_episode.locked;

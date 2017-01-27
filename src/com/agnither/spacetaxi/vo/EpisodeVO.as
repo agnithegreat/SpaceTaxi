@@ -12,7 +12,6 @@ package com.agnither.spacetaxi.vo
         {
             var episode: EpisodeVO = new EpisodeVO();
             episode.id = 1;
-            episode.name = "Milky Way";
             episode.skin = "milkyway_episode";
             episode.levels = new <LevelVO>[];
             episode.reward = 1000;
@@ -24,7 +23,6 @@ package com.agnither.spacetaxi.vo
         {
             var episode: EpisodeVO = new EpisodeVO();
             episode.id = 2;
-            episode.name = "Maelstrom";
             episode.skin = "maelstorm_episode";
             episode.levels = new <LevelVO>[];
             episode.reward = 2000;
@@ -36,7 +34,6 @@ package com.agnither.spacetaxi.vo
         {
             var episode: EpisodeVO = new EpisodeVO();
             episode.id = 3;
-            episode.name = "Soon";
             episode.skin = "secret_episode";
             episode.levels = new <LevelVO>[];
             episode.reward = 3000;
@@ -45,7 +42,6 @@ package com.agnither.spacetaxi.vo
         }
 
         public var id: int;
-        public var name: String;
         public var skin: String;
         public var levels: Vector.<LevelVO>;
         public var reward: int;

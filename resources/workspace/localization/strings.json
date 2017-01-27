@@ -1,0 +1,61 @@
+{
+    "Play":{"en_US":"Play", "ru_RU":"Играть"},
+    "ChooseLevel":{"en_US":"choose level", "ru_RU":"выбор уровня"},
+    "Garage":{"en_US":"garage", "ru_RU":"гараж"},
+    "Achievements":{"en_US":"achievements", "ru_RU":"достижения"},
+    "Settings":{"en_US":"Settings", "ru_RU":"Настройки"},
+
+    "Back":{"en_US":"Back", "ru_RU":"Назад"},
+    "Episode":{"en_US":"%d episode", "ru_RU":"%d эпизод"},
+    "Episode1":{"en_US":"Milky Way", "ru_RU":"Млечный Путь"},
+    "Episode2":{"en_US":"Maelstrom", "ru_RU":"Вихрь"},
+    "Episode3":{"en_US":"Soon", "ru_RU":"Скоро"},
+    "EpisodeSoon":{"en_US":"Soon", "ru_RU":"Скоро"},
+
+    "Level":{"en_US":"Level %d", "ru_RU":"Уровень %d"},
+
+    "Level1":{"en_US":"To The Moon And Back", "ru_RU":"До Луны и Обратно"},
+    "Level2":{"en_US":"Pit Stop", "ru_RU":"Пит Стоп"},
+    "Level3":{"en_US":"Planetary Shuffle", "ru_RU":"Межпланетная Потасовка"},
+    "Level4":{"en_US":"Tough Roads", "ru_RU":"Крутые Дороги"},
+    "Level5":{"en_US":"Space Rift", "ru_RU":""},
+    "Level6":{"en_US":"Busy Night", "ru_RU":"Беспокойная Ночь"},
+    "Level7":{"en_US":"Silenced", "ru_RU":""},
+    "Level8":{"en_US":"Prize Sideways", "ru_RU":""},
+    "Level9":{"en_US":"Farscape Blues", "ru_RU":""},
+    "Level10":{"en_US":"Crooked Parsec", "ru_RU":"Дуговой Парсек"},
+    "Level11":{"en_US":"Running Low", "ru_RU":"На Низкой Передаче"},
+    "Level12":{"en_US":"Heavy Metal Belt", "ru_RU":""},
+
+    "Level13":{"en_US":"Straight Cruise", "ru_RU":""},
+    "Level14":{"en_US":"Cake Is A Lie", "ru_RU":"Торт - Это Ложь"},
+    "Level15":{"en_US":"Headhunters", "ru_RU":"Головорезы"},
+    "Level16":{"en_US":"Colossus Shadow", "ru_RU":"Тень Колосса"},
+    "Level17":{"en_US":"Not Jumping", "ru_RU":""},
+    "Level18":{"en_US":"Finding Timo", "ru_RU":"В Поисках Тимо"},
+    "Level19":{"en_US":"Interstellar", "ru_RU":"Интерстеллар"},
+    "Level20":{"en_US":"No Return", "ru_RU":"Назад Дороги Нет"},
+    "Level21":{"en_US":"Treasure System", "ru_RU":""},
+    "Level22":{"en_US":"El Presidente", "ru_RU":""},
+    "Level23":{"en_US":"Dead Stars", "ru_RU":"Мертвые Звезды"},
+    "Level24":{"en_US":"The Capital", "ru_RU":"Столица"},
+
+    "LevelDescription":{"en_US":"Transport every passenger to his destination to complete the level", "ru_RU":"Перевези каждого пассажира в пункт его назначения, чтобы пройти уровень"},
+    "LevelReward":{"en_US":"LEVEL REWARD", "ru_RU":"НАГРАДА"},
+
+    "EpisodeIsDone":{"en_US":"EPISODE IS DONE", "ru_RU":"ЭПИЗОД ЗАВЕРШЕН"},
+
+    "OutOfFuel":{"en_US":"OUT OF FUEL", "ru_RU":"ТОПЛИВО КОНЧИЛОСЬ"},
+    "ShipIsCrashed":{"en_US":"SHIP IS CRASHED", "ru_RU":"КОРАБЛЬ УНИЧТОЖЕН"},
+    "ShipIsLost":{"en_US":"SHIP IS LOST", "ru_RU":"КОРАБЛЬ ПОТЕРЯЛСЯ"},
+
+    "Survey":{"en_US":"Survey", "ru_RU":"Опрос"},
+    "SurveyText":{"en_US":"Participate in our survey to help us improve the game", "ru_RU":"Поучаствуй в нашем опросе, чтобы помочь нам улучшить игру"},
+    "Start":{"en_US":"Start", "ru_RU":"Начать"},
+    "Later":{"en_US":"Later", "ru_RU":"Позже"},
+
+    "LogIn":{"en_US":"Log in:", "ru_RU":"Войти:"},
+    "Sound":{"en_US":"Sound:", "ru_RU":"Громкость:"},
+    "Support":{"en_US":"Support", "ru_RU":"Поддержка"}
+}
+

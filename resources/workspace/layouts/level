@@ -242,14 +242,14 @@
                   "verticalAlign":"top"
                 }
               },
-              "height":63.75,
+              "height":63.2,
               "name":"_levelNameTF",
               "style":{
                 "cls":"starling.styles.DistanceFieldStyle",
                 "customParams":{},
                 "params":{
                   "mode":"basic",
-                  "softness":0.2
+                  "softness":0.17
                 }
               },
               "text":"Secret Planet",

@@ -288,7 +288,7 @@ package com.agnither.spacetaxi.view.scenes.game
                 var position: Point = touch.getLocation(stage);
                 var shipPos: Point = _shipView.localToGlobal(new Point());
                 var distance: Number = Point.distance(position, shipPos);
-                const segment: int = 100 * Application.scaleFactor;
+                const segment: int = 150 * Application.scaleFactor;
                 switch (touch.phase)
                 {
                     case TouchPhase.HOVER:
@@ -309,7 +309,7 @@ package com.agnither.spacetaxi.view.scenes.game
                     {
                         if (_aiming)
                         {
-                            var angle: Number = Math.atan2(shipPos.y + _shipView.offset.y - position.y, shipPos.x + _shipView.offset.x - position.x);
+                            var angle: Number = Math.atan2(shipPos.y - position.y, shipPos.x - position.x);
                             var power: Number = Math.pow(distance / segment, 2);
                             _space.setPullPoint(angle, power, false, true);
                         } else {

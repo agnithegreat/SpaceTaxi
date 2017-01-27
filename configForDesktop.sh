@@ -8,3 +8,4 @@ ln -s ./../resources/levels levels
 ln -s ./../resources/sounds sounds
 ln -s ./../resources/workspace/textures textures
 ln -s ./../resources/workspace/layouts layouts
+ln -s ./../resources/workspace/localization localization

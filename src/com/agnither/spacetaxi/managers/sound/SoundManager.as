@@ -67,11 +67,15 @@ package com.agnither.spacetaxi.managers.sound
 
         public static function init():void
         {
-            SoundMixer.audioPlaybackMode = AudioPlaybackMode.AMBIENT;
             Config.volume.addEventListener(Volume.UPDATE, handleUpdate);
 
-            NativeApplication.nativeApplication.addEventListener("activate", handleActivate);
-            NativeApplication.nativeApplication.addEventListener("deactivate", handleDeactivate);
+            BUILD::standalone
+            {
+                SoundMixer.audioPlaybackMode = AudioPlaybackMode.AMBIENT;
+
+                NativeApplication.nativeApplication.addEventListener("activate", handleActivate);
+                NativeApplication.nativeApplication.addEventListener("deactivate", handleDeactivate);
+            }
         }
 
         public static function playMusic(name: String):void

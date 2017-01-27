@@ -19,9 +19,12 @@ package com.agnither.spacetaxi.tasks.init
         
         override public function execute(token: Object):void
         {
-            var xml : XML = NativeApplication.nativeApplication.applicationDescriptor;
-            var ns : Namespace = xml.namespace();
-            Config.version = xml.ns::versionNumber;
+            BUILD::standalone
+            {
+                var xml : XML = NativeApplication.nativeApplication.applicationDescriptor;
+                var ns : Namespace = xml.namespace();
+                Config.version = xml.ns::versionNumber;
+            }
 
             addTask(new LoadBaseTask());
             addTask(new LoadResourcesTask("preloader"));

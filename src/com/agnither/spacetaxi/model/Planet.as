@@ -48,6 +48,7 @@ package com.agnither.spacetaxi.model
 
             _time = Math.random();
             _timeMultiplier = 1 + (Math.random()-0.5) * 0.1;
+            _scale = 0.008 * (500 - radius) * 0.01;
         }
 
         override public function advanceTime(delta: Number):void

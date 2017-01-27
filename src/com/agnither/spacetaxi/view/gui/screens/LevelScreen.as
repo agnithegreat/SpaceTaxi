@@ -60,6 +60,8 @@ package com.agnither.spacetaxi.view.gui.screens
         {
             _rightButton.scaleX *= -1;
 
+            _backTF.text = Application.uiBuilder.localization.getLocalizedText("Back");
+
             StageUtil.fitAll(_root, Application.guiSize.width, Application.guiSize.height, Application.viewport.width, Application.viewport.height);
 
             _pageIndicator.gap = 10;
@@ -89,7 +91,7 @@ package com.agnither.spacetaxi.view.gui.screens
         override protected function activate():void
         {
             var episode: EpisodeVO = Application.appController.levelsController.currentEpisode;
-            _episodeNameTF.text = episode.name;
+            _episodeNameTF.text = Application.uiBuilder.localization.getLocalizedText("Episode" + episode.id);
             _starsTF.text = "" + episode.stars + "/" + episode.starsTotal;
 
             var levels: Vector.<LevelVO> = Application.appController.levelsController.currentEpisode.levels;

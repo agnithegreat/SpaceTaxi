@@ -32,6 +32,8 @@
       "layouts/modal_popup",
       "layouts/dialog_popup",
 
+      "localization/strings.json",
+
       "textures/*/gui.png",
       "textures/*/gui.xml",
       "textures/*/textures.png",

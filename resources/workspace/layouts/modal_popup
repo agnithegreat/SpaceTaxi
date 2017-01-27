@@ -29,7 +29,9 @@
             "value":""
           }
         ],
-        "customParams":{},
+        "customParams":{
+          "localizeKey":"Survey"
+        },
         "params":{
           "autoScale":true,
           "batchable":true,
@@ -50,10 +52,9 @@
             "customParams":{},
             "params":{
               "mode":"basic",
-              "softness":0.17
+              "softness":0.13
             }
           },
-          "text":"Survey",
           "width":700,
           "x":149,
           "y":220
@@ -72,7 +73,9 @@
             "value":""
           }
         ],
-        "customParams":{},
+        "customParams":{
+          "localizeKey":"SurveyText"
+        },
         "params":{
           "batchable":true,
           "format":{
@@ -91,10 +94,9 @@
             "customParams":{},
             "params":{
               "mode":"basic",
-              "softness":0.18
+              "softness":0.16
             }
           },
-          "text":"Participate in our survey to help us improve the game",
           "width":800,
           "x":99,
           "y":330
@@ -128,7 +130,9 @@
                 "value":""
               }
             ],
-            "customParams":{},
+            "customParams":{
+              "localizeKey":"Start"
+            },
             "params":{
               "autoScale":true,
               "batchable":true,
@@ -147,10 +151,10 @@
                 "cls":"starling.styles.DistanceFieldStyle",
                 "customParams":{},
                 "params":{
-                  "mode":"basic"
+                  "mode":"basic",
+                  "softness":0.17
                 }
               },
-              "text":"Begin",
               "width":322,
               "x":50
             }
@@ -194,7 +198,9 @@
                 "value":""
               }
             ],
-            "customParams":{},
+            "customParams":{
+              "localizeKey":"Later"
+            },
             "params":{
               "autoScale":true,
               "batchable":true,
@@ -213,10 +219,10 @@
                 "cls":"starling.styles.DistanceFieldStyle",
                 "customParams":{},
                 "params":{
-                  "mode":"basic"
+                  "mode":"basic",
+                  "softness":0.17
                 }
               },
-              "text":"Begin",
               "width":322,
               "x":50
             }

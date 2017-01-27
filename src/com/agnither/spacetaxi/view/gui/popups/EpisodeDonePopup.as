@@ -12,9 +12,7 @@ package com.agnither.spacetaxi.view.gui.popups
     import feathers.controls.LayoutGroup;
 
     import starling.core.Starling;
-
     import starling.display.MovieClip;
-
     import starling.display.Sprite;
     import starling.events.Event;
     import starling.text.TextField;

@@ -12,7 +12,7 @@
 
     <!-- A universally unique application identifier. Must be unique across all AIR applications.
          Using a reverse DNS-style name as the id is recommended. (Eg. com.example.ExampleApplication.) Required. -->
-    <id>com.agnither.SpaceShip</id>
+    <id>com.holypanda.SpaceShip</id>
 
     <!-- Used as the filename for the application. Required. -->
     <filename>Space Ship</filename>

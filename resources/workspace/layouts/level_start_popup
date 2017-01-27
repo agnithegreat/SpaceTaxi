@@ -133,7 +133,7 @@
             "customParams":{},
             "params":{
               "mode":"basic",
-              "softness":0.1
+              "softness":0.14
             }
           },
           "text":"JOURNEY BEGINS",
@@ -155,7 +155,9 @@
             "value":""
           }
         ],
-        "customParams":{},
+        "customParams":{
+          "localizeKey":"LevelDescription"
+        },
         "params":{
           "batchable":true,
           "format":{
@@ -174,10 +176,9 @@
             "customParams":{},
             "params":{
               "mode":"basic",
-              "softness":0.18
+              "softness":0.28
             }
           },
-          "text":"Once upon a time in far far galaxy there was a lost ship",
           "width":800,
           "x":99,
           "y":460
@@ -196,7 +197,9 @@
             "value":""
           }
         ],
-        "customParams":{},
+        "customParams":{
+          "localizeKey":"LevelReward"
+        },
         "params":{
           "autoSize":"vertical",
           "batchable":true,
@@ -209,20 +212,21 @@
               "size":78
             }
           },
-          "height":60.94,
+          "height":59.28,
           "name":"_textTF",
+          "pivotX":483,
+          "pivotY":29.64,
           "style":{
             "cls":"starling.styles.DistanceFieldStyle",
             "customParams":{},
             "params":{
               "mode":"basic",
-              "softness":0.18
+              "softness":0.15
             }
           },
-          "text":"LEVEL REWARD",
           "width":966,
-          "x":17,
-          "y":778
+          "x":500,
+          "y":800
         }
       },
       {

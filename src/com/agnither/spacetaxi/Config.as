@@ -25,5 +25,17 @@ package com.agnither.spacetaxi
         public static var ai: Boolean = false;
         
         public static var feedbackLink: String = "https://docs.google.com/forms/d/e/1FAIpQLSf2btrhF_mPoKD9yME0FzPIEbJOSvqKy5tlxIuWx_Q5ciK7NQ/viewform?entry.349077040=%user_id%";
+
+        public static const localization_map: Object = {
+            "ru": "ru_RU",
+            "en": "en_US",
+//            "de": "de_DE",
+//            "fr": "fr_FR",
+//            "ja": "ja_JP",
+//            "uk": "ru_RU",
+//            "be": "ru_RU",
+//            "kz": "ru_RU",
+            "*": "en_US"
+        };
     }
 }

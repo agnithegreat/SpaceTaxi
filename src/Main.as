@@ -24,7 +24,7 @@ package
 
     import starling.text.TextField;
 
-    [SWF (frameRate=60, width=1024, height=768, backgroundColor="#000000")]
+    [SWF (frameRate=60, width=1000, height=768, backgroundColor="#000000")]
     public class Main extends StarlingMainBase
     {
         [Embed (source="logo.png")]
@@ -51,21 +51,24 @@ package
             stage.quality = StageQuality.BEST;
             TextField.defaultTextureFormat = Context3DTextureFormat.BGRA;
 
-            BUILD::debug
+            BUILD::standalone
             {
-                NativeApplication.nativeApplication.addEventListener(InvokeEvent.INVOKE, handleInitializationArgs);
-
-                function handleInitializationArgs(event: InvokeEvent):void
+                BUILD::debug
                 {
-                    var args:Array = event.arguments as Array;
-                    if (args.length > 0)
+                    NativeApplication.nativeApplication.addEventListener(InvokeEvent.INVOKE, handleInitializationArgs);
+    
+                    function handleInitializationArgs(event: InvokeEvent):void
                     {
-                        var file: File = new File(String(args[0]));
-                        var fileStream: FileStream = new FileStream();
-                        fileStream.open(file, FileMode.READ);
-                        Config.replay = new ByteArray();
-                        fileStream.readBytes(Config.replay);
-                        fileStream.close();
+                        var args:Array = event.arguments as Array;
+                        if (args.length > 0)
+                        {
+                            var file: File = new File(String(args[0]));
+                            var fileStream: FileStream = new FileStream();
+                            fileStream.open(file, FileMode.READ);
+                            Config.replay = new ByteArray();
+                            fileStream.readBytes(Config.replay);
+                            fileStream.close();
+                        }
                     }
                 }
             }
@@ -75,7 +78,7 @@ package
         {
             super.initializeStarling();
 
-            showStats = Config.debug;
+//            showStats = Config.debug;
         }
 
         override protected function resize():void

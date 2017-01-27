@@ -167,14 +167,14 @@
               "size":90
             }
           },
-          "height":68.91,
+          "height":69.3,
           "name":"_levelTF",
           "style":{
             "cls":"starling.styles.DistanceFieldStyle",
             "customParams":{},
             "params":{
               "mode":"basic",
-              "softness":0.14
+              "softness":0.15
             }
           },
           "text":"Level 12",
@@ -217,7 +217,8 @@
             "customParams":{},
             "params":{
               "mode":"basic",
-              "softness":0.1
+              "softness":0.13,
+              "threshold":0.52
             }
           },
           "text":"JOURNEY BEGINS",
@@ -239,7 +240,9 @@
             "value":""
           }
         ],
-        "customParams":{},
+        "customParams":{
+          "localizeKey":"LevelDescription"
+        },
         "params":{
           "batchable":true,
           "format":{
@@ -258,10 +261,9 @@
             "customParams":{},
             "params":{
               "mode":"basic",
-              "softness":0.18
+              "softness":0.23
             }
           },
-          "text":"Once upon a time in far far galaxy there was a lost ship",
           "width":800,
           "x":99,
           "y":460

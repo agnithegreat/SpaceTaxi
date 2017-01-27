@@ -54,7 +54,7 @@
                     "customParams":{},
                     "params":{
                       "mode":"basic",
-                      "softness":0.25
+                      "softness":0.33
                     }
                   },
                   "text":"Hello, mysterious challenger! I have a job that suits you best! See this hostile planet dead ahead? These guys have some stuff I would like to buy. Bring it to me, and your effort will be payed off. Hurry, I don't like to wait.",

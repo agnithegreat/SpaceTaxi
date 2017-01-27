@@ -50,6 +50,8 @@ package com.agnither.spacetaxi.view.gui.screens
         override protected function initialize():void
         {
             _leftButton.scaleX *= -1;
+            
+            _backTF.text = Application.uiBuilder.localization.getLocalizedText("Back");
 
             StageUtil.fitAll(_root, Application.guiSize.width, Application.guiSize.height, Application.viewport.width, Application.viewport.height);
 

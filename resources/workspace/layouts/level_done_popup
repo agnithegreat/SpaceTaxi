@@ -223,7 +223,9 @@
             "value":""
           }
         ],
-        "customParams":{},
+        "customParams":{
+          "localizeKey":"LevelReward"
+        },
         "params":{
           "autoSize":"vertical",
           "batchable":true,
@@ -236,20 +238,21 @@
               "size":68
             }
           },
-          "height":53.13,
+          "height":51.68,
           "name":"_textTF",
+          "pivotX":483,
+          "pivotY":25.84,
           "style":{
             "cls":"starling.styles.DistanceFieldStyle",
             "customParams":{},
             "params":{
               "mode":"basic",
-              "softness":0.14
+              "softness":0.15
             }
           },
-          "text":"LEVEL REWARD",
           "width":966,
-          "x":17,
-          "y":781
+          "x":500,
+          "y":800
         }
       },
       {

@@ -229,7 +229,9 @@
                     "value":""
                   }
                 ],
-                "customParams":{},
+                "customParams":{
+                  "localizeKey":"Back"
+                },
                 "params":{
                   "autoSize":"bothDirections",
                   "batchable":true,
@@ -243,18 +245,21 @@
                       "size":100
                     }
                   },
-                  "height":78.13,
+                  "height":78,
                   "name":"_backTF",
+                  "pivotX":104.5,
+                  "pivotY":39,
                   "style":{
                     "cls":"starling.styles.DistanceFieldStyle",
                     "customParams":{},
                     "params":{
-                      "mode":"basic"
+                      "mode":"basic",
+                      "softness":0.14
                     }
                   },
-                  "text":"Back",
-                  "width":207.81,
-                  "x":104
+                  "width":209,
+                  "x":237,
+                  "y":53
                 }
               }
             ],
@@ -320,7 +325,7 @@
                 "customParams":{},
                 "params":{
                   "mode":"basic",
-                  "softness":0.07
+                  "softness":0.1
                 }
               },
               "text":"Milky Way",
@@ -391,19 +396,20 @@
                   "size":100
                 }
               },
-              "height":76.56,
+              "height":75,
               "name":"_starsTF",
               "style":{
                 "cls":"starling.styles.DistanceFieldStyle",
                 "customParams":{},
                 "params":{
-                  "mode":"basic"
+                  "mode":"basic",
+                  "softness":0.17
                 }
               },
               "text":"10/36",
-              "width":268.75,
+              "width":268,
               "x":170,
-              "y":37
+              "y":38
             }
           }
         ],

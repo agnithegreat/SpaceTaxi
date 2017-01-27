@@ -365,7 +365,7 @@
                 "customParams":{},
                 "params":{
                   "name":"icon",
-                  "x":45,
+                  "x":41,
                   "y":26
                 }
               },
@@ -382,8 +382,11 @@
                     "value":""
                   }
                 ],
-                "customParams":{},
+                "customParams":{
+                  "localizeKey":"Settings"
+                },
                 "params":{
+                  "autoScale":true,
                   "format":{
                     "cls":"starling.text.TextFormat",
                     "customParams":{},
@@ -400,17 +403,16 @@
                     "customParams":{},
                     "params":{
                       "mode":"shadow",
-                      "outerAlphaEnd":0.58,
-                      "outerAlphaStart":0.8,
-                      "outerThreshold":0.62,
+                      "outerAlphaEnd":0.55,
+                      "outerAlphaStart":0.77,
+                      "outerThreshold":0.54,
                       "shadowOffsetX":1,
                       "shadowOffsetY":5,
-                      "softness":0.17
+                      "softness":0.16
                     }
                   },
-                  "text":"Settings",
-                  "width":264.66,
-                  "x":95,
+                  "width":246.66,
+                  "x":105,
                   "y":20
                 }
               }

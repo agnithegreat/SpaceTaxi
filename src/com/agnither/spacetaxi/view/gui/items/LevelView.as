@@ -8,6 +8,7 @@ package com.agnither.spacetaxi.view.gui.items
     import com.agnither.spacetaxi.model.player.Progress;
     import com.agnither.spacetaxi.model.player.vo.LevelResultVO;
     import com.agnither.spacetaxi.tasks.logic.game.SelectLevelTask;
+    import com.agnither.spacetaxi.utils.StringUtils;
     import com.agnither.spacetaxi.view.utils.Animator;
     import com.agnither.spacetaxi.vo.LevelVO;
     import com.agnither.tasks.global.TaskSystem;
@@ -63,7 +64,7 @@ package com.agnither.spacetaxi.view.gui.items
 
             _planetImage.texture = Application.assetsManager.getTexture("planets/" + (_level.episode+1) + "/" + (_level.id % 12 + 1));
 
-            _levelNameTF.text = _level.title || "Level " + (_level.id+1);
+            _levelNameTF.text = Application.uiBuilder.localization.getLocalizedText("Level" + (_level.id+1));
 
             _planetBtn.addEventListener(Event.TRIGGERED, handleTriggered);
             _shadowBtn.addEventListener(Event.TRIGGERED, handleTriggered);

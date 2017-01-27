@@ -29,7 +29,9 @@
             "value":""
           }
         ],
-        "customParams":{},
+        "customParams":{
+          "localizeKey":"LogIn"
+        },
         "params":{
           "autoSize":"vertical",
           "batchable":true,
@@ -42,21 +44,21 @@
               "size":60
             }
           },
-          "height":55.31,
+          "height":55.2,
           "name":"_loginTF",
+          "pivotX":275,
+          "pivotY":27.6,
           "style":{
             "cls":"starling.styles.DistanceFieldStyle",
             "customParams":{},
             "params":{
               "mode":"basic",
-              "softness":0.2,
-              "threshold":0.45
+              "softness":0.2
             }
           },
-          "text":"Log in:",
           "width":550,
-          "x":225,
-          "y":225
+          "x":500,
+          "y":250
         }
       },
       {
@@ -202,7 +204,9 @@
                 "value":""
               }
             ],
-            "customParams":{},
+            "customParams":{
+              "localizeKey":"Support"
+            },
             "params":{
               "format":{
                 "cls":"starling.text.TextFormat",
@@ -213,18 +217,18 @@
                   "size":79
                 }
               },
-              "height":94,
+              "height":95,
               "name":"_feedbackTF",
               "style":{
                 "cls":"starling.styles.DistanceFieldStyle",
                 "customParams":{},
                 "params":{
-                  "mode":"basic"
+                  "mode":"basic",
+                  "softness":0.14
                 }
               },
-              "text":"Feedback",
-              "width":400,
-              "x":49,
+              "width":380,
+              "x":59,
               "y":81
             }
           }
@@ -302,7 +306,9 @@
             "value":""
           }
         ],
-        "customParams":{},
+        "customParams":{
+          "localizeKey":"Sound"
+        },
         "params":{
           "autoSize":"vertical",
           "batchable":true,
@@ -315,21 +321,21 @@
               "size":60
             }
           },
-          "height":46.88,
+          "height":46.8,
           "name":"_soundTF",
+          "pivotX":275,
+          "pivotY":23.4,
           "style":{
             "cls":"starling.styles.DistanceFieldStyle",
             "customParams":{},
             "params":{
               "mode":"basic",
-              "softness":0.2,
-              "threshold":0.45
+              "softness":0.2
             }
           },
-          "text":"Sound:",
           "width":550,
-          "x":225,
-          "y":600
+          "x":500,
+          "y":625
         }
       },
       {
