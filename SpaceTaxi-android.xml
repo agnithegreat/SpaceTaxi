@@ -23,7 +23,7 @@
     <!-- A string value of the format <0-999>.<0-999>.<0-999> that represents application version which can be used to check for application upgrade.
          Values can also be 1-part or 2-part. It is not necessary to have a 3-part value.
          An updated version of application must have a versionNumber value higher than the previous version. Required for namespace >= 2.5. -->
-    <versionNumber>0.0.1</versionNumber>
+    <versionNumber>0.1.1</versionNumber>
 
     <!-- A string value (such as "v1", "2.5", or "Alpha 1") that represents the version of the application, as it should be shown to users. Optional. -->
     <!--<versionLabel></versionLabel>-->
@@ -42,6 +42,13 @@
 
     <!-- Identifies the ActionScript extensions used by an application. -->
     <extensions>
+        <extensionID>com.myflashlab.air.extensions.dependency.overrideAir</extensionID>
+        <extensionID>com.myflashlab.air.extensions.dependency.androidSupport</extensionID>
+
+        <extensionID>com.myflashlab.air.extensions.facebook</extensionID>
+
+        <extensionID>com.marpies.ane.vk</extensionID>
+
         <extensionID>com.mesmotronic.ane.fullscreen</extensionID>
     </extensions>
 
@@ -165,79 +172,135 @@
     <!--</fileType>-->
     <!--</fileTypes>-->
 
-    <!-- iOS specific capabilities -->
-    <!--<iPhone>-->
-        <!-- A list of plist key/value pairs to be added to the application Info.plist -->
-        <!--<InfoAdditions>-->
-            <!--<![CDATA[-->
-            <!--<key>UIDeviceFamily</key>-->
-            <!--<array>-->
-                <!-- iPhone and iPod touch devices -->
-                <!--<string>1</string>-->
-                <!-- iPad devices -->
-                <!--<string>2</string>-->
-            <!--</array>-->
-            <!--<key>UIStatusBarStyle</key>-->
-            <!--<string>UIStatusBarStyleBlackOpaque</string>-->
-            <!--<key>UIRequiresPersistentWiFi</key>-->
-            <!--<string>YES</string>-->
-            <!--]]>-->
-        <!--</InfoAdditions>-->
-
-        <!-- A list of plist key/value pairs to be added to the application Entitlements.plist -->
-        <!--<Entitlements>
-            <![CDATA[
-            <key>keychain-access-groups</key>
-            <array>
-                <string></string>
-                <string></string>
-            </array>
-            ]]>
-        </Entitlements>-->
-
-        <!-- Display Resolution for the app (either "standard" or "high"). Optional. Default "standard" -->
-        <!--<requestedDisplayResolution>high</requestedDisplayResolution>-->
-        <!-- Forcing Render Mode CPU for the devices mentioned. Optional  -->
-        <!--<forceCPURenderModeForDevices></forceCPURenderModeForDevices> -->
-        <!-- File containing line separated list of external swf paths. These swfs won't be packaged inside the application
-        and corresponding stripped swfs will be output in externalStrippedSwfs folder. -->
-        <!--<externalSwfs></externalSwfs> -->
-    <!--</iPhone>-->
-
     <!-- Android specific tags that get passed to AndroidManifest.xml file. -->
-    <!--<android>-->
-        <!--<manifestAdditions>-->
-            <!--<![CDATA[-->
-            <!--<manifest android:installLocation="auto">-->
-                <!--<uses-permission android:name="android.permission.INTERNET"/>-->
-                <!--<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>-->
-                <!--<uses-permission android:name="android.permission.READ_PHONE_STATE"/>-->
-                <!--<uses-permission android:name="android.permission.VIBRATE"/>-->
-                <!--<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>-->
-                <!--<uses-permission android:name="android.permission.DISABLE_KEYGUARD"/>-->
-                <!--<uses-permission android:name="android.permission.WAKE_LOCK"/>-->
-                <!--<uses-permission android:name="android.permission.CAMERA"/>-->
-                <!--<uses-permission android:name="android.permission.RECORD_AUDIO"/>-->
-                <!--<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>-->
-                <!--<uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>-->
+    <android>
+        <manifestAdditions>
+            <![CDATA[
+                <manifest android:installLocation="auto">
+                    <!--The new Permission thing on Android works ONLY if you are targetting Android SDK 23 or higher-->
+                    <uses-sdk android:targetSdkVersion="23"/>
 
-                <!--<uses-feature android:required="true" android:name="android.hardware.touchscreen.multitouch"/>-->
-                <!--<application android:enabled="true">
-                    <activity android:excludeFromRecents="false">
-                        <intent-filter>
-                            <action android:name="android.intent.action.MAIN"/>
-                            <category android:name="android.intent.category.LAUNCHER"/>
-                        </intent-filter>
-                    </activity>
-                </application>-->
-            <!--</manifest>-->
-            <!--]]>-->
-            <!--</manifestAdditions>-->
+                    <!-- COMMON GROUP -->
+                    <uses-permission android:name="android.permission.INTERNET"/>
+                    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+                    <uses-permission android:name="android.permission.VIBRATE"/>
+
+                    <!-- CALENDAR GROUP -->
+                    <!--<uses-permission android:name="android.permission.READ_CALENDAR" />-->
+                    <!--<uses-permission android:name="android.permission.WRITE_CALENDAR" />-->
+
+                    <!-- CAMERA GROUP -->
+                    <!--<uses-permission android:name="android.permission.CAMERA" />-->
+
+                    <!-- CONTACTS GROUP -->
+                    <!--<uses-permission android:name="android.permission.READ_CONTACTS" />-->
+                    <!--<uses-permission android:name="android.permission.WRITE_CONTACTS" />-->
+                    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+
+                    <!-- LOCATION GROUP -->
+                    <!--<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />-->
+                    <!--<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />-->
+
+                    <!-- MICROPHONE GROUP -->
+                    <!--<uses-permission android:name="android.permission.RECORD_AUDIO" />-->
+
+                    <!-- PHONE GROUP -->
+                    <!--<uses-permission android:name="android.permission.PROCESS_OUTGOING_CALLS" />-->
+                    <!--<uses-permission android:name="android.permission.WRITE_CALL_LOG" />-->
+                    <!--<uses-permission android:name="android.permission.READ_CALL_LOG" />-->
+                    <!--<uses-permission android:name="android.permission.CALL_PHONE" />-->
+                    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+                    <!--<uses-permission android:name="android.permission.USE_SIP" />-->
+                    <!--<uses-permission android:name="com.android.voicemail.permission.ADD_VOICEMAIL" />-->
+
+                    <!-- SENSORS GROUP -->
+                    <!--<uses-permission android:name="android.permission.BODY_SENSORS" />-->
+
+                    <!-- SMS GROUP -->
+                    <!--<uses-permission android:name="android.permission.RECEIVE_MMS" />-->
+                    <!--<uses-permission android:name="android.permission.RECEIVE_WAP_PUSH" />-->
+                    <!--<uses-permission android:name="android.permission.READ_SMS" />-->
+                    <!--<uses-permission android:name="android.permission.RECEIVE_SMS" />-->
+                    <!--<uses-permission android:name="android.permission.SEND_SMS" />-->
+
+                    <!-- STORAGE GROUP -->
+                    <!--<uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />-->
+                    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+                    <!-- ADDITIONAL GROUP -->
+                    <uses-permission android:name="com.android.vending.BILLING"/>
+
+                    <!-- OneSignal permissions -->
+                    <permission android:name="air.com.holypanda.Kosmos.permission.C2D_MESSAGE"
+                                android:protectionLevel="signature" />
+                    <uses-permission android:name="air.com.holypanda.Kosmos.permission.C2D_MESSAGE" />
+                    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
+                    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+                    <uses-permission android:name="android.permission.WAKE_LOCK" />
+
+                    <!-- START: ShortcutBadger -->
+                    <!-- Samsung -->
+                    <uses-permission android:name="com.sec.android.provider.badge.permission.READ"/>
+                    <uses-permission android:name="com.sec.android.provider.badge.permission.WRITE"/>
+                    <!-- HTC -->
+                    <uses-permission android:name="com.htc.launcher.permission.READ_SETTINGS"/>
+                    <uses-permission android:name="com.htc.launcher.permission.UPDATE_SHORTCUT"/>
+                    <!-- Sony -->
+                    <uses-permission android:name="com.sonyericsson.home.permission.BROADCAST_BADGE"/>
+                    <!-- Apex -->
+                    <uses-permission android:name="com.anddoes.launcher.permission.UPDATE_COUNT"/>
+                    <!-- Solid -->
+                    <uses-permission android:name="com.majeur.launcher.permission.UPDATE_BADGE"/>
+                    <!-- Huawei -->
+                    <uses-permission android:name="com.huawei.android.launcher.permission.CHANGE_BADGE" />
+                    <uses-permission android:name="com.huawei.android.launcher.permission.READ_SETTINGS" />
+                    <uses-permission android:name="com.huawei.android.launcher.permission.WRITE_SETTINGS" />
+                    <!-- End: ShortcutBadger -->
+
+                    <uses-feature android:required="true" android:name="android.hardware.touchscreen.multitouch"/>
+                    <application android:hardwareAccelerated="true" android:allowBackup="true" android:enabled="true">
+                        <activity android:hardwareAccelerated="true">
+                            <intent-filter>
+                                <action android:name="android.intent.action.MAIN" />
+                                <category android:name="android.intent.category.LAUNCHER" />
+                            </intent-filter>
+                            <intent-filter>
+                                <action android:name="android.intent.action.VIEW" />
+                                <category android:name="android.intent.category.BROWSABLE" />
+                                <category android:name="android.intent.category.DEFAULT" />
+                                <data android:scheme="air.com.holypanda.Kosmos" />
+                            </intent-filter>
+                        </activity>
+
+                        <!-- application ID which identifies your game settings in the Google Game Services console (NOTE: leave the initial '\ ' as it is) -->
+                        <!--<meta-data android:name="com.google.android.gms.games.APP_ID" android:value="\ 1027704476237" />-->
+                        <!--<meta-data android:name="com.google.android.gms.version" android:value="@integer/google_play_services_version" />-->
+
+                        <activity
+                            android:name="com.vk.sdk.VKServiceActivity"
+                            android:label="ServiceActivity"
+                            android:theme="@style/VK.Transparent"
+                        />
+
+                        <!-- This is required for logging in -->
+                        <activity android:name="com.facebook.FacebookActivity"          android:configChanges="fontScale|keyboard|keyboardHidden|locale|mnc|mcc|navigation|orientation|screenLayout|screenSize|smallestScreenSize|uiMode|touchscreen"   android:theme="@android:style/Theme.NoDisplay" />
+                        <activity android:name="com.doitflash.facebook.access.MyLogin"  android:configChanges="fontScale|keyboard|keyboardHidden|locale|mnc|mcc|navigation|orientation|screenLayout|screenSize|smallestScreenSize|uiMode|touchscreen"   android:theme="@style/Theme.Transparent" />
+
+                        <!-- This is required for sharing https://developers.facebook.com/docs/sharing/android -->
+                        <provider android:authorities="com.facebook.app.FacebookContentProvider1848488828760224" android:name="com.facebook.FacebookContentProvider" android:exported="true"/>
+                        <activity android:name="com.doitflash.facebook.sharing.MyShare" android:theme="@style/Theme.Transparent" />
+
+                        <!-- This is required for app invite feature -->
+                        <activity android:name="com.doitflash.facebook.invite.MyInvite" android:theme="@style/Theme.Transparent" />
+                    </application>
+                </manifest>
+            ]]>
+            </manifestAdditions>
 
         <!-- Color depth for the app (either "32bit" or "16bit"). Optional. Default 16bit before namespace 3.0, 32bit after -->
         <!--<colorDepth></colorDepth>-->
         <!-- Indicates if the app contains video or not. Necessary for ordering of video planes with graphics plane, especially in Jellybean - if you app does video this must be set to true - valid values are true or false -->
         <!-- <containsVideo></containsVideo> -->
-    <!--</android>-->
+    </android>
 
 </application>

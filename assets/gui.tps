@@ -43,6 +43,23 @@
                     <int>2048</int>
                 </QSize>
             </struct>
+            <struct type="AutoSDSettings">
+                <key>scale</key>
+                <double>0.375</double>
+                <key>extension</key>
+                <string>768</string>
+                <key>spriteFilter</key>
+                <string></string>
+                <key>acceptFractionalValues</key>
+                <false/>
+                <key>maxTextureSize</key>
+                <QSize>
+                    <key>width</key>
+                    <int>2048</int>
+                    <key>height</key>
+                    <int>2048</int>
+                </QSize>
+            </struct>
         </array>
         <key>allowRotation</key>
         <true/>
@@ -648,7 +665,7 @@
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">assets/gui/main_screen/play_button_txt.png</key>
+            <key type="filename">assets/gui/main_screen/play_button_en.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
@@ -658,6 +675,19 @@
                 <rect>66,33,132,65</rect>
                 <key>scale9Paddings</key>
                 <rect>66,33,132,65</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">assets/gui/main_screen/play_button_ru.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>104,30,208,59</rect>
+                <key>scale9Paddings</key>
+                <rect>104,30,208,59</rect>
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
@@ -671,6 +701,19 @@
                 <rect>408,36,816,72</rect>
                 <key>scale9Paddings</key>
                 <rect>408,36,816,72</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">assets/gui/main_screen/ribbon.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>113,25,225,49</rect>
+                <key>scale9Paddings</key>
+                <rect>113,25,225,49</rect>
                 <key>scale9FromFile</key>
                 <false/>
             </struct>

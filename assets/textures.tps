@@ -43,6 +43,23 @@
                     <int>2048</int>
                 </QSize>
             </struct>
+            <struct type="AutoSDSettings">
+                <key>scale</key>
+                <double>0.375</double>
+                <key>extension</key>
+                <string>768</string>
+                <key>spriteFilter</key>
+                <string></string>
+                <key>acceptFractionalValues</key>
+                <false/>
+                <key>maxTextureSize</key>
+                <QSize>
+                    <key>width</key>
+                    <int>2048</int>
+                    <key>height</key>
+                    <int>2048</int>
+                </QSize>
+            </struct>
         </array>
         <key>allowRotation</key>
         <true/>
@@ -436,6 +453,58 @@
                 <rect>50,50,100,100</rect>
                 <key>scale9Paddings</key>
                 <rect>50,50,100,100</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">assets/game/misc/Tutorial/finger.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>36,43,72,85</rect>
+                <key>scale9Paddings</key>
+                <rect>36,43,72,85</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">assets/game/misc/Tutorial/finger_tap.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>28,46,55,91</rect>
+                <key>scale9Paddings</key>
+                <rect>28,46,55,91</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">assets/game/misc/arrow_push.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>34,82,68,164</rect>
+                <key>scale9Paddings</key>
+                <rect>34,82,68,164</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">assets/game/misc/arrow_push_wave.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>29,26,57,52</rect>
+                <key>scale9Paddings</key>
+                <rect>29,26,57,52</rect>
                 <key>scale9FromFile</key>
                 <false/>
             </struct>

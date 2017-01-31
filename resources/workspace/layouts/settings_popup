@@ -208,6 +208,8 @@
               "localizeKey":"Support"
             },
             "params":{
+              "autoScale":true,
+              "batchable":true,
               "format":{
                 "cls":"starling.text.TextFormat",
                 "customParams":{},

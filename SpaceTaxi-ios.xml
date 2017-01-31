@@ -23,7 +23,7 @@
     <!-- A string value of the format <0-999>.<0-999>.<0-999> that represents application version which can be used to check for application upgrade.
          Values can also be 1-part or 2-part. It is not necessary to have a 3-part value.
          An updated version of application must have a versionNumber value higher than the previous version. Required for namespace >= 2.5. -->
-    <versionNumber>0.0.1</versionNumber>
+    <versionNumber>0.1.1</versionNumber>
 
     <!-- A string value (such as "v1", "2.5", or "Alpha 1") that represents the version of the application, as it should be shown to users. Optional. -->
     <!--<versionLabel></versionLabel>-->
@@ -42,7 +42,12 @@
 
     <!-- Identifies the ActionScript extensions used by an application. -->
     <extensions>
-        <!--<extensionID>com.mesmotronic.ane.fullscreen</extensionID>-->
+        <extensionID>com.myflashlab.air.extensions.dependency.overrideAir</extensionID>
+        <extensionID>com.myflashlab.air.extensions.dependency.androidSupport</extensionID>
+
+        <extensionID>com.myflashlab.air.extensions.facebook</extensionID>
+
+        <extensionID>com.marpies.ane.vk</extensionID>
     </extensions>
 
     <!-- Settings for the application's initial window. Required. -->
@@ -131,8 +136,11 @@
         <image57x57>icons/57.png</image57x57>
         <image58x58>icons/58.png</image58x58>
         <image72x72>icons/72.png</image72x72>
+        <image76x76>icons/76.png</image76x76>
         <image114x114>icons/114.png</image114x114>
+        <image120x120>icons/120.png</image120x120>
         <image144x144>icons/144.png</image144x144>
+        <image152x152>icons/152.png</image152x152>
         <image1024x1024>icons/1024.png</image1024x1024>
     </icon>
 
@@ -179,6 +187,32 @@
                 <key>UIRequiresPersistentWiFi</key>
                 <string>NO</string>
 
+                <key>FacebookAppID</key>
+                <string>1848488828760224</string>
+
+                <key>FacebookDisplayName</key>
+                <string>Kosmos: Space Adventure</string>
+
+                <key>CFBundleURLTypes</key>
+                <array>
+                    <dict>
+                        <key>CFBundleURLSchemes</key>
+                        <array>
+                            <string>vk5848274</string>
+                            <string>fb1848488828760224</string>
+                            <string>air.com.holypanda.Kosmos</string>
+                        </array>
+                    </dict>
+                </array>
+
+                <key>UIBackgroundModes</key>
+                <array>
+                    <string>remote-notification</string>
+                </array>
+
+                <key>NSPhotoLibraryUsageDescription</key>
+                <string>My description about why I need this feature in my app</string>
+
                 <key>UIDeviceFamily</key>
                 <array>
                      <!--iPhone and iPod touch devices -->
@@ -187,19 +221,94 @@
                     <string>2</string>
                 </array>
 
-                <key>UIBackgroundModes</key>
+                <key>NSAppTransportSecurity</key>
+                <dict>
+                  <key>NSExceptionDomains</key>
+                  <dict>
+                    <key>facebook.com</key>
+                    <dict>
+                      <key>NSIncludesSubdomains</key>
+                      <true/>
+                      <key>NSExceptionRequiresForwardSecrecy</key>
+                      <false/>
+                      <key>NSTemporaryExceptionAllowsInsecureHTTPLoads</key>
+                      <true/>
+                      <key>NSTemporaryExceptionMinimumTLSVersion</key>
+                      <string>TLSv1.1</string>
+                    </dict>
+                    <key>fbcdn.net</key>
+                    <dict>
+                      <key>NSIncludesSubdomains</key>
+                      <true/>
+                      <key>NSExceptionRequiresForwardSecrecy</key>
+                      <false/>
+                      <key>NSTemporaryExceptionAllowsInsecureHTTPLoads</key>
+                      <true/>
+                      <key>NSTemporaryExceptionMinimumTLSVersion</key>
+                      <string>TLSv1.1</string>
+                    </dict>
+                    <key>akamaihd.net</key>
+                    <dict>
+                      <key>NSIncludesSubdomains</key>
+                      <true/>
+                      <key>NSExceptionRequiresForwardSecrecy</key>
+                      <false/>
+                      <key>NSTemporaryExceptionAllowsInsecureHTTPLoads</key>
+                      <true/>
+                      <key>NSTemporaryExceptionMinimumTLSVersion</key>
+                      <string>TLSv1.1</string>
+                    </dict>
+                    <key>vk.com</key>
+                    <dict>
+                        <key>NSExceptionRequiresForwardSecrecy</key>
+                        <false/>
+                        <key>NSIncludesSubdomains</key>
+                        <true/>
+                        <key>NSExceptionAllowsInsecureHTTPLoads</key>
+                        <true/>
+                    </dict>
+                  </dict>
+                  <key>NSAllowsArbitraryLoads</key>
+                  <true/>
+                </dict>
+                <key>LSApplicationQueriesSchemes</key>
                 <array>
-                    <string>remote-notification</string>
+                    <string>vk</string>
+                    <string>vk-share</string>
+                    <string>vkauthorize</string>
+
+                    <string>fb</string>
+                    <string>instagram</string>
+                    <string>tumblr</string>
+                    <string>twitter</string>
+
+                    <string>fbapi</string>
+                    <string>fb-messenger-api</string>
+                    <string>fbauth2</string>
+                    <string>fbshareextension</string>
+                    <string>fbapi20130214</string>
+                    <string>fbapi20130410</string>
+                    <string>fbapi20130702</string>
+                    <string>fbapi20131010</string>
+                    <string>fbapi20131219</string>
+                    <string>fbapi20140410</string>
+                    <string>fbapi20140116</string>
+                    <string>fbapi20150313</string>
+                    <string>fbapi20150629</string>
+                    <string>fbauth</string>
+                    <string>fbauth2</string>
+                    <string>fb-messenger-api20140430</string>
                 </array>
+
+
             ]]>
         </InfoAdditions>
 
-        <!-- A list of plist key/value pairs to be added to the application Entitlements.plist -->
         <Entitlements>
             <![CDATA[
-                <!--<key>beta-reports-active</key>-->
-                <!--<true />-->
-			]]>
+                <key>beta-reports-active</key>
+                <true/>
+            ]]>
         </Entitlements>
 
         <!-- Display Resolution for the app (either "standard" or "high"). Optional. Default "standard" -->
@@ -210,41 +319,5 @@
         and corresponding stripped swfs will be output in externalStrippedSwfs folder. -->
         <!--<externalSwfs></externalSwfs> -->
     </iPhone>
-
-    <!-- Android specific tags that get passed to AndroidManifest.xml file. -->
-    <!--<android>-->
-        <!--<manifestAdditions>-->
-            <!--<![CDATA[-->
-            <!--<manifest android:installLocation="auto">-->
-                <!--<uses-permission android:name="android.permission.INTERNET"/>-->
-                <!--<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>-->
-                <!--<uses-permission android:name="android.permission.READ_PHONE_STATE"/>-->
-                <!--<uses-permission android:name="android.permission.VIBRATE"/>-->
-                <!--<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>-->
-                <!--<uses-permission android:name="android.permission.DISABLE_KEYGUARD"/>-->
-                <!--<uses-permission android:name="android.permission.WAKE_LOCK"/>-->
-                <!--<uses-permission android:name="android.permission.CAMERA"/>-->
-                <!--<uses-permission android:name="android.permission.RECORD_AUDIO"/>-->
-                <!--<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>-->
-                <!--<uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>-->
-
-                <!--<uses-feature android:required="true" android:name="android.hardware.touchscreen.multitouch"/>-->
-                <!--<application android:enabled="true">
-                    <activity android:excludeFromRecents="false">
-                        <intent-filter>
-                            <action android:name="android.intent.action.MAIN"/>
-                            <category android:name="android.intent.category.LAUNCHER"/>
-                        </intent-filter>
-                    </activity>
-                </application>-->
-            <!--</manifest>-->
-            <!--]]>-->
-            <!--</manifestAdditions>-->
-
-        <!-- Color depth for the app (either "32bit" or "16bit"). Optional. Default 16bit before namespace 3.0, 32bit after -->
-        <!--<colorDepth></colorDepth>-->
-        <!-- Indicates if the app contains video or not. Necessary for ordering of video planes with graphics plane, especially in Jellybean - if you app does video this must be set to true - valid values are true or false -->
-        <!-- <containsVideo></containsVideo> -->
-    <!--</android>-->
 
 </application>

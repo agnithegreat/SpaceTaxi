@@ -1,8 +1,9 @@
 {
     "Play":{"en_US":"Play", "ru_RU":"Играть"},
-    "ChooseLevel":{"en_US":"choose level", "ru_RU":"выбор уровня"},
-    "Garage":{"en_US":"garage", "ru_RU":"гараж"},
-    "Achievements":{"en_US":"achievements", "ru_RU":"достижения"},
+    "Levels":{"en_US":"Levels", "ru_RU":"Уровни"},
+    "Garage":{"en_US":"Garage", "ru_RU":"Гараж"},
+    "Achievements":{"en_US":"Achievements", "ru_RU":"Достижения"},
+    "FreeCoins":{"en_US":"+%d Coins", "ru_RU":"+%d монет"},
     "Settings":{"en_US":"Settings", "ru_RU":"Настройки"},
 
     "Back":{"en_US":"Back", "ru_RU":"Назад"},
@@ -18,25 +19,25 @@
     "Level2":{"en_US":"Pit Stop", "ru_RU":"Пит Стоп"},
     "Level3":{"en_US":"Planetary Shuffle", "ru_RU":"Межпланетная Потасовка"},
     "Level4":{"en_US":"Tough Roads", "ru_RU":"Крутые Дороги"},
-    "Level5":{"en_US":"Space Rift", "ru_RU":""},
+    "Level5":{"en_US":"Space Rift", "ru_RU":"Space Rift"},
     "Level6":{"en_US":"Busy Night", "ru_RU":"Беспокойная Ночь"},
-    "Level7":{"en_US":"Silenced", "ru_RU":""},
-    "Level8":{"en_US":"Prize Sideways", "ru_RU":""},
-    "Level9":{"en_US":"Farscape Blues", "ru_RU":""},
+    "Level7":{"en_US":"Silenced", "ru_RU":"Silenced"},
+    "Level8":{"en_US":"Prize Sideways", "ru_RU":"Prize Sideways"},
+    "Level9":{"en_US":"Farscape Blues", "ru_RU":"Farscape Blues"},
     "Level10":{"en_US":"Crooked Parsec", "ru_RU":"Дуговой Парсек"},
     "Level11":{"en_US":"Running Low", "ru_RU":"На Низкой Передаче"},
-    "Level12":{"en_US":"Heavy Metal Belt", "ru_RU":""},
+    "Level12":{"en_US":"Heavy Metal Belt", "ru_RU":"Heavy Metal Belt"},
 
-    "Level13":{"en_US":"Straight Cruise", "ru_RU":""},
+    "Level13":{"en_US":"Straight Cruise", "ru_RU":"Straight Cruise"},
     "Level14":{"en_US":"Cake Is A Lie", "ru_RU":"Торт - Это Ложь"},
     "Level15":{"en_US":"Headhunters", "ru_RU":"Головорезы"},
     "Level16":{"en_US":"Colossus Shadow", "ru_RU":"Тень Колосса"},
-    "Level17":{"en_US":"Not Jumping", "ru_RU":""},
+    "Level17":{"en_US":"Not Jumping", "ru_RU":"Not Jumping"},
     "Level18":{"en_US":"Finding Timo", "ru_RU":"В Поисках Тимо"},
     "Level19":{"en_US":"Interstellar", "ru_RU":"Интерстеллар"},
     "Level20":{"en_US":"No Return", "ru_RU":"Назад Дороги Нет"},
-    "Level21":{"en_US":"Treasure System", "ru_RU":""},
-    "Level22":{"en_US":"El Presidente", "ru_RU":""},
+    "Level21":{"en_US":"Treasure System", "ru_RU":"Treasure System"},
+    "Level22":{"en_US":"El Presidente", "ru_RU":"El Presidente"},
     "Level23":{"en_US":"Dead Stars", "ru_RU":"Мертвые Звезды"},
     "Level24":{"en_US":"The Capital", "ru_RU":"Столица"},
 
@@ -56,6 +57,8 @@
 
     "LogIn":{"en_US":"Log in:", "ru_RU":"Войти:"},
     "Sound":{"en_US":"Sound:", "ru_RU":"Громкость:"},
-    "Support":{"en_US":"Support", "ru_RU":"Поддержка"}
+    "Support":{"en_US":"Support", "ru_RU":"Поддержка"},
+
+    "SurveyLink":{"en_US":"https://docs.google.com/forms/d/e/1FAIpQLSf2btrhF_mPoKD9yME0FzPIEbJOSvqKy5tlxIuWx_Q5ciK7NQ/viewform?entry.349077040=%s", "ru_RU":"https://docs.google.com/forms/d/e/1FAIpQLSc7AjFiFpNuA_TxLXMp9HZqqMqvnNZRJj63wHkVUZNumgmC3w/viewform?entry.349077040=%s"}
 }
 

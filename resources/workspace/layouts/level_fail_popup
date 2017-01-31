@@ -72,7 +72,6 @@
         ],
         "customParams":{},
         "params":{
-          "autoSize":"vertical",
           "batchable":true,
           "format":{
             "cls":"starling.text.TextFormat",
@@ -83,7 +82,7 @@
               "size":68
             }
           },
-          "height":50.32,
+          "height":137.32,
           "name":"_titleTF",
           "style":{
             "cls":"starling.styles.DistanceFieldStyle",
@@ -94,9 +93,9 @@
             }
           },
           "text":"NO FUEL",
-          "width":966,
-          "x":17,
-          "y":250
+          "width":550,
+          "x":225,
+          "y":220
         }
       },
       {

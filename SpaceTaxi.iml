@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <module type="Flex" version="4">
-  <component name="FlexBuildConfigurationManager" active="SpaceTaxi Android">
+  <component name="FlexBuildConfigurationManager" active="Kosmos Android Dev">
     <configurations>
-      <configuration name="SpaceTaxi Desktop" target-platform="Desktop" pure-as="true" main-class="Main" output-file="SpaceTaxi_Desktop.swf" output-folder="$MODULE_DIR$/build">
+      <configuration name="Kosmos Desktop" target-platform="Desktop" pure-as="true" main-class="MainStandalone" output-file="Kosmos_Desktop.swf" output-folder="$MODULE_DIR$/build">
         <dependencies target-player="24.0">
           <entries>
             <entry module-name="MainBase" build-configuration-name="MainBase">
@@ -33,7 +33,7 @@
         <packaging-android />
         <packaging-ios />
       </configuration>
-      <configuration name="SpaceTaxi Android" target-platform="Mobile" pure-as="true" main-class="Main" output-file="SpaceTaxi_Android.swf" output-folder="$MODULE_DIR$/build">
+      <configuration name="Kosmos Android Dev" target-platform="Mobile" pure-as="true" main-class="MainStandalone" output-file="Kosmos_Android.swf" output-folder="$MODULE_DIR$/build">
         <dependencies>
           <entries>
             <entry module-name="MainBase" build-configuration-name="MainBase">
@@ -72,7 +72,7 @@
         </packaging-android>
         <packaging-ios package-file-name="SpaceTaxi_Android" />
       </configuration>
-      <configuration name="SpaceTaxi IOS" target-platform="Mobile" pure-as="true" main-class="Main" output-file="SpaceTaxi_IOS.swf" output-folder="$MODULE_DIR$/build">
+      <configuration name="Kosmos IOS Dev" target-platform="Mobile" pure-as="true" main-class="MainStandalone" output-file="Kosmos_IOS.swf" output-folder="$MODULE_DIR$/build">
         <dependencies>
           <entries>
             <entry module-name="MainBase" build-configuration-name="MainBase">
@@ -119,11 +119,12 @@
             <FilePathAndPathInPackage file-path="$MODULE_DIR$/resources/launch/Default@2x.png" path-in-package="Default@2x.png" />
             <FilePathAndPathInPackage file-path="$MODULE_DIR$/resources/icons/ios/icons" path-in-package="icons" />
             <FilePathAndPathInPackage file-path="$MODULE_DIR$/resources/workspace/localization" path-in-package="localization" />
+            <FilePathAndPathInPackage file-path="$MODULE_DIR$/resources/launch/Default-568h.png" path-in-package="Default-568h.png" />
           </files-to-package>
           <AirSigningOptions keystore-path="$MODULE_DIR$/keys/ios/virich_dev.p12" provisioning-profile-path="$MODULE_DIR$/keys/ios/Kosmos_Dev.mobileprovision" />
         </packaging-ios>
       </configuration>
-      <configuration name="Space Taxi Web" pure-as="true" main-class="Main" output-file="Space_Taxi_Web.swf" output-folder="$MODULE_DIR$/build" use-html-wrapper="true" wrapper-template-path="$MODULE_DIR$/html-template">
+      <configuration name="Kosmos Web" pure-as="true" main-class="Main" output-file="Kosmos_Web.swf" output-folder="$MODULE_DIR$/build" use-html-wrapper="true" wrapper-template-path="$MODULE_DIR$/html-template">
         <dependencies target-player="24.0">
           <entries>
             <entry module-name="MainBase" build-configuration-name="MainBase">
@@ -144,6 +145,97 @@
         <packaging-air-desktop />
         <packaging-android />
         <packaging-ios />
+      </configuration>
+      <configuration name="Kosmos IOS Release" target-platform="Mobile" pure-as="true" main-class="MainStandalone" output-file="Kosmos_IOS_Release.swf" output-folder="$MODULE_DIR$/build">
+        <dependencies>
+          <entries>
+            <entry module-name="MainBase" build-configuration-name="MainBase">
+              <dependency linkage="Merged" />
+            </entry>
+            <entry library-name="swc" library-level="project">
+              <dependency linkage="Merged" />
+            </entry>
+            <entry module-name="TaskManagement" build-configuration-name="TaskManagement">
+              <dependency linkage="Merged" />
+            </entry>
+            <entry library-name="common" library-level="project">
+              <dependency linkage="Merged" />
+            </entry>
+            <entry library-name="ios" library-level="project">
+              <dependency linkage="Merged" />
+            </entry>
+          </entries>
+          <sdk name="AIRSDK_24" />
+        </dependencies>
+        <compiler-options>
+          <option name="additionalOptions" value="-define+=BUILD::standalone,true -define+=BUILD::debug,false -define+=BUILD::mobile,true -define+=BUILD::ios,true -define+=BUILD::android,false -advanced-telemetry=true" />
+        </compiler-options>
+        <packaging-air-desktop />
+        <packaging-android use-generated-descriptor="false" custom-descriptor-path="$MODULE_DIR$/SpaceTaxi-android.xml" package-file-name="Kosmos_IOS_Release">
+          <files-to-package>
+            <FilePathAndPathInPackage file-path="$MODULE_DIR$/resources/config" path-in-package="config" />
+            <FilePathAndPathInPackage file-path="$MODULE_DIR$/resources/assets" path-in-package="assets" />
+          </files-to-package>
+        </packaging-android>
+        <packaging-ios enabled="true" use-generated-descriptor="false" custom-descriptor-path="$MODULE_DIR$/SpaceTaxi-ios.xml" package-file-name="Kosmos_IOS_Release">
+          <files-to-package>
+            <FilePathAndPathInPackage file-path="$MODULE_DIR$/resources/config" path-in-package="config" />
+            <FilePathAndPathInPackage file-path="$MODULE_DIR$/resources/workspace/textures" path-in-package="textures" />
+            <FilePathAndPathInPackage file-path="$MODULE_DIR$/resources/sounds" path-in-package="sounds" />
+            <FilePathAndPathInPackage file-path="$MODULE_DIR$/resources/workspace/layouts" path-in-package="layouts" />
+            <FilePathAndPathInPackage file-path="$MODULE_DIR$/resources/levels" path-in-package="levels" />
+            <FilePathAndPathInPackage file-path="$MODULE_DIR$/resources/launch/Default-Landscape-568h@2x.png" path-in-package="Default-Landscape-568h@2x.png" />
+            <FilePathAndPathInPackage file-path="$MODULE_DIR$/resources/launch/Default-Landscape-667h@2x.png" path-in-package="Default-Landscape-667h@2x.png" />
+            <FilePathAndPathInPackage file-path="$MODULE_DIR$/resources/launch/Default-Landscape-736h@3x.png" path-in-package="Default-Landscape-736h@3x.png" />
+            <FilePathAndPathInPackage file-path="$MODULE_DIR$/resources/launch/Default-Landscape.png" path-in-package="Default-Landscape.png" />
+            <FilePathAndPathInPackage file-path="$MODULE_DIR$/resources/launch/Default-Landscape@2x.png" path-in-package="Default-Landscape@2x.png" />
+            <FilePathAndPathInPackage file-path="$MODULE_DIR$/resources/launch/Default.png" path-in-package="Default.png" />
+            <FilePathAndPathInPackage file-path="$MODULE_DIR$/resources/launch/Default@2x.png" path-in-package="Default@2x.png" />
+            <FilePathAndPathInPackage file-path="$MODULE_DIR$/resources/icons/ios/icons" path-in-package="icons" />
+            <FilePathAndPathInPackage file-path="$MODULE_DIR$/resources/workspace/localization" path-in-package="localization" />
+            <FilePathAndPathInPackage file-path="$MODULE_DIR$/resources/launch/Default-568h.png" path-in-package="Default-568h.png" />
+          </files-to-package>
+          <AirSigningOptions keystore-path="$MODULE_DIR$/keys/ios/kosmos_distr.p12" provisioning-profile-path="$MODULE_DIR$/keys/ios/Kosmos_AppStore.mobileprovision" />
+        </packaging-ios>
+      </configuration>
+      <configuration name="Kosmos Android Release" target-platform="Mobile" pure-as="true" main-class="MainStandalone" output-file="Kosmos_Android_Release.swf" output-folder="$MODULE_DIR$/build">
+        <dependencies>
+          <entries>
+            <entry module-name="MainBase" build-configuration-name="MainBase">
+              <dependency linkage="Merged" />
+            </entry>
+            <entry library-name="swc" library-level="project">
+              <dependency linkage="Merged" />
+            </entry>
+            <entry module-name="TaskManagement" build-configuration-name="TaskManagement">
+              <dependency linkage="Merged" />
+            </entry>
+            <entry library-name="android" library-level="project">
+              <dependency linkage="Merged" />
+            </entry>
+            <entry library-name="common" library-level="project">
+              <dependency linkage="Merged" />
+            </entry>
+          </entries>
+          <sdk name="AIRSDK_24" />
+        </dependencies>
+        <compiler-options>
+          <option name="additionalOptions" value="-define+=BUILD::standalone,true -define+=BUILD::debug,false -define+=BUILD::mobile,true -define+=BUILD::ios,false -define+=BUILD::android,true -advanced-telemetry=true" />
+        </compiler-options>
+        <packaging-air-desktop />
+        <packaging-android enabled="true" use-generated-descriptor="false" custom-descriptor-path="$MODULE_DIR$/SpaceTaxi-android.xml" package-file-name="Kosmos_Android_Release">
+          <files-to-package>
+            <FilePathAndPathInPackage file-path="$MODULE_DIR$/resources/config" path-in-package="config" />
+            <FilePathAndPathInPackage file-path="$MODULE_DIR$/resources/workspace/textures" path-in-package="textures" />
+            <FilePathAndPathInPackage file-path="$MODULE_DIR$/resources/sounds" path-in-package="sounds" />
+            <FilePathAndPathInPackage file-path="$MODULE_DIR$/resources/workspace/layouts" path-in-package="layouts" />
+            <FilePathAndPathInPackage file-path="$MODULE_DIR$/resources/levels" path-in-package="levels" />
+            <FilePathAndPathInPackage file-path="$MODULE_DIR$/resources/icons/android/icons" path-in-package="icons" />
+            <FilePathAndPathInPackage file-path="$MODULE_DIR$/resources/workspace/localization" path-in-package="localization" />
+          </files-to-package>
+          <AirSigningOptions key-alias="kosmos" keystore-path="$MODULE_DIR$/keys/android/kosmos.jks" keystore-type="JKS" use-temp-certificate="false" />
+        </packaging-android>
+        <packaging-ios package-file-name="Kosmos_Android_Release" />
       </configuration>
     </configurations>
     <compiler-options />

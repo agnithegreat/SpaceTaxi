@@ -322,14 +322,29 @@
                 "constructorParams":[
                   {
                     "cls":"starling.textures.Texture",
-                    "textureName":"main_screen/play_button_txt"
+                    "textureName":"main_screen/play_button_en"
                   }
                 ],
                 "customParams":{},
                 "params":{
-                  "name":"label",
-                  "x":213,
-                  "y":166
+                  "name":"_playLabel_en",
+                  "x":212,
+                  "y":162
+                }
+              },
+              {
+                "cls":"starling.display.Image",
+                "constructorParams":[
+                  {
+                    "cls":"starling.textures.Texture",
+                    "textureName":"main_screen/play_button_ru"
+                  }
+                ],
+                "customParams":{},
+                "params":{
+                  "name":"_playLabel_ru",
+                  "x":152,
+                  "y":160
                 }
               }
             ],
@@ -387,6 +402,7 @@
                 },
                 "params":{
                   "autoScale":true,
+                  "batchable":true,
                   "format":{
                     "cls":"starling.text.TextFormat",
                     "customParams":{},
@@ -471,14 +487,57 @@
                 "constructorParams":[
                   {
                     "cls":"starling.textures.Texture",
-                    "textureName":"main_screen/achievements"
+                    "textureName":"main_screen/ribbon"
                   }
                 ],
                 "customParams":{},
                 "params":{
-                  "name":"label",
-                  "x":51,
-                  "y":336
+                  "name":"ribbon",
+                  "x":31,
+                  "y":330
+                }
+              },
+              {
+                "cls":"starling.text.TextField",
+                "constructorParams":[
+                  {
+                    "value":200
+                  },
+                  {
+                    "value":100
+                  },
+                  {
+                    "value":""
+                  }
+                ],
+                "customParams":{
+                  "localizeKey":"Achievements"
+                },
+                "params":{
+                  "autoScale":true,
+                  "batchable":true,
+                  "format":{
+                    "cls":"starling.text.TextFormat",
+                    "customParams":{},
+                    "params":{
+                      "color":1061541,
+                      "font":"dragu_bold",
+                      "size":50
+                    }
+                  },
+                  "height":100,
+                  "name":"_achievementsTF",
+                  "style":{
+                    "cls":"starling.styles.DistanceFieldStyle",
+                    "customParams":{},
+                    "params":{
+                      "mode":"basic",
+                      "softness":0.2
+                    }
+                  },
+                  "width":361,
+                  "x":81,
+                  "y":328
                 }
               }
             ],
@@ -534,14 +593,57 @@
                 "constructorParams":[
                   {
                     "cls":"starling.textures.Texture",
-                    "textureName":"main_screen/choose_level"
+                    "textureName":"main_screen/ribbon"
                   }
                 ],
                 "customParams":{},
                 "params":{
-                  "name":"label",
-                  "x":151,
-                  "y":218
+                  "name":"ribbon",
+                  "x":31,
+                  "y":330
+                }
+              },
+              {
+                "cls":"starling.text.TextField",
+                "constructorParams":[
+                  {
+                    "value":200
+                  },
+                  {
+                    "value":100
+                  },
+                  {
+                    "value":""
+                  }
+                ],
+                "customParams":{
+                  "localizeKey":"Levels"
+                },
+                "params":{
+                  "autoScale":true,
+                  "batchable":true,
+                  "format":{
+                    "cls":"starling.text.TextFormat",
+                    "customParams":{},
+                    "params":{
+                      "color":1061541,
+                      "font":"dragu_bold",
+                      "size":50
+                    }
+                  },
+                  "height":100,
+                  "name":"_levelsTF",
+                  "style":{
+                    "cls":"starling.styles.DistanceFieldStyle",
+                    "customParams":{},
+                    "params":{
+                      "mode":"basic",
+                      "softness":0.2
+                    }
+                  },
+                  "width":361,
+                  "x":81,
+                  "y":328
                 }
               }
             ],
@@ -597,14 +699,57 @@
                 "constructorParams":[
                   {
                     "cls":"starling.textures.Texture",
-                    "textureName":"main_screen/free_coins"
+                    "textureName":"main_screen/ribbon"
                   }
                 ],
                 "customParams":{},
                 "params":{
-                  "name":"label",
-                  "x":109,
-                  "y":275
+                  "name":"ribbon",
+                  "x":-9,
+                  "y":286
+                }
+              },
+              {
+                "cls":"starling.text.TextField",
+                "constructorParams":[
+                  {
+                    "value":200
+                  },
+                  {
+                    "value":100
+                  },
+                  {
+                    "value":""
+                  }
+                ],
+                "customParams":{
+                  "localizeKey":"FreeCoins"
+                },
+                "params":{
+                  "autoScale":true,
+                  "batchable":true,
+                  "format":{
+                    "cls":"starling.text.TextFormat",
+                    "customParams":{},
+                    "params":{
+                      "color":1061541,
+                      "font":"dragu_bold",
+                      "size":50
+                    }
+                  },
+                  "height":100,
+                  "name":"_freeCoinsTF",
+                  "style":{
+                    "cls":"starling.styles.DistanceFieldStyle",
+                    "customParams":{},
+                    "params":{
+                      "mode":"basic",
+                      "softness":0.2
+                    }
+                  },
+                  "width":361,
+                  "x":41,
+                  "y":284
                 }
               }
             ],
@@ -634,7 +779,7 @@
             }
           },
           "name":"top_right",
-          "x":1948,
+          "x":1941,
           "y":100
         }
       },
@@ -660,14 +805,57 @@
                 "constructorParams":[
                   {
                     "cls":"starling.textures.Texture",
-                    "textureName":"main_screen/garage"
+                    "textureName":"main_screen/ribbon"
                   }
                 ],
                 "customParams":{},
                 "params":{
-                  "name":"label",
-                  "x":173,
-                  "y":417
+                  "name":"ribbon",
+                  "x":49.5,
+                  "y":367
+                }
+              },
+              {
+                "cls":"starling.text.TextField",
+                "constructorParams":[
+                  {
+                    "value":200
+                  },
+                  {
+                    "value":100
+                  },
+                  {
+                    "value":""
+                  }
+                ],
+                "customParams":{
+                  "localizeKey":"Garage"
+                },
+                "params":{
+                  "autoScale":true,
+                  "batchable":true,
+                  "format":{
+                    "cls":"starling.text.TextFormat",
+                    "customParams":{},
+                    "params":{
+                      "color":1061541,
+                      "font":"dragu_bold",
+                      "size":50
+                    }
+                  },
+                  "height":100,
+                  "name":"_garageTF",
+                  "style":{
+                    "cls":"starling.styles.DistanceFieldStyle",
+                    "customParams":{},
+                    "params":{
+                      "mode":"basic",
+                      "softness":0.2
+                    }
+                  },
+                  "width":361,
+                  "x":99.5,
+                  "y":365
                 }
               }
             ],
