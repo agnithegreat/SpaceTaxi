@@ -84,6 +84,11 @@ package com.holypanda.kosmos.view.scenes.game
 
             var delta: Number = GeomUtils.getAngleDelta(_animation.rotation, _ship.rotation + Math.PI * 0.5);
             _animation.rotation += delta * 0.15;
+
+            if (_ship.durability > 0)
+            {
+                _animation.alpha = 1;
+            }
         }
 
         private function stopFire():void
@@ -156,11 +161,10 @@ package com.holypanda.kosmos.view.scenes.game
             stopFire();
             mount();
         }
-
+        
         private function handleCrash(event: Event):void
         {
-            clear();
-            Starling.juggler.tween(_animation, 0.1, {alpha: 0, onComplete: destroy});
+            Starling.juggler.tween(_animation, 0.1, {alpha: 0});
             
             dispatchEventWith(EXPLODE);
 

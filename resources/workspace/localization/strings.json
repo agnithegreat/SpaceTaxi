@@ -55,8 +55,18 @@
     "Start":{"en_US":"Start", "ru_RU":"Начать"},
     "Later":{"en_US":"Later", "ru_RU":"Позже"},
 
+    "FuelUp":{"en_US":"Fuel up?", "ru_RU":"Подзаправимся?"},
+    "Repair":{"en_US":"Repair?", "ru_RU":"Отремонтируемся?"},
+    "Watch":{"en_US":"Watch", "ru_RU":"Смотреть"},
+    "NoVideo":{"en_US":"No Video", "ru_RU":"Без видео"},
+
+    "NoVideoTitle":{"en_US":"No Video?", "ru_RU":"Без видео?"},
+    "NoVideoDescription":{"en_US":"Turn ads off and continue to play without watch video forever", "ru_RU":"Отключи рекламу и продолжай играть без просмотра видео"},
+    "NoThanks":{"en_US":"No, thanks", "ru_RU":"Нет, спасибо"},
+
     "Sound":{"en_US":"Sound:", "ru_RU":"Громкость:"},
     "LogIn":{"en_US":"Link your progress:", "ru_RU":"Связать сохранения:"},
+    "LogOut":{"en_US":"Log Out", "ru_RU":"Выйти"},
     "Support":{"en_US":"Support", "ru_RU":"Поддержка"},
 
     "SurveyLink":{"en_US":"https://docs.google.com/forms/d/e/1FAIpQLSf2btrhF_mPoKD9yME0FzPIEbJOSvqKy5tlxIuWx_Q5ciK7NQ/viewform?entry.349077040=%s", "ru_RU":"https://docs.google.com/forms/d/e/1FAIpQLSc7AjFiFpNuA_TxLXMp9HZqqMqvnNZRJj63wHkVUZNumgmC3w/viewform?entry.349077040=%s"}

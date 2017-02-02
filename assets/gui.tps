@@ -756,6 +756,19 @@
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
+            <key type="filename">assets/gui/pop_up/adv_icon.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>15,14,29,27</rect>
+                <key>scale9Paddings</key>
+                <rect>15,14,29,27</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
             <key type="filename">assets/gui/pop_up/back.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
@@ -835,6 +848,19 @@
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
+            <key type="filename">assets/gui/pop_up/button_log_out.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>85,26,169,51</rect>
+                <key>scale9Paddings</key>
+                <rect>85,26,169,51</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
             <key type="filename">assets/gui/pop_up/button_music_off.png</key>
             <key type="filename">assets/gui/pop_up/button_music_on.png</key>
             <struct type="IndividualSpriteSettings">
@@ -846,6 +872,19 @@
                 <rect>24,34,48,67</rect>
                 <key>scale9Paddings</key>
                 <rect>24,34,48,67</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">assets/gui/pop_up/button_no.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>89,36,177,71</rect>
+                <key>scale9Paddings</key>
+                <rect>89,36,177,71</rect>
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
@@ -886,6 +925,19 @@
                 <rect>33,31,66,61</rect>
                 <key>scale9Paddings</key>
                 <rect>33,31,66,61</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">assets/gui/pop_up/button_yes.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>131,52,262,103</rect>
+                <key>scale9Paddings</key>
+                <rect>131,52,262,103</rect>
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
@@ -1029,6 +1081,32 @@
                 <rect>29,34,57,67</rect>
                 <key>scale9Paddings</key>
                 <rect>29,34,57,67</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">assets/gui/pop_up/restore_fuel.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>82,51,163,101</rect>
+                <key>scale9Paddings</key>
+                <rect>82,51,163,101</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">assets/gui/pop_up/restore_life.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>66,47,132,94</rect>
+                <key>scale9Paddings</key>
+                <rect>66,47,132,94</rect>
                 <key>scale9FromFile</key>
                 <false/>
             </struct>

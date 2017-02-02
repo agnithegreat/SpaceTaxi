@@ -8,6 +8,7 @@ package com.holypanda.kosmos.tasks.server.vo
     public class UserDataVO
     {
         public var money: String;
+        public var noAds: String;
         public var levels: Object = {};
         public var episodes: Object = {};
 
@@ -15,6 +16,7 @@ package com.holypanda.kosmos.tasks.server.vo
         {
             var data: Object = {};
             data.Money = money;
+            data.NoAds = noAds;
             data.Levels = JSON.stringify(levels);
             data.Episodes = JSON.stringify(episodes);
             return data;
@@ -28,7 +30,10 @@ package com.holypanda.kosmos.tasks.server.vo
                 if (key == "Money")
                 {
                     money = record.Value;
-                } else if (key == "Levels")
+                } else if (key == "NoAds")
+                {
+                    noAds = record.Value;
+                }else if (key == "Levels")
                 {
                     levels = JSON.parse(record.Value);
                 } else if (key == "Episodes")

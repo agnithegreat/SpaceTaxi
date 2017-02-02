@@ -7,7 +7,7 @@ package com.holypanda.kosmos.tasks.logic
     import com.agnither.tasks.global.TaskSystem;
 
     import com.holypanda.kosmos.Application;
-    import com.holypanda.kosmos.model.player.Progress;
+    import com.holypanda.kosmos.model.player.Player;
     import com.holypanda.kosmos.tasks.server.LoadUserDataPlayFabTask;
     import com.holypanda.kosmos.tasks.server.vo.UserDataVO;
 
@@ -25,8 +25,8 @@ package com.holypanda.kosmos.tasks.logic
             var task: LoadUserDataPlayFabTask = new LoadUserDataPlayFabTask();
             TaskSystem.getInstance().addTask(task, function onComplete():void
             {
-                var progress: Progress = Application.appController.player.progress;
-                progress.init(task.result as UserDataVO);
+                var player: Player = Application.appController.player;
+                player.init(task.result as UserDataVO);
 
                 complete();
             });

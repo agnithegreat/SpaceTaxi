@@ -68,8 +68,8 @@ package com.holypanda.kosmos.managers.ads
             } else if (!_waitRewardedVideo)
             {
                 _waitRewardedVideo = true;
-//                FyberSdk.instance.requestRewardedVideoAds(null, null, true);
-                FyberSdk.instance.requestRewardedVideoAds();
+                FyberSdk.instance.requestRewardedVideoAds(null, null, true);
+//                FyberSdk.instance.requestRewardedVideoAds();
             }
         }
         

@@ -156,6 +156,69 @@
               "name":"_durabilityIndicator",
               "x":975
             }
+          },
+          {
+            "children":[
+              {
+                "cls":"starling.display.Image",
+                "constructorParams":[
+                  {
+                    "cls":"starling.textures.Texture",
+                    "textureName":"misc/Glow/glow_01"
+                  }
+                ],
+                "customParams":{},
+                "params":{
+                  "name":"back",
+                  "pivotX":74,
+                  "pivotY":22
+                }
+              },
+              {
+                "cls":"starling.text.TextField",
+                "constructorParams":[
+                  {
+                    "value":200
+                  },
+                  {
+                    "value":100
+                  },
+                  {
+                    "value":""
+                  }
+                ],
+                "customParams":{},
+                "params":{
+                  "format":{
+                    "cls":"starling.text.TextFormat",
+                    "customParams":{},
+                    "params":{
+                      "color":16777215,
+                      "font":"dragu_bold",
+                      "size":70
+                    }
+                  },
+                  "height":70,
+                  "name":"_ordersTF",
+                  "style":{
+                    "cls":"starling.styles.DistanceFieldStyle",
+                    "customParams":{},
+                    "params":{
+                      "mode":"basic",
+                      "softness":0.2
+                    }
+                  },
+                  "text":"10/10",
+                  "width":200
+                }
+              }
+            ],
+            "cls":"starling.display.Sprite",
+            "customParams":{},
+            "params":{
+              "name":"sprite",
+              "x":1527
+            }
           }
         ],
         "cls":"feathers.controls.LayoutGroup",

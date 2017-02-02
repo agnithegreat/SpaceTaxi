@@ -207,7 +207,7 @@
           },
           "height":55.2,
           "name":"_loginTF",
-          "pivotX":275,
+          "pivotX":400,
           "pivotY":27.6,
           "style":{
             "cls":"starling.styles.DistanceFieldStyle",
@@ -217,59 +217,182 @@
               "softness":0.2
             }
           },
-          "width":550,
+          "width":800,
           "x":500,
           "y":492
         }
       },
       {
-        "cls":"starling.display.Button",
-        "constructorParams":[
+        "children":[
           {
-            "cls":"starling.textures.Texture",
-            "textureName":"pop_up/button_fb"
+            "cls":"starling.display.Button",
+            "constructorParams":[
+              {
+                "cls":"starling.textures.Texture",
+                "textureName":"pop_up/button_fb"
+              }
+            ],
+            "customParams":{},
+            "params":{
+              "height":176,
+              "name":"_fbButton",
+              "pivotX":87,
+              "pivotY":88,
+              "textFormat":{
+                "cls":"starling.text.TextFormat",
+                "constructorParams":[],
+                "customParams":{},
+                "params":{}
+              },
+              "width":174,
+              "x":393,
+              "y":88
+            }
+          },
+          {
+            "cls":"starling.display.Button",
+            "constructorParams":[
+              {
+                "cls":"starling.textures.Texture",
+                "textureName":"pop_up/button_vk"
+              }
+            ],
+            "customParams":{},
+            "params":{
+              "height":176,
+              "name":"_vkButton",
+              "pivotX":87,
+              "pivotY":88,
+              "textFormat":{
+                "cls":"starling.text.TextFormat",
+                "constructorParams":[],
+                "customParams":{},
+                "params":{}
+              },
+              "width":174,
+              "x":607,
+              "y":88
+            }
           }
         ],
+        "cls":"feathers.controls.LayoutGroup",
         "customParams":{},
         "params":{
-          "height":176,
-          "name":"_fbButton",
-          "pivotX":87,
-          "pivotY":88,
-          "textFormat":{
-            "cls":"starling.text.TextFormat",
-            "constructorParams":[],
+          "layout":{
+            "cls":"feathers.layout.HorizontalLayout",
             "customParams":{},
-            "params":{}
+            "params":{
+              "gap":40,
+              "horizontalAlign":"center",
+              "verticalAlign":"middle"
+            }
           },
-          "width":174,
-          "x":400,
-          "y":615
+          "layoutData":{
+            "cls":"feathers.layout.AnchorLayoutData",
+            "customParams":{},
+            "params":{
+              "horizontalCenter":0,
+              "percentWidth":100
+            }
+          },
+          "name":"_buttons",
+          "width":1000,
+          "y":529
         }
       },
       {
-        "cls":"starling.display.Button",
-        "constructorParams":[
+        "children":[
           {
-            "cls":"starling.textures.Texture",
-            "textureName":"pop_up/button_vk"
+            "cls":"starling.display.Image",
+            "constructorParams":[
+              {
+                "cls":"starling.textures.Texture",
+                "textureName":"pop_up/button_log_out"
+              }
+            ],
+            "customParams":{},
+            "params":{
+              "name":"back",
+              "x":140,
+              "y":37
+            }
+          },
+          {
+            "cls":"starling.display.Image",
+            "constructorParams":[
+              {
+                "cls":"starling.textures.Texture",
+                "textureName":"pop_up/button_fb"
+              }
+            ],
+            "customParams":{},
+            "params":{
+              "name":"_icon_fb"
+            }
+          },
+          {
+            "cls":"starling.display.Image",
+            "constructorParams":[
+              {
+                "cls":"starling.textures.Texture",
+                "textureName":"pop_up/button_vk"
+              }
+            ],
+            "customParams":{},
+            "params":{
+              "name":"_icon_vk"
+            }
+          },
+          {
+            "cls":"starling.text.TextField",
+            "constructorParams":[
+              {
+                "value":200
+              },
+              {
+                "value":100
+              },
+              {
+                "value":""
+              }
+            ],
+            "customParams":{
+              "localizeKey":"LogOut"
+            },
+            "params":{
+              "autoScale":true,
+              "batchable":true,
+              "format":{
+                "cls":"starling.text.TextFormat",
+                "customParams":{},
+                "params":{
+                  "color":16777215,
+                  "font":"dragu_medium",
+                  "size":79
+                }
+              },
+              "height":95,
+              "name":"_logoutTF",
+              "style":{
+                "cls":"starling.styles.DistanceFieldStyle",
+                "customParams":{},
+                "params":{
+                  "mode":"basic",
+                  "softness":0.14
+                }
+              },
+              "width":303,
+              "x":175,
+              "y":41
+            }
           }
         ],
+        "cls":"starlingbuilder.extensions.uicomponents.ContainerButton",
         "customParams":{},
         "params":{
-          "height":176,
-          "name":"_vkButton",
-          "pivotX":87,
-          "pivotY":88,
-          "textFormat":{
-            "cls":"starling.text.TextFormat",
-            "constructorParams":[],
-            "customParams":{},
-            "params":{}
-          },
-          "width":174,
-          "x":600,
-          "y":615
+          "name":"_logoutButton",
+          "x":261,
+          "y":529
         }
       },
       {

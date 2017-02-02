@@ -52,7 +52,7 @@ package com.holypanda.kosmos.vo
             var sum: int = 0;
             for (var i:int = 0; i < levels.length; i++)
             {
-                var result: LevelResultVO = Application.appController.player.progress.getLevelResult(levels[i].id);
+                var result: LevelResultVO = Application.appController.player.getLevelResult(levels[i].id);
                 if (result != null)
                 {
                     sum += result.stars;

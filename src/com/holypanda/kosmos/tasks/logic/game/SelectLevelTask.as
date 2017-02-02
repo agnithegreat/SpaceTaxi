@@ -6,6 +6,7 @@ package com.holypanda.kosmos.tasks.logic.game
     import com.holypanda.kosmos.Application;
     import com.holypanda.kosmos.managers.windows.WindowManager;
     import com.holypanda.kosmos.view.gui.popups.LevelStartPopup;
+
     import com.agnither.tasks.abstract.SimpleTask;
 
     public class SelectLevelTask extends SimpleTask
@@ -25,7 +26,7 @@ package com.holypanda.kosmos.tasks.logic.game
             
             if (_level == -1)
             {
-                _level = Application.appController.player.progress.level;
+                _level = Application.appController.player.level;
             }
 
             Application.appController.selectLevel(_level);

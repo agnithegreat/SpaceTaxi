@@ -4,13 +4,17 @@
 package com.holypanda.kosmos.controller
 {
     import com.agnither.tasks.global.TaskSystem;
+    import com.holypanda.kosmos.Application;
 
     import com.holypanda.kosmos.Config;
     import com.holypanda.kosmos.managers.analytics.GamePlayAnalytics;
+    import com.holypanda.kosmos.managers.windows.WindowManager;
     import com.holypanda.kosmos.model.Space;
     import com.holypanda.kosmos.model.player.Player;
     import com.holypanda.kosmos.tasks.logic.SaveLevelResultTask;
+    import com.holypanda.kosmos.tasks.logic.ShowAdsTask;
     import com.holypanda.kosmos.utils.logger.Logger;
+    import com.holypanda.kosmos.view.gui.popups.ContinuePopup;
 
     import starling.core.Starling;
     import starling.events.Event;
@@ -71,7 +75,7 @@ package com.holypanda.kosmos.controller
 
             _servicesController.init();
 
-            _player.init();
+            _player.load();
         }
 
         public function selectEpisode(episode: int):void
@@ -91,6 +95,12 @@ package com.holypanda.kosmos.controller
             pauseGame(false);
         }
 
+        public function reviveGame(value: Boolean):void
+        {
+            _space.revive(value);
+            pauseGame(false);
+        }
+
         public function restartGame():void
         {
             pauseGame(false);
@@ -102,9 +112,9 @@ package com.holypanda.kosmos.controller
             _space.pause(value);
             if (value)
             {
-                Starling.juggler.remove(_space)
+                Starling.juggler.remove(_space);
             } else {
-                Starling.juggler.add(_space)
+                Starling.juggler.add(_space);
             }
         }
 
@@ -117,21 +127,35 @@ package com.holypanda.kosmos.controller
 
         private function handleLevelComplete(event: Event):void
         {
-            if (Config.replay == null)
-            {
-                Logger.sendReplay(GamePlayAnalytics.exportData());
-            }
-
             pauseGame(true);
 
+            BUILD::mobile
+            {
+                if (!_space.win && !_space.revived)
+                {
+                    if (Application.appController.player.noAds)
+                    {
+                        Application.appController.reviveGame(true);
+                        return;
+                    }
+
+                    WindowManager.showPopup(new ContinuePopup(), true);
+                    return;
+                }
+            }
+            
             Starling.juggler.delayCall(checkResults, 1);
         }
 
         private function checkResults():void
         {
+            if (Config.replay == null)
+            {
+                Logger.sendReplay(GamePlayAnalytics.exportData());
+            }
+            
             TaskSystem.getInstance().addTask(new SaveLevelResultTask());
-
-            _servicesController.showInterstitial();
+            TaskSystem.getInstance().addTask(new ShowAdsTask());
         }
     }
 }

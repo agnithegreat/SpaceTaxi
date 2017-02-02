@@ -48,7 +48,7 @@ package com.holypanda.kosmos.managers.iap
         }
 
         public function purchase(id: String):void {
-            Billing.doPayment(BillingType.CONSUMABLE, id, "Payload CONSUMABLE", handleSuccess);
+            Billing.doPayment(BillingType.PERMANENT, id, "Payload", handleSuccess);
         }
 
         public function complete(receipt: String):void {

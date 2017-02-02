@@ -7,6 +7,7 @@ package com.holypanda.kosmos.view.gui.screens
     import com.holypanda.kosmos.Config;
     import com.holypanda.kosmos.managers.sound.SoundManager;
     import com.holypanda.kosmos.managers.windows.WindowManager;
+    import com.holypanda.kosmos.tasks.logic.FreeCoinsTask;
     import com.holypanda.kosmos.tasks.logic.game.SelectLevelTask;
     import com.holypanda.kosmos.utils.StringUtils;
     import com.holypanda.kosmos.view.gui.items.FakeShipView;
@@ -16,8 +17,6 @@ package com.holypanda.kosmos.view.gui.screens
     import com.agnither.utils.gui.components.Screen;
 
     import feathers.controls.LayoutGroup;
-
-    import flash.system.Capabilities;
 
     import starling.display.Image;
     import starling.display.Sprite;
@@ -155,7 +154,7 @@ package com.holypanda.kosmos.view.gui.screens
             _playButton.addEventListener(Event.TRIGGERED, handlePlay);
             _settingsButton.addEventListener(Event.TRIGGERED, handleSettings);
 
-            var max: int = Application.appController.player.progress.level + 2;
+            var max: int = Application.appController.player.level + 2;
             var rand1: int = Math.random() * max;
             var rand2: int = rand1;
             while (rand2 == rand1)
@@ -194,7 +193,7 @@ package com.holypanda.kosmos.view.gui.screens
         private function handleFreeCoins(event: Event):void
         {
             SoundManager.playSound(SoundManager.CLICK);
-            Application.appController.services.showRewardedVideo();
+            TaskSystem.getInstance().addTask(new FreeCoinsTask());
         }
 
         private function handleGarage(event: Event):void

@@ -32,6 +32,11 @@ package com.holypanda.kosmos.managers
             }
             return "";
         }
+        
+        public static function get products():Array
+        {
+            return [prefix + "noads"];
+        }
 
         public static function get deviceId():String
         {

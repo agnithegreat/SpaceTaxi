@@ -5,6 +5,7 @@ package com.holypanda.kosmos.view.gui.popups
 {
     import com.holypanda.kosmos.Application;
     import com.holypanda.kosmos.Config;
+    import com.holypanda.kosmos.controller.SocialController;
     import com.holypanda.kosmos.enums.AuthMethod;
     import com.holypanda.kosmos.managers.sound.SoundManager;
     import com.holypanda.kosmos.managers.windows.WindowManager;
@@ -14,10 +15,12 @@ package com.holypanda.kosmos.view.gui.popups
 
     import com.agnither.tasks.global.TaskSystem;
     import com.agnither.utils.gui.components.Popup;
+    import com.holypanda.kosmos.tasks.logic.UnlinkTask;
 
     import feathers.controls.LayoutGroup;
 
     import starling.display.Button;
+    import starling.display.Image;
     import starling.display.Sprite;
     import starling.events.Event;
     import starling.text.TextField;
@@ -33,9 +36,15 @@ package com.holypanda.kosmos.view.gui.popups
         public var _soundTF: TextField;
 
         public var _closeButton: ContainerButton;
-        
+
+        public var _buttons: LayoutGroup;
         public var _fbButton: Button;
         public var _vkButton: Button;
+
+        public var _logoutButton: ContainerButton;
+        public var _icon_vk: Image;
+        public var _icon_fb: Image;
+        public var _logoutTF: TextField;
 
         public var _musicOnBtn: Button;
         public var _musicOffBtn: Button;
@@ -70,14 +79,18 @@ package com.holypanda.kosmos.view.gui.popups
             _closeButton.addEventListener(Event.TRIGGERED, handleTriggered);
             _fbButton.addEventListener(Event.TRIGGERED, handleTriggered);
             _vkButton.addEventListener(Event.TRIGGERED, handleTriggered);
+            _logoutButton.addEventListener(Event.TRIGGERED, handleTriggered);
             _musicOnBtn.addEventListener(Event.TRIGGERED, handleTriggered);
             _musicOffBtn.addEventListener(Event.TRIGGERED, handleTriggered);
             _soundOnBtn.addEventListener(Event.TRIGGERED, handleTriggered);
             _soundOffBtn.addEventListener(Event.TRIGGERED, handleTriggered);
             _feedbackButton.addEventListener(Event.TRIGGERED, handleTriggered);
             
-            Config.volume.addEventListener(Volume.UPDATE, handleUpdate);
-            handleUpdate(null);
+            Config.volume.addEventListener(Volume.UPDATE, handleVolumeUpdate);
+            handleVolumeUpdate(null);
+
+            Application.appController.social.addEventListener(SocialController.UPDATE, handleSocialUpdate);
+            handleSocialUpdate(null);
         }
 
         override protected function deactivate():void
@@ -85,19 +98,32 @@ package com.holypanda.kosmos.view.gui.popups
             _closeButton.removeEventListener(Event.TRIGGERED, handleTriggered);
             _fbButton.removeEventListener(Event.TRIGGERED, handleTriggered);
             _vkButton.removeEventListener(Event.TRIGGERED, handleTriggered);
+            _logoutButton.removeEventListener(Event.TRIGGERED, handleTriggered);
             _musicOnBtn.removeEventListener(Event.TRIGGERED, handleTriggered);
             _musicOffBtn.removeEventListener(Event.TRIGGERED, handleTriggered);
             _soundOnBtn.removeEventListener(Event.TRIGGERED, handleTriggered);
             _soundOffBtn.removeEventListener(Event.TRIGGERED, handleTriggered);
             _feedbackButton.removeEventListener(Event.TRIGGERED, handleTriggered);
+
+            Config.volume.removeEventListener(Volume.UPDATE, handleVolumeUpdate);
+            Application.appController.social.removeEventListener(SocialController.UPDATE, handleSocialUpdate);
         }
 
-        private function handleUpdate(event: Event):void
+        private function handleVolumeUpdate(event: Event):void
         {
             _musicOnBtn.visible = Config.volume.music > 0;
             _musicOffBtn.visible = Config.volume.music == 0;
             _soundOnBtn.visible = Config.volume.sound > 0;
             _soundOffBtn.visible = Config.volume.sound == 0;
+        }
+
+        private function handleSocialUpdate(event: Event):void
+        {
+            var loggedTo: AuthMethod = Application.appController.social.loggedTo;
+            _buttons.visible = loggedTo == null;
+            _logoutButton.visible = loggedTo != null;
+            _icon_vk.visible = loggedTo == AuthMethod.VK;
+            _icon_fb.visible = loggedTo == AuthMethod.FB;
         }
 
         override protected function cancelHandler():void
@@ -127,7 +153,12 @@ package com.holypanda.kosmos.view.gui.popups
                     TaskSystem.getInstance().addTask(new EnterTask(AuthMethod.VK));
                     break;
                 }
-                    
+                case _logoutButton:
+                {
+                    TaskSystem.getInstance().addTask(new UnlinkTask());
+                    break;
+                }
+
                 case _musicOnBtn:
                 {
                     Config.volume.setMusic(false);

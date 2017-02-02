@@ -151,6 +151,12 @@ package com.holypanda.kosmos.model
         {
             return _win;
         }
+        
+        private var _revived: Boolean;
+        public function get revived():Boolean
+        {
+            return _revived;
+        }
 
         public function Space()
         {
@@ -210,6 +216,7 @@ package com.holypanda.kosmos.model
             _moves = 0;
             _complete = false;
             _win = false;
+            _revived = false;
 
             _zoneController = new ZoneController();
             for (i = 0; i < level.zones.length; i++)
@@ -245,6 +252,24 @@ package com.holypanda.kosmos.model
                 _ship.mute();
             }
             dispatchEventWith(PAUSE, false, value);
+        }
+        
+        public function revive(value: Boolean):void
+        {
+            if (value)
+            {
+                if (_ship.fuel == 0)
+                {
+                    _ship.fuelUp(_ship.fuelMax);
+                }
+                if (_ship.durability == 0)
+                {
+                    _ship.repair();
+                }
+                _ship.update();
+            }
+            _revived = true;
+            _complete = false;
         }
         
         public function restart(level: LevelVO):void
@@ -453,15 +478,10 @@ package com.holypanda.kosmos.model
                 var planetCollided: Planet = checkCollisions(body, currentDelta);
                 if (planetCollided != null)
                 {
-                    if (body is Ship && body.alive)
+                    if (body is Ship)
                     {
                         checkLand(body as Ship, planetCollided);
                     }
-                }
-                
-                if (body == _ship)
-                {
-
                 }
 
                 if (body.alive)

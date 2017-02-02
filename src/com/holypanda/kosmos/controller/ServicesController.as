@@ -7,7 +7,6 @@ package com.holypanda.kosmos.controller
     import com.holypanda.kosmos.managers.ads.RewardedVideoInfo;
     import com.holypanda.kosmos.managers.windows.LoaderManager;
 
-    import starling.core.Starling;
     import starling.events.Event;
     import starling.events.EventDispatcher;
 
@@ -25,13 +24,21 @@ package com.holypanda.kosmos.controller
         }
         
         private var _count: int;
+        public function get count():int
+        {
+            return _count;
+        }
+        public function set count(value: int):void
+        {
+            _count = value;
+        }
 
         private var _rewardedVideoInfo: RewardedVideoInfo;
         public function get rewardedVideoInfo():RewardedVideoInfo
         {
             return _rewardedVideoInfo;
         }
-
+        
         public function ServicesController()
         {
             _services = Services.getServices();
@@ -42,7 +49,7 @@ package com.holypanda.kosmos.controller
             _services.init();
             
             _services.addPurchaseListener(handleIAPSuccess, handleIAPFail, handleIAPProductsReceived);
-//            _services.initInAppPurchases(Application.appController.shop.products);
+            _services.initInAppPurchases(Services.products);
         }
         
         public function initAds():void
@@ -59,15 +66,6 @@ package com.holypanda.kosmos.controller
 
         public function showInterstitial():void
         {
-            // TODO: enable ads
-//            if (!Application.appController.player.settings.ads) return;
-
-            _count++;
-            
-            if (_count < 5) return;
-
-            _count = 0;
-            
             LoaderManager.startLoading("interstitial");
             _services.showInterstitial(function callback(success: Boolean):void
             {
@@ -77,26 +75,12 @@ package com.holypanda.kosmos.controller
 
         public function showRewardedVideo():void
         {
-            var now: Number = (new Date()).time;
-            if (_rewardedVideoInfo.check(now))
+            LoaderManager.startLoading("rewardedVideo");
+            _services.showRewardedVideo(function callback(success: Boolean):void
             {
-                LoaderManager.startLoading("rewardedVideo");
-                _services.showRewardedVideo(function callback(success: Boolean):void
-                {
-                    LoaderManager.stopLoading("rewardedVideo");
-                    if (success)
-                    {
-                        var now: Number = (new Date()).time;
-                        _rewardedVideoInfo.cleanUp(now);
-                        _rewardedVideoInfo.add(now);
-                        _rewardedVideoInfo.save();
-
-                        dispatchEventWith(REWARDED_VIDEO);
-                        
-                        Starling.juggler.delayCall(_services.getReward, 1.5);
-                    }
-                });
-            }
+                LoaderManager.stopLoading("rewardedVideo");
+                dispatchEventWith(REWARDED_VIDEO, false, success);
+            });
         }
 
         public function makePurchase(id: String):void
@@ -137,11 +121,6 @@ package com.holypanda.kosmos.controller
 
         private function handleAdsReward(amount: int):void
         {
-            LoaderManager.stopLoading("rewardedVideo");
-
-            if (amount == 0) return;
-
-//            TaskSystem.getInstance().addTask(new GetVideoBonusTask());
         }
     }
 }

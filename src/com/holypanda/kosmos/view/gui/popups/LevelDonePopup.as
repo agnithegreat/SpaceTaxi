@@ -4,10 +4,9 @@
 package com.holypanda.kosmos.view.gui.popups
 {
     import com.holypanda.kosmos.Application;
-    import com.holypanda.kosmos.controller.StateController;
     import com.holypanda.kosmos.managers.sound.SoundManager;
     import com.holypanda.kosmos.managers.windows.WindowManager;
-    import com.holypanda.kosmos.model.player.Progress;
+    import com.holypanda.kosmos.model.player.Player;
     import com.holypanda.kosmos.model.player.vo.LevelResultVO;
     import com.holypanda.kosmos.tasks.logic.game.EndGameTask;
     import com.holypanda.kosmos.tasks.logic.game.RestartGameTask;
@@ -15,6 +14,7 @@ package com.holypanda.kosmos.view.gui.popups
     import com.holypanda.kosmos.view.gui.items.FakeShipView;
     import com.holypanda.kosmos.view.utils.Animator;
     import com.holypanda.kosmos.vo.LevelVO;
+
     import com.agnither.tasks.global.TaskSystem;
     import com.agnither.utils.gui.components.Popup;
 
@@ -22,7 +22,6 @@ package com.holypanda.kosmos.view.gui.popups
     import feathers.controls.LayoutGroup;
 
     import starling.core.Starling;
-
     import starling.display.Button;
     import starling.display.Image;
     import starling.display.MovieClip;
@@ -94,8 +93,7 @@ package com.holypanda.kosmos.view.gui.popups
 
             _ship.addChild(new FakeShipView(1.7, 0, false));
 
-            var progress: Progress = Application.appController.player.progress;
-            var result: LevelResultVO = progress.getLevelResult(_level.id);
+            var result: LevelResultVO = Application.appController.player.getLevelResult(_level.id);
             _star1.state = result != null && result.stars >= 1 ? ButtonState.DOWN : ButtonState.UP;
             _star2.state = result != null && result.stars >= 2 ? ButtonState.DOWN : ButtonState.UP;
             _star3.state = result != null && result.stars >= 3 ? ButtonState.DOWN : ButtonState.UP;

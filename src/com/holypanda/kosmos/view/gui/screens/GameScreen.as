@@ -35,6 +35,7 @@ package com.holypanda.kosmos.view.gui.screens
 
         public var _moneyTF: TextField;
         public var _addTF: TextField;
+        public var _ordersTF: TextField;
 
         private var _space: Space;
 
@@ -112,6 +113,8 @@ package com.holypanda.kosmos.view.gui.screens
             var ship: Ship = Application.appController.space.ship;
             _fuelIndicator.update(ship.fuel, event != null);
             _durabilityIndicator.update(ship.durability, event != null);
+
+            _ordersTF.text = "" + Application.appController.space.orders.completed + "/" + Application.appController.space.orders.orders.length;
 
             var moneyVal: int = Application.appController.space.orders.money;
             if (_moneyVal != moneyVal)

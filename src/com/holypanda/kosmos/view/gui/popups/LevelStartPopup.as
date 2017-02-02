@@ -7,12 +7,12 @@ package com.holypanda.kosmos.view.gui.popups
     import com.holypanda.kosmos.controller.StateController;
     import com.holypanda.kosmos.managers.sound.SoundManager;
     import com.holypanda.kosmos.managers.windows.WindowManager;
-    import com.holypanda.kosmos.model.player.Progress;
     import com.holypanda.kosmos.model.player.vo.LevelResultVO;
     import com.holypanda.kosmos.tasks.logic.game.EndGameTask;
     import com.holypanda.kosmos.tasks.logic.game.RestartGameTask;
     import com.holypanda.kosmos.tasks.logic.game.StartGameTask;
     import com.holypanda.kosmos.vo.LevelVO;
+
     import com.agnither.tasks.global.TaskSystem;
     import com.agnither.utils.gui.components.Popup;
 
@@ -84,8 +84,7 @@ package com.holypanda.kosmos.view.gui.popups
             _rewardTF.text = String(level.reward);
             _root.validate();
 
-            var progress: Progress = Application.appController.player.progress;
-            var result: LevelResultVO = progress.getLevelResult(level.id);
+            var result: LevelResultVO = Application.appController.player.getLevelResult(level.id);
             _star1.state = result != null && result.stars >= 1 ? ButtonState.DOWN : ButtonState.UP;
             _star2.state = result != null && result.stars >= 2 ? ButtonState.DOWN : ButtonState.UP;
             _star3.state = result != null && result.stars >= 3 ? ButtonState.DOWN : ButtonState.UP;

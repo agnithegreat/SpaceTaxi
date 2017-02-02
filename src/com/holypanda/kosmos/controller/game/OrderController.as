@@ -33,11 +33,18 @@ package com.holypanda.kosmos.controller.game
             return _wave;
         }
         
+        private var _completed: int;
+        public function get completed():int
+        {
+            return _completed;
+        }
+        
         public function OrderController()
         {
             _orders = new <Order>[];
             _money = 0;
             _wave = 0;
+            _completed = 0;
         }
         
         public function start():void
@@ -98,6 +105,7 @@ package com.holypanda.kosmos.controller.game
                     
                     order.complete();
                     ship.order();
+                    _completed++;
                 }
                 if (order.active && !order.completed)
                 {

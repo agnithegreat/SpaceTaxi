@@ -99,7 +99,7 @@ package com.holypanda.kosmos.view.gui.screens
             for (var i:int = 0; i < levels.length; i++)
             {
                 var level: LevelVO = levels[i];
-                if (level.id <= Application.appController.player.progress.level)
+                if (level.id <= Application.appController.player.level)
                 {
                     current = i / 3;
                 }

@@ -7,6 +7,7 @@ package com.holypanda.kosmos.tasks.logic
     import com.holypanda.kosmos.Config;
     import com.holypanda.kosmos.utils.StringUtils;
     import com.agnither.tasks.abstract.SimpleTask;
+    import com.holypanda.kosmos.utils.logger.Logger;
 
     import flash.net.URLRequest;
     import flash.net.navigateToURL;
@@ -21,6 +22,8 @@ package com.holypanda.kosmos.tasks.logic
         override public function execute(token: Object):void
         {
             super.execute(token);
+            
+            Logger.sendLog();
 
             var url: String = Application.uiBuilder.localization.getLocalizedText("SurveyLink");
             url = StringUtils.format(url, Config.userId);

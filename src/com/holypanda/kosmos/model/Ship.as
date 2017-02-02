@@ -199,6 +199,8 @@ package com.holypanda.kosmos.model
 
         public function repair():void
         {
+            _alive = true;
+            _durability = _durabilityMax;
             if (_signal != null)
             {
                 SoundManager.stopSound(_signal);

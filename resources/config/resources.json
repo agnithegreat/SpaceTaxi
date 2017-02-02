@@ -29,7 +29,9 @@
       "layouts/level_start_popup",
       "layouts/pause_popup",
       "layouts/settings_popup",
-      "layouts/modal_popup",
+      "layouts/survey_popup",
+      "layouts/continue_popup",
+      "layouts/no_video_popup",
       "layouts/dialog_popup",
 
       "localization/strings.json",

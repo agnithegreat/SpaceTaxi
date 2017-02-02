@@ -5,12 +5,12 @@ package com.holypanda.kosmos.view.gui.items
 {
     import com.holypanda.kosmos.Application;
     import com.holypanda.kosmos.managers.sound.SoundManager;
-    import com.holypanda.kosmos.model.player.Progress;
+    import com.holypanda.kosmos.model.player.Player;
     import com.holypanda.kosmos.model.player.vo.LevelResultVO;
     import com.holypanda.kosmos.tasks.logic.game.SelectLevelTask;
-    import com.holypanda.kosmos.utils.StringUtils;
     import com.holypanda.kosmos.view.utils.Animator;
     import com.holypanda.kosmos.vo.LevelVO;
+
     import com.agnither.tasks.global.TaskSystem;
     import com.agnither.utils.gui.components.AbstractComponent;
 
@@ -69,10 +69,10 @@ package com.holypanda.kosmos.view.gui.items
             _planetBtn.addEventListener(Event.TRIGGERED, handleTriggered);
             _shadowBtn.addEventListener(Event.TRIGGERED, handleTriggered);
 
-            var progress: Progress = Application.appController.player.progress;
-            var current: Boolean = _level.id == progress.level;
-            var locked: Boolean = _level.id > progress.level;
-            var result: LevelResultVO = progress.getLevelResult(_level.id);
+            var player: Player = Application.appController.player;
+            var current: Boolean = _level.id == player.level;
+            var locked: Boolean = _level.id > player.level;
+            var result: LevelResultVO = player.getLevelResult(_level.id);
 
             _planetBtn.visible = !locked;
             _shadowBtn.visible = locked;

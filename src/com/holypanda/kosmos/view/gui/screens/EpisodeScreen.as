@@ -77,7 +77,7 @@ package com.holypanda.kosmos.view.gui.screens
                 sum += episodes[i].stars;
                 total += episodes[i].starsTotal;
                 var episode: EpisodeVO = episodes[i];
-                if (episode.levels.length > 0 && episode.levels[0].id <= Application.appController.player.progress.level)
+                if (episode.levels.length > 0 && episode.levels[0].id <= Application.appController.player.level)
                 {
                     current = i;
                 }
