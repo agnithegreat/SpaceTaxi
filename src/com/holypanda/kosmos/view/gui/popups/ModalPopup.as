@@ -46,7 +46,7 @@ package com.holypanda.kosmos.view.gui.popups
             _root.pivotY = _root.height * 0.5;
 
             _titleTF.text = Application.uiBuilder.localization.getLocalizedText("Survey");
-            _descriptionTF.text = Application.uiBuilder.localization.getLocalizedText("SurveyDescription");
+            _descriptionTF.text = Application.uiBuilder.localization.getLocalizedText("SurveyText");
             _firstTF.text = Application.uiBuilder.localization.getLocalizedText("Start");
             _secondTF.text = Application.uiBuilder.localization.getLocalizedText("Later");
 

@@ -232,8 +232,8 @@ package com.holypanda.kosmos.model
             _orderController.start();
 
             _dialogController = new DialogController();
-            _dialogController.init();
-            _dialogController.start();
+//            _dialogController.init();
+//            _dialogController.start();
             
             GamePlayAnalytics.startLevel(level.id);
         }

@@ -194,6 +194,7 @@ package com.holypanda.kosmos.view.gui.screens
         private function handleFreeCoins(event: Event):void
         {
             SoundManager.playSound(SoundManager.CLICK);
+            Application.appController.services.showRewardedVideo();
         }
 
         private function handleGarage(event: Event):void

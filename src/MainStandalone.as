@@ -55,6 +55,7 @@ package
                 function handleInitializationArgs(event: InvokeEvent):void
                 {
                     var args:Array = event.arguments as Array;
+//                    args = ["/Users/agnither/projects/Idea/SpaceTaxi/resources/replays/android_0.1.4_c2abb26e54713ed2e7ed8454f4f17363_ac0b857dff22257b75419d8b1467e7f3.replay"];
                     if (args.length > 0)
                     {
                         var file: File = new File(String(args[0]));
@@ -72,7 +73,7 @@ package
         {
             super.initializeStarling();
 
-            showStats = Config.debug;
+//            showStats = Config.debug;
         }
 
         override protected function resize():void

@@ -7,10 +7,12 @@ package com.holypanda.kosmos.view.gui.game
 
     import feathers.controls.LayoutGroup;
 
+    import starling.animation.IAnimatable;
+
     import starling.core.Starling;
     import starling.display.Image;
 
-    public class IndicatorView extends AbstractComponent
+    public class IndicatorView extends AbstractComponent implements IAnimatable
     {
         public static const FUEL: String = "fuel";
         public static const DURABILITY: String = "durability";
@@ -27,6 +29,8 @@ package com.holypanda.kosmos.view.gui.game
         private var _value: int;
         private var _max: int;
         private var _amount: int;
+
+        private var _time: Number = 0;
 
         public function IndicatorView()
         {
@@ -57,7 +61,22 @@ package com.holypanda.kosmos.view.gui.game
 
                 var scale: Number = _baseScale * (_value + 1) / (_amount + 1);
                 Starling.juggler.tween(_bar.mask, animate ? 0.3 : 0, {scaleX: scale});
+
+                if (_value < 2 && _value != _max)
+                {
+                    _time = 0;
+                    Starling.juggler.add(this);
+                } else {
+                    Starling.juggler.remove(this);
+                    _icon.alpha = 1;
+                }
             }
+        }
+
+        public function advanceTime(time: Number):void
+        {
+            _time += time * 10;
+            _icon.alpha = (1 + Math.cos(_time)) * 0.5;
         }
     }
 }

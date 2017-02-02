@@ -6,5 +6,10 @@ package com.holypanda.kosmos.model.player.vo
     public class EpisodeResultVO
     {
         public var episode: int;
+
+        public function toJSON(s:String):*
+        {
+            return [episode];
+        }
     }
 }

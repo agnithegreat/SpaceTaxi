@@ -2,6 +2,26 @@
   "layout":{
     "children":[
       {
+        "cls":"starling.display.Quad",
+        "constructorParams":[
+          {
+            "name":"width",
+            "type":"Number",
+            "value":2048
+          },
+          {
+            "name":"height",
+            "type":"Number",
+            "value":1536
+          }
+        ],
+        "customParams":{},
+        "params":{
+          "alpha":0,
+          "name":"quad"
+        }
+      },
+      {
         "children":[
           {
             "children":[

@@ -12,8 +12,7 @@
         "customParams":{},
         "params":{
           "name":"back",
-          "x":17,
-          "y":133
+          "x":17
         }
       },
       {
@@ -28,7 +27,7 @@
         "params":{
           "name":"cup",
           "x":176,
-          "y":170
+          "y":37
         }
       },
       {
@@ -48,7 +47,7 @@
           "pivotX":250,
           "pivotY":250,
           "x":500,
-          "y":1077
+          "y":944
         }
       },
       {
@@ -112,7 +111,7 @@
         "params":{
           "name":"_okButton",
           "x":500,
-          "y":1077
+          "y":944
         }
       },
       {
@@ -157,7 +156,7 @@
           },
           "width":966,
           "x":500,
-          "y":800
+          "y":667
         }
       },
       {
@@ -233,14 +232,14 @@
           },
           "name":"container",
           "x":357,
-          "y":848
+          "y":715
         }
       }
     ],
     "cls":"feathers.controls.LayoutGroup",
     "customParams":{},
     "params":{
-      "height":1250,
+      "height":1150,
       "layout":{
         "cls":"feathers.layout.AnchorLayout",
         "customParams":{},
@@ -262,7 +261,7 @@
     "canvasColor":0,
     "canvasSize":{
       "x":1000,
-      "y":1250
+      "y":1150
     }
   },
   "version":"2.0"

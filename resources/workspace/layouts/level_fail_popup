@@ -12,8 +12,7 @@
         "customParams":{},
         "params":{
           "name":"back",
-          "x":17,
-          "y":133
+          "x":17
         }
       },
       {
@@ -28,7 +27,7 @@
         "params":{
           "name":"icon",
           "x":142,
-          "y":173
+          "y":40
         }
       },
       {
@@ -38,7 +37,7 @@
         "params":{
           "name":"_ship",
           "x":500,
-          "y":625
+          "y":492
         }
       },
       {
@@ -54,7 +53,7 @@
           "alpha":0.75,
           "name":"icon",
           "x":312,
-          "y":254
+          "y":121
         }
       },
       {
@@ -95,7 +94,7 @@
           "text":"NO FUEL",
           "width":550,
           "x":225,
-          "y":220
+          "y":87
         }
       },
       {
@@ -136,7 +135,7 @@
         "params":{
           "name":"_menuButton",
           "x":394,
-          "y":1074
+          "y":941
         }
       },
       {
@@ -155,7 +154,7 @@
           "pivotX":250,
           "pivotY":250,
           "x":598,
-          "y":1077
+          "y":944
         }
       },
       {
@@ -198,7 +197,7 @@
         "params":{
           "name":"_replayButton",
           "x":598,
-          "y":1077
+          "y":944
         }
       },
       {
@@ -243,7 +242,7 @@
           },
           "width":966,
           "x":500,
-          "y":800
+          "y":667
         }
       },
       {
@@ -318,14 +317,14 @@
           },
           "name":"container",
           "x":357,
-          "y":847
+          "y":714
         }
       }
     ],
     "cls":"feathers.controls.LayoutGroup",
     "customParams":{},
     "params":{
-      "height":1250,
+      "height":1150,
       "layout":{
         "cls":"feathers.layout.AnchorLayout",
         "customParams":{},
@@ -347,7 +346,7 @@
     "canvasColor":0,
     "canvasSize":{
       "x":1000,
-      "y":1250
+      "y":1150
     }
   },
   "version":"2.0"

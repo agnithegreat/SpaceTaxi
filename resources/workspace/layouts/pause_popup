@@ -12,8 +12,7 @@
         "customParams":{},
         "params":{
           "name":"back",
-          "x":17,
-          "y":133
+          "x":17
         }
       },
       {
@@ -54,7 +53,7 @@
         "params":{
           "name":"_menuButton",
           "x":320,
-          "y":1074
+          "y":941
         }
       },
       {
@@ -95,7 +94,7 @@
         "params":{
           "name":"_resumeButton",
           "x":680,
-          "y":1074
+          "y":941
         }
       },
       {
@@ -138,7 +137,7 @@
         "params":{
           "name":"_replayButton",
           "x":500,
-          "y":1077
+          "y":944
         }
       },
       {
@@ -180,7 +179,7 @@
           "text":"Level 12",
           "width":550,
           "x":225,
-          "y":250
+          "y":117
         }
       },
       {
@@ -224,7 +223,7 @@
           "text":"JOURNEY BEGINS",
           "width":700,
           "x":149,
-          "y":374
+          "y":241
         }
       },
       {
@@ -266,7 +265,7 @@
           },
           "width":800,
           "x":99,
-          "y":460
+          "y":327
         }
       },
       {
@@ -291,7 +290,7 @@
           },
           "width":96,
           "x":400,
-          "y":850
+          "y":717
         }
       },
       {
@@ -316,7 +315,7 @@
           },
           "width":132,
           "x":600,
-          "y":850
+          "y":717
         }
       },
       {
@@ -341,7 +340,7 @@
           },
           "width":96,
           "x":400,
-          "y":850
+          "y":717
         }
       },
       {
@@ -366,14 +365,14 @@
           },
           "width":132,
           "x":600,
-          "y":850
+          "y":717
         }
       }
     ],
     "cls":"feathers.controls.LayoutGroup",
     "customParams":{},
     "params":{
-      "height":1250,
+      "height":1150,
       "layout":{
         "cls":"feathers.layout.AnchorLayout",
         "customParams":{},
@@ -395,7 +394,7 @@
     "canvasColor":0,
     "canvasSize":{
       "x":1000,
-      "y":1250
+      "y":1150
     }
   },
   "version":"2.0"

@@ -12,8 +12,169 @@
         "customParams":{},
         "params":{
           "name":"back",
-          "x":17,
-          "y":133
+          "x":17
+        }
+      },
+      {
+        "cls":"starling.text.TextField",
+        "constructorParams":[
+          {
+            "value":200
+          },
+          {
+            "value":100
+          },
+          {
+            "value":""
+          }
+        ],
+        "customParams":{
+          "localizeKey":"Sound"
+        },
+        "params":{
+          "autoSize":"vertical",
+          "batchable":true,
+          "format":{
+            "cls":"starling.text.TextFormat",
+            "customParams":{},
+            "params":{
+              "color":16777215,
+              "font":"dragu_medium",
+              "size":60
+            }
+          },
+          "height":46.8,
+          "name":"_soundTF",
+          "pivotX":275,
+          "pivotY":23.4,
+          "style":{
+            "cls":"starling.styles.DistanceFieldStyle",
+            "customParams":{},
+            "params":{
+              "mode":"basic",
+              "softness":0.2
+            }
+          },
+          "width":550,
+          "x":500,
+          "y":117
+        }
+      },
+      {
+        "cls":"starling.display.Button",
+        "constructorParams":[
+          {
+            "cls":"starling.textures.Texture",
+            "textureName":"pop_up/button_music_off"
+          }
+        ],
+        "customParams":{},
+        "params":{
+          "height":134,
+          "name":"_musicOffBtn",
+          "pivotX":48,
+          "pivotY":67,
+          "textFormat":{
+            "cls":"starling.text.TextFormat",
+            "constructorParams":[],
+            "customParams":{},
+            "params":{}
+          },
+          "width":96,
+          "x":400,
+          "y":267
+        }
+      },
+      {
+        "cls":"starling.display.Button",
+        "constructorParams":[
+          {
+            "cls":"starling.textures.Texture",
+            "textureName":"pop_up/button_sound_off"
+          }
+        ],
+        "customParams":{},
+        "params":{
+          "height":122,
+          "name":"_soundOffBtn",
+          "pivotX":66,
+          "pivotY":61,
+          "textFormat":{
+            "cls":"starling.text.TextFormat",
+            "constructorParams":[],
+            "customParams":{},
+            "params":{}
+          },
+          "width":132,
+          "x":600,
+          "y":267
+        }
+      },
+      {
+        "cls":"starling.display.Button",
+        "constructorParams":[
+          {
+            "cls":"starling.textures.Texture",
+            "textureName":"pop_up/button_music_on"
+          }
+        ],
+        "customParams":{},
+        "params":{
+          "height":134,
+          "name":"_musicOnBtn",
+          "pivotX":48,
+          "pivotY":67,
+          "textFormat":{
+            "cls":"starling.text.TextFormat",
+            "constructorParams":[],
+            "customParams":{},
+            "params":{}
+          },
+          "width":96,
+          "x":400,
+          "y":267
+        }
+      },
+      {
+        "cls":"starling.display.Button",
+        "constructorParams":[
+          {
+            "cls":"starling.textures.Texture",
+            "textureName":"pop_up/button_sound_on"
+          }
+        ],
+        "customParams":{},
+        "params":{
+          "height":122,
+          "name":"_soundOnBtn",
+          "pivotX":66,
+          "pivotY":61,
+          "textFormat":{
+            "cls":"starling.text.TextFormat",
+            "constructorParams":[],
+            "customParams":{},
+            "params":{}
+          },
+          "width":132,
+          "x":600,
+          "y":267
+        }
+      },
+      {
+        "cls":"starling.display.Image",
+        "constructorParams":[
+          {
+            "cls":"starling.textures.Texture",
+            "textureName":"pop_up/line"
+          }
+        ],
+        "customParams":{},
+        "params":{
+          "name":"line",
+          "pivotX":429,
+          "pivotY":57,
+          "x":500,
+          "y":367
         }
       },
       {
@@ -58,7 +219,7 @@
           },
           "width":550,
           "x":500,
-          "y":250
+          "y":492
         }
       },
       {
@@ -66,24 +227,24 @@
         "constructorParams":[
           {
             "cls":"starling.textures.Texture",
-            "textureName":"pop_up/button_music_off"
+            "textureName":"pop_up/button_fb"
           }
         ],
         "customParams":{},
         "params":{
-          "height":134,
-          "name":"_musicOffBtn",
-          "pivotX":48,
-          "pivotY":67,
+          "height":176,
+          "name":"_fbButton",
+          "pivotX":87,
+          "pivotY":88,
           "textFormat":{
             "cls":"starling.text.TextFormat",
             "constructorParams":[],
             "customParams":{},
             "params":{}
           },
-          "width":96,
+          "width":174,
           "x":400,
-          "y":748
+          "y":615
         }
       },
       {
@@ -91,74 +252,24 @@
         "constructorParams":[
           {
             "cls":"starling.textures.Texture",
-            "textureName":"pop_up/button_sound_off"
+            "textureName":"pop_up/button_vk"
           }
         ],
         "customParams":{},
         "params":{
-          "height":122,
-          "name":"_soundOffBtn",
-          "pivotX":66,
-          "pivotY":61,
+          "height":176,
+          "name":"_vkButton",
+          "pivotX":87,
+          "pivotY":88,
           "textFormat":{
             "cls":"starling.text.TextFormat",
             "constructorParams":[],
             "customParams":{},
             "params":{}
           },
-          "width":132,
+          "width":174,
           "x":600,
-          "y":748
-        }
-      },
-      {
-        "cls":"starling.display.Button",
-        "constructorParams":[
-          {
-            "cls":"starling.textures.Texture",
-            "textureName":"pop_up/button_music_on"
-          }
-        ],
-        "customParams":{},
-        "params":{
-          "height":134,
-          "name":"_musicOnBtn",
-          "pivotX":48,
-          "pivotY":67,
-          "textFormat":{
-            "cls":"starling.text.TextFormat",
-            "constructorParams":[],
-            "customParams":{},
-            "params":{}
-          },
-          "width":96,
-          "x":400,
-          "y":749
-        }
-      },
-      {
-        "cls":"starling.display.Button",
-        "constructorParams":[
-          {
-            "cls":"starling.textures.Texture",
-            "textureName":"pop_up/button_sound_on"
-          }
-        ],
-        "customParams":{},
-        "params":{
-          "height":122,
-          "name":"_soundOnBtn",
-          "pivotX":66,
-          "pivotY":61,
-          "textFormat":{
-            "cls":"starling.text.TextFormat",
-            "constructorParams":[],
-            "customParams":{},
-            "params":{}
-          },
-          "width":132,
-          "x":600,
-          "y":749
+          "y":615
         }
       },
       {
@@ -242,119 +353,7 @@
           "pivotX":249,
           "pivotY":103,
           "x":500,
-          "y":960
-        }
-      },
-      {
-        "cls":"starling.display.Button",
-        "constructorParams":[
-          {
-            "cls":"starling.textures.Texture",
-            "textureName":"pop_up/button_fb"
-          }
-        ],
-        "customParams":{},
-        "params":{
-          "height":176,
-          "name":"_fbButton",
-          "pivotX":87,
-          "pivotY":88,
-          "textFormat":{
-            "cls":"starling.text.TextFormat",
-            "constructorParams":[],
-            "customParams":{},
-            "params":{}
-          },
-          "width":174,
-          "x":400,
-          "y":400
-        }
-      },
-      {
-        "cls":"starling.display.Button",
-        "constructorParams":[
-          {
-            "cls":"starling.textures.Texture",
-            "textureName":"pop_up/button_vk"
-          }
-        ],
-        "customParams":{},
-        "params":{
-          "height":176,
-          "name":"_vkButton",
-          "pivotX":87,
-          "pivotY":88,
-          "textFormat":{
-            "cls":"starling.text.TextFormat",
-            "constructorParams":[],
-            "customParams":{},
-            "params":{}
-          },
-          "width":174,
-          "x":600,
-          "y":400
-        }
-      },
-      {
-        "cls":"starling.text.TextField",
-        "constructorParams":[
-          {
-            "value":200
-          },
-          {
-            "value":100
-          },
-          {
-            "value":""
-          }
-        ],
-        "customParams":{
-          "localizeKey":"Sound"
-        },
-        "params":{
-          "autoSize":"vertical",
-          "batchable":true,
-          "format":{
-            "cls":"starling.text.TextFormat",
-            "customParams":{},
-            "params":{
-              "color":16777215,
-              "font":"dragu_medium",
-              "size":60
-            }
-          },
-          "height":46.8,
-          "name":"_soundTF",
-          "pivotX":275,
-          "pivotY":23.4,
-          "style":{
-            "cls":"starling.styles.DistanceFieldStyle",
-            "customParams":{},
-            "params":{
-              "mode":"basic",
-              "softness":0.2
-            }
-          },
-          "width":550,
-          "x":500,
-          "y":625
-        }
-      },
-      {
-        "cls":"starling.display.Image",
-        "constructorParams":[
-          {
-            "cls":"starling.textures.Texture",
-            "textureName":"pop_up/line"
-          }
-        ],
-        "customParams":{},
-        "params":{
-          "name":"line",
-          "pivotX":429,
-          "pivotY":57,
-          "x":500,
-          "y":500
+          "y":827
         }
       },
       {
@@ -399,14 +398,14 @@
           "pivotX":211,
           "pivotY":66,
           "x":1133.5,
-          "y":260
+          "y":127
         }
       }
     ],
     "cls":"feathers.controls.LayoutGroup",
     "customParams":{},
     "params":{
-      "height":1250,
+      "height":1000,
       "layout":{
         "cls":"feathers.layout.AnchorLayout",
         "customParams":{},
@@ -428,7 +427,7 @@
     "canvasColor":0,
     "canvasSize":{
       "x":1000,
-      "y":1250
+      "y":1000
     }
   },
   "version":"2.0"

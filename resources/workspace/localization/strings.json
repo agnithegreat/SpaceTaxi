@@ -55,8 +55,8 @@
     "Start":{"en_US":"Start", "ru_RU":"Начать"},
     "Later":{"en_US":"Later", "ru_RU":"Позже"},
 
-    "LogIn":{"en_US":"Log in:", "ru_RU":"Войти:"},
     "Sound":{"en_US":"Sound:", "ru_RU":"Громкость:"},
+    "LogIn":{"en_US":"Link your progress:", "ru_RU":"Связать сохранения:"},
     "Support":{"en_US":"Support", "ru_RU":"Поддержка"},
 
     "SurveyLink":{"en_US":"https://docs.google.com/forms/d/e/1FAIpQLSf2btrhF_mPoKD9yME0FzPIEbJOSvqKy5tlxIuWx_Q5ciK7NQ/viewform?entry.349077040=%s", "ru_RU":"https://docs.google.com/forms/d/e/1FAIpQLSc7AjFiFpNuA_TxLXMp9HZqqMqvnNZRJj63wHkVUZNumgmC3w/viewform?entry.349077040=%s"}

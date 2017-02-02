@@ -24,13 +24,6 @@ package
             stage.quality = StageQuality.BEST;
             TextField.defaultTextureFormat = Context3DTextureFormat.BGRA;
         }
-
-        override protected function initializeStarling():void
-        {
-            super.initializeStarling();
-
-//            showStats = Config.debug;
-        }
     }
 }
 

@@ -320,8 +320,6 @@ package com.holypanda.kosmos.view.scenes.game
 
         private function handleTouch(event: TouchEvent):void
         {
-            if (!_space.ship.stable) return;
-
             var touch: Touch = event.getTouch(stage);
             if (touch != null)
             {
@@ -337,11 +335,11 @@ package com.holypanda.kosmos.view.scenes.game
                     }
                     case TouchPhase.BEGAN:
                     {
-                        if (distance <= segment)
+                        if (_space.ship.stable && distance <= segment)
                         {
                             _aiming = true;
                         } else {
-                            _touch = touch.getLocation(stage);
+                            _touch = position;
                         }
                         break;
                     }
@@ -373,7 +371,6 @@ package com.holypanda.kosmos.view.scenes.game
                             }
                             _arrow.scaleX = _arrow.scaleY;
                         } else {
-                            position = touch.getLocation(stage);
                             _delta.x = _touch.x - position.x;
                             _delta.y = _touch.y - position.y;
                         }
@@ -525,7 +522,7 @@ package com.holypanda.kosmos.view.scenes.game
 
             var sx: Number = Math.abs(dx);
             var sy: Number = Math.abs(dy);
-            var scale: Number = Math.min(stage.stageWidth / sx, stage.stageHeight / sy, Application.scaleFactor) * 0.85;
+            var scale: Number = Math.min(stage.stageWidth / sx, stage.stageHeight / sy, Application.scaleFactor) * 0.75;
 
             if (sx > _viewport.width * 2 || sy > _viewport.height * 2)
             {

@@ -23,7 +23,7 @@
     <!-- A string value of the format <0-999>.<0-999>.<0-999> that represents application version which can be used to check for application upgrade.
          Values can also be 1-part or 2-part. It is not necessary to have a 3-part value.
          An updated version of application must have a versionNumber value higher than the previous version. Required for namespace >= 2.5. -->
-    <versionNumber>0.1.1</versionNumber>
+    <versionNumber>0.1.8</versionNumber>
 
     <!-- A string value (such as "v1", "2.5", or "Alpha 1") that represents the version of the application, as it should be shown to users. Optional. -->
     <!--<versionLabel></versionLabel>-->
@@ -44,10 +44,31 @@
     <extensions>
         <extensionID>com.myflashlab.air.extensions.dependency.overrideAir</extensionID>
         <extensionID>com.myflashlab.air.extensions.dependency.androidSupport</extensionID>
+        <extensionID>com.myflashlab.air.extensions.dependency.googlePlayServices.auth.base</extensionID>
+        <extensionID>com.myflashlab.air.extensions.dependency.googlePlayServices.base</extensionID>
+        <extensionID>com.myflashlab.air.extensions.dependency.googlePlayServices.basement</extensionID>
+        <extensionID>com.myflashlab.air.extensions.dependency.googlePlayServices.drive</extensionID>
+        <extensionID>com.myflashlab.air.extensions.dependency.googlePlayServices.games</extensionID>
+        <extensionID>com.myflashlab.air.extensions.dependency.googlePlayServices.plus</extensionID>
 
+        <extensionID>com.myflashlab.air.extensions.gameServices</extensionID>
         <extensionID>com.myflashlab.air.extensions.facebook</extensionID>
+        <extensionID>com.myflashlab.air.extensions.billing</extensionID>
+        <extensionID>com.myflashlab.air.extensions.permissionCheck</extensionID>
 
+        <extensionID>com.marpies.ane.googleplayservices.iid</extensionID>
+        <extensionID>com.marpies.ane.googleplayservices.gcm</extensionID>
+        <extensionID>com.marpies.ane.googleplayservices.analytics</extensionID>
+        <extensionID>com.marpies.ane.googleplayservices.location</extensionID>
+        <extensionID>com.marpies.ane.onesignal</extensionID>
         <extensionID>com.marpies.ane.vk</extensionID>
+
+        <extensionID>com.fyber.sdk</extensionID>
+        <extensionID>com.fyber.mediation.adcolony</extensionID>
+        <extensionID>com.fyber.mediation.applovin</extensionID>
+        <extensionID>com.fyber.mediation.chartboost</extensionID>
+        <extensionID>com.fyber.mediation.unityads</extensionID>
+        <extensionID>com.fyber.mediation.vungle</extensionID>
 
         <extensionID>com.mesmotronic.ane.fullscreen</extensionID>
     </extensions>
@@ -273,8 +294,8 @@
                         </activity>
 
                         <!-- application ID which identifies your game settings in the Google Game Services console (NOTE: leave the initial '\ ' as it is) -->
-                        <!--<meta-data android:name="com.google.android.gms.games.APP_ID" android:value="\ 1027704476237" />-->
-                        <!--<meta-data android:name="com.google.android.gms.version" android:value="@integer/google_play_services_version" />-->
+                        <meta-data android:name="com.google.android.gms.games.APP_ID" android:value="\ 740311521432" />
+                        <meta-data android:name="com.google.android.gms.version" android:value="@integer/google_play_services_version" />
 
                         <activity
                             android:name="com.vk.sdk.VKServiceActivity"
@@ -292,6 +313,99 @@
 
                         <!-- This is required for app invite feature -->
                         <activity android:name="com.doitflash.facebook.invite.MyInvite" android:theme="@style/Theme.Transparent" />
+
+
+
+                        <!-- Fyber Rewarded Video Activity -->
+                        <activity android:name="com.fyber.sdk.wrapper.FYBRewardedVideoAirActivity"
+                            android:configChanges="fontScale|keyboard|keyboardHidden|locale|mnc|mcc|navigation|orientation|screenLayout|screenSize|smallestScreenSize|uiMode|touchscreen"
+                            android:hardwareAccelerated="true" />
+
+                        <!-- Fyber Interstitial Activity -->
+                        <activity android:name="com.sponsorpay.publisher.interstitial.SPInterstitialActivity"
+                            android:configChanges="fontScale|keyboard|keyboardHidden|locale|mnc|mcc|navigation|orientation|screenLayout|screenSize|smallestScreenSize|uiMode|touchscreen"
+                            android:hardwareAccelerated="true" />
+
+                        <!-- Fyber Wrapper Activity -->
+                        <activity android:name="com.fyber.sdk.wrapper.FYBWrapperActivity"
+                            android:configChanges="fontScale|keyboard|keyboardHidden|locale|mnc|mcc|navigation|orientation|screenLayout|screenSize|smallestScreenSize|uiMode|touchscreen"
+                            android:hardwareAccelerated="true" />
+
+                        <!-- Fyber Pre-caching service -->
+                        <service android:name="com.sponsorpay.publisher.mbe.player.caching.SPCacheVideoDownloadService" />
+
+                        <!-- AdColony -->
+                        <activity android:name="com.jirbo.adcolony.AdColonyOverlay"
+                            android:configChanges="keyboardHidden|orientation|screenSize"
+                            android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen" />
+                        <activity android:name="com.jirbo.adcolony.AdColonyFullscreen"
+                            android:configChanges="keyboardHidden|orientation|screenSize"
+                            android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen" />
+                        <activity android:name="com.jirbo.adcolony.AdColonyBrowser"
+                            android:configChanges="keyboardHidden|orientation|screenSize"
+                            android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen" />
+
+                        <!-- AppLovin -->
+                        <meta-data android:name="applovin.sdk.key"
+                            android:value="RBkKGmrLRSwMyve-QqT3H4b-AHOBRoKt-2BEp1aEUVbQOFOq3stKxSJ5khHAUb2TeDiRFHglnH99WTzaPrwKHD" />
+                        <meta-data android:name="applovin.sdk.verbose_logging"
+                            android:value="true" />
+                        <activity android:name="com.applovin.adview.AppLovinInterstitialActivity" />
+                        <activity android:name="com.applovin.adview.AppLovinConfirmationActivity" />
+
+                        <!-- Chartboost -->
+                        <activity
+                            android:name="com.chartboost.sdk.CBImpressionActivity"
+                            android:excludeFromRecents="true"
+                            android:configChanges="keyboardHidden|orientation|screenLayout|screenSize|smallestScreenSize"
+                            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+
+                        <!-- UnityAds -->
+                        <activity
+                            android:name="com.unity3d.ads.android.view.UnityAdsFullscreenActivity"
+                            android:configChanges="fontScale|keyboard|keyboardHidden|locale|mnc|mcc|navigation|orientation|screenLayout|screenSize|smallestScreenSize|uiMode|touchscreen"
+                            android:hardwareAccelerated="true"
+                            android:theme="@android:style/Theme.NoTitleBar.Fullscreen" />
+
+                        <!-- Vungle -->
+                        <activity android:name="com.vungle.publisher.FullScreenAdActivity"
+                            android:configChanges="keyboardHidden|orientation|screenSize"
+                            android:theme="@android:style/Theme.NoTitleBar.Fullscreen" />
+                        <service android:name="com.vungle.publisher.VungleService"
+                            android:exported="false" />
+
+                        <!-- OneSignal BEGIN -->
+                        <meta-data android:name="onesignal_app_id"
+                                    android:value="f82bc1b1-0a7f-4d36-839d-23ae2bb78211" />
+                        <meta-data android:name="onesignal_google_project_number"
+                                    android:value="str:1027704476237" />
+
+                        <receiver android:name="com.onesignal.GcmBroadcastReceiver"
+                                    android:permission="com.google.android.c2dm.permission.SEND" >
+                            <intent-filter>
+                                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+                                <category android:name="air.com.dieselpuppet.Lotto" />
+                            </intent-filter>
+                        </receiver>
+                        <receiver android:name="com.onesignal.NotificationOpenedReceiver" />
+                        <service android:name="com.onesignal.GcmIntentService" />
+                        <service android:name="com.onesignal.SyncService" android:stopWithTask="false" />
+                        <activity android:name="com.onesignal.PermissionsActivity" android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+
+                        <service android:name="com.onesignal.NotificationRestoreService" />
+                        <receiver android:name="com.onesignal.BootUpReceiver">
+                            <intent-filter>
+                                <action android:name="android.intent.action.BOOT_COMPLETED" />
+                                <action android:name="android.intent.action.QUICKBOOT_POWERON" />
+                            </intent-filter>
+                        </receiver>
+                        <receiver android:name="com.onesignal.UpgradeReceiver">
+                            <intent-filter>
+                                <action android:name="android.intent.action.MY_PACKAGE_REPLACED" />
+                            </intent-filter>
+                        </receiver>
+                        <!-- OneSignal END -->
+
                     </application>
                 </manifest>
             ]]>

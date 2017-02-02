@@ -5,12 +5,7 @@ package com.holypanda.kosmos.tasks.init
 {
     import com.holypanda.kosmos.Application;
     import com.holypanda.kosmos.Config;
-    import com.holypanda.kosmos.enums.AuthMethod;
-    import com.holypanda.kosmos.managers.Services;
     import com.holypanda.kosmos.tasks.load.LoadAdditionalTask;
-    import com.holypanda.kosmos.tasks.server.InitPlayFabTask;
-    import com.holypanda.kosmos.tasks.server.LoginPlayFabTask;
-    import com.holypanda.kosmos.utils.LocalStorage;
 
     import com.agnither.tasks.abstract.MultiTask;
 
@@ -30,9 +25,6 @@ package com.holypanda.kosmos.tasks.init
         override public function execute(token: Object):void
         {
             addTask(new LoadAdditionalTask());
-            addTask(new InitSocialTask());
-            addTask(new InitPlayFabTask());
-            addTask(new LoginPlayFabTask());
 
             super.execute(token);
         }
@@ -49,6 +41,7 @@ package com.holypanda.kosmos.tasks.init
             
             var locale: String = Config.localization_map[Capabilities.language];
             Config.locale = locale != null ? Capabilities.language : "en";
+//            Config.locale = "en";
             locale = Config.localization_map[Config.locale];
             Application.uiBuilder.localization = new DefaultLocalization(Application.assetsManager.getObject("strings"), locale);
             

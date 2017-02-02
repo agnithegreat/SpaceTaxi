@@ -3,17 +3,14 @@
  */
 package com.holypanda.kosmos.controller
 {
+    import com.agnither.tasks.global.TaskSystem;
+
     import com.holypanda.kosmos.Config;
     import com.holypanda.kosmos.managers.analytics.GamePlayAnalytics;
-    import com.holypanda.kosmos.managers.windows.WindowManager;
     import com.holypanda.kosmos.model.Space;
     import com.holypanda.kosmos.model.player.Player;
-    import com.holypanda.kosmos.model.player.vo.EpisodeResultVO;
+    import com.holypanda.kosmos.tasks.logic.SaveLevelResultTask;
     import com.holypanda.kosmos.utils.logger.Logger;
-    import com.holypanda.kosmos.view.gui.popups.EpisodeDonePopup;
-    import com.holypanda.kosmos.view.gui.popups.LevelDonePopup;
-    import com.holypanda.kosmos.view.gui.popups.LevelFailPopup;
-    import com.holypanda.kosmos.view.gui.popups.ModalPopup;
 
     import starling.core.Starling;
     import starling.events.Event;
@@ -49,12 +46,19 @@ package com.holypanda.kosmos.controller
         {
             return _socialController;
         }
+
+        private var _servicesController: ServicesController;
+        public function get services():ServicesController
+        {
+            return _servicesController;
+        }
         
         public function AppController()
         {
             _stateController = new StateController();
             _levelsController = new LevelsController();
             _socialController = new SocialController();
+            _servicesController = new ServicesController();
             _player = new Player();
 
             _space = new Space();
@@ -64,6 +68,9 @@ package com.holypanda.kosmos.controller
         {
             _stateController.init();
             _levelsController.init();
+
+            _servicesController.init();
+
             _player.init();
         }
 
@@ -122,25 +129,9 @@ package com.holypanda.kosmos.controller
 
         private function checkResults():void
         {
-            if (_space.win)
-            {
-                var lastLevelInEpisode: Boolean = _levelsController.currentLevel == _levelsController.currentEpisode.lastLevel;
-                var result: EpisodeResultVO = _player.progress.getEpisodeResult(_levelsController.currentEpisode.id);
-                if (lastLevelInEpisode && result == null)
-                {
-                    _player.progress.setEpisodeResult(_levelsController.currentLevel.episode);
-                    WindowManager.showPopup(new EpisodeDonePopup(), true);
+            TaskSystem.getInstance().addTask(new SaveLevelResultTask());
 
-                    WindowManager.showPopup(new ModalPopup(), true);
-                }
-                
-                _player.progress.setLevelResult(_levelsController.currentLevel.id, _space.orders.money, _levelsController.currentLevel.countStars(_space.moves));
-                _player.progress.save();
-
-                WindowManager.showPopup(new LevelDonePopup(), true);
-            } else {
-                WindowManager.showPopup(new LevelFailPopup(), true);
-            }
+            _servicesController.showInterstitial();
         }
     }
 }

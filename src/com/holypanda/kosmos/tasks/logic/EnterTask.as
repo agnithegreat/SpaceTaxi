@@ -7,11 +7,12 @@ package com.holypanda.kosmos.tasks.logic
 
     import com.holypanda.kosmos.Application;
     import com.holypanda.kosmos.enums.AuthMethod;
+    import com.holypanda.kosmos.managers.Services;
     import com.holypanda.kosmos.managers.windows.LoaderManager;
+    import com.holypanda.kosmos.tasks.server.LoginPlayFabTask;
     import com.holypanda.kosmos.tasks.social.FacebookLoginTask;
     import com.holypanda.kosmos.tasks.social.VkontakteLoginTask;
     import com.holypanda.kosmos.utils.LocalStorage;
-    import com.holypanda.kosmos.vo.UserVO;
 
     public class EnterTask extends MultiTask
     {
@@ -28,13 +29,13 @@ package com.holypanda.kosmos.tasks.logic
         {
             LoaderManager.startLoading(toString());
             
-            var user: UserVO = new UserVO();
-
             var userId: String = LocalStorage.settings.read("userId") as String;
-            if (userId != null)
+            if (userId == null)
             {
-                user.id = userId;
+                userId = Services.deviceId;
+                LocalStorage.auth.write("userId", userId);
             }
+            
             if (_auth == null)
             {
                 var auth: String = LocalStorage.settings.read("auth") as String;
@@ -45,19 +46,14 @@ package com.holypanda.kosmos.tasks.logic
             {
                 case AuthMethod.GUEST:
                 {
-                    if (user.id != null)
-                    {
-//                        addTask(new ServerAuthEnterTask(_auth, As2Bert.encBStr(user.id), handleEnter));
-                    } else {
-//                        addTask(new ServerAuthRegisterTask(handleEnter));
-                    }
+                    addTask(new LoginPlayFabTask(userId, _auth));
                     break;
                 }
                 case AuthMethod.FB:
                 {
                     BUILD::mobile
                     {
-                        addTask(new FacebookLoginTask(handleEnter));
+                        addTask(new FacebookLoginTask());
                     }
                     break;
                 }
@@ -65,25 +61,7 @@ package com.holypanda.kosmos.tasks.logic
                 {
                     BUILD::mobile
                     {
-                        addTask(new VkontakteLoginTask(handleEnter));
-                        // TODO: убрать костыль для ВК
-                        LoaderManager.stopLoading(toString());
-                    }
-                    break;
-                }
-                case AuthMethod.GP:
-                {
-                    BUILD::android
-                    {
-//                        addTask(new GooglePlayLoginTask(handleEnter));
-                    }
-                    break;
-                }
-                case AuthMethod.GC:
-                {
-                    BUILD::ios
-                    {
-//                        addTask(new GameCenterLoginTask(handleEnter));
+                        addTask(new VkontakteLoginTask());
                     }
                     break;
                 }
@@ -92,14 +70,12 @@ package com.holypanda.kosmos.tasks.logic
             super.execute(token);
         }
 
-        public function handleEnter(success: Boolean):void
+        override protected function processComplete():void
         {
             LoaderManager.stopLoading(toString());
             
-            if (!success) return;
-
             Application.appController.social.update();
-//            Application.appController.services.initAds();
+            Application.appController.services.initAds();
 //            Application.appController.analytics.logCompletedRegistration(_auth.tag);
 //            
 //            Application.appController.achievements.load();

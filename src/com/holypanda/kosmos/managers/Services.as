@@ -15,7 +15,7 @@ package com.holypanda.kosmos.managers
         {
             BUILD::mobile
             {
-//                return new MobileServices();
+                return new MobileServices();
             }
             return new Services();
         }
@@ -24,11 +24,11 @@ package com.holypanda.kosmos.managers
         {
             BUILD::ios
             {
-                return "com.dieselpuppet.Lotto.";
+                return "com.holypanda.kosmos.";
             }
             BUILD::android
             {
-                return "com.dieselpuppet.lotto.";
+                return "com.holypanda.kosmos.";
             }
             return "";
         }
@@ -78,7 +78,11 @@ package com.holypanda.kosmos.managers
         public function initAds(rewardCallback: Function):void
         {
         }
-        public function showInterstitial():void {
+        public function showInterstitial(callback: Function):void {
+            if (callback != null)
+            {
+                callback(false);
+            }
         }
         public function showRewardedVideo(callback: Function):void {
             if (callback != null)

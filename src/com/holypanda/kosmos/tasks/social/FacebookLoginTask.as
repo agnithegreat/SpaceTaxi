@@ -10,19 +10,17 @@ package com.holypanda.kosmos.tasks.social
     import com.holypanda.kosmos.enums.AuthMethod;
     import com.holypanda.kosmos.managers.social.MobileFacebookSocial;
     import com.holypanda.kosmos.tasks.server.LinkPlayFabTask;
+    import com.holypanda.kosmos.tasks.server.LoginPlayFabTask;
+    import com.holypanda.kosmos.utils.LocalStorage;
 
     import starling.events.Event;
 
     public class FacebookLoginTask extends SimpleTask
     {
-        private var _callback: Function;
-
         private var _social: MobileFacebookSocial;
         
-        public function FacebookLoginTask(callback: Function)
+        public function FacebookLoginTask()
         {
-            _callback = callback;
-            
             super();
         }
         
@@ -49,13 +47,13 @@ package com.holypanda.kosmos.tasks.social
         
         private function handleGetMe(event: Event):void
         {
-            TaskSystem.getInstance().addTask(new LinkPlayFabTask(_social.token, AuthMethod.FB), handleLink);
-        }
-        
-        private function handleLink():void
-        {
-            _callback(true);
-            complete();
+            var userId: String = LocalStorage.auth.read("userId") as String;
+            if (userId == _social.me.id)
+            {
+                TaskSystem.getInstance().addTask(new LoginPlayFabTask(_social.me.id, AuthMethod.FB), complete);
+            } else {
+                TaskSystem.getInstance().addTask(new LinkPlayFabTask(_social.me.id, AuthMethod.FB), complete);
+            }
         }
     }
 }

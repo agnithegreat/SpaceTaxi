@@ -181,6 +181,28 @@
           {
             "children":[
               {
+                "cls":"starling.display.Quad",
+                "constructorParams":[
+                  {
+                    "name":"width",
+                    "type":"Number",
+                    "value":50
+                  },
+                  {
+                    "name":"height",
+                    "type":"Number",
+                    "value":50
+                  }
+                ],
+                "customParams":{},
+                "params":{
+                  "alpha":0,
+                  "name":"quad",
+                  "scaleX":7,
+                  "scaleY":2.5
+                }
+              },
+              {
                 "cls":"starling.display.Image",
                 "constructorParams":[
                   {

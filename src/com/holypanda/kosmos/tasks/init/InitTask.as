@@ -5,7 +5,9 @@ package com.holypanda.kosmos.tasks.init
 {
     import com.holypanda.kosmos.Config;
     import com.holypanda.kosmos.tasks.load.LoadBaseTask;
+    import com.holypanda.kosmos.tasks.logic.EnterTask;
     import com.holypanda.kosmos.tasks.resources.LoadResourcesTask;
+    import com.holypanda.kosmos.tasks.server.InitPlayFabTask;
 
     import com.agnither.tasks.abstract.MultiTask;
 
@@ -31,6 +33,9 @@ package com.holypanda.kosmos.tasks.init
             addTask(new LoadResourcesTask("preloader"));
             addTask(new InitPreloaderTask());
             addTask(new InitApplicationTask());
+            addTask(new InitSocialTask());
+            addTask(new InitPlayFabTask());
+            addTask(new EnterTask());
             
             BUILD::debug
             {

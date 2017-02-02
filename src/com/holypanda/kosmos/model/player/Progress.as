@@ -5,6 +5,7 @@ package com.holypanda.kosmos.model.player
 {
     import com.holypanda.kosmos.model.player.vo.EpisodeResultVO;
     import com.holypanda.kosmos.model.player.vo.LevelResultVO;
+    import com.holypanda.kosmos.tasks.server.vo.UserDataVO;
     import com.holypanda.kosmos.utils.LocalStorage;
 
     import flash.net.registerClassAlias;
@@ -13,8 +14,23 @@ package com.holypanda.kosmos.model.player
 
     public class Progress extends EventDispatcher
     {
+        private var _money: int;
+        public function get money():int
+        {
+            return _money;
+        }
+        
         private var _levels: Object;
+        public function get levels():Object
+        {
+            return _levels;
+        }
+        
         private var _episodes: Object;
+        public function get episodes():Object
+        {
+            return _episodes;
+        }
 
         private var _level: int;
         public function get level():int
@@ -29,6 +45,25 @@ package com.holypanda.kosmos.model.player
 
             registerClassAlias("LevelResultVO", LevelResultVO);
             registerClassAlias("EpisodeResultVO", EpisodeResultVO);
+        }
+        
+        public function init(userData: UserDataVO):void
+        {
+            _money = Math.max(int(userData.money), _money);
+            for each (var levelResult: Array in userData.levels)
+            {
+                setLevelResult(levelResult[0], levelResult[1], levelResult[2]);
+            }
+            for each (var episodeResult: Array in userData.episodes)
+            {
+                setEpisodeResult(episodeResult[0]);
+            }
+            save();
+        }
+        
+        public function addMoney(value: int):void
+        {
+            _money += value;
         }
 
         public function getLevelResult(id: int):LevelResultVO
@@ -70,6 +105,7 @@ package com.holypanda.kosmos.model.player
 
         public function save():void
         {
+            LocalStorage.progress.write("money", _money);
             LocalStorage.progress.write("levels", _levels);
             LocalStorage.progress.write("episodes", _episodes);
             LocalStorage.progress.write("current", _level);
@@ -77,6 +113,7 @@ package com.holypanda.kosmos.model.player
 
         public function load():void
         {
+            _money = LocalStorage.progress.read("money") as int || 0;
             _levels = LocalStorage.progress.read("levels") || {};
             _episodes = LocalStorage.progress.read("episodes") || {};
             _level = LocalStorage.progress.read("current") as int || 0;

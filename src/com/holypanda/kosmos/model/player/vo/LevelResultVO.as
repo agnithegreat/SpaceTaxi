@@ -8,5 +8,10 @@ package com.holypanda.kosmos.model.player.vo
         public var level: int;
         public var money: int;
         public var stars: int;
+
+        public function toJSON(s:String):*
+        {
+            return [level, money, stars];
+        }
     }
 }
