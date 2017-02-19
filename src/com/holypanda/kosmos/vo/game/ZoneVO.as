@@ -3,7 +3,6 @@
  */
 package com.holypanda.kosmos.vo.game
 {
-    import com.holypanda.kosmos.vo.*;
     public class ZoneVO extends ObjectVO
     {
         public var type: String;

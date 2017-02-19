@@ -46,6 +46,7 @@
     "LevelDescription":{"en_US":"Transport every passenger to his destination to complete the level", "ru_RU":"Перевези каждого пассажира в пункт его назначения, чтобы пройти уровень"},
     "LevelReward":{"en_US":"LEVEL REWARD", "ru_RU":"НАГРАДА"},
 
+    "LevelIsDone":{"en_US":"LEVEL IS DONE", "ru_RU":"УРОВЕНЬ ЗАВЕРШЕН"},
     "EpisodeIsDone":{"en_US":"EPISODE IS DONE", "ru_RU":"ЭПИЗОД ЗАВЕРШЕН"},
 
     "OutOfFuel":{"en_US":"OUT OF FUEL", "ru_RU":"ТОПЛИВО КОНЧИЛОСЬ"},

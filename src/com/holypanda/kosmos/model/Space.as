@@ -16,7 +16,6 @@ package com.holypanda.kosmos.model
     import com.holypanda.kosmos.vo.game.OrderVO;
     import com.holypanda.kosmos.vo.game.PlanetVO;
     import com.holypanda.kosmos.vo.game.PortalVO;
-    import com.holypanda.kosmos.vo.game.ZoneVO;
 
     import flash.geom.Point;
     import flash.geom.Rectangle;
@@ -43,7 +42,7 @@ package com.holypanda.kosmos.model
         public static const MIN_SPEED: Number = 5;
         public static const DAMAGE_SPEED: Number = 30;
         public static const CONTROL_SPEED: Number = 200;
-        public static const TRAJECTORY_STEPS: int = 20; // 20 min, 250 max
+        public static const TRAJECTORY_STEPS: int = 200; // 20 min, 250 max
         public static const TRAJECTORY_LENGTH: int = 100000; // 100 min, 100000 max
 
         private var _ship: Ship;
@@ -215,12 +214,7 @@ package com.holypanda.kosmos.model
             _revived = false;
 
             _zoneController = new ZoneController();
-            for (i = 0; i < level.zones.length; i++)
-            {
-                var zone: ZoneVO = level.zones[i];
-                _zoneController.addZone(new Zone(3, zone, _planetsDict[zone.planet]));
-            }
-            
+
             _orderController = new OrderController();
             _orderController.addEventListener(OrderController.DONE, handleOrdersDone);
             for (i = 0; i < level.orders.length; i++)
@@ -250,11 +244,7 @@ package com.holypanda.kosmos.model
         {
             if (value)
             {
-                if (_ship.fuel == 0)
-                {
-                    _ship.fuelUp(_ship.fuelMax);
-                }
-                if (_ship.durability == 0)
+                if (!_ship.alive)
                 {
                     _ship.repair();
                 }
@@ -337,7 +327,7 @@ package com.holypanda.kosmos.model
 
         public function setPullPoint(angle: Number, power: Number, full: Boolean, show: Boolean):void
         {
-            if (_ship.stable && _ship.fuel > 0)
+            if (_ship.stable)
             {
                 GamePlayAnalytics.setMovement(angle, power);
                 
@@ -404,7 +394,7 @@ package com.holypanda.kosmos.model
 
         public function launch():void
         {
-            if (_ship.stable && _ship.fuel > 0 && _trajectory.length > 10)
+            if (_ship.stable && _trajectory.length > 10)
             {
                 GamePlayAnalytics.launch();
                 
@@ -647,7 +637,7 @@ package com.holypanda.kosmos.model
                     _completeNotify = true;
                     dispatchEventWith(LEVEL_COMPLETE);
                 }
-            } else if (!_ship.alive || (_ship.stable && _ship.fuel == 0))
+            } else if (!_ship.alive)
             {
                 lose();
             }

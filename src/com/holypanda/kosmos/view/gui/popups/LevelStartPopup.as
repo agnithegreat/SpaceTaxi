@@ -11,7 +11,6 @@ package com.holypanda.kosmos.view.gui.popups
     import com.holypanda.kosmos.tasks.logic.game.EndGameTask;
     import com.holypanda.kosmos.tasks.logic.game.RestartGameTask;
     import com.holypanda.kosmos.tasks.logic.game.StartGameTask;
-    import com.holypanda.kosmos.utils.StringUtils;
     import com.holypanda.kosmos.vo.LevelVO;
 
     import com.agnither.tasks.global.TaskSystem;
@@ -46,9 +45,6 @@ package com.holypanda.kosmos.view.gui.popups
         public var _star2: Button;
         public var _star3: Button;
 
-        public var _container: LayoutGroup;
-        public var _rewardTF: TextField;
-
         public function LevelStartPopup()
         {
             super(0, 1);
@@ -80,10 +76,6 @@ package com.holypanda.kosmos.view.gui.popups
 
             _titleTF.text = Application.uiBuilder.localization.getLocalizedText("Level" + (level.id+1));
             _descriptionTF.text = Application.uiBuilder.localization.getLocalizedText("LevelDescription");
-
-            _rewardTF.text = StringUtils.formatNumberDelimeter(level.reward, " ");
-            _container.readjustLayout();
-            _container.validate();
 
             var result: LevelResultVO = Application.appController.player.getLevelResult(level.id);
             _star1.state = result != null && result.stars >= 1 ? ButtonState.DOWN : ButtonState.UP;

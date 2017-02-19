@@ -6,8 +6,7 @@ package com.holypanda.kosmos.view.gui.popups
     import com.holypanda.kosmos.Application;
     import com.holypanda.kosmos.managers.sound.SoundManager;
     import com.holypanda.kosmos.managers.windows.WindowManager;
-    import com.holypanda.kosmos.utils.StringUtils;
-    import com.holypanda.kosmos.vo.EpisodeVO;
+
     import com.agnither.utils.gui.components.Popup;
 
     import feathers.controls.LayoutGroup;
@@ -31,9 +30,6 @@ package com.holypanda.kosmos.view.gui.popups
         
         public var _okButton: ContainerButton;
 
-        public var _container: LayoutGroup;
-        public var _rewardTF: TextField;
-
         public function EpisodeDonePopup()
         {
             super(0, 1);
@@ -54,13 +50,7 @@ package com.holypanda.kosmos.view.gui.popups
 
         override protected function activate():void
         {
-            var episode: EpisodeVO = Application.appController.levelsController.currentEpisode;
-            
             _okButton.addEventListener(Event.TRIGGERED, handleTriggered);
-
-            _rewardTF.text = StringUtils.formatNumberDelimeter(episode.reward, " ");
-            _container.readjustLayout();
-            _container.validate();
 
             Starling.juggler.add(_glowMC);
         }

@@ -7,6 +7,5 @@ package com.holypanda.kosmos.enums
     {
         public static const DEPARTURE: String = "departure";
         public static const ARRIVAL: String = "arrival";
-        public static const FUEL: String = "fuel";
     }
 }

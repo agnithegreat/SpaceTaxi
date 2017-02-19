@@ -6,14 +6,11 @@ package com.holypanda.kosmos.view.gui.popups
     import com.holypanda.kosmos.Application;
     import com.holypanda.kosmos.managers.sound.SoundManager;
     import com.holypanda.kosmos.managers.windows.WindowManager;
-    import com.holypanda.kosmos.model.player.Player;
     import com.holypanda.kosmos.model.player.vo.LevelResultVO;
     import com.holypanda.kosmos.tasks.logic.game.EndGameTask;
     import com.holypanda.kosmos.tasks.logic.game.RestartGameTask;
     import com.holypanda.kosmos.tasks.logic.game.SelectLevelTask;
-    import com.holypanda.kosmos.utils.StringUtils;
     import com.holypanda.kosmos.view.gui.items.FakeShipView;
-    import com.holypanda.kosmos.view.utils.Animator;
     import com.holypanda.kosmos.vo.LevelVO;
 
     import com.agnither.tasks.global.TaskSystem;
@@ -24,7 +21,6 @@ package com.holypanda.kosmos.view.gui.popups
 
     import starling.core.Starling;
     import starling.display.Button;
-    import starling.display.Image;
     import starling.display.MovieClip;
     import starling.display.Sprite;
     import starling.events.Event;
@@ -45,12 +41,11 @@ package com.holypanda.kosmos.view.gui.popups
         public var _replayButton: ContainerButton;
         public var _nextButton: ContainerButton;
 
-        public var _container: LayoutGroup;
-        public var _rewardTF: TextField;
-
         public var _star1: Button;
         public var _star2: Button;
         public var _star3: Button;
+
+        public var _textTF: TextField;
         
         private var _level: LevelVO;
 
@@ -90,10 +85,6 @@ package com.holypanda.kosmos.view.gui.popups
             _star1.state = result != null && result.stars >= 1 ? ButtonState.DOWN : ButtonState.UP;
             _star2.state = result != null && result.stars >= 2 ? ButtonState.DOWN : ButtonState.UP;
             _star3.state = result != null && result.stars >= 3 ? ButtonState.DOWN : ButtonState.UP;
-            
-            _rewardTF.text = StringUtils.formatNumberDelimeter(result.money, " ");
-            _container.readjustLayout();
-            _container.validate();
 
             Starling.juggler.add(_glowMC);
         }

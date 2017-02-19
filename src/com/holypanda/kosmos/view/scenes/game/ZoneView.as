@@ -85,17 +85,6 @@ package com.holypanda.kosmos.view.scenes.game
                 {
                     break;
                 }
-
-                case ZoneType.FUEL:
-                {
-                    _sign = new Image(Application.assetsManager.getTexture("misc/symbol_station"));
-                    _sign.pivotX = _sign.width * 0.5;
-                    _sign.pivotY = _sign.height * 0.5;
-                    _sign.scaleX = 0.25;
-                    _sign.scaleY = 0.25;
-                    addChild(_sign);
-                    break;
-                }
             }
         }
 

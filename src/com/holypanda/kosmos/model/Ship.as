@@ -3,8 +3,6 @@
  */
 package com.holypanda.kosmos.model
 {
-    import com.holypanda.kosmos.managers.sound.SoundManager;
-
     import starling.events.Event;
 
     public class Ship extends DynamicSpaceBody
@@ -21,28 +19,6 @@ package com.holypanda.kosmos.model
         public function get rotation():Number
         {
             return _rotation;
-        }
-        
-        protected var _fuel: int;
-        public function get fuel():int
-        {
-            return _fuel;
-        }
-        protected var _fuelMax: int;
-        public function get fuelMax():int
-        {
-            return _fuelMax;
-        }
-
-        protected var _durability: int;
-        public function get durability():int
-        {
-            return _durability;
-        }
-        protected var _durabilityMax: int;
-        public function get durabilityMax():int
-        {
-            return _durabilityMax;
         }
         
         protected var _planet: Planet;
@@ -72,22 +48,10 @@ package com.holypanda.kosmos.model
             super.reset();
             
             _stable = false;
-
-            // TODO: FUEL - setup
-            _fuelMax = 3;
-            _fuel = _fuelMax;
-
-            // TODO: DURABILITY - setup
-            _durabilityMax = 1;
-            _durability = _durabilityMax;
         }
 
         public function launch(fuel: int = 0):void
         {
-            if (_fuel < fuel) {
-                throw new Error("no fuel");
-            }
-
             if (_planet != null)
             {
                 _planet.removeEventListener(SpaceBody.UPDATE, handlePlanetUpdate);
@@ -95,13 +59,6 @@ package com.holypanda.kosmos.model
             }
             _stable = false;
             _landing = false;
-
-            _fuel -= fuel;
-
-            if (!_clone && _fuel < 2)
-            {
-                SoundManager.playSound(SoundManager.LOW_FUEL);
-            }
 
             dispatchEventWith(LAUNCH);
         }
@@ -124,16 +81,7 @@ package com.holypanda.kosmos.model
         {
             dispatchEventWith(COLLIDE, false, power);
 
-            _durability -= power;
-            if (_durability <= 0)
-            {
-                crash();
-            }
-
-            if (!_clone && _durability < 2)
-            {
-                SoundManager.playSound(SoundManager.LOW_FUEL);
-            }
+            crash();
         }
 
         public function landPrepare(planet: Planet):void
@@ -167,7 +115,6 @@ package com.holypanda.kosmos.model
         {
             super.crash();
             
-            _durability = 0;
             stop();
             dispatchEventWith(CRASH);
         }
@@ -183,16 +130,9 @@ package com.holypanda.kosmos.model
             dispatchEventWith(ORDER);
         }
 
-        public function fuelUp(amount: Number):void
-        {
-            SoundManager.playSound(SoundManager.FUEL_LOAD);
-            _fuel = Math.min(_fuel + amount, _fuelMax);
-        }
-
         public function repair():void
         {
             _alive = true;
-            _durability = _durabilityMax;
         }
         
         override public function clone():SpaceBody

@@ -85,7 +85,7 @@ package com.holypanda.kosmos.view.scenes.game
             var delta: Number = GeomUtils.getAngleDelta(_animation.rotation, _ship.rotation + Math.PI * 0.5);
             _animation.rotation += delta * 0.15;
 
-            if (_ship.durability > 0)
+            if (_ship.alive)
             {
                 _animation.alpha = 1;
             }

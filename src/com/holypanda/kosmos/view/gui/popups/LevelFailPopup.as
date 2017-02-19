@@ -10,6 +10,7 @@ package com.holypanda.kosmos.view.gui.popups
     import com.holypanda.kosmos.tasks.logic.game.RestartGameTask;
     import com.holypanda.kosmos.utils.StringUtils;
     import com.holypanda.kosmos.view.gui.items.FakeShipView;
+
     import com.agnither.tasks.global.TaskSystem;
     import com.agnither.utils.gui.components.Popup;
 
@@ -65,12 +66,9 @@ package com.holypanda.kosmos.view.gui.popups
             _menuButton.addEventListener(Event.TRIGGERED, handleTriggered);
             _replayButton.addEventListener(Event.TRIGGERED, handleTriggered);
 
-            if (Application.appController.space.ship.durability == 0)
+            if (!Application.appController.space.ship.alive)
             {
                 _titleTF.text = Application.uiBuilder.localization.getLocalizedText("ShipIsCrashed");
-            } else if (Application.appController.space.ship.fuel == 0)
-            {
-                _titleTF.text = Application.uiBuilder.localization.getLocalizedText("OutOfFuel");
             } else {
                 _titleTF.text = Application.uiBuilder.localization.getLocalizedText("ShipIsLost");
             }

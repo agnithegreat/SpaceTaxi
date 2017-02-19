@@ -5,7 +5,6 @@ package com.holypanda.kosmos.controller.game
 {
     import com.holypanda.kosmos.Application;
     import com.holypanda.kosmos.enums.ZoneType;
-    import com.holypanda.kosmos.managers.sound.SoundManager;
     import com.holypanda.kosmos.model.Ship;
     import com.holypanda.kosmos.model.orders.Zone;
 
@@ -49,12 +48,6 @@ package com.holypanda.kosmos.controller.game
                 case ZoneType.ARRIVAL:
                 {
                     Application.appController.space.orders.checkOrders(ship, zone);
-                    break;
-                }
-                case ZoneType.FUEL:
-                {
-                    SoundManager.playSound(SoundManager.FUEL_LOAD);
-                    ship.fuelUp(ship.fuelMax);
                     break;
                 }
             }
