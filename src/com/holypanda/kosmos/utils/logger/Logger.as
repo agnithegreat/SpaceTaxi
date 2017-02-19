@@ -52,7 +52,6 @@ package com.holypanda.kosmos.utils.logger
                     log("screenDPI: " + Capabilities.screenDPI);
                     log("screenResolutionX: " + Capabilities.screenResolutionX);
                     log("screenResolutionY: " + Capabilities.screenResolutionY);
-                    log("touchscreenType: " + Capabilities.touchscreenType);
                     log("cpuArchitecture: " + Capabilities.cpuArchitecture);
                     log("languages: " + Capabilities.languages);
                     log("version: " + Capabilities.version);
@@ -103,10 +102,8 @@ package com.holypanda.kosmos.utils.logger
             {
                 var hash:String = MD5.hashBytes(replay);
 
-                var contents:ByteArray = new ByteArray();
-                replay.readBytes(contents);
                 var filename:String = Config.platform + "_" + Config.version + "_" + Config.userId + "_" + hash + ".replay";
-                sendFile(contents, "Kosmos/replays", filename);
+                sendFile(replay, "Kosmos/replays", filename);
             }
         }
         

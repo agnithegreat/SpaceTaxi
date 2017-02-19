@@ -53,8 +53,6 @@ package com.holypanda.kosmos.model
 
         private var _landing: Boolean;
 
-        private var _signal: String;
-        
         private var _clone: Boolean;
 
         public function Ship(radius: int, mass: Number, rotation: Number, clone: Boolean = false)
@@ -100,9 +98,9 @@ package com.holypanda.kosmos.model
 
             _fuel -= fuel;
 
-            if (!_clone && _fuel < 2 && _signal == null)
+            if (!_clone && _fuel < 2)
             {
-                _signal = SoundManager.playSound(SoundManager.LOW_FUEL, true);
+                SoundManager.playSound(SoundManager.LOW_FUEL);
             }
 
             dispatchEventWith(LAUNCH);
@@ -132,9 +130,9 @@ package com.holypanda.kosmos.model
                 crash();
             }
 
-            if (!_clone && _durability < 2 && _signal == null)
+            if (!_clone && _durability < 2)
             {
-                _signal = SoundManager.playSound(SoundManager.LOW_FUEL, true);
+                SoundManager.playSound(SoundManager.LOW_FUEL);
             }
         }
 
@@ -189,32 +187,12 @@ package com.holypanda.kosmos.model
         {
             SoundManager.playSound(SoundManager.FUEL_LOAD);
             _fuel = Math.min(_fuel + amount, _fuelMax);
-
-            if (_signal != null)
-            {
-                SoundManager.stopSound(_signal);
-                _signal = null;
-            }
         }
 
         public function repair():void
         {
             _alive = true;
             _durability = _durabilityMax;
-            if (_signal != null)
-            {
-                SoundManager.stopSound(_signal);
-                _signal = null;
-            }
-        }
-        
-        public function mute():void
-        {
-            if (_signal != null)
-            {
-                SoundManager.stopSound(_signal);
-                _signal = null;
-            }
         }
         
         override public function clone():SpaceBody
@@ -242,12 +220,6 @@ package com.holypanda.kosmos.model
         override public function destroy():void
         {
             super.destroy();
-
-            if (_signal != null)
-            {
-                SoundManager.stopSound(_signal);
-                _signal = null;
-            }
 
             _planet = null;
         }

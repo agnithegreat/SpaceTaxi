@@ -99,6 +99,12 @@ package com.holypanda.kosmos.view.gui.popups
 
         private function handlePurchase(value: Boolean):void
         {
+            // TODO: move this block of code to right place
+            if (value)
+            {
+                Application.appController.player.disableAds();
+                Application.appController.player.save();
+            }
             Application.appController.reviveGame(value);
             WindowManager.closePopup(this, true);
         }

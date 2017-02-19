@@ -16,7 +16,7 @@ package com.holypanda.kosmos.controller
         private var _currentLevel: int;
         public function get currentLevel():LevelVO
         {
-            return _levels[_currentLevel];
+            return _levels.length > _currentLevel ? _levels[_currentLevel] : null;
         }
         
         public function getLevel(id: int):LevelVO
@@ -70,7 +70,7 @@ package com.holypanda.kosmos.controller
         public function selectLevel(level: int):void
         {
             _currentLevel = level;
-            while (_currentLevel > 0 && currentLevel.ship == null)
+            while (_currentLevel > 0 && (currentLevel == null || currentLevel.ship == null))
             {
                 _currentLevel--;
             }

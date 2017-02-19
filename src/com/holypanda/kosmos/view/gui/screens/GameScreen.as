@@ -10,6 +10,7 @@ package com.holypanda.kosmos.view.gui.screens
     import com.holypanda.kosmos.model.Ship;
     import com.holypanda.kosmos.model.Space;
     import com.holypanda.kosmos.model.SpaceBody;
+    import com.holypanda.kosmos.utils.StringUtils;
     import com.holypanda.kosmos.view.gui.game.IndicatorView;
     import com.holypanda.kosmos.view.gui.popups.PausePopup;
     import com.agnither.utils.gui.components.Screen;
@@ -40,6 +41,7 @@ package com.holypanda.kosmos.view.gui.screens
         private var _space: Space;
 
         private var _moneyVal: int = -1;
+        private var _moneyTweenVal: int;
 
         public function GameScreen()
         {
@@ -139,12 +141,13 @@ package com.holypanda.kosmos.view.gui.screens
 
         public function set money(value: int):void
         {
-            _moneyTF.text = String(value) + " ";
+            _moneyTweenVal = value;
+            _moneyTF.text = StringUtils.formatNumberDelimeter(_moneyTweenVal, " ");
         }
 
         public function get money():int
         {
-            return int(_moneyTF.text);
+            return _moneyTweenVal;
         }
     }
 }

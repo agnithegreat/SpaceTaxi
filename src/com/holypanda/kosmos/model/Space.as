@@ -3,7 +3,6 @@
  */
 package com.holypanda.kosmos.model
 {
-    import com.holypanda.kosmos.Config;
     import com.holypanda.kosmos.controller.game.DialogController;
     import com.holypanda.kosmos.controller.game.OrderController;
     import com.holypanda.kosmos.controller.game.ZoneController;
@@ -12,8 +11,8 @@ package com.holypanda.kosmos.model
     import com.holypanda.kosmos.managers.sound.SoundManager;
     import com.holypanda.kosmos.model.orders.Zone;
     import com.holypanda.kosmos.utils.GeomUtils;
-    import com.holypanda.kosmos.utils.ShipAI;
     import com.holypanda.kosmos.vo.LevelVO;
+    import com.holypanda.kosmos.vo.game.CollectibleVO;
     import com.holypanda.kosmos.vo.game.OrderVO;
     import com.holypanda.kosmos.vo.game.PlanetVO;
     import com.holypanda.kosmos.vo.game.PortalVO;
@@ -42,18 +41,16 @@ package com.holypanda.kosmos.model
         public static const DISTANCE_POWER: Number = 2;
         public static const DELTA: Number = 0.15;
         public static const MIN_SPEED: Number = 5;
-        public static const DAMAGE_SPEED: Number = 40;
+        public static const DAMAGE_SPEED: Number = 30;
         public static const CONTROL_SPEED: Number = 200;
-        public static const TRAJECTORY_STEPS: Number = 100; // 50 min, 250 max
-        public static const TRAJECTORY_LENGTH: Number = 200; // 100 min, 100000 max
+        public static const TRAJECTORY_STEPS: int = 20; // 20 min, 250 max
+        public static const TRAJECTORY_LENGTH: int = 100000; // 100 min, 100000 max
 
         private var _ship: Ship;
         public function get ship():Ship
         {
             return _ship;
         }
-
-        private var _shipAI: ShipAI;
 
         private var _planets: Vector.<Planet>;
         private var _planetsDict: Dictionary;
@@ -145,6 +142,7 @@ package com.holypanda.kosmos.model
         }
 
         private var _complete: Boolean;
+        private var _completeNotify: Boolean;
         
         private var _win: Boolean;
         public function get win():Boolean
@@ -167,8 +165,6 @@ package com.holypanda.kosmos.model
             _ship = new Ship(10, 1, level.ship.rotation);
             _ship.place(level.ship.position.x, level.ship.position.y);
             _ship.landPrepare(null);
-
-            _shipAI = new ShipAI(this, _ship);
 
             _planets = new <Planet>[];
             _planetsDict = new Dictionary();
@@ -194,15 +190,14 @@ package com.holypanda.kosmos.model
                 var previous: Portal = portal;
             }
 
-            // TODO: enable collectibles
             _collectibles = new <Collectible>[];
-//            for (i = 0; i < level.collectibles.length; i++)
-//            {
-//                var coll: CollectibleVO = level.collectibles[i];
-//                var collectible: Collectible = new Collectible(coll);
-//                collectible.place(coll.position.x, coll.position.y);
-//                _collectibles.push(collectible);
-//            }
+            for (i = 0; i < level.collectibles.length; i++)
+            {
+                var coll: CollectibleVO = level.collectibles[i];
+                var collectible: Collectible = new Collectible(coll);
+                collectible.place(coll.position.x, coll.position.y);
+                _collectibles.push(collectible);
+            }
             
             _dynamics = new <DynamicSpaceBody>[];
 
@@ -215,6 +210,7 @@ package com.holypanda.kosmos.model
             _shipTime = 0;
             _moves = 0;
             _complete = false;
+            _completeNotify = false;
             _win = false;
             _revived = false;
 
@@ -247,10 +243,6 @@ package com.holypanda.kosmos.model
         
         public function pause(value: Boolean):void
         {
-            if (value)
-            {
-                _ship.mute();
-            }
             dispatchEventWith(PAUSE, false, value);
         }
         
@@ -270,6 +262,7 @@ package com.holypanda.kosmos.model
             }
             _revived = true;
             _complete = false;
+            _completeNotify = false;
         }
         
         public function restart(level: LevelVO):void
@@ -292,9 +285,6 @@ package com.holypanda.kosmos.model
             _ship.destroy();
             _ship = null;
             
-            _shipAI.destroy();
-            _shipAI = null;
-
             if (_phantom != null)
             {
                 _phantom.destroy();
@@ -375,10 +365,17 @@ package com.holypanda.kosmos.model
                     _phantom = null;
                 }
 
-                _phantom = _ship.clone() as Ship;
-                launchShip(_phantom);
-                computeTrajectory(_phantom, show, full);
+                Starling.juggler.removeDelayedCalls(createPhantom);
+                Starling.juggler.delayCall(createPhantom, 0, show, full);
             }
+        }
+
+        private function createPhantom(show: Boolean, full: Boolean):void
+        {
+            _phantom = _ship.clone() as Ship;
+            launchShip(_phantom);
+
+            computeTrajectory(_phantom, show, full);
         }
 
         private function computeTrajectory(ship: Ship, show: Boolean, full: Boolean):void
@@ -645,14 +642,14 @@ package com.holypanda.kosmos.model
         {
             if (_complete)
             {
-                dispatchEventWith(LEVEL_COMPLETE);
-                return;
-            }
-
-            if (!_ship.alive || (_ship.stable && _ship.fuel == 0))
+                if (!_completeNotify)
+                {
+                    _completeNotify = true;
+                    dispatchEventWith(LEVEL_COMPLETE);
+                }
+            } else if (!_ship.alive || (_ship.stable && _ship.fuel == 0))
             {
                 lose();
-                return;
             }
 
             if (_ship.stable) return;
@@ -674,11 +671,6 @@ package com.holypanda.kosmos.model
             if (_landPlanet != null && _trajectoryTime - _flightTime < 10)
             {
                 _ship.landPrepare(_landPlanet);
-            }
-            
-            if (Config.ai)
-            {
-                _shipAI.compute();
             }
 
             var shipRect: Rectangle = new Rectangle(ship.x - ship.radius, ship.y - ship.radius, ship.radius * 2, ship.radius * 2);

@@ -150,6 +150,7 @@ package com.holypanda.kosmos.managers.windows
                 });
             } else {
                 popup.touchable = true;
+                popup.setup();
 
                 var id: int = _popupsStack.indexOf(popup);
                 if (id >= 0)

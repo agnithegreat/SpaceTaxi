@@ -73,6 +73,11 @@ package com.holypanda.kosmos.model.player
         {
             _money += value;
         }
+        
+        public function disableAds():void
+        {
+            _noAds = true;
+        }
 
         public function getLevelResult(id: int):LevelResultVO
         {

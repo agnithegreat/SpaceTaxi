@@ -40,6 +40,7 @@ package com.holypanda.kosmos.view.scenes.game
 
         private static var colors: Array = [0x85651f, 0x85292d, 0x4c5f12, 0x1b6d5f, 0x1b4b6d, 0x41207e, 0x7e2074, 0x8a223b];
         private static var colorTime: Number = 5;
+        private static const segment: int = 150 * Application.scaleFactor;
 
         private var _space: Space;
 
@@ -325,8 +326,6 @@ package com.holypanda.kosmos.view.scenes.game
             {
                 var position: Point = touch.getLocation(stage);
                 var shipPos: Point = _shipView.localToGlobal(new Point());
-                var distance: Number = Point.distance(position, shipPos);
-                const segment: int = 150 * Application.scaleFactor;
                 switch (touch.phase)
                 {
                     case TouchPhase.HOVER:
@@ -335,6 +334,7 @@ package com.holypanda.kosmos.view.scenes.game
                     }
                     case TouchPhase.BEGAN:
                     {
+                        var distance: Number = Point.distance(position, shipPos);
                         if (_space.ship.stable && distance <= segment)
                         {
                             _aiming = true;
@@ -347,29 +347,7 @@ package com.holypanda.kosmos.view.scenes.game
                     {
                         if (_aiming)
                         {
-                            var angle: Number = Math.atan2(shipPos.y - position.y, shipPos.x - position.x);
-                            var power: Number = Math.pow(distance / segment, 2);
-                            _space.setPullPoint(angle, power, false, true);
-
-                            _arrowWave3.visible = power > 1;
-                            _arrowWave2.visible = power > 1.5;
-                            _arrowWave1.visible = power > 2;
-
-                            _arrow.x = shipPos.x;
-                            _arrow.y = shipPos.y;
-                            _arrow.rotation = angle + Math.PI * 0.5;
-
-                            var delta: Number = distance - _arrowBaseLength;
-                            var scale: Number = distance / _arrowBaseLength;
-                            if (delta < 0)
-                            {
-                                _arrow.scaleY = 0.75 * scale;
-                                _arrow.pivotY = -0.25 * _arrowBaseLength;
-                            } else {
-                                _arrow.scaleY = 0.75;
-                                _arrow.pivotY = -delta - 0.25 * _arrowBaseLength;
-                            }
-                            _arrow.scaleX = _arrow.scaleY;
+                            setPullPoint(shipPos, position);
                         } else {
                             _delta.x = _touch.x - position.x;
                             _delta.y = _touch.y - position.y;
@@ -393,6 +371,34 @@ package com.holypanda.kosmos.view.scenes.game
                     }
                 }
             }
+        }
+
+        private function setPullPoint(shipPos: Point, position: Point):void
+        {
+            var distance: Number = Point.distance(position, shipPos);
+            var angle: Number = Math.atan2(shipPos.y - position.y, shipPos.x - position.x);
+            var power: Number = 1.5 * Math.pow(distance / segment, 2);
+            _space.setPullPoint(angle, power, false, true);
+
+            _arrowWave3.visible = power > 1;
+            _arrowWave2.visible = power > 1.5;
+            _arrowWave1.visible = power > 2;
+
+            _arrow.x = shipPos.x;
+            _arrow.y = shipPos.y;
+            _arrow.rotation = angle + Math.PI * 0.5;
+
+            var delta: Number = distance - _arrowBaseLength;
+            var scale: Number = distance / _arrowBaseLength;
+            if (delta < 0)
+            {
+                _arrow.scaleY = 0.75 * scale;
+                _arrow.pivotY = -0.25 * _arrowBaseLength;
+            } else {
+                _arrow.scaleY = 0.75;
+                _arrow.pivotY = -delta - 0.25 * _arrowBaseLength;
+            }
+            _arrow.scaleX = _arrow.scaleY;
         }
 
         private function handleNewMeteor(event: Event):void

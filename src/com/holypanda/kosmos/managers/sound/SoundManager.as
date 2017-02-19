@@ -58,6 +58,7 @@ package com.holypanda.kosmos.managers.sound
         private static var currentMusic: SoundContainer;
 
         private static var _backgroundMode: Boolean;
+        private static var _backgroundModeValue: Number = 0.25;
 
         public static function getSound(name: String):Sound
         {
@@ -86,7 +87,7 @@ package com.holypanda.kosmos.managers.sound
             var container: SoundContainer = new SoundContainer(sound, true, true);
             container.play();
 
-            var vol: Number = _backgroundMode ? 0.5 : 1;
+            var vol: Number = _backgroundMode ? _backgroundModeValue : 1;
             container.tweenVolume(vol * Config.volume.music, 0.3);
 
             playing[name] = container;
@@ -132,7 +133,7 @@ package com.holypanda.kosmos.managers.sound
         public static function set backgroundMode(value: Boolean):void
         {
             _backgroundMode = value;
-            var vol: Number = _backgroundMode ? 0.5 : 1;
+            var vol: Number = _backgroundMode ? _backgroundModeValue : 1;
             if (currentMusic != null)
             {
                 currentMusic.tweenVolume(vol * Config.volume.music, 0.3);
@@ -157,7 +158,7 @@ package com.holypanda.kosmos.managers.sound
 
         private static function handleUpdate(event: Event):void
         {
-            var vol: Number = _backgroundMode ? 0.5 : 1;
+            var vol: Number = _backgroundMode ? _backgroundModeValue : 1;
             for (var key:String in playing)
             {
                 var container: SoundContainer = playing[key];

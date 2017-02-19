@@ -103,14 +103,35 @@
         "customParams":{},
         "params":{}
       },
+      "mask":{
+        "cls":"starling.display.Quad",
+        "constructorParams":[
+          {
+            "name":"width",
+            "type":"Number",
+            "value":50
+          },
+          {
+            "name":"height",
+            "type":"Number",
+            "value":50
+          }
+        ],
+        "customParams":{},
+        "params":{
+          "name":null,
+          "scaleX":7.3,
+          "scaleY":2.66
+        }
+      },
       "name":"_root",
-      "width":472
+      "width":365
     }
   },
   "setting":{
     "canvasColor":0,
     "canvasSize":{
-      "x":472,
+      "x":365,
       "y":132
     }
   },

@@ -6,6 +6,7 @@ package com.holypanda.kosmos.view.gui.popups
     import com.holypanda.kosmos.Application;
     import com.holypanda.kosmos.managers.sound.SoundManager;
     import com.holypanda.kosmos.managers.windows.WindowManager;
+    import com.holypanda.kosmos.utils.StringUtils;
     import com.holypanda.kosmos.vo.EpisodeVO;
     import com.agnither.utils.gui.components.Popup;
 
@@ -24,11 +25,13 @@ package com.holypanda.kosmos.view.gui.popups
     {
         public var _root: LayoutGroup;
 
-        public var _glowMC: MovieClip;
+        public var _textTF: TextField;
 
+        public var _glowMC: MovieClip;
+        
         public var _okButton: ContainerButton;
 
-        public var _textTF: TextField;
+        public var _container: LayoutGroup;
         public var _rewardTF: TextField;
 
         public function EpisodeDonePopup()
@@ -41,8 +44,6 @@ package com.holypanda.kosmos.view.gui.popups
 
         override protected function initialize():void
         {
-            SoundManager.playSound(SoundManager.POPUP_WIN_EPISODE);
-            
             _glowMC.touchable = false;
 
             _root.pivotX = _root.width * 0.5;
@@ -57,10 +58,16 @@ package com.holypanda.kosmos.view.gui.popups
             
             _okButton.addEventListener(Event.TRIGGERED, handleTriggered);
 
-            _rewardTF.text = String(episode.reward);
-            _root.validate();
+            _rewardTF.text = StringUtils.formatNumberDelimeter(episode.reward, " ");
+            _container.readjustLayout();
+            _container.validate();
 
             Starling.juggler.add(_glowMC);
+        }
+
+        override public function setup():void
+        {
+            SoundManager.playSound(SoundManager.POPUP_WIN_EPISODE);
         }
 
         override protected function deactivate():void

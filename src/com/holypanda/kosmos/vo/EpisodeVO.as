@@ -14,7 +14,7 @@ package com.holypanda.kosmos.vo
             episode.id = 1;
             episode.skin = "milkyway_episode";
             episode.levels = new <LevelVO>[];
-            episode.reward = 1000;
+            episode.reward = 10000;
             episode.locked = false;
             return episode;
         }
@@ -25,7 +25,7 @@ package com.holypanda.kosmos.vo
             episode.id = 2;
             episode.skin = "maelstorm_episode";
             episode.levels = new <LevelVO>[];
-            episode.reward = 2000;
+            episode.reward = 20000;
             episode.locked = false;
             return episode;
         }
@@ -36,7 +36,7 @@ package com.holypanda.kosmos.vo
             episode.id = 3;
             episode.skin = "secret_episode";
             episode.levels = new <LevelVO>[];
-            episode.reward = 3000;
+            episode.reward = 30000;
             episode.locked = true;
             return episode;
         }

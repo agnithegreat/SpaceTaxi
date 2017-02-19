@@ -11,6 +11,7 @@ package com.holypanda.kosmos.view.gui.popups
     import com.holypanda.kosmos.tasks.logic.game.EndGameTask;
     import com.holypanda.kosmos.tasks.logic.game.RestartGameTask;
     import com.holypanda.kosmos.tasks.logic.game.StartGameTask;
+    import com.holypanda.kosmos.utils.StringUtils;
     import com.holypanda.kosmos.vo.LevelVO;
 
     import com.agnither.tasks.global.TaskSystem;
@@ -40,12 +41,13 @@ package com.holypanda.kosmos.view.gui.popups
 
         public var _titleTF: TextField;
         public var _descriptionTF: TextField;
-        public var _textTF: TextField;
-        public var _rewardTF: TextField;
 
         public var _star1: Button;
         public var _star2: Button;
         public var _star3: Button;
+
+        public var _container: LayoutGroup;
+        public var _rewardTF: TextField;
 
         public function LevelStartPopup()
         {
@@ -57,8 +59,6 @@ package com.holypanda.kosmos.view.gui.popups
 
         override protected function initialize():void
         {
-            SoundManager.playSound(SoundManager.POPUP_REWARD);
-
             _star1.touchable = false;
             _star2.touchable = false;
             _star3.touchable = false;
@@ -81,8 +81,9 @@ package com.holypanda.kosmos.view.gui.popups
             _titleTF.text = Application.uiBuilder.localization.getLocalizedText("Level" + (level.id+1));
             _descriptionTF.text = Application.uiBuilder.localization.getLocalizedText("LevelDescription");
 
-            _rewardTF.text = String(level.reward);
-            _root.validate();
+            _rewardTF.text = StringUtils.formatNumberDelimeter(level.reward, " ");
+            _container.readjustLayout();
+            _container.validate();
 
             var result: LevelResultVO = Application.appController.player.getLevelResult(level.id);
             _star1.state = result != null && result.stars >= 1 ? ButtonState.DOWN : ButtonState.UP;
@@ -90,6 +91,11 @@ package com.holypanda.kosmos.view.gui.popups
             _star3.state = result != null && result.stars >= 3 ? ButtonState.DOWN : ButtonState.UP;
 
             Starling.juggler.add(_glowMC);
+        }
+        
+        override public function setup():void
+        {
+            SoundManager.playSound(SoundManager.POPUP_REWARD);
         }
 
         override protected function deactivate():void
@@ -102,11 +108,9 @@ package com.holypanda.kosmos.view.gui.popups
 
         override protected function cancelHandler():void
         {
-            WindowManager.closePopup(this, true);
-
-            if (Application.appController.states.currentState == StateController.GAME)
+            if (Application.appController.states.currentState != StateController.GAME)
             {
-                TaskSystem.getInstance().addTask(new EndGameTask());
+                WindowManager.closePopup(this, true);
             }
         }
 

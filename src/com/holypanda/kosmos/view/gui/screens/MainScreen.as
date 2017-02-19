@@ -154,7 +154,7 @@ package com.holypanda.kosmos.view.gui.screens
             _playButton.addEventListener(Event.TRIGGERED, handlePlay);
             _settingsButton.addEventListener(Event.TRIGGERED, handleSettings);
 
-            var max: int = Application.appController.player.level + 2;
+            var max: int = Math.min(Application.appController.player.level + 2, SKINS.length);
             var rand1: int = Math.random() * max;
             var rand2: int = rand1;
             while (rand2 == rand1)

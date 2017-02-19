@@ -4,7 +4,6 @@
 package com.holypanda.kosmos.view.gui.popups
 {
     import com.holypanda.kosmos.Application;
-    import com.holypanda.kosmos.controller.StateController;
     import com.holypanda.kosmos.managers.sound.SoundManager;
     import com.holypanda.kosmos.managers.windows.WindowManager;
     import com.holypanda.kosmos.tasks.logic.game.EndGameTask;
@@ -17,9 +16,7 @@ package com.holypanda.kosmos.view.gui.popups
     import feathers.controls.LayoutGroup;
 
     import starling.core.Starling;
-
     import starling.display.MovieClip;
-
     import starling.display.Sprite;
     import starling.events.Event;
     import starling.text.TextField;
@@ -39,7 +36,8 @@ package com.holypanda.kosmos.view.gui.popups
         public var _replayButton: ContainerButton;
 
         public var _titleTF: TextField;
-        public var _textTF: TextField;
+
+        public var _container: LayoutGroup;
         public var _rewardTF: TextField;
 
         public function LevelFailPopup()
@@ -52,8 +50,6 @@ package com.holypanda.kosmos.view.gui.popups
 
         override protected function initialize():void
         {
-            SoundManager.playSound(SoundManager.POPUP_LOSE);
-            
             _glowMC.touchable = false;
             
             _root.pivotX = _root.width * 0.5;
@@ -80,10 +76,16 @@ package com.holypanda.kosmos.view.gui.popups
             }
 
             var reward: int = Application.appController.space.orders.money;
-            _rewardTF.text = String(reward);
-            _root.validate();
+            _rewardTF.text = StringUtils.formatNumberDelimeter(reward, " ");
+            _container.readjustLayout();
+            _container.validate();
 
             Starling.juggler.add(_glowMC);
+        }
+
+        override public function setup():void
+        {
+            SoundManager.playSound(SoundManager.POPUP_LOSE);
         }
 
         override protected function deactivate():void
@@ -92,16 +94,6 @@ package com.holypanda.kosmos.view.gui.popups
             _replayButton.removeEventListener(Event.TRIGGERED, handleTriggered);
 
             Starling.juggler.remove(_glowMC);
-        }
-
-        override protected function cancelHandler():void
-        {
-            WindowManager.closePopup(this, true);
-
-            if (Application.appController.states.currentState == StateController.GAME)
-            {
-                TaskSystem.getInstance().addTask(new EndGameTask());
-            }
         }
 
         private function handleTriggered(event: Event):void

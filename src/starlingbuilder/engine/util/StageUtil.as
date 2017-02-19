@@ -222,6 +222,7 @@ package starlingbuilder.engine.util
                 }
             }
 
+            root.readjustLayout();
             root.validate();
         }
 
@@ -231,6 +232,7 @@ package starlingbuilder.engine.util
 
             root.scaleX = scale;
             root.scaleY = scale;
+            root.readjustLayout();
             root.validate();
         }
     }

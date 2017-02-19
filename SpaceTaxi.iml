@@ -24,10 +24,13 @@
           <files-to-package>
             <FilePathAndPathInPackage file-path="$MODULE_DIR$/resources/config" path-in-package="config" />
             <FilePathAndPathInPackage file-path="$MODULE_DIR$/resources/sounds" path-in-package="sounds" />
-            <FilePathAndPathInPackage file-path="$MODULE_DIR$/resources/workspace/textures" path-in-package="textures" />
+            <FilePathAndPathInPackage file-path="$MODULE_DIR$/resources/workspace/textures/1024" path-in-package="textures/1024" />
             <FilePathAndPathInPackage file-path="$MODULE_DIR$/resources/workspace/layouts" path-in-package="layouts" />
             <FilePathAndPathInPackage file-path="$MODULE_DIR$/resources/levels" path-in-package="levels" />
             <FilePathAndPathInPackage file-path="$MODULE_DIR$/resources/workspace/localization" path-in-package="localization" />
+            <FilePathAndPathInPackage file-path="$MODULE_DIR$/resources/icons/ios/icons" path-in-package="icons" />
+            <FilePathAndPathInPackage file-path="$MODULE_DIR$/resources/workspace/textures/fonts" path-in-package="textures/fonts" />
+            <FilePathAndPathInPackage file-path="$MODULE_DIR$/resources/workspace/textures/ship" path-in-package="textures/ship" />
           </files-to-package>
         </packaging-air-desktop>
         <packaging-android />

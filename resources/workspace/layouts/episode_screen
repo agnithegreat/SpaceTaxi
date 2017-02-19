@@ -119,12 +119,12 @@
             "customParams":{},
             "params":{
               "left":80,
-              "verticalCenter":0
+              "verticalCenter":50
             }
           },
           "name":"left",
           "x":80,
-          "y":682
+          "y":732
         }
       },
       {
@@ -168,12 +168,12 @@
             "customParams":{},
             "params":{
               "right":80,
-              "verticalCenter":0
+              "verticalCenter":50
             }
           },
           "name":"right",
           "x":1816,
-          "y":682
+          "y":732
         }
       },
       {
@@ -366,13 +366,13 @@
             "customParams":{},
             "params":{
               "right":80,
-              "top":80
+              "top":60
             }
           },
           "name":"top_right",
           "width":450,
           "x":1518,
-          "y":80
+          "y":60
         }
       }
     ],

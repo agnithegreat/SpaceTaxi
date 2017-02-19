@@ -21,7 +21,6 @@ package com.holypanda.kosmos
         public static var volume: Volume = new Volume();
         
         public static var replay: ByteArray;
-        public static var ai: Boolean = false;
         
         public static var locale: String = "en";
         public static const localization_map: Object = {

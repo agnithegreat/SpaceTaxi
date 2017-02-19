@@ -5,6 +5,7 @@ package com.holypanda.kosmos.view.gui.screens
 {
     import com.holypanda.kosmos.Application;
     import com.holypanda.kosmos.managers.sound.SoundManager;
+    import com.holypanda.kosmos.utils.StringUtils;
     import com.holypanda.kosmos.view.gui.items.LevelView;
     import com.holypanda.kosmos.vo.EpisodeVO;
     import com.holypanda.kosmos.vo.LevelVO;
@@ -36,6 +37,7 @@ package com.holypanda.kosmos.view.gui.screens
 
         public var _starsTF: TextField;
 
+        public var _episodeTF: TextField;
         public var _episodeNameTF: TextField;
 
         public var _levels: ScrollContainer;
@@ -91,6 +93,7 @@ package com.holypanda.kosmos.view.gui.screens
         override protected function activate():void
         {
             var episode: EpisodeVO = Application.appController.levelsController.currentEpisode;
+            _episodeTF.text = StringUtils.format(Application.uiBuilder.localization.getLocalizedText("Episode"), episode.id);
             _episodeNameTF.text = Application.uiBuilder.localization.getLocalizedText("Episode" + episode.id);
             _starsTF.text = "" + episode.stars + "/" + episode.starsTotal;
 

@@ -30,7 +30,7 @@
 
     "Level13":{"en_US":"Straight Cruise", "ru_RU":"Straight Cruise"},
     "Level14":{"en_US":"Cake Is A Lie", "ru_RU":"Торт - Это Ложь"},
-    "Level15":{"en_US":"Headhunters", "ru_RU":"Головорезы"},
+    "Level15":{"en_US":"Headhunters", "ru_RU":"Охотники За Головами"},
     "Level16":{"en_US":"Colossus Shadow", "ru_RU":"Тень Колосса"},
     "Level17":{"en_US":"Not Jumping", "ru_RU":"Not Jumping"},
     "Level18":{"en_US":"Finding Timo", "ru_RU":"В Поисках Тимо"},
@@ -40,6 +40,8 @@
     "Level22":{"en_US":"El Presidente", "ru_RU":"El Presidente"},
     "Level23":{"en_US":"Dead Stars", "ru_RU":"Мертвые Звезды"},
     "Level24":{"en_US":"The Capital", "ru_RU":"Столица"},
+
+    "Dialog.1.1":{"en_US":"", "ru_RU":""},
 
     "LevelDescription":{"en_US":"Transport every passenger to his destination to complete the level", "ru_RU":"Перевези каждого пассажира в пункт его назначения, чтобы пройти уровень"},
     "LevelReward":{"en_US":"LEVEL REWARD", "ru_RU":"НАГРАДА"},

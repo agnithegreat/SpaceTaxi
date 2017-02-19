@@ -11,6 +11,7 @@ package com.holypanda.kosmos.view.gui.popups
     import com.holypanda.kosmos.tasks.logic.game.EndGameTask;
     import com.holypanda.kosmos.tasks.logic.game.RestartGameTask;
     import com.holypanda.kosmos.tasks.logic.game.SelectLevelTask;
+    import com.holypanda.kosmos.utils.StringUtils;
     import com.holypanda.kosmos.view.gui.items.FakeShipView;
     import com.holypanda.kosmos.view.utils.Animator;
     import com.holypanda.kosmos.vo.LevelVO;
@@ -37,15 +38,14 @@ package com.holypanda.kosmos.view.gui.popups
         public var _root: LayoutGroup;
 
         public var _ship: Sprite;
-        
-        public var _glow: Image;
+
         public var _glowMC: MovieClip;
 
         public var _menuButton: ContainerButton;
         public var _replayButton: ContainerButton;
         public var _nextButton: ContainerButton;
 
-        public var _textTF: TextField;
+        public var _container: LayoutGroup;
         public var _rewardTF: TextField;
 
         public var _star1: Button;
@@ -64,8 +64,6 @@ package com.holypanda.kosmos.view.gui.popups
 
         override protected function initialize():void
         {
-            SoundManager.playSound(SoundManager.POPUP_WIN_LEVEL);
-            
             _star1.touchable = false;
             _star2.touchable = false;
             _star3.touchable = false;
@@ -76,11 +74,6 @@ package com.holypanda.kosmos.view.gui.popups
             _root.pivotY = _root.height * 0.5;
 
             StageUtil.fitPopup(_root, Application.guiSize.width, Application.guiSize.height, Application.viewport.width, Application.viewport.height);
-
-            Animator.create(0.125, 0, function (time: Number):void
-            {
-                _glow.rotation = time;
-            });
         }
 
         override protected function activate():void
@@ -98,10 +91,16 @@ package com.holypanda.kosmos.view.gui.popups
             _star2.state = result != null && result.stars >= 2 ? ButtonState.DOWN : ButtonState.UP;
             _star3.state = result != null && result.stars >= 3 ? ButtonState.DOWN : ButtonState.UP;
             
-            _rewardTF.text = String(result.money);
-            _root.validate();
+            _rewardTF.text = StringUtils.formatNumberDelimeter(result.money, " ");
+            _container.readjustLayout();
+            _container.validate();
 
             Starling.juggler.add(_glowMC);
+        }
+
+        override public function setup():void
+        {
+            SoundManager.playSound(SoundManager.POPUP_WIN_LEVEL);
         }
 
         override protected function deactivate():void
@@ -111,15 +110,8 @@ package com.holypanda.kosmos.view.gui.popups
             _nextButton.removeEventListener(Event.TRIGGERED, handleTriggered);
 
             _level = null;
-            
+
             Starling.juggler.remove(_glowMC);
-        }
-
-        override protected function cancelHandler():void
-        {
-            WindowManager.closePopup(this, true);
-
-            TaskSystem.getInstance().addTask(new EndGameTask());
         }
 
         private function handleTriggered(event: Event):void

@@ -44,6 +44,7 @@ package com.holypanda.kosmos.model.orders
             _id = id;
             _zone = zone;
             _planet = planet;
+            _zone.size = Math.min(_zone.size, _planet.radius * 0.7);
             _active = true;
         }
         

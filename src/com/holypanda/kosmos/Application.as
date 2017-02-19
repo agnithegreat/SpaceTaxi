@@ -8,9 +8,9 @@ package com.holypanda.kosmos
     import com.holypanda.kosmos.managers.windows.WindowManager;
     import com.holypanda.kosmos.tasks.init.InitTask;
     import com.holypanda.kosmos.utils.LevelParser;
+    import com.holypanda.kosmos.utils.logger.Logger;
 
     import com.agnither.tasks.global.TaskSystem;
-    import com.holypanda.kosmos.utils.logger.Logger;
 
     import feathers.layout.AnchorLayout;
     import feathers.layout.HorizontalLayout;
@@ -19,11 +19,9 @@ package com.holypanda.kosmos
 
     import flash.display.Bitmap;
     import flash.geom.Rectangle;
-    import flash.ui.Keyboard;
 
     import starling.core.Starling;
     import starling.display.Sprite;
-    import starling.events.KeyboardEvent;
     import starling.extensions.AssetMediator;
     import starling.extensions.TextureMaskStyle;
     import starling.styles.DistanceFieldStyle;
@@ -75,20 +73,6 @@ package com.holypanda.kosmos
             WindowManager.init(this, viewport);
 
             TaskSystem.getInstance().addTask(new InitTask());
-
-            stage.addEventListener(KeyboardEvent.KEY_DOWN, handleKeyDown);
-        }
-
-        private function handleKeyDown(event: KeyboardEvent):void
-        {
-            switch (event.keyCode)
-            {
-                case Keyboard.ENTER:
-                {
-                    Config.ai = !Config.ai;
-                    break;
-                }
-            }
         }
     }
 }

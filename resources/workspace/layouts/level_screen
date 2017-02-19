@@ -27,6 +27,109 @@
       {
         "children":[
           {
+            "cls":"starling.text.TextField",
+            "constructorParams":[
+              {
+                "value":200
+              },
+              {
+                "value":100
+              },
+              {
+                "value":""
+              }
+            ],
+            "customParams":{},
+            "params":{
+              "batchable":true,
+              "format":{
+                "cls":"starling.text.TextFormat",
+                "customParams":{},
+                "params":{
+                  "color":16777215,
+                  "font":"dragu_medium",
+                  "size":100
+                }
+              },
+              "height":120,
+              "name":"_episodeTF",
+              "style":{
+                "cls":"starling.styles.DistanceFieldStyle",
+                "customParams":{},
+                "params":{
+                  "mode":"basic",
+                  "softness":0.16
+                }
+              },
+              "text":"1 episode",
+              "width":1400
+            }
+          },
+          {
+            "cls":"starling.text.TextField",
+            "constructorParams":[
+              {
+                "value":200
+              },
+              {
+                "value":100
+              },
+              {
+                "value":""
+              }
+            ],
+            "customParams":{},
+            "params":{
+              "batchable":true,
+              "format":{
+                "cls":"starling.text.TextFormat",
+                "customParams":{},
+                "params":{
+                  "color":16777215,
+                  "font":"dragu_bold",
+                  "size":200
+                }
+              },
+              "height":200,
+              "name":"_episodeNameTF",
+              "style":{
+                "cls":"starling.styles.DistanceFieldStyle",
+                "customParams":{},
+                "params":{
+                  "mode":"basic",
+                  "softness":0.08
+                }
+              },
+              "text":"Milky Way",
+              "width":1400,
+              "y":140
+            }
+          }
+        ],
+        "cls":"feathers.controls.LayoutGroup",
+        "customParams":{},
+        "params":{
+          "layout":{
+            "cls":"feathers.layout.AnchorLayout",
+            "customParams":{},
+            "params":{}
+          },
+          "layoutData":{
+            "cls":"feathers.layout.AnchorLayoutData",
+            "customParams":{},
+            "params":{
+              "horizontalCenter":0,
+              "top":80
+            }
+          },
+          "name":"top_center",
+          "x":324,
+          "y":80
+        }
+      },
+      {
+        "children":[
+          {
             "children":[
               {
                 "cls":"starling.display.Sprite",
@@ -93,12 +196,12 @@
             "customParams":{},
             "params":{
               "horizontalCenter":0,
-              "verticalCenter":0
+              "verticalCenter":50
             }
           },
           "name":"center",
           "x":199,
-          "y":418
+          "y":468
         }
       },
       {
@@ -142,12 +245,12 @@
             "customParams":{},
             "params":{
               "left":80,
-              "verticalCenter":0
+              "verticalCenter":50
             }
           },
           "name":"left",
           "x":80,
-          "y":714
+          "y":764
         }
       },
       {
@@ -191,12 +294,12 @@
             "customParams":{},
             "params":{
               "right":80,
-              "verticalCenter":0
+              "verticalCenter":50
             }
           },
           "name":"right",
           "x":1874,
-          "y":714
+          "y":764
         }
       },
       {
@@ -316,69 +419,6 @@
       {
         "children":[
           {
-            "cls":"starling.text.TextField",
-            "constructorParams":[
-              {
-                "value":200
-              },
-              {
-                "value":100
-              },
-              {
-                "value":""
-              }
-            ],
-            "customParams":{},
-            "params":{
-              "batchable":true,
-              "format":{
-                "cls":"starling.text.TextFormat",
-                "customParams":{},
-                "params":{
-                  "color":16777215,
-                  "font":"dragu_bold",
-                  "size":150
-                }
-              },
-              "height":150,
-              "name":"_episodeNameTF",
-              "style":{
-                "cls":"starling.styles.DistanceFieldStyle",
-                "customParams":{},
-                "params":{
-                  "mode":"basic",
-                  "softness":0.1
-                }
-              },
-              "text":"Milky Way",
-              "width":1024
-            }
-          }
-        ],
-        "cls":"feathers.controls.LayoutGroup",
-        "customParams":{},
-        "params":{
-          "layout":{
-            "cls":"feathers.layout.AnchorLayout",
-            "customParams":{},
-            "params":{}
-          },
-          "layoutData":{
-            "cls":"feathers.layout.AnchorLayoutData",
-            "customParams":{},
-            "params":{
-              "horizontalCenter":0,
-              "top":80
-            }
-          },
-          "name":"top_center",
-          "x":512,
-          "y":80
-        }
-      },
-      {
-        "children":[
-          {
             "cls":"starling.display.Image",
             "constructorParams":[
               {
@@ -452,13 +492,13 @@
             "customParams":{},
             "params":{
               "right":80,
-              "top":80
+              "top":60
             }
           },
           "name":"top_right",
           "width":450,
           "x":1518,
-          "y":80
+          "y":60
         }
       },
       {

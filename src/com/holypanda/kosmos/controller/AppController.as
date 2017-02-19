@@ -127,15 +127,13 @@ package com.holypanda.kosmos.controller
 
         private function handleLevelComplete(event: Event):void
         {
-            pauseGame(true);
-
             BUILD::mobile
             {
                 if (!_space.win && !_space.revived)
                 {
-                    if (Application.appController.player.noAds)
+                    if (_player.noAds)
                     {
-                        Application.appController.reviveGame(true);
+                        reviveGame(true);
                         return;
                     }
 
@@ -149,6 +147,8 @@ package com.holypanda.kosmos.controller
 
         private function checkResults():void
         {
+            pauseGame(true);
+
             if (Config.replay == null)
             {
                 Logger.sendReplay(GamePlayAnalytics.exportData());

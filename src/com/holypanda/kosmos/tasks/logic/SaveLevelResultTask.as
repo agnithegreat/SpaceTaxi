@@ -42,6 +42,7 @@ package com.holypanda.kosmos.tasks.logic
                 var result: EpisodeResultVO = player.getEpisodeResult(episode.id);
                 if (lastLevelInEpisode && result == null)
                 {
+                    player.addMoney(episode.reward);
                     player.setEpisodeResult(level.episode);
                     WindowManager.showPopup(new EpisodeDonePopup(), true);
     
