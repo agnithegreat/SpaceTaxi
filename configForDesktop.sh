@@ -4,7 +4,6 @@ mkdir build
 cd build 
 ln -s ./../resources/assets assets
 ln -s ./../resources/config config
-ln -s ./../resources/levels levels
 ln -s ./../resources/sounds sounds
 ln -s ./../resources/workspace/textures textures
 ln -s ./../resources/workspace/layouts layouts

@@ -23,6 +23,10 @@ package com.holypanda.kosmos.view.scenes.game
         public static const EXPLODE: String = "ShipView.EXPLODE";
         
         private var _ship: Ship;
+        public function get ship():Ship
+        {
+            return _ship;
+        }
 
         private var _animation: StarlingArmatureDisplay;
         private var _thrust: Boolean;
@@ -71,7 +75,7 @@ package com.holypanda.kosmos.view.scenes.game
             var planet: Planet = _ship.planet;
             if (planet != null)
             {
-                var angle: Number = Math.atan2(_ship.y - planet.y, _ship.x - planet.x);
+                var angle: Number = GeomUtils.getAngle(planet.position, _ship.position);
                 var nx: Number = planet.radius * Math.cos(angle) * Math.cos(planet.time) * planet.scale;
                 var ny: Number = planet.radius * Math.sin(angle) * Math.cos(planet.time + Math.PI) * planet.scale;
 

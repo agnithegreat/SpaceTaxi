@@ -49,7 +49,7 @@ package com.holypanda.kosmos.view.gui.popups
             _root.pivotX = _root.width * 0.5;
             _root.pivotY = _root.height * 0.5;
 
-            var repair: Boolean = Application.appController.space.ship.durability == 0;
+            var repair: Boolean = !Application.appController.space.ship.alive;
             
             _icon_repair.visible = repair;
             _icon_fuel.visible = !repair;

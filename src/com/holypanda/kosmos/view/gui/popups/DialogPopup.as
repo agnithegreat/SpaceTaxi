@@ -7,6 +7,7 @@ package com.holypanda.kosmos.view.gui.popups
     import com.holypanda.kosmos.managers.sound.SoundManager;
     import com.holypanda.kosmos.managers.windows.WindowManager;
     import com.holypanda.kosmos.vo.SpeechVO;
+
     import com.agnither.utils.gui.components.Popup;
 
     import feathers.controls.LayoutGroup;
@@ -132,6 +133,8 @@ package com.holypanda.kosmos.view.gui.popups
             Starling.juggler.removeDelayedCalls(nextSound);
             Starling.juggler.removeDelayedCalls(nextLetter);
             Starling.juggler.removeDelayedCalls(closeFn);
+            
+            Application.appController.space.dialogController.closeDialog(_speech);
 
             WindowManager.closePopup(this, true);
         }

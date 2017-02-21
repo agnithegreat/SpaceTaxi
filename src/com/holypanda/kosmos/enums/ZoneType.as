@@ -5,7 +5,7 @@ package com.holypanda.kosmos.enums
 {
     public class ZoneType
     {
-        public static const DEPARTURE: String = "departure";
-        public static const ARRIVAL: String = "arrival";
+        public static const CHECKPOINT: String = "checkpoint";
+        public static const QUEST: String = "quest";
     }
 }

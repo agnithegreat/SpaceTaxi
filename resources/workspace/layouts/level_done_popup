@@ -16,16 +16,6 @@
         }
       },
       {
-        "children":[],
-        "cls":"feathers.controls.LayoutGroup",
-        "customParams":{},
-        "params":{
-          "includeInLayout":false,
-          "name":"container",
-          "y":-133
-        }
-      },
-      {
         "cls":"starling.display.Image",
         "constructorParams":[
           {
@@ -37,7 +27,7 @@
         "params":{
           "name":"icon",
           "x":80,
-          "y":199
+          "y":180
         }
       },
       {
@@ -47,7 +37,7 @@
         "params":{
           "name":"_ship",
           "x":500,
-          "y":492
+          "y":473
         }
       },
       {
@@ -310,10 +300,10 @@
               "size":70
             }
           },
-          "height":53.2,
+          "height":54.6,
           "name":"_textTF",
           "pivotX":400,
-          "pivotY":26.6,
+          "pivotY":27.3,
           "style":{
             "cls":"starling.styles.DistanceFieldStyle",
             "customParams":{},
@@ -331,7 +321,7 @@
     "cls":"feathers.controls.LayoutGroup",
     "customParams":{},
     "params":{
-      "height":1150,
+      "height":1000,
       "layout":{
         "cls":"feathers.layout.AnchorLayout",
         "customParams":{},
@@ -353,7 +343,7 @@
     "canvasColor":0,
     "canvasSize":{
       "x":1000,
-      "y":1150
+      "y":1000
     }
   },
   "version":"2.0"

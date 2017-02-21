@@ -8,7 +8,6 @@ package com.holypanda.kosmos.view.gui.popups
     import com.holypanda.kosmos.managers.windows.WindowManager;
     import com.holypanda.kosmos.tasks.logic.game.EndGameTask;
     import com.holypanda.kosmos.tasks.logic.game.RestartGameTask;
-    import com.holypanda.kosmos.utils.StringUtils;
     import com.holypanda.kosmos.view.gui.items.FakeShipView;
 
     import com.agnither.tasks.global.TaskSystem;
@@ -37,9 +36,6 @@ package com.holypanda.kosmos.view.gui.popups
         public var _replayButton: ContainerButton;
 
         public var _titleTF: TextField;
-
-        public var _container: LayoutGroup;
-        public var _rewardTF: TextField;
 
         public function LevelFailPopup()
         {
@@ -72,11 +68,6 @@ package com.holypanda.kosmos.view.gui.popups
             } else {
                 _titleTF.text = Application.uiBuilder.localization.getLocalizedText("ShipIsLost");
             }
-
-            var reward: int = Application.appController.space.orders.money;
-            _rewardTF.text = StringUtils.formatNumberDelimeter(reward, " ");
-            _container.readjustLayout();
-            _container.validate();
 
             Starling.juggler.add(_glowMC);
         }

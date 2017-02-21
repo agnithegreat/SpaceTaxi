@@ -48,5 +48,10 @@ package com.holypanda.kosmos.utils
             }
             return angleDelta
         }
+
+        public static function getAngle(point1: Point, point2: Point):Number
+        {
+            return Math.atan2(point2.y - point1.y, point2.x - point1.x);
+        }
     }
 }

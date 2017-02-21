@@ -13,12 +13,12 @@
     "cache": false,
     "folder": "",
     "assets": [
-      "levels/levels.json",
+      "config/levels.json",
+      "config/dialogs.json",
+      "config/tutorial.json",
 
       "layouts/main_screen",
       "layouts/game_screen",
-      "layouts/fuel_indicator",
-      "layouts/durability_indicator",
       "layouts/episode_screen",
       "layouts/episode",
       "layouts/level_screen",
@@ -33,6 +33,7 @@
       "layouts/continue_popup",
       "layouts/no_video_popup",
       "layouts/dialog_popup",
+      "layouts/finger",
 
       "localization/strings.json",
 
@@ -44,8 +45,6 @@
       "textures/ship/ship_skeleton.json",
       "textures/ship/ship_texture.json",
 
-      "textures/fonts/dragu_gold.fnt",
-      "textures/fonts/dragu_gold.png",
       "textures/fonts/dragu_bold.fnt",
       "textures/fonts/dragu_bold.png",
       "textures/fonts/dragu_medium.fnt",

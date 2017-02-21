@@ -41,7 +41,19 @@
     "Level23":{"en_US":"Dead Stars", "ru_RU":"Мертвые Звезды"},
     "Level24":{"en_US":"The Capital", "ru_RU":"Столица"},
 
-    "Dialog.1.1":{"en_US":"", "ru_RU":""},
+    "Dialog.1.1":{"en_US":"Unbelievable... The control panel of the real spaceship, not of this stupid simulator.", "ru_RU":"Невероятно... Передо мной панель управления самого настоящего космического корабля, а не какой-то дурацкий симулятор."},
+    "Dialog.1.2":{"en_US":"Well... Fuel at the maximum. Climate is OK. The engine is ready to start. Correcting course...", "ru_RU":"Так так... Топливо на максимуме. Микроклимат в норме. Двигатель готов к запуску. Корректировка курса..."},
+    "Dialog.1.3":{"en_US":"5... 4... 3... 2... 1... Go!", "ru_RU":"5... 4... 3... 2... 1... Поехали!"},
+    "Dialog.1.4":{"en_US":"WOW! Such speed! So... Let's go back!", "ru_RU":"Вау! Вот это скорость! Тааак... Летим обратно!"},
+    "Dialog.1.5":{"en_US":"So exciting! Ok, now gather some energy cells.", "ru_RU":"Дух захватывает! А теперь нужно собрать немного ячеек энергии."},
+    "Dialog.1.6":{"en_US":"Terrific! This loop has definitely worth the 5 years of studying in the Space Academy!", "ru_RU":"Потрясающе! Эта петля определенно стоила 5 лет обучения в космической академии!"},
+
+    "Dialog.2.1":{"en_US":"", "ru_RU":""},
+
+    "Dialog.3.1":{"en_US":"...", "ru_RU":"Ну что, пора прокатиться с ветерком - двигатель на полную мощность, готовимся к гиперпрыжку!"},
+    "Dialog.3.2":{"en_US":"...", "ru_RU":"Черт, где это я?! Должно быть, переборщил с мощностью... Земля-Земля, говорит Космос, как слышно?"},
+    "Dialog.3.3":{"en_US":"...", "ru_RU":"..."},
+    "Dialog.3.4":{"en_US":"...", "ru_RU":"Связь отсутствует... В навигаторе нет никакой информации о моем местоположении. О боже, как же далеко меня занесло!"},
 
     "LevelDescription":{"en_US":"Transport every passenger to his destination to complete the level", "ru_RU":"Перевези каждого пассажира в пункт его назначения, чтобы пройти уровень"},
     "LevelReward":{"en_US":"LEVEL REWARD", "ru_RU":"НАГРАДА"},

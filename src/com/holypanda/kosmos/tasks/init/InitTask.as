@@ -3,6 +3,8 @@
  */
 package com.holypanda.kosmos.tasks.init
 {
+    import com.agnither.tasks.global.TaskSystem;
+    import com.holypanda.kosmos.Application;
     import com.holypanda.kosmos.Config;
     import com.holypanda.kosmos.tasks.load.LoadBaseTask;
     import com.holypanda.kosmos.tasks.logic.EnterTask;
@@ -36,13 +38,20 @@ package com.holypanda.kosmos.tasks.init
             addTask(new InitSocialTask());
             addTask(new InitPlayFabTask());
             addTask(new EnterTask());
+
+            super.execute(token);
+        }
+
+        override protected function processComplete():void
+        {
+            Application.appController.states.mainState();
             
             BUILD::debug
             {
-                addTask(new InitReplayTask());
+                TaskSystem.getInstance().addTask(new InitReplayTask());
             }
 
-            super.execute(token);
+            super.processComplete();
         }
     }
 }

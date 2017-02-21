@@ -14,17 +14,16 @@ package com.holypanda.kosmos.model.orders
     public class Zone extends EventDispatcher
     {
         public static const UPDATE: String = "Zone.UPDATE";
-
-        private var _id: int;
-        public function get id():int
-        {
-            return _id;
-        }
         
         private var _zone: ZoneVO;
         public function get zone():ZoneVO
         {
             return _zone;
+        }
+
+        public function get id():int
+        {
+            return _zone.id;
         }
         
         private var _planet: Planet;
@@ -38,24 +37,37 @@ package com.holypanda.kosmos.model.orders
         {
             return _active;
         }
-        
-        public function Zone(id: int, zone: ZoneVO, planet: Planet)
+
+        private var _completed: Boolean;
+        public function get completed():Boolean
         {
-            _id = id;
+            return _completed;
+        }
+        
+        public function Zone(zone: ZoneVO, planet: Planet)
+        {
             _zone = zone;
             _planet = planet;
             _zone.size = Math.min(_zone.size, _planet.radius * 0.7);
-            _active = true;
+            _active = false;
+            _completed = false;
         }
         
         public function check(ship: Ship):Boolean
         {
             return Point.distance(ship.position, new Point(_zone.position.x, _zone.position.y)) <= _zone.size + ship.radius;
         }
-        
-        public function set active(value: Boolean):void
+
+        public function activate():void
         {
-            _active = value;
+            _active = true;
+            dispatchEventWith(UPDATE);
+        }
+        
+        public function complete():void
+        {
+            _active = false;
+            _completed = true;
             dispatchEventWith(UPDATE);
         }
         

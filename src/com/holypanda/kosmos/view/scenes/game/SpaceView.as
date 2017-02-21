@@ -4,15 +4,19 @@
 package com.holypanda.kosmos.view.scenes.game
 {
     import com.holypanda.kosmos.Application;
+    import com.holypanda.kosmos.controller.game.TutorialController;
     import com.holypanda.kosmos.model.Collectible;
     import com.holypanda.kosmos.model.Meteor;
     import com.holypanda.kosmos.model.Planet;
     import com.holypanda.kosmos.model.Space;
     import com.holypanda.kosmos.model.orders.Zone;
     import com.holypanda.kosmos.tasks.logic.game.LevelFailTask;
+    import com.holypanda.kosmos.utils.GeomUtils;
     import com.holypanda.kosmos.utils.LevelParser;
     import com.holypanda.kosmos.view.scenes.game.effects.CometEffect;
     import com.holypanda.kosmos.view.scenes.game.effects.ExplosionEffect;
+    import com.holypanda.kosmos.vo.TutorialVO;
+
     import com.agnither.tasks.global.TaskSystem;
     import com.agnither.utils.gui.components.AbstractComponent;
 
@@ -40,7 +44,7 @@ package com.holypanda.kosmos.view.scenes.game
 
         private static var colors: Array = [0x85651f, 0x85292d, 0x4c5f12, 0x1b6d5f, 0x1b4b6d, 0x41207e, 0x7e2074, 0x8a223b];
         private static var colorTime: Number = 5;
-        private static const segment: int = 150 * Application.scaleFactor;
+        private static const segment: int = 150;
 
         private var _space: Space;
 
@@ -56,6 +60,7 @@ package com.holypanda.kosmos.view.scenes.game
         private var _zonesContainer: Sprite;
         private var _objectsContainer: Sprite;
         private var _upperContainer: Sprite;
+        private var _helperContainer: Sprite;
 
         private var _planets: Vector.<PlanetView>;
         private var _portals: Vector.<PortalView>;
@@ -90,6 +95,14 @@ package com.holypanda.kosmos.view.scenes.game
 
         private var _touch: Point;
         private var _delta: Point;
+
+        private var _lastPullPoint: Point;
+
+        private var _tutorial: TutorialVO;
+        private var _tutorialTime: Number;
+        private var _tutorialDelay: Number;
+
+        public var _finger: Image;
 
         public function SpaceView()
         {
@@ -153,10 +166,13 @@ package com.holypanda.kosmos.view.scenes.game
             _upperContainer = new Sprite();
             _container.addChild(_upperContainer);
 
+            _helperContainer = new Sprite();
+            _container.addChild(_helperContainer);
+
             _arrow = new Sprite();
             _arrow.scaleX = 0;
             _arrow.scaleY = 0;
-            addChild(_arrow);
+            _helperContainer.addChild(_arrow);
 
             _arrowWave1 = new Image(Application.assetsManager.getTexture("misc/arrow_push_wave"));
             _arrowWave1.pivotX = _arrowWave1.width * 0.5;
@@ -183,6 +199,9 @@ package com.holypanda.kosmos.view.scenes.game
             _arrowView.pivotX = _arrowView.width * 0.5;
             _arrowBaseLength = _arrowView.height;
             _arrow.addChild(_arrowView);
+
+            Application.uiBuilder.create(Application.assetsManager.getObject("finger"), true, this);
+            _helperContainer.addChild(_finger);
         }
 
         override protected function activate():void
@@ -194,6 +213,8 @@ package com.holypanda.kosmos.view.scenes.game
             _space.addEventListener(Space.SHOW_TRAJECTORY, handleShowTrajectory);
             _space.addEventListener(Space.UPDATE_TRAJECTORY, handleUpdateTrajectory);
             _space.addEventListener(Space.HIDE_TRAJECTORY, handleHideTrajectory);
+            
+            _space.tutorialController.addEventListener(TutorialController.TUTORIAL, handleTutorial);
 
             _container.x = stage.stageWidth / 2;
             _container.y = stage.stageHeight / 2;
@@ -258,6 +279,8 @@ package com.holypanda.kosmos.view.scenes.game
 
         override protected function deactivate():void
         {
+            _space.tutorialController.removeEventListener(TutorialController.TUTORIAL, handleTutorial);
+            
             _space.removeEventListener(Space.NEW_METEOR, handleNewMeteor);
             _space.removeEventListener(Space.PAUSE, handlePause);
             _space.removeEventListener(Space.RESTART, handleRestart);
@@ -324,8 +347,10 @@ package com.holypanda.kosmos.view.scenes.game
             var touch: Touch = event.getTouch(stage);
             if (touch != null)
             {
-                var position: Point = touch.getLocation(stage);
-                var shipPos: Point = _shipView.localToGlobal(new Point());
+                var position: Point = touch.getLocation(_container);
+                position.x = Math.round(position.x);
+                position.y = Math.round(position.y);
+                var shipPos: Point = _shipView.ship.position;
                 switch (touch.phase)
                 {
                     case TouchPhase.HOVER:
@@ -347,7 +372,14 @@ package com.holypanda.kosmos.view.scenes.game
                     {
                         if (_aiming)
                         {
-                            setPullPoint(shipPos, position);
+                            if (_tutorial != null && Point.distance(_tutorial.point, position) <= _tutorial.approx)
+                            {
+                                // accurate aiming
+                                setPullPoint(shipPos, _tutorial.point);
+                            } else {
+                                trace(position);
+                                setPullPoint(shipPos, position);
+                            }
                         } else {
                             _delta.x = _touch.x - position.x;
                             _delta.y = _touch.y - position.y;
@@ -358,6 +390,20 @@ package com.holypanda.kosmos.view.scenes.game
                     {
                         if (_aiming)
                         {
+                            if (_tutorial != null)
+                            {
+                                if (Point.distance(_tutorial.point, position) > _tutorial.approx)
+                                {
+                                    // resetting launch
+                                    setPullPoint(shipPos, shipPos);
+                                }
+
+                                if (_space.launchable)
+                                {
+                                    _tutorial = null;
+                                }
+                            }
+
                             _space.launch();
                             _aiming = false;
 
@@ -375,14 +421,18 @@ package com.holypanda.kosmos.view.scenes.game
 
         private function setPullPoint(shipPos: Point, position: Point):void
         {
+            if (_lastPullPoint != null && _lastPullPoint.x == position.x && _lastPullPoint.y == position.y) return;
+
+            _lastPullPoint = position;
+
             var distance: Number = Point.distance(position, shipPos);
-            var angle: Number = Math.atan2(shipPos.y - position.y, shipPos.x - position.x);
-            var power: Number = 1.5 * Math.pow(distance / segment, 2);
+            var angle: Number = GeomUtils.getAngle(position, shipPos);
+            var power: Number = Math.pow(distance / segment, 2);
             _space.setPullPoint(angle, power, false, true);
 
-            _arrowWave3.visible = power > 1;
-            _arrowWave2.visible = power > 1.5;
-            _arrowWave1.visible = power > 2;
+            _arrowWave3.visible = power > 1.5;
+            _arrowWave2.visible = power > 3;
+            _arrowWave1.visible = power > 6;
 
             _arrow.x = shipPos.x;
             _arrow.y = shipPos.y;
@@ -399,6 +449,13 @@ package com.holypanda.kosmos.view.scenes.game
                 _arrow.pivotY = -delta - 0.25 * _arrowBaseLength;
             }
             _arrow.scaleX = _arrow.scaleY;
+        }
+
+        private function handleTutorial(event: Event):void
+        {
+            _tutorial = event.data as TutorialVO;
+            _tutorialTime = 0;
+            _tutorialDelay = 0;
         }
 
         private function handleNewMeteor(event: Event):void
@@ -572,8 +629,37 @@ package com.holypanda.kosmos.view.scenes.game
             });
         }
 
+        private function checkTutorial(time: Number):void
+        {
+            _finger.visible = _tutorial != null && !_aiming;
+
+            if (_tutorial != null)
+            {
+                if (!_aiming && _tutorialDelay <= 0)
+                {
+                    var shipPos: Point = _shipView.ship.position;
+                    var fingerPos: Point = Point.interpolate(_tutorial.point, shipPos, Math.min(_tutorialTime, 1));
+                    setPullPoint(shipPos, fingerPos);
+                    _tutorialDelay = 0.05;
+
+                    _finger.x = fingerPos.x;
+                    _finger.y = fingerPos.y;
+                    _finger.rotation = GeomUtils.getAngle(_tutorial.point, shipPos) + Math.PI * 0.5;
+                }
+
+                _tutorialTime += time;
+                _tutorialDelay -= time;
+                if (_tutorialTime >= 2)
+                {
+                    _tutorialTime = 0;
+                }
+            }
+        }
+
         public function advanceTime(time: Number):void
         {
+            checkTutorial(time);
+
             _time += time;
             while (_time >= colorTime)
             {

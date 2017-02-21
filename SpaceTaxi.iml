@@ -26,7 +26,6 @@
             <FilePathAndPathInPackage file-path="$MODULE_DIR$/resources/sounds" path-in-package="sounds" />
             <FilePathAndPathInPackage file-path="$MODULE_DIR$/resources/workspace/textures/1024" path-in-package="textures/1024" />
             <FilePathAndPathInPackage file-path="$MODULE_DIR$/resources/workspace/layouts" path-in-package="layouts" />
-            <FilePathAndPathInPackage file-path="$MODULE_DIR$/resources/levels" path-in-package="levels" />
             <FilePathAndPathInPackage file-path="$MODULE_DIR$/resources/workspace/localization" path-in-package="localization" />
             <FilePathAndPathInPackage file-path="$MODULE_DIR$/resources/icons/ios/icons" path-in-package="icons" />
             <FilePathAndPathInPackage file-path="$MODULE_DIR$/resources/workspace/textures/fonts" path-in-package="textures/fonts" />
@@ -67,7 +66,6 @@
             <FilePathAndPathInPackage file-path="$MODULE_DIR$/resources/workspace/textures" path-in-package="textures" />
             <FilePathAndPathInPackage file-path="$MODULE_DIR$/resources/sounds" path-in-package="sounds" />
             <FilePathAndPathInPackage file-path="$MODULE_DIR$/resources/workspace/layouts" path-in-package="layouts" />
-            <FilePathAndPathInPackage file-path="$MODULE_DIR$/resources/levels" path-in-package="levels" />
             <FilePathAndPathInPackage file-path="$MODULE_DIR$/resources/icons/android/icons" path-in-package="icons" />
             <FilePathAndPathInPackage file-path="$MODULE_DIR$/resources/workspace/localization" path-in-package="localization" />
             <FilePathAndPathInPackage file-path="$MODULE_DIR$/resources/assets_android/assets" path-in-package="assets" />
@@ -108,7 +106,6 @@
             <FilePathAndPathInPackage file-path="$MODULE_DIR$/resources/workspace/textures" path-in-package="textures" />
             <FilePathAndPathInPackage file-path="$MODULE_DIR$/resources/sounds" path-in-package="sounds" />
             <FilePathAndPathInPackage file-path="$MODULE_DIR$/resources/workspace/layouts" path-in-package="layouts" />
-            <FilePathAndPathInPackage file-path="$MODULE_DIR$/resources/levels" path-in-package="levels" />
             <FilePathAndPathInPackage file-path="$MODULE_DIR$/resources/launch/Default-Landscape-568h@2x.png" path-in-package="Default-Landscape-568h@2x.png" />
             <FilePathAndPathInPackage file-path="$MODULE_DIR$/resources/launch/Default-Landscape-667h@2x.png" path-in-package="Default-Landscape-667h@2x.png" />
             <FilePathAndPathInPackage file-path="$MODULE_DIR$/resources/launch/Default-Landscape-736h@3x.png" path-in-package="Default-Landscape-736h@3x.png" />
@@ -183,7 +180,6 @@
             <FilePathAndPathInPackage file-path="$MODULE_DIR$/resources/workspace/textures" path-in-package="textures" />
             <FilePathAndPathInPackage file-path="$MODULE_DIR$/resources/sounds" path-in-package="sounds" />
             <FilePathAndPathInPackage file-path="$MODULE_DIR$/resources/workspace/layouts" path-in-package="layouts" />
-            <FilePathAndPathInPackage file-path="$MODULE_DIR$/resources/levels" path-in-package="levels" />
             <FilePathAndPathInPackage file-path="$MODULE_DIR$/resources/launch/Default-Landscape-568h@2x.png" path-in-package="Default-Landscape-568h@2x.png" />
             <FilePathAndPathInPackage file-path="$MODULE_DIR$/resources/launch/Default-Landscape-667h@2x.png" path-in-package="Default-Landscape-667h@2x.png" />
             <FilePathAndPathInPackage file-path="$MODULE_DIR$/resources/launch/Default-Landscape-736h@3x.png" path-in-package="Default-Landscape-736h@3x.png" />
@@ -230,7 +226,6 @@
             <FilePathAndPathInPackage file-path="$MODULE_DIR$/resources/workspace/textures" path-in-package="textures" />
             <FilePathAndPathInPackage file-path="$MODULE_DIR$/resources/sounds" path-in-package="sounds" />
             <FilePathAndPathInPackage file-path="$MODULE_DIR$/resources/workspace/layouts" path-in-package="layouts" />
-            <FilePathAndPathInPackage file-path="$MODULE_DIR$/resources/levels" path-in-package="levels" />
             <FilePathAndPathInPackage file-path="$MODULE_DIR$/resources/icons/android/icons" path-in-package="icons" />
             <FilePathAndPathInPackage file-path="$MODULE_DIR$/resources/workspace/localization" path-in-package="localization" />
             <FilePathAndPathInPackage file-path="$MODULE_DIR$/resources/assets_android/assets" path-in-package="assets" />

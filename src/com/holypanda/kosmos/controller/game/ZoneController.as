@@ -3,8 +3,6 @@
  */
 package com.holypanda.kosmos.controller.game
 {
-    import com.holypanda.kosmos.Application;
-    import com.holypanda.kosmos.enums.ZoneType;
     import com.holypanda.kosmos.model.Ship;
     import com.holypanda.kosmos.model.orders.Zone;
 
@@ -12,15 +10,32 @@ package com.holypanda.kosmos.controller.game
 
     public class ZoneController extends EventDispatcher
     {
+        public static const UPDATE: String = "ZoneController.UPDATE";
+        public static const DONE: String = "ZoneController.DONE";
+        
         private var _zones: Vector.<Zone>;
         public function get zones():Vector.<Zone>
         {
             return _zones;
         }
+
+        private var _wave: int;
+        public function get wave():int
+        {
+            return _wave;
+        }
+
+        private var _completed: int;
+        public function get completed():int
+        {
+            return _completed;
+        }
         
         public function ZoneController()
         {
             _zones = new <Zone>[];
+            _wave = 0;
+            _completed = 0;
         }
         
         public function addZone(zone: Zone):void
@@ -28,28 +43,44 @@ package com.holypanda.kosmos.controller.game
             _zones.push(zone);
         }
 
-        public function checkZones(ship: Ship):void
+        public function checkZones(ship: Ship):Zone
         {
             for (var i:int = 0; i < _zones.length; i++)
             {
                 var zone: Zone = _zones[i];
                 if (zone.active && zone.check(ship))
                 {
-                    useZone(zone, ship);
+                    zone.complete();
+                    nextWave();
+                    return zone;
                 }
             }
+            return null;
         }
 
-        private function useZone(zone: Zone, ship: Ship):void
+        public function start():void
         {
-            switch (zone.zone.type)
+            nextWave();
+        }
+
+        public function nextWave():void
+        {
+            _wave++;
+
+            var newZones: int = 0;
+            for (var i:int = 0; i < _zones.length; i++)
             {
-                case ZoneType.DEPARTURE:
-                case ZoneType.ARRIVAL:
+                var zone: Zone = _zones[i];
+                if (!zone.active && !zone.completed && zone.id <= _wave)
                 {
-                    Application.appController.space.orders.checkOrders(ship, zone);
-                    break;
+                    zone.activate();
+                    newZones++;
                 }
+            }
+
+            if (newZones == 0)
+            {
+                dispatchEventWith(DONE);
             }
         }
         

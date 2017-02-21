@@ -49,8 +49,7 @@ package com.holypanda.kosmos.tasks.logic
                     WindowManager.showPopup(new SurveyPopup(), true);
                 }
 
-                player.addMoney(space.orders.money);
-                player.setLevelResult(level.id, space.orders.money, level.countStars(space.moves));
+                player.setLevelResult(level.id, 0, level.countStars(space.moves));
                 player.save();
     
                 var userData: UserDataVO = new UserDataVO();

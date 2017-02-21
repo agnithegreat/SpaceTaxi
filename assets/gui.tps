@@ -279,19 +279,6 @@
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">assets/gui/common/coin.png</key>
-            <struct type="IndividualSpriteSettings">
-                <key>pivotPoint</key>
-                <point_f>0.5,0.5</point_f>
-                <key>scale9Enabled</key>
-                <false/>
-                <key>scale9Borders</key>
-                <rect>35,33,69,66</rect>
-                <key>scale9Paddings</key>
-                <rect>35,33,69,66</rect>
-                <key>scale9FromFile</key>
-                <false/>
-            </struct>
             <key type="filename">assets/gui/common/navigate_big.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
@@ -368,59 +355,6 @@
                 <rect>350,250,700,500</rect>
                 <key>scale9Paddings</key>
                 <rect>350,250,700,500</rect>
-                <key>scale9FromFile</key>
-                <false/>
-            </struct>
-            <key type="filename">assets/gui/game_screen/fuel.png</key>
-            <key type="filename">assets/gui/game_screen/life.png</key>
-            <struct type="IndividualSpriteSettings">
-                <key>pivotPoint</key>
-                <point_f>0.5,0.5</point_f>
-                <key>scale9Enabled</key>
-                <false/>
-                <key>scale9Borders</key>
-                <rect>33,33,67,67</rect>
-                <key>scale9Paddings</key>
-                <rect>33,33,67,67</rect>
-                <key>scale9FromFile</key>
-                <false/>
-            </struct>
-            <key type="filename">assets/gui/game_screen/fuel_index_full.png</key>
-            <struct type="IndividualSpriteSettings">
-                <key>pivotPoint</key>
-                <point_f>0.5,0.5</point_f>
-                <key>scale9Enabled</key>
-                <false/>
-                <key>scale9Borders</key>
-                <rect>86,15,171,30</rect>
-                <key>scale9Paddings</key>
-                <rect>86,15,171,30</rect>
-                <key>scale9FromFile</key>
-                <false/>
-            </struct>
-            <key type="filename">assets/gui/game_screen/fuel_life_index_empty.png</key>
-            <struct type="IndividualSpriteSettings">
-                <key>pivotPoint</key>
-                <point_f>0.5,0.5</point_f>
-                <key>scale9Enabled</key>
-                <false/>
-                <key>scale9Borders</key>
-                <rect>86,14,171,29</rect>
-                <key>scale9Paddings</key>
-                <rect>86,14,171,29</rect>
-                <key>scale9FromFile</key>
-                <false/>
-            </struct>
-            <key type="filename">assets/gui/game_screen/life_index_full.png</key>
-            <struct type="IndividualSpriteSettings">
-                <key>pivotPoint</key>
-                <point_f>0.5,0.5</point_f>
-                <key>scale9Enabled</key>
-                <false/>
-                <key>scale9Borders</key>
-                <rect>86,15,171,29</rect>
-                <key>scale9Paddings</key>
-                <rect>86,15,171,29</rect>
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
@@ -509,19 +443,6 @@
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">assets/gui/main_screen/achievements.png</key>
-            <struct type="IndividualSpriteSettings">
-                <key>pivotPoint</key>
-                <point_f>0.5,0.5</point_f>
-                <key>scale9Enabled</key>
-                <false/>
-                <key>scale9Borders</key>
-                <rect>100,39,199,78</rect>
-                <key>scale9Paddings</key>
-                <rect>100,39,199,78</rect>
-                <key>scale9FromFile</key>
-                <false/>
-            </struct>
             <key type="filename">assets/gui/main_screen/achievements_teaser.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
@@ -532,19 +453,6 @@
                 <rect>128,126,256,253</rect>
                 <key>scale9Paddings</key>
                 <rect>128,126,256,253</rect>
-                <key>scale9FromFile</key>
-                <false/>
-            </struct>
-            <key type="filename">assets/gui/main_screen/choose_level.png</key>
-            <struct type="IndividualSpriteSettings">
-                <key>pivotPoint</key>
-                <point_f>0.5,0.5</point_f>
-                <key>scale9Enabled</key>
-                <false/>
-                <key>scale9Borders</key>
-                <rect>88,69,175,138</rect>
-                <key>scale9Paddings</key>
-                <rect>88,69,175,138</rect>
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
@@ -561,19 +469,6 @@
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">assets/gui/main_screen/free_coins.png</key>
-            <struct type="IndividualSpriteSettings">
-                <key>pivotPoint</key>
-                <point_f>0.5,0.5</point_f>
-                <key>scale9Enabled</key>
-                <false/>
-                <key>scale9Borders</key>
-                <rect>75,35,151,70</rect>
-                <key>scale9Paddings</key>
-                <rect>75,35,151,70</rect>
-                <key>scale9FromFile</key>
-                <false/>
-            </struct>
             <key type="filename">assets/gui/main_screen/free_coins_teaser.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
@@ -584,19 +479,6 @@
                 <rect>108,107,216,213</rect>
                 <key>scale9Paddings</key>
                 <rect>108,107,216,213</rect>
-                <key>scale9FromFile</key>
-                <false/>
-            </struct>
-            <key type="filename">assets/gui/main_screen/garage.png</key>
-            <struct type="IndividualSpriteSettings">
-                <key>pivotPoint</key>
-                <point_f>0.5,0.5</point_f>
-                <key>scale9Enabled</key>
-                <false/>
-                <key>scale9Borders</key>
-                <rect>70,26,140,52</rect>
-                <key>scale9Paddings</key>
-                <rect>70,26,140,52</rect>
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
@@ -1003,19 +885,6 @@
                 <rect>25,15,50,30</rect>
                 <key>scale9Paddings</key>
                 <rect>25,15,50,30</rect>
-                <key>scale9FromFile</key>
-                <false/>
-            </struct>
-            <key type="filename">assets/gui/pop_up/level_done_glow.png</key>
-            <struct type="IndividualSpriteSettings">
-                <key>pivotPoint</key>
-                <point_f>0.5,0.5</point_f>
-                <key>scale9Enabled</key>
-                <false/>
-                <key>scale9Borders</key>
-                <rect>305,305,610,610</rect>
-                <key>scale9Paddings</key>
-                <rect>305,305,610,610</rect>
                 <key>scale9FromFile</key>
                 <false/>
             </struct>

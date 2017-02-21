@@ -27,7 +27,7 @@
         "params":{
           "name":"icon",
           "x":142,
-          "y":40
+          "y":30
         }
       },
       {
@@ -37,7 +37,7 @@
         "params":{
           "name":"_ship",
           "x":500,
-          "y":492
+          "y":490
         }
       },
       {
@@ -53,7 +53,7 @@
           "alpha":0.75,
           "name":"icon",
           "x":312,
-          "y":121
+          "y":120
         }
       },
       {
@@ -205,7 +205,7 @@
     "cls":"feathers.controls.LayoutGroup",
     "customParams":{},
     "params":{
-      "height":1150,
+      "height":1000,
       "layout":{
         "cls":"feathers.layout.AnchorLayout",
         "customParams":{},
@@ -227,7 +227,7 @@
     "canvasColor":0,
     "canvasSize":{
       "x":1000,
-      "y":1150
+      "y":1000
     }
   },
   "version":"2.0"

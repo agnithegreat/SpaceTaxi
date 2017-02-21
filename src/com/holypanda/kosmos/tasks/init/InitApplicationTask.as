@@ -46,7 +46,6 @@ package com.holypanda.kosmos.tasks.init
             Application.uiBuilder.localization = new DefaultLocalization(Application.assetsManager.getObject("strings"), locale);
             
             Application.appController.init();
-            Application.appController.states.mainState();
 
             super.processComplete();
         }

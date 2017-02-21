@@ -4,18 +4,19 @@
 package com.holypanda.kosmos.model
 {
     import com.holypanda.kosmos.controller.game.DialogController;
-    import com.holypanda.kosmos.controller.game.OrderController;
+    import com.holypanda.kosmos.controller.game.TutorialController;
     import com.holypanda.kosmos.controller.game.ZoneController;
     import com.holypanda.kosmos.enums.PlanetType;
     import com.holypanda.kosmos.managers.analytics.GamePlayAnalytics;
     import com.holypanda.kosmos.managers.sound.SoundManager;
     import com.holypanda.kosmos.model.orders.Zone;
     import com.holypanda.kosmos.utils.GeomUtils;
+    import com.holypanda.kosmos.utils.GeomUtils;
     import com.holypanda.kosmos.vo.LevelVO;
     import com.holypanda.kosmos.vo.game.CollectibleVO;
-    import com.holypanda.kosmos.vo.game.OrderVO;
     import com.holypanda.kosmos.vo.game.PlanetVO;
     import com.holypanda.kosmos.vo.game.PortalVO;
+    import com.holypanda.kosmos.vo.game.ZoneVO;
 
     import flash.geom.Point;
     import flash.geom.Rectangle;
@@ -42,7 +43,7 @@ package com.holypanda.kosmos.model
         public static const MIN_SPEED: Number = 5;
         public static const DAMAGE_SPEED: Number = 30;
         public static const CONTROL_SPEED: Number = 200;
-        public static const TRAJECTORY_STEPS: int = 200; // 20 min, 250 max
+        public static const TRAJECTORY_STEPS: int = 150; // 20 min, 250 max
         public static const TRAJECTORY_LENGTH: int = 100000; // 100 min, 100000 max
 
         private var _ship: Ship;
@@ -94,6 +95,8 @@ package com.holypanda.kosmos.model
         }
 
         private var _time: Number = 0;
+
+        private var _waitLaunch: Boolean;
         
         private var _shipTime: Number = 0;
         private var _flightTime: Number = 0;
@@ -114,16 +117,16 @@ package com.holypanda.kosmos.model
             return _zoneController;
         }
 
-        private var _orderController: OrderController;
-        public function get orders():OrderController
-        {
-            return _orderController;
-        }
-
         private var _dialogController: DialogController;
         public function get dialogController():DialogController
         {
             return _dialogController;
+        }
+
+        private var _tutorialController: TutorialController;
+        public function get tutorialController():TutorialController
+        {
+            return _tutorialController;
         }
 
         private var _landPlanet: Planet;
@@ -138,6 +141,11 @@ package com.holypanda.kosmos.model
         public function get moves():int
         {
             return _moves;
+        }
+        
+        public function get launchable():Boolean
+        {
+            return _ship.stable && _trajectory.length > 10;
         }
 
         private var _complete: Boolean;
@@ -214,27 +222,27 @@ package com.holypanda.kosmos.model
             _revived = false;
 
             _zoneController = new ZoneController();
-
-            _orderController = new OrderController();
-            _orderController.addEventListener(OrderController.DONE, handleOrdersDone);
-            for (i = 0; i < level.orders.length; i++)
+            for (i = 0; i < level.zones.length; i++)
             {
-                var order: OrderVO = level.orders[i];
-                var departure: Zone = new Zone(i, order.departure, _planetsDict[order.departure.planet]);
-                var arrival: Zone = new Zone(i, order.arrival, _planetsDict[order.arrival.planet]);
-                _zoneController.addZone(departure);
-                _zoneController.addZone(arrival);
-                _orderController.addOrder(new Order(order.cost, order.wave, 100, departure, arrival));
+                var z: ZoneVO = level.zones[i];
+                var zone: Zone = new Zone(z, _planetsDict[z.planet]);
+                _zoneController.addZone(zone);
             }
-            _orderController.start();
+            _zoneController.addEventListener(ZoneController.DONE, handleZonesDone);
+            _zoneController.start();
 
             _dialogController = new DialogController();
-//            _dialogController.init();
-//            _dialogController.start();
+            _dialogController.addEventListener(DialogController.UPDATE, handleDialogUpdate);
+            _dialogController.init(level.id);
+            _dialogController.triggerEvent();
+
+            _tutorialController = new TutorialController();
+            _tutorialController.init(level.id);
+            _tutorialController.triggerEvent();
             
             GamePlayAnalytics.startLevel(level.id);
         }
-        
+
         public function pause(value: Boolean):void
         {
             dispatchEventWith(PAUSE, false, value);
@@ -316,13 +324,15 @@ package com.holypanda.kosmos.model
             _viewports = null;
             _pullPoint = null;
             _trajectory = null;
-            
+
+            _zoneController.removeEventListener(ZoneController.DONE, handleZonesDone);
             _zoneController.destroy();
             _zoneController = null;
 
-            _orderController.removeEventListener(OrderController.DONE, handleOrdersDone);
-            _orderController.destroy();
-            _orderController = null;
+            _dialogController.removeEventListener(DialogController.UPDATE, handleDialogUpdate);
+            _dialogController = null;
+
+            _tutorialController = null;
         }
 
         public function setPullPoint(angle: Number, power: Number, full: Boolean, show: Boolean):void
@@ -394,8 +404,17 @@ package com.holypanda.kosmos.model
 
         public function launch():void
         {
-            if (_ship.stable && _trajectory.length > 10)
+            if (launchable)
             {
+                if (!_waitLaunch)
+                {
+                    _dialogController.triggerEvent("launch");
+                    _waitLaunch = true;
+                    if (!_dialogController.idle) return;
+                }
+
+                _waitLaunch = false;
+
                 GamePlayAnalytics.launch();
                 
                 computeTrajectory(_phantom, false, true);
@@ -446,7 +465,7 @@ package com.holypanda.kosmos.model
             {
                 var planet: Planet = _planets[i];
                 var d: Number = Point.distance(planet.position, body.position);
-                var angle: Number = Math.atan2(planet.y - body.y, planet.x - body.x);
+                var angle: Number = GeomUtils.getAngle(body.position, planet.position);
                 var accMod: Number = G * planet.mass / Math.pow(d, DISTANCE_POWER) * delta;
                 acX += accMod * Math.cos(angle);
                 acY += accMod * Math.sin(angle);
@@ -583,7 +602,11 @@ package com.holypanda.kosmos.model
 
                 if (ship == _ship)
                 {
-                    _zoneController.checkZones(_ship);
+                    var zone: Zone = _zoneController.checkZones(_ship);
+                    if (zone != null)
+                    {
+                        _dialogController.triggerEvent("zone." + zone.id);
+                    }
                 }
             }
         }
@@ -682,7 +705,23 @@ package com.holypanda.kosmos.model
             }
         }
 
-        private function handleOrdersDone(event: Event):void
+        private function handleDialogUpdate(event: Event):void
+        {
+            if (_dialogController.idle)
+            {
+                if (_waitLaunch)
+                {
+                    launch();
+                }
+
+                if (_ship.stable)
+                {
+                    _tutorialController.triggerEvent("ready");
+                }
+            }
+        }
+
+        private function handleZonesDone(event: Event):void
         {
             _win = true;
             _complete = true;

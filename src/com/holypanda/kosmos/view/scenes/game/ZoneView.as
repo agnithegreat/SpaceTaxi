@@ -4,10 +4,10 @@
 package com.holypanda.kosmos.view.scenes.game
 {
     import com.holypanda.kosmos.Application;
-    import com.holypanda.kosmos.enums.ZoneType;
     import com.holypanda.kosmos.managers.sound.SoundManager;
     import com.holypanda.kosmos.model.SpaceBody;
     import com.holypanda.kosmos.model.orders.Zone;
+    import com.holypanda.kosmos.utils.GeomUtils;
 
     import starling.core.Starling;
     import starling.display.Image;
@@ -63,29 +63,17 @@ package com.holypanda.kosmos.view.scenes.game
             _zone.planet.addEventListener(SpaceBody.UPDATE, handlePlanetUpdate);
             handlePlanetUpdate(null);
 
-            rotation = Math.atan2(_zone.zone.position.y - _zone.planet.y, _zone.zone.position.x - _zone.planet.x) + Math.PI * 0.5;
+            rotation = GeomUtils.getAngle(_zone.planet.position, _zone.zone.position) + Math.PI * 0.5;
         }
 
         private function setup():void
         {
-            switch (_zone.zone.type)
-            {
-                case ZoneType.DEPARTURE:
-                {
-                    _sign = new Image(Application.assetsManager.getTexture("misc/symbol"));
-                    _sign.pivotX = _sign.width * 0.5;
-                    _sign.pivotY = _sign.height * 0.5;
-                    _sign.scaleX = 0.25;
-                    _sign.scaleY = 0.25;
-                    addChild(_sign);
-                    break;
-                }
-
-                case ZoneType.ARRIVAL:
-                {
-                    break;
-                }
-            }
+            _sign = new Image(Application.assetsManager.getTexture("misc/symbol"));
+            _sign.pivotX = _sign.width * 0.5;
+            _sign.pivotY = _sign.height * 0.5;
+            _sign.scaleX = 0.25;
+            _sign.scaleY = 0.25;
+            addChild(_sign);
         }
 
         private function handleAnimationComplete(event: Event):void
@@ -111,7 +99,7 @@ package com.holypanda.kosmos.view.scenes.game
 
         private function handlePlanetUpdate(event: Event):void
         {
-            var angle: Number = Math.atan2(_zone.zone.position.y - _zone.planet.y, _zone.zone.position.x - _zone.planet.x);
+            var angle: Number = GeomUtils.getAngle(_zone.planet.position, _zone.zone.position);
             var nx: Number = _zone.planet.radius * Math.cos(angle) * Math.cos(_zone.planet.time) * _zone.planet.scale;
             var ny: Number = _zone.planet.radius * Math.sin(angle) * Math.cos(_zone.planet.time + Math.PI) * _zone.planet.scale;
 

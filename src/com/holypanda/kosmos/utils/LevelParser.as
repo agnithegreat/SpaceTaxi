@@ -6,7 +6,6 @@ package com.holypanda.kosmos.utils
     import com.holypanda.kosmos.vo.LevelVO;
     import com.holypanda.kosmos.vo.game.CollectibleVO;
     import com.holypanda.kosmos.vo.game.ObjectVO;
-    import com.holypanda.kosmos.vo.game.OrderVO;
     import com.holypanda.kosmos.vo.game.PlanetVO;
     import com.holypanda.kosmos.vo.game.PortalVO;
     import com.holypanda.kosmos.vo.game.ShipVO;
@@ -79,39 +78,13 @@ package com.holypanda.kosmos.utils
             ship.rotation = level.ship.rotation;
             magnetToPlanet(ship, getNearestPlanet(ship.position, planets), 10);
             data.ship = ship;
-            
-            var orders: Vector.<OrderVO> = new <OrderVO>[];
-            for (i = 0; i < level.orders.length; i++)
-            {
-                var or: Object = level.orders[i];
-                var order: OrderVO = new OrderVO();
-                order.id = or.id;
-                order.cost = or.cost;
-                order.wave = or.wave;
-                
-                order.departure = new ZoneVO();
-                order.departure.type = or.departure.type;
-                order.departure.position = new Point(or.departure.x, or.departure.y);
-                order.departure.size = or.departure.size;
-                order.departure.planet = getNearestPlanet(order.departure.position, planets);
-                magnetToPlanet(order.departure, order.departure.planet, 0);
-
-                order.arrival = new ZoneVO();
-                order.arrival.type = or.arrival.type;
-                order.arrival.position = new Point(or.arrival.x, or.arrival.y);
-                order.arrival.size = or.arrival.size;
-                order.arrival.planet = getNearestPlanet(order.arrival.position, planets);
-                magnetToPlanet(order.arrival, order.arrival.planet, 0);
-
-                orders.push(order);
-            }
-            data.orders = orders;
 
             var zones: Vector.<ZoneVO> = new <ZoneVO>[];
             for (i = 0; i < level.zones.length; i++)
             {
                 var z: Object = level.zones[i];
                 var zone: ZoneVO = new ZoneVO();
+                zone.id = z.id;
                 zone.type = z.type;
                 zone.position = new Point(z.x, z.y);
                 zone.size = z.size;
@@ -155,7 +128,7 @@ package com.holypanda.kosmos.utils
         
         private static function magnetToPlanet(object: ObjectVO, planet: PlanetVO, radius: Number):void
         {
-            var angle: Number = Math.atan2(object.position.y - planet.position.y, object.position.x - planet.position.x);
+            var angle: Number = GeomUtils.getAngle(planet.position, object.position);
             object.position.x = planet.position.x + (planet.radius + radius) * Math.cos(angle);
             object.position.y = planet.position.y + (planet.radius + radius) * Math.sin(angle);
         }

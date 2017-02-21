@@ -4,7 +4,6 @@
 package com.holypanda.kosmos.vo
 {
     import com.holypanda.kosmos.vo.game.CollectibleVO;
-    import com.holypanda.kosmos.vo.game.OrderVO;
     import com.holypanda.kosmos.vo.game.PlanetVO;
     import com.holypanda.kosmos.vo.game.PortalVO;
     import com.holypanda.kosmos.vo.game.ShipVO;
@@ -22,7 +21,6 @@ package com.holypanda.kosmos.vo
         public var ship: ShipVO;
         public var planets: Vector.<PlanetVO>;
         public var portals: Vector.<PortalVO>;
-        public var orders: Vector.<OrderVO>;
         public var zones: Vector.<ZoneVO>;
         public var collectibles: Vector.<CollectibleVO>;
         public var viewports: Vector.<Rectangle>;
@@ -35,16 +33,6 @@ package com.holypanda.kosmos.vo
                 count--;
             }
             return count;
-        }
-        
-        public function get reward():int
-        {
-            var sum: int = 0;
-            for (var i:int = 0; i < orders.length; i++)
-            {
-                sum += orders[i].cost;
-            }
-            return sum;
         }
     }
 }

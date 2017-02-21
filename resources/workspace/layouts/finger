@@ -1,0 +1,36 @@
+{
+  "layout":{
+    "children":[
+      {
+        "cls":"starling.display.Image",
+        "constructorParams":[
+          {
+            "cls":"starling.textures.Texture",
+            "textureName":"misc/Tutorial/finger"
+          }
+        ],
+        "customParams":{},
+        "params":{
+          "name":"_finger",
+          "pivotX":75,
+          "pivotY":10,
+          "x":75,
+          "y":10
+        }
+      }
+    ],
+    "cls":"feathers.controls.LayoutGroup",
+    "customParams":{},
+    "params":{
+      "name":"root"
+    }
+  },
+  "setting":{
+    "canvasColor":0,
+    "canvasSize":{
+      "x":144,
+      "y":170
+    }
+  },
+  "version":"2.0"
+}

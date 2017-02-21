@@ -3,6 +3,8 @@
  */
 package com.holypanda.kosmos.model
 {
+    import com.holypanda.kosmos.utils.GeomUtils;
+
     import starling.events.Event;
 
     public class Ship extends DynamicSpaceBody
@@ -152,7 +154,7 @@ package com.holypanda.kosmos.model
         {
             if (planet != null)
             {
-                _rotation = Math.atan2(y - planet.y, x - planet.x);
+                _rotation = GeomUtils.getAngle(planet.position, _position);
                 update();
             }
         }

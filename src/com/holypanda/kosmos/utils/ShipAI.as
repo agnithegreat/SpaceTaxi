@@ -85,8 +85,8 @@ package com.holypanda.kosmos.utils
 
         private function findPath():void
         {
-            _baseAngle = Math.atan2(_ship.y - _ship.planet.y, _ship.x - _ship.planet.x);
-            var angle2: Number = Math.atan2(_target.zone.position.y - _ship.y, _target.zone.position.x - _ship.x);
+            _baseAngle = GeomUtils.getAngle(_ship.planet.position, _ship.position);
+            var angle2: Number = GeomUtils.getAngle(_ship.position, _target.zone.position);
             var delta: Number = GeomUtils.getAngleDelta(_baseAngle, angle2);
             _angle = Math.abs(delta) < Math.PI * 0.5 ? _baseAngle + delta * 0.5 : angle2;
 
